@@ -2,10 +2,10 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const { title = "Progressivo" } = Astro.props;
+const { title = "Progressivo", lang = "cs" } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="cs">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,35 @@ const { title = "Progressivo" } = Astro.props;
     <slot />
   </main>
   <Footer />
+  <script is:inline>
+    // Automatic language detection
+    // Only run on the root path
+    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+      try {
+        const userLang = navigator.language || navigator.userLanguage;
+        // Get the primary language code (e.g., "en-US" -> "en")
+        const langCode = userLang.split('-')[0].toLowerCase();
+        const supportedLangs = ['en', 'de', 'ru', 'es'];
+
+        // If the detected language is supported and not the default (cs), redirect
+        if (supportedLangs.includes(langCode)) {
+          // Check if we have already redirected or user explicitly chose this language?
+          // The requirement says "při první návštěvě", but without cookies/storage it's hard to know if it's "first".
+          // However, usually this script running on '/' is enough for the basic requirement.
+          // Ideally we would check sessionStorage to avoid redirect loops if user explicitly clicks "CZ".
+          // For now, implementing basic redirection as requested.
+
+          // Check if not already redirected in this session to avoid loop if user wants to stay on CS
+          if (!sessionStorage.getItem('lang_redirected')) {
+             sessionStorage.setItem('lang_redirected', 'true');
+             window.location.href = `/${langCode}`;
+          }
+        }
+      } catch (e) {
+        console.error('Language detection failed', e);
+      }
+    }
+  </script>
 </body>
 </html>
 
@@ -88,5 +117,75 @@ const { title = "Progressivo" } = Astro.props;
     padding-left: 1rem;
     padding-right: 1rem;
     box-sizing: border-box;
+  }
+
+  /* Design System - Prose Configuration */
+  .prose {
+    max-width: 56rem; /* max-w-4xl */
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--color-text); /* Slate 900 */
+    line-height: 1.75;
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: var(--color-text);
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .prose h1 {
+    font-size: 2.25em;
+    margin-top: 0;
+  }
+
+  .prose h2 {
+    font-size: 1.5em;
+  }
+
+  .prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+
+  .prose a {
+    color: var(--color-accent); /* Amber 600 */
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+  }
+
+  .prose a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .prose ul, .prose ol {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 1.625em;
+  }
+
+  .prose li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .prose blockquote {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-text);
+    border-left-width: 0.25rem;
+    border-left-color: var(--color-accent);
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    padding-left: 1em;
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--color-text);
   }
 </style>

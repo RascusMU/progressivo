@@ -17,6 +17,17 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/o-nas">O nás</a></li>
         <li><a href="/kontakt">Kontakt</a></li>
+        <li class="lang-switch">
+          <a href="/" class={`lang-link ${Astro.url.pathname === '/' || Astro.url.pathname.startsWith('/sluzby') || Astro.url.pathname.startsWith('/blog') || Astro.url.pathname.startsWith('/o-nas') || Astro.url.pathname.startsWith('/kontakt') || Astro.url.pathname.startsWith('/gdpr') || Astro.url.pathname.startsWith('/obchodni') || Astro.url.pathname.startsWith('/smluvni') ? 'active' : ''}`} title="Čeština">CZ</a>
+          <span class="separator">|</span>
+          <a href="/en" class={`lang-link ${Astro.url.pathname.startsWith('/en') ? 'active' : ''}`} title="English">EN</a>
+          <span class="separator">|</span>
+          <a href="/de" class={`lang-link ${Astro.url.pathname.startsWith('/de') ? 'active' : ''}`} title="Deutsch">DE</a>
+          <span class="separator">|</span>
+          <a href="/ru" class={`lang-link ${Astro.url.pathname.startsWith('/ru') ? 'active' : ''}`} title="Русский">RU</a>
+          <span class="separator">|</span>
+          <a href="/es" class={`lang-link ${Astro.url.pathname.startsWith('/es') ? 'active' : ''}`} title="Español">ES</a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -123,6 +134,40 @@
     width: 100%;
   }
 
+  /* Language Switcher */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .lang-link {
+    color: var(--color-text-light); /* Softer color for inactive languages */
+    padding: 0 !important; /* Override default nav padding */
+    font-weight: 500;
+  }
+
+  .lang-link:hover {
+    color: var(--color-accent);
+  }
+
+  .lang-link.active {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  /* Remove underline animation from language links */
+  .lang-link::after {
+    display: none;
+  }
+
+  .separator {
+    color: #cbd5e1; /* Light gray separator */
+    font-size: 0.8rem;
+  }
+
   /* Mobile Responsive Styles */
   @media (max-width: 768px) {
     .header-container {
@@ -181,6 +226,17 @@
       font-size: 1.125rem;
       display: block;
       padding: 0.5rem 2rem;
+    }
+
+    .lang-switch {
+      margin-left: 0;
+      margin-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .lang-link {
+        font-size: 1rem;
+        padding: 0 0.5rem !important;
     }
   }
 </style>
