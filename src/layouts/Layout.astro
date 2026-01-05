@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 const { title = "Progressivo", lang = "cs" } = Astro.props;
 ---
@@ -12,7 +13,7 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
   <title>{title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
 </head>
 <body>
   <Header />
@@ -20,25 +21,17 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
     <slot />
   </main>
   <Footer />
+  <WhatsAppButton />
+
   <script is:inline>
     // Automatic language detection
-    // Only run on the root path
     if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
       try {
         const userLang = navigator.language || navigator.userLanguage;
-        // Get the primary language code (e.g., "en-US" -> "en")
         const langCode = userLang.split('-')[0].toLowerCase();
         const supportedLangs = ['en', 'de', 'ru', 'es'];
 
-        // If the detected language is supported and not the default (cs), redirect
         if (supportedLangs.includes(langCode)) {
-          // Check if we have already redirected or user explicitly chose this language?
-          // The requirement says "při první návštěvě", but without cookies/storage it's hard to know if it's "first".
-          // However, usually this script running on '/' is enough for the basic requirement.
-          // Ideally we would check sessionStorage to avoid redirect loops if user explicitly clicks "CZ".
-          // For now, implementing basic redirection as requested.
-
-          // Check if not already redirected in this session to avoid loop if user wants to stay on CS
           if (!sessionStorage.getItem('lang_redirected')) {
              sessionStorage.setItem('lang_redirected', 'true');
              window.location.href = `/${langCode}`;
@@ -48,18 +41,73 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
         console.error('Language detection failed', e);
       }
     }
+
+    // Animation Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => observer.observe(el));
+
+      // Also observe sections by default if they don't have the class but we want to animate them
+      // For now, I'll manually add the class to sections I want to animate or just target all sections
+      const sections = document.querySelectorAll('section');
+      sections.forEach(el => {
+          el.classList.add('animate-on-scroll');
+          observer.observe(el);
+      });
+    });
+
+    // Dark Mode Init
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (savedTheme === 'dark' || (!savedTheme && systemTheme === 'dark')) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
   </script>
 </body>
 </html>
 
 <style is:global>
   :root {
+    /* Light Mode Variables */
     --color-text: #0f172a; /* Slate 900 */
     --color-text-light: #475569; /* Slate 600 */
     --color-accent: #d97706; /* Amber 600 */
     --color-accent-hover: #b45309; /* Amber 700 */
     --color-bg: #ffffff;
     --color-bg-alt: #f8fafc; /* Slate 50 */
+    --color-bg-header: rgba(255, 255, 255, 0.95);
+    --color-border: rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Dark Mode Variables */
+  html.dark {
+    --color-text: #f1f5f9; /* Slate 100 */
+    --color-text-light: #94a3b8; /* Slate 400 */
+    --color-bg: #0f172a; /* Slate 900 */
+    --color-bg-alt: #1e293b; /* Slate 800 */
+    --color-bg-header: rgba(15, 23, 42, 0.95);
+    --color-border: rgba(255, 255, 255, 0.1);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   }
 
   html {
@@ -68,23 +116,23 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
 
   body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
     color: var(--color-text);
     background-color: var(--color-bg);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   main {
     flex: 1;
     width: 100%;
-    /* Note: Removed max-width to allow full-width sections.
-       Use .container for constrained content. */
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: var(--color-text);
     line-height: 1.2;
     margin-top: 0;
@@ -100,16 +148,11 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
     color: var(--color-accent-hover);
   }
 
-  /* Fix for broken images */
   img {
-    background-color: #cbd5e1; /* Slate 300 - placeholder color */
+    background-color: #cbd5e1;
     position: relative;
-    /* Optional: Ensure it has some dimensions if src fails and no dims set,
-       but that might break layout for intentional small icons.
-       Usually sufficient to set bg color. */
   }
 
-  /* Utility classes */
   .container {
     max-width: 1200px;
     margin-left: auto;
@@ -119,17 +162,30 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
     box-sizing: border-box;
   }
 
-  /* Design System - Prose Configuration */
+  /* Animation Classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Prose Configuration */
   .prose {
-    max-width: 56rem; /* max-w-4xl */
+    max-width: 56rem;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: var(--color-text); /* Slate 900 */
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    color: var(--color-text);
     line-height: 1.75;
   }
 
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: var(--color-text);
     margin-top: 2em;
     margin-bottom: 1em;
@@ -137,42 +193,18 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
     font-weight: 700;
   }
 
-  .prose h1 {
-    font-size: 2.25em;
-    margin-top: 0;
-  }
-
-  .prose h2 {
-    font-size: 1.5em;
-  }
-
-  .prose p {
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-  }
-
+  .prose h1 { font-size: 2.25em; margin-top: 0; }
+  .prose h2 { font-size: 1.5em; }
+  .prose p { margin-top: 1.25em; margin-bottom: 1.25em; }
   .prose a {
-    color: var(--color-accent); /* Amber 600 */
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
     font-weight: 500;
   }
-
-  .prose a:hover {
-    color: var(--color-accent-hover);
-  }
-
-  .prose ul, .prose ol {
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    padding-left: 1.625em;
-  }
-
-  .prose li {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-
+  .prose a:hover { color: var(--color-accent-hover); }
+  .prose ul, .prose ol { margin-top: 1.25em; margin-bottom: 1.25em; padding-left: 1.625em; }
+  .prose li { margin-top: 0.5em; margin-bottom: 0.5em; }
   .prose blockquote {
     font-weight: 500;
     font-style: italic;
@@ -183,9 +215,5 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
     margin-bottom: 1.6em;
     padding-left: 1em;
   }
-
-  .prose strong {
-    font-weight: 600;
-    color: var(--color-text);
-  }
+  .prose strong { font-weight: 600; color: var(--color-text); }
 </style>

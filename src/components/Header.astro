@@ -5,35 +5,51 @@
     <a href="/" class="logo-link">
       <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" class="logo" />
     </a>
-    <button id="menu-toggle" aria-label="Menu">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-    <nav id="nav-menu">
-      <ul>
-        <li><a href="/">Domů</a></li>
-        <li><a href="/#services">Služby</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/o-nas">O nás</a></li>
-        <li><a href="/kontakt">Kontakt</a></li>
-        <li class="lang-switch">
-          <a href="/" class={`lang-link ${Astro.url.pathname === '/' || Astro.url.pathname.startsWith('/sluzby') || Astro.url.pathname.startsWith('/blog') || Astro.url.pathname.startsWith('/o-nas') || Astro.url.pathname.startsWith('/kontakt') || Astro.url.pathname.startsWith('/gdpr') || Astro.url.pathname.startsWith('/obchodni') || Astro.url.pathname.startsWith('/smluvni') ? 'active' : ''}`} title="Čeština">CZ</a>
-          <span class="separator">|</span>
-          <a href="/en" class={`lang-link ${Astro.url.pathname.startsWith('/en') ? 'active' : ''}`} title="English">EN</a>
-          <span class="separator">|</span>
-          <a href="/de" class={`lang-link ${Astro.url.pathname.startsWith('/de') ? 'active' : ''}`} title="Deutsch">DE</a>
-          <span class="separator">|</span>
-          <a href="/ru" class={`lang-link ${Astro.url.pathname.startsWith('/ru') ? 'active' : ''}`} title="Русский">RU</a>
-          <span class="separator">|</span>
-          <a href="/es" class={`lang-link ${Astro.url.pathname.startsWith('/es') ? 'active' : ''}`} title="Español">ES</a>
-        </li>
-      </ul>
-    </nav>
+
+    <div class="nav-wrapper">
+      <button id="menu-toggle" aria-label="Menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="/">Domů</a></li>
+          <li><a href="/#services">Služby</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/o-nas">O nás</a></li>
+          <li><a href="/kontakt">Kontakt</a></li>
+          <li class="lang-switch">
+            <a href="/" class={`lang-link ${Astro.url.pathname === '/' || Astro.url.pathname.startsWith('/sluzby') || Astro.url.pathname.startsWith('/blog') || Astro.url.pathname.startsWith('/o-nas') || Astro.url.pathname.startsWith('/kontakt') || Astro.url.pathname.startsWith('/gdpr') || Astro.url.pathname.startsWith('/obchodni') || Astro.url.pathname.startsWith('/smluvni') ? 'active' : ''}`} title="Čeština">CZ</a>
+            <span class="separator">|</span>
+            <a href="/en" class={`lang-link ${Astro.url.pathname.startsWith('/en') ? 'active' : ''}`} title="English">EN</a>
+            <span class="separator">|</span>
+            <a href="/de" class={`lang-link ${Astro.url.pathname.startsWith('/de') ? 'active' : ''}`} title="Deutsch">DE</a>
+            <span class="separator">|</span>
+            <a href="/ru" class={`lang-link ${Astro.url.pathname.startsWith('/ru') ? 'active' : ''}`} title="Русский">RU</a>
+            <span class="separator">|</span>
+            <a href="/es" class={`lang-link ${Astro.url.pathname.startsWith('/es') ? 'active' : ''}`} title="Español">ES</a>
+          </li>
+          <li class="theme-switch-wrapper">
+             <button id="theme-toggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
+                <!-- Sun Icon -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                </svg>
+                <!-- Moon Icon -->
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                </svg>
+             </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <script>
+  // Mobile Menu
   const menuToggle = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');
 
@@ -43,17 +59,44 @@
       menuToggle.classList.toggle('active');
     });
   }
+
+  // Dark Mode Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+
+  // Check current theme and update icon visibility
+  // The theme is already set on <html> by the inline script in Layout.astro
+  const updateIcon = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      // If dark, show sun (to switch to light), else show moon
+      // Wait, usually:
+      // Dark mode active -> Show Sun (to switch to light)
+      // Light mode active -> Show Moon (to switch to dark)
+  };
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
 </script>
 
 <style>
   header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--color-bg-header);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
   .header-container {
@@ -75,6 +118,11 @@
     transition: height 0.3s ease;
   }
 
+  .nav-wrapper {
+      display: flex;
+      align-items: center;
+  }
+
   /* Hamburger Menu Button */
   #menu-toggle {
     display: none;
@@ -87,6 +135,7 @@
     height: 21px;
     padding: 0;
     z-index: 1001;
+    margin-left: 1rem;
   }
 
   .hamburger-line {
@@ -104,6 +153,7 @@
     padding: 0;
     display: flex;
     gap: 2rem;
+    align-items: center;
   }
 
   nav a {
@@ -141,6 +191,8 @@
     gap: 0.3rem;
     margin-left: 1rem;
     font-size: 0.9rem;
+    border-left: 1px solid var(--color-border);
+    padding-left: 1rem;
   }
 
   .lang-link {
@@ -164,9 +216,53 @@
   }
 
   .separator {
-    color: #cbd5e1; /* Light gray separator */
+    color: var(--color-text-light);
+    opacity: 0.5;
     font-size: 0.8rem;
   }
+
+  /* Theme Toggle */
+  .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+  }
+
+  #theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text);
+      padding: 0.25rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #theme-toggle:hover {
+      background-color: rgba(0,0,0,0.05);
+      color: var(--color-accent);
+  }
+
+  html.dark #theme-toggle:hover {
+      background-color: rgba(255,255,255,0.1);
+  }
+
+  .sun-icon, .moon-icon {
+      width: 20px;
+      height: 20px;
+  }
+
+  /* By default (light mode), show Moon (to switch to dark), hide Sun */
+  .sun-icon { display: none; }
+  .moon-icon { display: block; }
+
+  /* In dark mode, show Sun (to switch to light), hide Moon */
+  :global(html.dark) .sun-icon { display: block; }
+  :global(html.dark) .moon-icon { display: none; }
+
 
   /* Mobile Responsive Styles */
   @media (max-width: 768px) {
@@ -198,9 +294,9 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background-color: white;
+      background-color: var(--color-bg);
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid var(--color-border);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
       /* Hidden state */
@@ -231,7 +327,14 @@
     .lang-switch {
       margin-left: 0;
       margin-top: 1rem;
-      padding-bottom: 1rem;
+      padding-bottom: 0;
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .theme-switch-wrapper {
+        margin-left: 0;
+        margin-bottom: 1rem;
     }
 
     .lang-link {

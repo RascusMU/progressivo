@@ -7,7 +7,7 @@ const services = await getCollection('services');
 
 <Layout title="Domů | Progressivo">
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero animate-on-scroll">
     <div class="container hero-content">
       <h1>Překročte hranice s námi – propojujeme Evropu s celým světem</h1>
       <p class="subtitle">Moderní technika, vzdělání i DNA analýzy na jediné platformě.</p>
@@ -15,8 +15,24 @@ const services = await getCollection('services');
     </div>
   </section>
 
+  <!-- Founder Section -->
+  <section id="founder" class="founder-section animate-on-scroll">
+    <div class="container founder-content">
+      <div class="founder-text">
+        <h2 class="section-title-left">O zakladateli</h2>
+        <p class="founder-bio">
+          Jaroslav Cingel – Spojuji mezinárodní byznys se svobodou. 15+ let zkušeností v logistice, Panama & EU.
+        </p>
+        <a href="https://cingel.cz" class="founder-link">Poznat můj příběh &rarr;</a>
+      </div>
+      <div class="founder-image-wrapper">
+        <img src="/images/jaroslav-v-obleku.webp" alt="Jaroslav Cingel" class="founder-image" />
+      </div>
+    </div>
+  </section>
+
   <!-- Services Section -->
-  <section id="services" class="section-services">
+  <section id="services" class="section-services animate-on-scroll">
     <div class="container">
       <h2 class="section-title">Naše služby</h2>
       <div class="services-grid">
@@ -89,6 +105,79 @@ const services = await getCollection('services');
     color: white;
   }
 
+  /* Founder Section */
+  .founder-section {
+    padding: 5rem 0;
+    background-color: var(--color-bg);
+  }
+
+  .founder-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .section-title-left {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+    text-align: left;
+  }
+
+  .section-title-left::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  .founder-bio {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+  }
+
+  .founder-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+
+  .founder-link:hover {
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .founder-image-wrapper {
+    position: relative;
+  }
+
+  .founder-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+
   /* Services Section */
   .section-services {
     padding: 5rem 0;
@@ -130,15 +219,16 @@ const services = await getCollection('services');
   }
 
   .service-card {
-    background: white;
+    background: var(--color-bg); /* Use var for dark mode support */
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-card);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
+    border: 1px solid var(--color-border);
   }
 
   .service-card:hover {
@@ -211,6 +301,25 @@ const services = await getCollection('services');
 
     .hero .subtitle {
       font-size: 1.1rem;
+    }
+
+    .founder-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .section-title-left {
+      text-align: center;
+    }
+
+    .section-title-left::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .founder-link {
+        margin: 0 auto;
     }
 
     .section-title {
