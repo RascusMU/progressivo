@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Modal from '../components/Modal.astro';
 
 const { title = "Progressivo", lang = "cs" } = Astro.props;
 ---
@@ -22,6 +23,7 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
   </main>
   <Footer />
   <WhatsAppButton />
+  <Modal />
 
   <script is:inline>
     // Automatic language detection
@@ -166,12 +168,18 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Global Image Styles */
+  img:not(.logo):not(.sun-icon):not(.moon-icon) {
+      border-radius: 1rem; /* rounded-2xl */
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   /* Prose Configuration */
