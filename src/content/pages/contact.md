@@ -2,7 +2,7 @@ Kontakt
 
 # Spojte se s námi dnes
 
-![](../../wp-content/uploads/2025/04/IMG_2112.webp "Panamá city")
+<!-- ![](../../wp-content/uploads/2025/04/IMG_2112.webp "Panamá city") -->
 
 Časté dotazy
 

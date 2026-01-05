@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'contact');
+if (!entry) {
+  throw new Error('Page pages/contact not found');
+}
+const { Content } = await render(entry);
+---
+
+<Layout title="Kontakt">
+  <main class="container mx-auto px-4 py-8 prose lg:prose-xl">
+    <Content />
+  </main>
+</Layout>
