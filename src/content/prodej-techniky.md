@@ -1,3 +1,7 @@
+---
+title: "Online prodej techniky"
+description: "Zprostředkování nákupu a dovozu těžké techniky online."
+---
 # Online prodej techniky
 
 Celý proces jsme v **Progressivo Corp.** navrhli tak, aby byl pro vás co nejjednodušší, nejrychlejší a plně zvládnutelný online.

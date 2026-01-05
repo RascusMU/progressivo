@@ -1,3 +1,7 @@
+---
+title: "Překladatelská činnost"
+description: "Rychlé a přesné překlady dokumentů a textů (mimo soudní)."
+---
 # Překladatelská činnost
 
 Společnost **Progressivo Corp.** je váš spolehlivý partner pro překlady všeho druhu! Dokumenty, e-maily, dopisy nebo jiné texty – vše přeložíme rychle, kvalitně a přesně. A pokud jde o okamžitou komunikaci, nabízíme i **asistenci při překladu po telefonu**, abyste mohli bez starostí jednat s obchodními partnery, klienty nebo úřady.

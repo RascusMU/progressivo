@@ -1,3 +1,7 @@
+---
+title: "IT podpora"
+description: "Zajištění funkčnosti technologií, řešení problémů a správa systémů."
+---
 # IT podpora
 
 **IT podpora** je klíčovou službou, která zajišťuje, že vaše technologie fungují přesně tak, jak potřebujete. Může zahrnovat širokou škálu činností, od každodenní pomoci s technickými problémy až po komplexní správu IT infrastruktury.

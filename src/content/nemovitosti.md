@@ -1,3 +1,7 @@
+---
+title: "Nemovitosti"
+description: "Zprostředkování nákupu nemovitostí v zemích jako Kostarika, Panama a Kolumbie."
+---
 # Nemovitosti
 
 Tropická příroda, dechberoucí pláže a nekonečné příležitosti – to vše nabízejí Kostarika, Panama a Kolumbie. Tyto tři země, každá svým jedinečným způsobem, představují ideální destinace pro život, investice či odpočinkové místo na důchod. Pokud sníte o nemovitosti obklopené exotickou přírodou nebo s nádherným výhledem na oceán, právě zde můžete začít svou cestu k životu v ráji.

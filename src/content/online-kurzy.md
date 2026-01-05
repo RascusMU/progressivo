@@ -1,3 +1,7 @@
+---
+title: "Online kurzy"
+description: "Vzdělávací kurzy a doučování online pro děti i dospělé."
+---
 # Online kurzy
 
 **Pro koho jsou kurzy určeny:**

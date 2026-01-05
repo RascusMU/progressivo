@@ -1,3 +1,7 @@
+---
+title: "Efektivní integrace"
+description: "Propojení online nástrojů a služeb do jednoho funkčního celku pro úsporu času."
+---
 # Efektivní integrace
 
 „Ať už jste student, podnikatel nebo běžný uživatel, naše řešení efektivní integrace vám umožní propojit všechny klíčové online nástroje a služby do jednoho funkčního celku.

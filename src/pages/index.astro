@@ -1,6 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
 ---
-<Layout title="Progressivo">
-  <h1>Progressivo</h1>
+
+<Layout title="Služby | Progressivo">
+  <h1>Naše služby</h1>
+  <div class="services-grid">
+    {services.map((service) => (
+      <div class="service-card">
+        <h2>{service.data.title}</h2>
+        <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
+        <a href={`/sluzby/${service.id}`}>Více informací</a>
+      </div>
+    ))}
+  </div>
 </Layout>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .service-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  .service-card h2 {
+    margin-top: 0;
+  }
+  .service-card a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .service-card a:hover {
+    text-decoration: underline;
+  }
+</style>
