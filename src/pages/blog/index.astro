@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await getCollection('blog');
+---
+
+<Layout title="Blog">
+  <h1>Blog</h1>
+  <ul>
+    {posts.map((post) => (
+      <li>
+        <article>
+          <h2>
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          </h2>
+          {post.data.date && (
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('cs-CZ')}
+            </time>
+          )}
+          <p>
+            {post.data.description
+              ? post.data.description
+              : post.body
+                ? post.body.substring(0, 150).replace(/[#*]/g, '') + '...'
+                : ''}
+          </p>
+        </article>
+      </li>
+    ))}
+  </ul>
+</Layout>

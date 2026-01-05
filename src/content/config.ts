@@ -9,4 +9,13 @@ const services = defineCollection({
   }),
 });
 
-export const collections = { services };
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date().optional(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { services, blog };

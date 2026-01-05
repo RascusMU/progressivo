@@ -141,7 +141,7 @@ V dnešní době propojeného světa je snadnější než kdy dříve přestěho
  **S Progressivo Corp. k vašemu snu**:
 Ať už vás láká harmonie přírody Kostariky, moderní metropole Panamy nebo rozmanitost Kolumbie, jsme zde, abychom vám pomohli splnit váš sen. S námi je cesta k vlastní nemovitosti v tropickém ráji jednodušší a bezpečnější. Udělejte první krok s Progressivo Corp. a objevte nekonečné možnosti, které vám mohou změnit život
 
-![Close-up of hands holding a smartphone showing the word 'Network' on screen.](../../wp-content/uploads/2025/04/pexels-photo-6914350-6914350-1-683x1024.jpg "pexels-photo-6914350-6914350-1")
+<!-- ![Close-up of hands holding a smartphone showing the word 'Network' on screen.](../../wp-content/uploads/2025/04/pexels-photo-6914350-6914350-1-683x1024.jpg "pexels-photo-6914350-6914350-1") -->
 
 ### Online prodej techniky
 
