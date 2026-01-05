@@ -18,4 +18,12 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { services, blog };
+const pages = defineCollection({
+  type: 'content',
+});
+
+const legal = defineCollection({
+  type: 'content',
+});
+
+export const collections = { services, blog, pages, legal };
