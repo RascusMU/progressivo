@@ -6,6 +6,46 @@ const services = await getCollection('services');
 ---
 
 <Layout title="Domů | Progressivo">
+  <script>
+    // Stats Animation
+    const statsSection = document.querySelector('.stats-section');
+    const stats = document.querySelectorAll('.stat-number');
+    let started = false;
+
+    function startCounting() {
+      if (started) return;
+
+      stats.forEach(stat => {
+        const target = +stat.getAttribute('data-target');
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+
+        let current = 0;
+        const updateCount = () => {
+          current += increment;
+          if (current < target) {
+            stat.innerText = Math.ceil(current) + (stat.nextElementSibling.innerText.includes('/7') && target === 24 ? '' : (target === 15 ? '+' : ''));
+            requestAnimationFrame(updateCount);
+          } else {
+            stat.innerText = target + (target === 15 ? '+' : '');
+          }
+        };
+        updateCount();
+      });
+      started = true;
+    }
+
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                startCounting();
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    }
+  </script>
+
   <!-- Hero Section -->
   <section class="hero animate-on-scroll">
     <div class="container hero-content">
@@ -27,6 +67,24 @@ const services = await getCollection('services');
       </div>
       <div class="founder-image-wrapper">
         <img src="/images/jaroslav-v-obleku.webp" alt="Jaroslav Cingel" class="founder-image" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section animate-on-scroll">
+    <div class="container stats-container">
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0</div>
+        <div class="stat-label">let v byznysu</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">kontinenty</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="24">0</div>
+        <div class="stat-label">/7 podpora</div>
       </div>
     </div>
   </section>
@@ -178,6 +236,39 @@ const services = await getCollection('services');
     object-fit: cover;
   }
 
+  /* Stats Section */
+  .stats-section {
+    padding: 3rem 0;
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 1.125rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
   /* Services Section */
   .section-services {
     padding: 5rem 0;
@@ -219,7 +310,9 @@ const services = await getCollection('services');
   }
 
   .service-card {
-    background: var(--color-bg); /* Use var for dark mode support */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-card);
@@ -228,7 +321,12 @@ const services = await getCollection('services');
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  :global(html.dark) .service-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .service-card:hover {
