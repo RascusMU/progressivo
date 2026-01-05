@@ -1,0 +1,55 @@
+---
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="footer-content">
+    <p>&copy; {year} Progressivo. Všechna práva vyhrazena.</p>
+    <nav>
+      <ul>
+        <li><a href="/gdpr">GDPR</a></li>
+        <li><a href="/obchodni-podminky">Obchodní podmínky</a></li>
+        <li><a href="/smluvni-podminky">Smluvní podmínky</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    border-top: 1px solid #e9ecef;
+    margin-top: 2rem;
+  }
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  nav a:hover {
+    text-decoration: underline;
+    color: #333;
+  }
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+</style>
