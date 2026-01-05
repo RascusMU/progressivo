@@ -5,7 +5,12 @@
     <a href="/" class="logo-link">
       <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" class="logo" />
     </a>
-    <nav>
+    <button id="menu-toggle" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <nav id="nav-menu">
       <ul>
         <li><a href="/">Domů</a></li>
         <li><a href="/#services">Služby</a></li>
@@ -16,6 +21,18 @@
     </nav>
   </div>
 </header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+  }
+</script>
 
 <style>
   header {
@@ -44,8 +61,32 @@
   .logo {
     height: 50px;
     width: auto;
+    transition: height 0.3s ease;
   }
 
+  /* Hamburger Menu Button */
+  #menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Navigation */
   nav ul {
     list-style: none;
     margin: 0;
@@ -82,16 +123,64 @@
     width: 100%;
   }
 
+  /* Mobile Responsive Styles */
   @media (max-width: 768px) {
     .header-container {
-      flex-direction: column;
-      gap: 1rem;
+      flex-wrap: wrap; /* Allows nav to break to new line if needed, though we position it absolute */
+    }
+
+    .logo {
+      height: 40px; /* Smaller logo on mobile */
+    }
+
+    #menu-toggle {
+      display: flex;
+    }
+
+    /* Hamburger Animation when active */
+    #menu-toggle.active .hamburger-line:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    #menu-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    #menu-toggle.active .hamburger-line:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+      /* Hidden state */
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    nav.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     nav ul {
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      font-size: 1.125rem;
+      display: block;
+      padding: 0.5rem 2rem;
     }
   }
 </style>

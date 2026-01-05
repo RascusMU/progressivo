@@ -71,6 +71,15 @@ const { title = "Progressivo" } = Astro.props;
     color: var(--color-accent-hover);
   }
 
+  /* Fix for broken images */
+  img {
+    background-color: #cbd5e1; /* Slate 300 - placeholder color */
+    position: relative;
+    /* Optional: Ensure it has some dimensions if src fails and no dims set,
+       but that might break layout for intentional small icons.
+       Usually sufficient to set bg color. */
+  }
+
   /* Utility classes */
   .container {
     max-width: 1200px;
