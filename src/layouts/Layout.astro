@@ -5,6 +5,16 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Modal from '../components/Modal.astro';
 
 const { title = "Progressivo", lang = "cs" } = Astro.props;
+
+const translations = {
+  cs: { description: "Moderní technika, vzdělání i DNA analýzy na jediné platformě." },
+  en: { description: "Modern technology, education and DNA analysis on a single platform." },
+  de: { description: "Moderne Technik, Bildung und DNA-Analyse auf einer einzigen Plattform." },
+  ru: { description: "Современные технологии, образование и анализ ДНК на одной платформе." },
+  es: { description: "Tecnología moderna, educación y análisis de ADN en una sola plataforma." }
+};
+
+const description = translations[lang]?.description || translations['cs'].description;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -12,12 +22,13 @@ const { title = "Progressivo", lang = "cs" } = Astro.props;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
+  <meta name="description" content={description}>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <Header />
+  <Header lang={lang} />
   <main>
     <slot />
   </main>

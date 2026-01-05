@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'about');
+if (!entry) {
+  // Graceful fallback or custom error page if needed, for now just basic text
+  // throw new Error('Page pages/about not found');
+}
+const { Content } = entry ? await render(entry) : { Content: null };
+---
+
+<Layout lang="es" title="O nás | Progressivo">
+  <div class="page-header">
+     <div class="container">
+        <h1>O nás</h1>
+     </div>
+  </div>
+  <main class="container page-content animate-on-scroll">
+    {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah se připravuje.</p>}
+  </main>
+</Layout>
+
+<style>
+  .page-header {
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+  }
+
+  /* Dark mode adjustment for gradient if needed, though vars handle it */
+  :global(.dark) .page-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  }
+
+  h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0;
+  }
+
+  .page-content {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+  }
+</style>
