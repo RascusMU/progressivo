@@ -157,7 +157,7 @@ services.sort((a, b) => {
           return (
           <a href={`/cs/sluzby/${slug}`} class={cardClass}>
             <div class="card-media">
-                <img src="/images/mapa-svetabusines.webp" alt={service.data.title} class="service-image" />
+                <img src={service.data.image || "/images/mapa-svetabusines.webp"} alt={service.data.title} class="service-image" />
             </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
