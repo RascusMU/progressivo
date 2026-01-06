@@ -2,6 +2,7 @@
 title: "Real Estate"
 description: "Facilitation of real estate purchases in countries like Costa Rica, Panama, and Colombia."
 lang: en
+image: "/images/mapa-svetabusines.webp"
 ---
 # Real Estate
 

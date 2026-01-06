@@ -2,6 +2,7 @@
 title: "IT Support"
 description: "Ensuring technology functionality, troubleshooting, and systems management."
 lang: en
+image: "/images/IT-podpora.jpg"
 ---
 # IT Support
 

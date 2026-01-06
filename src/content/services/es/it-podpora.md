@@ -2,6 +2,7 @@
 title: "Soporte de TI"
 description: "Aseguramiento de la funcionalidad tecnológica, solución de problemas y gestión de sistemas."
 lang: es
+image: "/images/IT-podpora.jpg"
 ---
 # Soporte de TI
 

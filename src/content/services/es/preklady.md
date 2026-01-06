@@ -2,6 +2,7 @@
 title: "Actividad de traducción"
 description: "Traducciones rápidas y precisas de documentos y textos (excepto judiciales)."
 lang: es
+image: "/images/preklady.jpg"
 ---
 # Actividad de traducción
 

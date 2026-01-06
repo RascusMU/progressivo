@@ -2,6 +2,7 @@
 title: "Integración Efectiva"
 description: "Conexión de herramientas y servicios en línea en una unidad funcional para ahorrar tiempo."
 lang: es
+image: "/images/drevena-splet.webp"
 ---
 # Integración Efectiva
 

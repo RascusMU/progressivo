@@ -2,6 +2,7 @@
 title: "Venta de técnica en línea"
 description: "Intermediación de compra e importación de maquinaria pesada en línea."
 lang: es
+image: "/images/lod-kontajner.jpg"
 ---
 # Venta de técnica en línea
 

@@ -2,6 +2,7 @@
 title: "Expatriierung und Visa"
 description: "Umfassende Unterstützung beim Umzug ins Ausland und bei der Visabearbeitung."
 lang: de
+image: "/images/expatriace.jpg"
 ---
 # Expatriierung und Visa
 

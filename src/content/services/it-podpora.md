@@ -2,6 +2,7 @@
 title: "IT podpora"
 description: "Zajištění funkčnosti technologií, řešení problémů a správa systémů."
 lang: cs
+image: "/images/IT-podpora.jpg"
 ---
 # IT podpora
 

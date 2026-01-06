@@ -2,6 +2,7 @@
 title: "Bienes Raíces"
 description: "Facilitación de compras de bienes raíces en países como Costa Rica, Panamá y Colombia."
 lang: es
+image: "/images/mapa-svetabusines.webp"
 ---
 # Bienes Raíces
 

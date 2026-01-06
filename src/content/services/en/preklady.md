@@ -2,6 +2,7 @@
 title: "Translation Services"
 description: "Fast and accurate translations of documents and texts (excluding certified translations)."
 lang: en
+image: "/images/preklady.jpg"
 ---
 # Translation Services
 
