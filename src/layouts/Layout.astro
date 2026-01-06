@@ -1,6 +1,7 @@
 ---
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Modal from '../components/Modal.astro';
+import Header from '../components/Header.astro';
 // import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -36,6 +37,7 @@ const description = descriptions[lang] || descriptions.cs;
 		<!-- <ClientRouter /> -->
 	</head>
 	<body>
+        <Header lang={lang} />
 		<slot />
         <WhatsAppButton />
         <Modal lang={lang} />
