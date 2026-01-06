@@ -157,62 +157,93 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const root = document.documentElement;
+    function initHeader() {
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
 
-    // Check for saved user preference, if any, on load
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        root.classList.toggle('dark', savedTheme === 'dark');
-    } else {
-        // Check system preference
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        root.classList.toggle('dark', systemPrefersDark);
+        // Check for saved user preference, if any, on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            root.classList.toggle('dark', savedTheme === 'dark');
+        } else {
+            // Check system preference
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            root.classList.toggle('dark', systemPrefersDark);
+        }
+
+        if (themeToggle) {
+             // Remove old listener if exists (good practice for SPA navigations, though strictly replaced elements don't need it)
+             const newThemeToggle = themeToggle.cloneNode(true);
+             themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+
+             newThemeToggle.addEventListener('click', () => {
+                root.classList.toggle('dark');
+                localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+            });
+        }
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        if (mobileMenuToggle && mobileMenu) {
+            const newMobileMenuToggle = mobileMenuToggle.cloneNode(true);
+            mobileMenuToggle.parentNode.replaceChild(newMobileMenuToggle, mobileMenuToggle);
+
+            newMobileMenuToggle.addEventListener('click', () => {
+                newMobileMenuToggle.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+            });
+        }
+
+        // Language Switcher Dropdown Logic
+        const langBtn = document.querySelector('.lang-btn');
+        const langMenu = document.querySelector('.lang-menu');
+        const langSwitcher = document.querySelector('.lang-switcher-dropdown');
+
+        if (langBtn && langMenu && langSwitcher) {
+            // Reset state
+             langMenu.classList.remove('show');
+             langBtn.setAttribute('aria-expanded', 'false');
+
+             const newLangBtn = langBtn.cloneNode(true);
+             langBtn.parentNode.replaceChild(newLangBtn, langBtn);
+
+            newLangBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const expanded = newLangBtn.getAttribute('aria-expanded') === 'true';
+                newLangBtn.setAttribute('aria-expanded', !expanded);
+                langMenu.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            const closeDropdown = (e) => {
+                if (!langSwitcher.contains(e.target)) {
+                    langMenu.classList.remove('show');
+                    newLangBtn.setAttribute('aria-expanded', 'false');
+                }
+            };
+            document.removeEventListener('click', window._closeDropdownHandler); // Cleanup previous
+            window._closeDropdownHandler = closeDropdown;
+            document.addEventListener('click', closeDropdown);
+        }
+
+        // Save language preference on click
+        document.querySelectorAll('.lang-item').forEach(item => {
+            item.addEventListener('click', () => {
+                 const selectedLang = item.getAttribute('data-lang');
+                 localStorage.setItem('preferred-lang', selectedLang);
+            });
+        });
     }
 
-    themeToggle.addEventListener('click', () => {
-        root.classList.toggle('dark');
-        localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
-    });
+    // Run on initial load
+    // initHeader(); // Not needed if we use astro:page-load which fires on initial too?
+    // Wait, astro:page-load fires on initial load too.
 
-    // Mobile Menu Logic
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
-
-    mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('open');
-        mobileMenu.classList.toggle('open');
-        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-    });
-
-    // Language Switcher Dropdown Logic
-    const langBtn = document.querySelector('.lang-btn');
-    const langMenu = document.querySelector('.lang-menu');
-    const langSwitcher = document.querySelector('.lang-switcher-dropdown');
-
-    langBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const expanded = langBtn.getAttribute('aria-expanded') === 'true';
-        langBtn.setAttribute('aria-expanded', !expanded);
-        langMenu.classList.toggle('show');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!langSwitcher.contains(e.target)) {
-            langMenu.classList.remove('show');
-            langBtn.setAttribute('aria-expanded', 'false');
-        }
-    });
-
-    // Save language preference on click
-    document.querySelectorAll('.lang-item').forEach(item => {
-        item.addEventListener('click', () => {
-             const selectedLang = item.getAttribute('data-lang');
-             localStorage.setItem('preferred-lang', selectedLang);
-        });
-    });
+    document.addEventListener('astro:page-load', initHeader);
 </script>
 
 <style>
