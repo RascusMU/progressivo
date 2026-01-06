@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const id = 'reklamace-a-vraceni-zbozi'; // Currently only CS exists?
+const entry = await getEntry('legal', id);
+
+// If translation doesn't exist, we might want to fallback or show nothing.
+// But since the file exists in content/legal, let's see.
+// The file listing showed only `reklamace-a-vraceni-zbozi.md`, no -en, -de etc.
+// So for now, this page might only be valid for CS?
+// But this is a dynamic route for [lang].
+// If I enable it for [lang], it will show Czech content on /en/reklamace...
+// Maybe I should only create it if I can handle it.
+// But wait, the user wants "Unify routing".
+// If I create this, I ensure no 404s if someone tries to access it, even if content is untranslated.
+// However, typically "reklamace" is specific.
+
+// Let's check if the root page exists. It does NOT in the listing above.
+// But CONTENT_MAP says it should be /reklamace-a-vraceni-zbozi/index.html.
+// I should create the root page AND the dynamic page.
+
+const { Content } = entry ? await render(entry) : { Content: null };
+const translations = {
+    cs: 'Reklamace a vrácení zboží',
+    en: 'Complaints and Returns',
+    de: 'Reklamation und Rückgabe',
+    es: 'Quejas y Devoluciones',
+    ru: 'Рекламации и возврат'
+};
+const title = translations[lang] || translations.cs;
+---
+
+<Layout lang={lang} title={`${title} | Progressivo`}>
+  <div class="page-header">
+     <div class="container">
+        <h1>{title}</h1>
+     </div>
+  </div>
+  <main class="container page-content animate-on-scroll">
+    {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah není k dispozici.</p>}
+  </main>
+</Layout>
+
+<style>
+  .page-header {
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+  }
+
+  :global(.dark) .page-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  }
+
+  h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0;
+  }
+
+  .page-content {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+  }
+</style>

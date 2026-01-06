@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://progressivo.cz',
+  site: 'https://progressivo.eu',
   integrations: [sitemap()],
   i18n: {
     defaultLocale: 'cs',
