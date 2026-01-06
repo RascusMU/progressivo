@@ -375,23 +375,16 @@ const t = translations[lang];
 
   .services-grid {
     display: grid;
-    /* Desktop default: 3 columns */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  /* Large Desktop - optional, if we want 4 columns on very large screens */
-  @media (min-width: 1280px) {
-     .services-grid {
-       grid-template-columns: repeat(4, 1fr);
-     }
+    /* User requested: auto-fit with minmax 300px */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem !important;
   }
 
   .service-card {
     background: #ffffff;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 2rem;
+    padding: 2rem; /* Explicitly set padding as requested */
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -472,9 +465,7 @@ const t = translations[lang];
   /* Responsive Adjustments */
   @media (max-width: 1024px) {
     /* Tablet: 2 columns */
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    /* .services-grid override removed to respect auto-fit */
   }
 
   @media (max-width: 768px) {
@@ -514,8 +505,6 @@ const t = translations[lang];
     }
 
     /* Mobile: 1 column */
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
+    /* .services-grid override removed to respect auto-fit */
   }
 </style>
