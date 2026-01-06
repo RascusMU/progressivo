@@ -1,61 +1,77 @@
 ---
 const { lang = 'cs' } = Astro.props;
 
-const navLinks = {
-  cs: [
-    { href: '/#services', text: 'Služby' },
-    { href: '/o-nas', text: 'O nás' },
-    { href: '/blog', text: 'Blog' },
-    { href: '/kontakt', text: 'Kontakt' },
-  ],
-  en: [
-    { href: '/en/#services', text: 'Services' },
-    { href: '/en/o-nas', text: 'About Us' },
-    { href: '/en/blog', text: 'Blog' },
-    { href: '/en/kontakt', text: 'Contact' },
-  ],
-  de: [
-    { href: '/de/#services', text: 'Dienstleistungen' },
-    { href: '/de/o-nas', text: 'Über uns' },
-    { href: '/de/blog', text: 'Blog' },
-    { href: '/de/kontakt', text: 'Kontakt' },
-  ],
-  ru: [
-    { href: '/ru/#services', text: 'Услуги' },
-    { href: '/ru/o-nas', text: 'О нас' },
-    { href: '/ru/blog', text: 'Блог' },
-    { href: '/ru/kontakt', text: 'Контакты' },
-  ],
-  es: [
-    { href: '/es/#services', text: 'Servicios' },
-    { href: '/es/o-nas', text: 'Sobre nosotros' },
-    { href: '/es/blog', text: 'Blog' },
-    { href: '/es/kontakt', text: 'Contacto' },
-  ],
+const translations = {
+  cs: {
+    services: 'Služby',
+    about: 'O nás',
+    blog: 'Blog',
+    contact: 'Kontakt',
+  },
+  en: {
+    services: 'Services',
+    about: 'About Us',
+    blog: 'Blog',
+    contact: 'Contact',
+  },
+  de: {
+    services: 'Dienstleistungen',
+    about: 'Über uns',
+    blog: 'Blog',
+    contact: 'Kontakt',
+  },
+  es: {
+    services: 'Servicios',
+    about: 'Sobre nosotros',
+    blog: 'Blog',
+    contact: 'Contacto',
+  },
+  ru: {
+    services: 'Услуги',
+    about: 'О нас',
+    blog: 'Блог',
+    contact: 'Контакты',
+  },
 };
 
 const languages = [
-    { code: 'cs', label: 'CZ', flag: '🇨🇿', path: '/' },
-    { code: 'en', label: 'EN', flag: '🇺🇸', path: '/en/' },
-    { code: 'de', label: 'DE', flag: '🇩🇪', path: '/de/' },
-    { code: 'ru', label: 'RU', flag: '🇷🇺', path: '/ru/' },
-    { code: 'es', label: 'ES', flag: '🇵🇦', path: '/es/' }
+    { code: 'cs', label: 'CZ', flag: '🇨🇿' },
+    { code: 'en', label: 'EN', flag: '🇺🇸' },
+    { code: 'de', label: 'DE', flag: '🇩🇪' },
+    { code: 'ru', label: 'RU', flag: '🇷🇺' },
+    { code: 'es', label: 'ES', flag: '🇵🇦' }
 ];
 
 const currentLangObj = languages.find(l => l.code === lang) || languages[0];
+const t = translations[lang] || translations.cs;
 
-const links = navLinks[lang] || navLinks.cs;
+// Helper for localized internal links
+const getLink = (path) => {
+    if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
+    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`;
+    return lang === 'cs' ? path : `/${lang}${path}`;
+};
+
+// Navigation Links using the helper
+const navLinks = [
+    { href: getLink('/#services'), text: t.services },
+    { href: getLink('/o-nas'), text: t.about },
+    { href: getLink('/blog'), text: t.blog },
+    { href: getLink('/kontakt'), text: t.contact },
+];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="header">
   <div class="container header-content">
-    <a href={lang === 'cs' ? '/' : `/${lang}/`} class="logo">
+    <a href={getLink('/')} class="logo">
       <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" width="120" height="80" />
     </a>
 
     <nav class="nav-desktop">
       <ul class="nav-list">
-        {links.map((link) => (
+        {navLinks.map((link) => (
           <li><a href={link.href}>{link.text}</a></li>
         ))}
       </ul>
@@ -70,12 +86,49 @@ const links = navLinks[lang] || navLinks.cs;
                 <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div class="lang-menu">
-                {languages.map(l => (
-                    <a href={l.path} class={`lang-item ${l.code === lang ? 'active' : ''}`} data-lang={l.code}>
-                        <span class="flag">{l.flag}</span>
-                        <span class="label">{l.label}</span>
-                    </a>
-                ))}
+                {languages.map(l => {
+                    // Logic to preserve current path but change language
+                    let targetPath = '/';
+                    const segments = currentPath.split('/').filter(Boolean); // e.g. ['es', 'o-nas'] or ['o-nas']
+
+                    // Identify if the first segment is a language code
+                    const firstSegmentIsLang = languages.some(lang => lang.code === segments[0]);
+
+                    if (l.code === 'cs') {
+                         // Switching TO Czech (root)
+                         if (firstSegmentIsLang) {
+                             // Remove the lang prefix
+                             const newSegments = segments.slice(1);
+                             targetPath = '/' + newSegments.join('/');
+                         } else {
+                             // Already at root or some deep path in CS
+                             targetPath = currentPath;
+                         }
+                    } else {
+                        // Switching TO another language (e.g. 'en')
+                        if (firstSegmentIsLang) {
+                            // Replace the existing lang prefix
+                            const newSegments = [l.code, ...segments.slice(1)];
+                            targetPath = '/' + newSegments.join('/');
+                        } else {
+                            // Add the new lang prefix
+                            const newSegments = [l.code, ...segments];
+                            targetPath = '/' + newSegments.join('/');
+                        }
+                    }
+
+                    // Fix root path edge cases
+                    if (targetPath === '') targetPath = '/';
+                    else if (targetPath === `/${l.code}`) targetPath = `/${l.code}/`;
+                    else if (targetPath === '//') targetPath = '/';
+
+                    return (
+                        <a href={targetPath} class={`lang-item ${l.code === lang ? 'active' : ''}`} data-lang={l.code}>
+                            <span class="flag">{l.flag}</span>
+                            <span class="label">{l.label}</span>
+                        </a>
+                    )
+                })}
             </div>
         </div>
 
@@ -95,7 +148,7 @@ const links = navLinks[lang] || navLinks.cs;
   <div class="mobile-menu">
       <nav>
           <ul>
-            {links.map((link) => (
+            {navLinks.map((link) => (
                 <li><a href={link.href}>{link.text}</a></li>
             ))}
           </ul>
