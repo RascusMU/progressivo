@@ -95,16 +95,18 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
     <div class="container">
       <h2 class="section-title">Naše služby</h2>
       <div class="services-grid">
-        {services.map((service) => (
+        {services.map((service) => {
+          const slug = service.id.replace(/\.md$/, '');
+          return (
           <div class="service-card">
             <div class="card-media">
                 <img src="/images/mapa-svetabusines.webp" alt={service.data.title} class="service-image" />
             </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
-            <a href={`/sluzby/${service.id}`} class="card-link">Více informací &rarr;</a>
+            <a href={`/sluzby/${slug}`} class="card-link">Více informací &rarr;</a>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   </section>
