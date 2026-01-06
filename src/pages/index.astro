@@ -3,7 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allServices = await getCollection('services');
-const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].some(prefix => service.id.startsWith(prefix)));
+let services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].some(prefix => service.id.startsWith(prefix)));
+
+const desiredOrder = [
+  'analyza-dna',
+  'efektivni-integrace',
+  'it-podpora',
+  'expatriace-viza',
+  'nemovitosti',
+  'preklady',
+  'prodej-techniky',
+  'online-kurzy'
+];
+
+services.sort((a, b) => {
+  const slugA = a.id.replace(/\.md$/, '');
+  const slugB = b.id.replace(/\.md$/, '');
+  return desiredOrder.indexOf(slugA) - desiredOrder.indexOf(slugB);
+});
 ---
 
 <Layout title="Domů | Progressivo">
@@ -127,10 +144,15 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
       <div class="services-grid">
         {services.map((service) => {
           const slug = service.id.replace(/\.md$/, '');
-          // Determine if this card should span 2 columns (dominant cards)
-          // Based on memory: 'analyza-dna', 'expatriace-viza' are dominant
-          const isDominant = ['analyza-dna', 'expatriace-viza'].includes(slug);
-          const cardClass = `service-card ${isDominant ? 'span-2' : ''}`;
+
+          let spanClass = 'span-1';
+          if (slug === 'analyza-dna' || slug === 'expatriace-viza') {
+            spanClass = 'span-2';
+          } else if (slug === 'online-kurzy') {
+            spanClass = 'span-3';
+          }
+
+          const cardClass = `service-card ${spanClass}`;
 
           return (
           <a href={`/cs/sluzby/${slug}`} class={cardClass}>
@@ -331,12 +353,11 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns for Bento layout */
-    gap: 24px; /* Fixed gap as requested */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    grid-auto-flow: dense; /* Helps with Bento packing */
   }
 
   .service-card {
@@ -362,6 +383,10 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
 
   .span-2 {
       grid-column: span 2;
+  }
+
+  .span-3 {
+      grid-column: span 3;
   }
 
   :global(html.dark) .service-card {
@@ -411,22 +436,27 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
 
   /* Responsive Adjustments */
   @media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .span-2 {
-        grid-column: span 2; /* Keep spanning on tablet if it fits */
-    }
+     /* The user specifically asked for 3 columns and specific layout.
+        However, usually 1024px is too small for 3 columns if cards are wide.
+        But the user's prompt didn't specify tablet behavior other than <768px.
+        I will leave the 2-column fallback for tablet (1024px) as it was before,
+        but make sure spans are handled gracefully or just allow the grid to flow.
+        Actually, let's stick to the user's specific CSS which only mentioned max-width 768px.
+        Wait, the user's CSS instruction was:
+        "@media (max-width: 768px) { .span-2, .span-3 { grid-column: span 1; } }"
+        It didn't mention 1024px.
+        If I remove the 1024px query, it will stay 3 columns down to 768px.
+        I'll keep it simple and follow the user's explicit CSS for mobile.
+     */
   }
 
   @media (max-width: 768px) {
     .services-grid {
-        grid-template-columns: 1fr; /* Mobile: 1 column */
+        grid-template-columns: 1fr;
     }
 
-    .span-2 {
-        grid-column: auto; /* Reset span on mobile */
+    .span-2, .span-3 {
+        grid-column: span 1;
     }
 
     .hero {
