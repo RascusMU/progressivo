@@ -4,17 +4,33 @@ import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
-  return services.map(service => ({
-    params: { slug: service.id },
-    props: { service },
-  }));
+
+  const languages = ['en', 'de', 'ru', 'es'];
+
+  const paths = [];
+
+  for (const service of services) {
+    const id = service.id;
+    const parts = id.split('/');
+    if (parts.length > 1 && languages.includes(parts[0])) {
+      const lang = parts[0];
+      const slug = parts.slice(1).join('/').replace(/\.md$/, '');
+
+      paths.push({
+        params: { lang, slug },
+        props: { service },
+      });
+    }
+  }
+
+  return paths;
 }
 
 const { service } = Astro.props;
 const { Content } = await render(service);
 ---
 
-<Layout lang="ru" title={`${service.data.title} | Progressivo`}>
+<Layout title={`${service.data.title} | Progressivo`} lang={Astro.params.lang}>
   <div class="page-header">
      <div class="container">
         <h1>{service.data.title}</h1>
