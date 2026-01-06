@@ -1,0 +1,64 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout lang="de" title={`${post.data.title} | Progressivo`}>
+  <div class="page-header">
+     <div class="container">
+        <h1>{post.data.title}</h1>
+        {post.data.date && (
+            <time datetime={post.data.date.toISOString()} class="post-date">
+            {post.data.date.toLocaleDateString('cs-CZ')}
+            </time>
+        )}
+     </div>
+  </div>
+
+  <article class="container page-content animate-on-scroll">
+    <div class="prose lg:prose-xl mx-auto">
+        <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .page-header {
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+  }
+
+  :global(.dark) .page-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  }
+
+  h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 0.5rem 0;
+  }
+
+  .post-date {
+      color: var(--color-text-light);
+      font-size: 1rem;
+  }
+
+  .page-content {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+  }
+</style>

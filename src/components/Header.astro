@@ -1,8 +1,42 @@
 ---
+const { lang = 'cs' } = Astro.props;
+
+const isCs = lang === 'cs';
+const homeLink = isCs ? '/' : `/${lang}`;
+const servicesLink = isCs ? '/#services' : `/${lang}/#services`;
+const blogLink = isCs ? '/blog' : `/${lang}/blog`;
+const aboutLink = isCs ? '/o-nas' : `/${lang}/o-nas`;
+const contactLink = isCs ? '/kontakt' : `/${lang}/kontakt`;
+
+// Language Switcher Logic
+const currentPath = Astro.url.pathname;
+const supportedLangs = ['en', 'de', 'ru', 'es'];
+
+function getPurePath(path) {
+  let p = path;
+  if (p.length > 1 && p.endsWith('/')) {
+    p = p.slice(0, -1);
+  }
+  const parts = p.split('/').filter(Boolean);
+  if (parts.length > 0 && supportedLangs.includes(parts[0])) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return p === '' || p === '/' ? '/' : (p.startsWith('/') ? p : '/' + p);
+}
+
+const purePath = getPurePath(currentPath);
+
+function getLangLink(targetLang) {
+    if (targetLang === 'cs') {
+        return purePath === '' ? '/' : purePath;
+    }
+    const suffix = purePath === '/' ? '' : purePath;
+    return `/${targetLang}${suffix}`;
+}
 ---
 <header>
   <div class="container header-container">
-    <a href="/" class="logo-link">
+    <a href={homeLink} class="logo-link">
       <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" class="logo" />
     </a>
 
@@ -14,21 +48,21 @@
       </button>
       <nav id="nav-menu">
         <ul>
-          <li><a href="/">Domů</a></li>
-          <li><a href="/#services">Služby</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/o-nas">O nás</a></li>
-          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href={homeLink}>Domů</a></li>
+          <li><a href={servicesLink}>Služby</a></li>
+          <li><a href={blogLink}>Blog</a></li>
+          <li><a href={aboutLink}>O nás</a></li>
+          <li><a href={contactLink}>Kontakt</a></li>
           <li class="lang-switch">
-            <a href="/" class={`lang-link ${Astro.url.pathname === '/' || Astro.url.pathname.startsWith('/sluzby') || Astro.url.pathname.startsWith('/blog') || Astro.url.pathname.startsWith('/o-nas') || Astro.url.pathname.startsWith('/kontakt') || Astro.url.pathname.startsWith('/gdpr') || Astro.url.pathname.startsWith('/obchodni') || Astro.url.pathname.startsWith('/smluvni') ? 'active' : ''}`} title="Čeština">CZ</a>
+            <a href={getLangLink('cs')} class={`lang-link ${lang === 'cs' ? 'active' : ''}`} title="Čeština">CZ</a>
             <span class="separator">|</span>
-            <a href="/en" class={`lang-link ${Astro.url.pathname.startsWith('/en') ? 'active' : ''}`} title="English">EN</a>
+            <a href={getLangLink('en')} class={`lang-link ${lang === 'en' ? 'active' : ''}`} title="English">EN</a>
             <span class="separator">|</span>
-            <a href="/de" class={`lang-link ${Astro.url.pathname.startsWith('/de') ? 'active' : ''}`} title="Deutsch">DE</a>
+            <a href={getLangLink('de')} class={`lang-link ${lang === 'de' ? 'active' : ''}`} title="Deutsch">DE</a>
             <span class="separator">|</span>
-            <a href="/ru" class={`lang-link ${Astro.url.pathname.startsWith('/ru') ? 'active' : ''}`} title="Русский">RU</a>
+            <a href={getLangLink('ru')} class={`lang-link ${lang === 'ru' ? 'active' : ''}`} title="Русский">RU</a>
             <span class="separator">|</span>
-            <a href="/es" class={`lang-link ${Astro.url.pathname.startsWith('/es') ? 'active' : ''}`} title="Español">ES</a>
+            <a href={getLangLink('es')} class={`lang-link ${lang === 'es' ? 'active' : ''}`} title="Español">ES</a>
           </li>
           <li class="theme-switch-wrapper">
              <button id="theme-toggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
@@ -62,16 +96,6 @@
 
   // Dark Mode Toggle
   const themeToggle = document.getElementById('theme-toggle');
-
-  // Check current theme and update icon visibility
-  // The theme is already set on <html> by the inline script in Layout.astro
-  const updateIcon = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      // If dark, show sun (to switch to light), else show moon
-      // Wait, usually:
-      // Dark mode active -> Show Sun (to switch to light)
-      // Light mode active -> Show Moon (to switch to dark)
-  };
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {

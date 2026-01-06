@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+const posts = await getCollection('blog');
+---
+
+<Layout lang="ru" title="Blog | Progressivo">
+  <div class="page-header">
+     <div class="container">
+        <h1>Blog</h1>
+     </div>
+  </div>
+
+  <div class="container page-content animate-on-scroll">
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <article class="blog-card">
+            <div class="card-content">
+                <h2>
+                    <a href={`/ru/blog/${post.slug}`}>{post.data.title}</a>
+                </h2>
+                {post.data.date && (
+                    <time datetime={post.data.date.toISOString()} class="post-date">
+                    {post.data.date.toLocaleDateString('cs-CZ')}
+                    </time>
+                )}
+                <p class="post-excerpt">
+                    {post.data.description
+                    ? post.data.description
+                    : post.body
+                        ? post.body.substring(0, 150).replace(/[#*]/g, '') + '...'
+                        : ''}
+                </p>
+                <a href={`/ru/blog/${post.slug}`} class="read-more">Číst více &rarr;</a>
+            </div>
+          </article>
+        ))}
+      </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+  }
+
+  :global(.dark) .page-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  }
+
+  h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0;
+  }
+
+  .page-content {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+  }
+
+  .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+  }
+
+  .blog-card {
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .blog-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+  }
+
+  .blog-card h2 a {
+      color: var(--color-text);
+      text-decoration: none;
+  }
+
+  .blog-card h2 a:hover {
+      color: var(--color-accent);
+  }
+
+  .post-date {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      margin-bottom: 1rem;
+      display: block;
+  }
+
+  .post-excerpt {
+      color: var(--color-text-light);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+  }
+
+  .read-more {
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+  }
+
+  .read-more:hover {
+      gap: 0.5rem;
+  }
+</style>
