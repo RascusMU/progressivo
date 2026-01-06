@@ -14,6 +14,63 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const allServices = await getCollection('services');
 const services = allServices.filter(service => service.id.startsWith(lang + '/'));
+
+const translations = {
+  en: {
+    heroTitle: "Go Beyond Borders With Us – Connecting Europe With the World",
+    heroSubtitle: "Modern technology, education, and DNA analysis on a single platform.",
+    heroButton: "Discover Our Services",
+    founderTitle: "About the Founder",
+    founderBio: "Jaroslav Cingel – Bridging international business with freedom. 15+ years of experience in logistics, Panama & EU.",
+    founderButton: "Read My Story \u2192",
+    statsYears: "Years in Business",
+    statsContinents: "Continents",
+    statsSupport: "/7 Support",
+    servicesTitle: "Our Services",
+    servicesLink: "More Info \u2192"
+  },
+  de: {
+    heroTitle: "Grenzen überschreiten – Wir verbinden Europa mit der Welt",
+    heroSubtitle: "Moderne Technik, Bildung und DNA-Analysen auf einer einzigen Plattform.",
+    heroButton: "Entdecken Sie unsere Dienstleistungen",
+    founderTitle: "Über den Gründer",
+    founderBio: "Jaroslav Cingel – Ich verbinde internationales Geschäft mit Freiheit. 15+ Jahre Erfahrung in Logistik, Panama & EU.",
+    founderButton: "Meine Geschichte lesen \u2192",
+    statsYears: "Jahre im Geschäft",
+    statsContinents: "Kontinente",
+    statsSupport: "/7 Support",
+    servicesTitle: "Unsere Dienstleistungen",
+    servicesLink: "Mehr Info \u2192"
+  },
+  es: {
+    heroTitle: "Supere las fronteras con nosotros – Conectamos Europa con el mundo",
+    heroSubtitle: "Tecnología moderna, educación y análisis de ADN en una sola plataforma.",
+    heroButton: "Descubra nuestros servicios",
+    founderTitle: "Sobre el Fundador",
+    founderBio: "Jaroslav Cingel – Uniendo negocios internacionales con libertad. 15+ años de experiencia en logística, Panamá y la UE.",
+    founderButton: "Conoce mi historia \u2192",
+    statsYears: "Años en el negocio",
+    statsContinents: "Continentes",
+    statsSupport: "/7 Soporte",
+    servicesTitle: "Nuestros Servicios",
+    servicesLink: "Más información \u2192"
+  },
+  ru: {
+    heroTitle: "Преодолевайте границы с нами – соединяем Европу со всем миром",
+    heroSubtitle: "Современные технологии, образование и ДНК-анализ на единой платформе.",
+    heroButton: "Откройте для себя наши услуги",
+    founderTitle: "Об основателе",
+    founderBio: "Ярослав Цингель – Объединяю международный бизнес со свободой. 15+ лет опыта в логистике, Панама и ЕС.",
+    founderButton: "Узнать мою историю \u2192",
+    statsYears: "Лет в бизнесе",
+    statsContinents: "Континента",
+    statsSupport: "/7 Поддержка",
+    servicesTitle: "Наши услуги",
+    servicesLink: "Подробнее \u2192"
+  }
+};
+
+const t = translations[lang];
 ---
 
 <Layout lang={lang} title="Domů | Progressivo">
@@ -60,9 +117,9 @@ const services = allServices.filter(service => service.id.startsWith(lang + '/')
   <!-- Hero Section -->
   <section class="hero animate-on-scroll">
     <div class="container hero-content">
-      <h1>Překročte hranice s námi – propojujeme Evropu s celým světem</h1>
-      <p class="subtitle">Moderní technika, vzdělání i DNA analýzy na jediné platformě.</p>
-      <a href="#services" class="cta-button">Objevte naše služby</a>
+      <h1>{t.heroTitle}</h1>
+      <p class="subtitle">{t.heroSubtitle}</p>
+      <a href="#services" class="cta-button">{t.heroButton}</a>
     </div>
   </section>
 
@@ -70,11 +127,11 @@ const services = allServices.filter(service => service.id.startsWith(lang + '/')
   <section id="founder" class="founder-section animate-on-scroll">
     <div class="container founder-content">
       <div class="founder-text">
-        <h2 class="section-title-left">O zakladateli</h2>
+        <h2 class="section-title-left">{t.founderTitle}</h2>
         <p class="founder-bio">
-          Jaroslav Cingel – Spojuji mezinárodní byznys se svobodou. 15+ let zkušeností v logistice, Panama & EU.
+          {t.founderBio}
         </p>
-        <a href="https://cingel.cz" class="founder-link">Poznat můj příběh &rarr;</a>
+        <a href="https://cingel.cz" class="founder-link">{t.founderButton}</a>
       </div>
       <div class="founder-image-wrapper">
         <img src="/images/jaroslav-v-obleku.webp" alt="Jaroslav Cingel" class="founder-image" />
@@ -87,15 +144,15 @@ const services = allServices.filter(service => service.id.startsWith(lang + '/')
     <div class="container stats-container">
       <div class="stat-item">
         <div class="stat-number" data-target="15">0</div>
-        <div class="stat-label">let v byznysu</div>
+        <div class="stat-label">{t.statsYears}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">kontinenty</div>
+        <div class="stat-label">{t.statsContinents}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="24">0</div>
-        <div class="stat-label">/7 podpora</div>
+        <div class="stat-label">{t.statsSupport}</div>
       </div>
     </div>
   </section>
@@ -103,7 +160,7 @@ const services = allServices.filter(service => service.id.startsWith(lang + '/')
   <!-- Services Section -->
   <section id="services" class="section-services animate-on-scroll">
     <div class="container">
-      <h2 class="section-title">Naše služby</h2>
+      <h2 class="section-title">{t.servicesTitle}</h2>
       <div class="services-grid">
         {services.map((service) => (
           <div class="service-card">
@@ -112,7 +169,7 @@ const services = allServices.filter(service => service.id.startsWith(lang + '/')
             </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
-            <a href={`/sluzby/${service.id}`} class="card-link">Více informací &rarr;</a>
+            <a href={`/${lang}/sluzby/${service.id.split('/').pop().replace('.md', '')}`} class="card-link">{t.servicesLink}</a>
           </div>
         ))}
       </div>

@@ -1,5 +1,98 @@
 ---
+const { lang = 'cs' } = Astro.props;
 const year = new Date().getFullYear();
+
+const translations = {
+  cs: {
+    founderRole: "Zakladatel & CEO",
+    quote: "\"Budoucnost patří těm, kteří se nebojí spojit zdánlivě nespojitelné.\"",
+    writeToMe: "Napište mi \u2192",
+    companyDesc: "Jsme Progressivo. Propojujeme moderní technologie, vzdělávání a vědu pro lepší budoucnost. Váš partner pro růst a inovace.",
+    quickLinks: "Rychlé odkazy",
+    linkServices: "Služby",
+    linkBlog: "Blog",
+    linkAbout: "O nás",
+    linkContact: "Kontakt",
+    legalInfo: "Právní informace",
+    linkGdpr: "GDPR a ochrana dat",
+    linkTerms: "Obchodní podmínky",
+    linkContract: "Smluvní podmínky",
+    allRights: "Všechna práva vyhrazena."
+  },
+  en: {
+    founderRole: "Founder & CEO",
+    quote: "\"The future belongs to those who are not afraid to connect the seemingly unconnected.\"",
+    writeToMe: "Write to me \u2192",
+    companyDesc: "We are Progressivo. Connecting modern technology, education, and science for a better future. Your partner for growth and innovation.",
+    quickLinks: "Quick Links",
+    linkServices: "Services",
+    linkBlog: "Blog",
+    linkAbout: "About Us",
+    linkContact: "Contact",
+    legalInfo: "Legal Info",
+    linkGdpr: "GDPR & Data Protection",
+    linkTerms: "Terms & Conditions",
+    linkContract: "Contractual Terms",
+    allRights: "All rights reserved."
+  },
+  de: {
+    founderRole: "Gründer & CEO",
+    quote: "\"Die Zukunft gehört denen, die sich nicht scheuen, das scheinbar Unverbindbare zu verbinden.\"",
+    writeToMe: "Schreiben Sie mir \u2192",
+    companyDesc: "Wir sind Progressivo. Wir verbinden moderne Technologie, Bildung und Wissenschaft für eine bessere Zukunft. Ihr Partner für Wachstum und Innovation.",
+    quickLinks: "Schnelllinks",
+    linkServices: "Dienstleistungen",
+    linkBlog: "Blog",
+    linkAbout: "Über uns",
+    linkContact: "Kontakt",
+    legalInfo: "Rechtliche Hinweise",
+    linkGdpr: "DSGVO & Datenschutz",
+    linkTerms: "AGB",
+    linkContract: "Vertragsbedingungen",
+    allRights: "Alle Rechte vorbehalten."
+  },
+  es: {
+    founderRole: "Fundador & CEO",
+    quote: "\"El futuro pertenece a aquellos que no temen conectar lo aparentemente inconectable.\"",
+    writeToMe: "Escríbeme \u2192",
+    companyDesc: "Somos Progressivo. Conectamos tecnología moderna, educación y ciencia para un futuro mejor. Su socio para el crecimiento y la innovación.",
+    quickLinks: "Enlaces rápidos",
+    linkServices: "Servicios",
+    linkBlog: "Blog",
+    linkAbout: "Sobre nosotros",
+    linkContact: "Contacto",
+    legalInfo: "Información legal",
+    linkGdpr: "GDPR y protección de datos",
+    linkTerms: "Términos y condiciones",
+    linkContract: "Condiciones contractuales",
+    allRights: "Todos los derechos reservados."
+  },
+  ru: {
+    founderRole: "Основатель и CEO",
+    quote: "\"Будущее принадлежит тем, кто не боится соединять, казалось бы, несоединимое.\"",
+    writeToMe: "Напишите мне \u2192",
+    companyDesc: "Мы — Progressivo. Соединяем современные технологии, образование и науку ради лучшего будущего. Ваш партнер для роста и инноваций.",
+    quickLinks: "Быстрые ссылки",
+    linkServices: "Услуги",
+    linkBlog: "Блог",
+    linkAbout: "О нас",
+    linkContact: "Контакты",
+    legalInfo: "Юридическая информация",
+    linkGdpr: "GDPR и защита данных",
+    linkTerms: "Условия использования",
+    linkContract: "Договорные условия",
+    allRights: "Все права защищены."
+  }
+};
+
+const t = translations[lang] || translations.cs;
+
+// Helper for links
+const getLink = (path) => {
+    if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
+    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`;
+    return lang === 'cs' ? path : `/${lang}${path}`;
+};
 ---
 <footer>
   <!-- Founder Medallion Section -->
@@ -10,9 +103,9 @@ const year = new Date().getFullYear();
       </div>
       <div class="medallion-text">
         <h4>Jaroslav Cingel</h4>
-        <p class="role">Zakladatel & CEO</p>
-        <p class="quote">"Budoucnost patří těm, kteří se nebojí spojit zdánlivě nespojitelné."</p>
-        <a href="mailto:info@cingel.cz" class="contact-link">Napište mi &rarr;</a>
+        <p class="role">{t.founderRole}</p>
+        <p class="quote">{t.quote}</p>
+        <a href="mailto:info@cingel.cz" class="contact-link">{t.writeToMe}</a>
       </div>
     </div>
   </div>
@@ -20,40 +113,40 @@ const year = new Date().getFullYear();
   <div class="footer-container">
     <!-- Column 1: Logo & Company Description -->
     <div class="footer-col company-info">
-      <a href="/" class="footer-logo">
+      <a href={getLink('/')} class="footer-logo">
         <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" />
       </a>
-      <p>Jsme Progressivo. Propojujeme moderní technologie, vzdělávání a vědu pro lepší budoucnost. Váš partner pro růst a inovace.</p>
+      <p>{t.companyDesc}</p>
     </div>
 
     <!-- Column 2: Quick Links -->
     <div class="footer-col quick-links">
-      <h3>Rychlé odkazy</h3>
+      <h3>{t.quickLinks}</h3>
       <nav>
         <ul>
-          <li><a href="/#services">Služby</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/o-nas">O nás</a></li>
-          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href={getLink('/#services')}>{t.linkServices}</a></li>
+          <li><a href={getLink('/blog')}>{t.linkBlog}</a></li>
+          <li><a href={getLink('/o-nas')}>{t.linkAbout}</a></li>
+          <li><a href={getLink('/kontakt')}>{t.linkContact}</a></li>
         </ul>
       </nav>
     </div>
 
     <!-- Column 3: Legal Info -->
     <div class="footer-col legal-info">
-      <h3>Právní informace</h3>
+      <h3>{t.legalInfo}</h3>
       <nav>
         <ul>
-          <li><a href="/gdpr">GDPR a ochrana dat</a></li>
-          <li><a href="/obchodni-podminky">Obchodní podmínky</a></li>
-          <li><a href="/smluvni-podminky">Smluvní podmínky</a></li>
+          <li><a href={getLink('/gdpr')}>{t.linkGdpr}</a></li>
+          <li><a href={getLink('/obchodni-podminky')}>{t.linkTerms}</a></li>
+          <li><a href={getLink('/smluvni-podminky')}>{t.linkContract}</a></li>
         </ul>
       </nav>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; {year} Progressivo. Všechna práva vyhrazena.</p>
+    <p>&copy; {year} Progressivo. {t.allRights}</p>
   </div>
 </footer>
 
