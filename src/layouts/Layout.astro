@@ -3,8 +3,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Modal from '../components/Modal.astro';
+import { ClientRouter } from 'astro:transitions';
 
-const { title = "Progressivo", lang = "cs" } = Astro.props;
+const { title = "Progressivo", lang = "cs", description: propDescription } = Astro.props;
 
 const translations = {
   cs: { description: "Moderní technika, vzdělání i DNA analýzy na jediné platformě." },
@@ -14,7 +15,7 @@ const translations = {
   es: { description: "Tecnología moderna, educación y análisis de ADN en una sola plataforma." }
 };
 
-const description = translations[lang]?.description || translations['cs'].description;
+const description = propDescription || translations[lang]?.description || translations['cs'].description;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -26,6 +27,7 @@ const description = translations[lang]?.description || translations['cs'].descri
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+  <ClientRouter />
 </head>
 <body>
   <Header lang={lang} />

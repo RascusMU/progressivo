@@ -30,7 +30,7 @@ const { service } = Astro.props;
 const { Content } = await render(service);
 ---
 
-<Layout title={`${service.data.title} | Progressivo`} lang={Astro.params.lang}>
+<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={Astro.params.lang}>
   <div class="page-header">
      <div class="container">
         <h1>{service.data.title}</h1>
