@@ -2,7 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const services = await getCollection('services');
+const allServices = await getCollection('services');
+const services = allServices.filter(service => service.id.startsWith('en/'));
 ---
 
 <Layout lang="en" title="Domů | Progressivo">
