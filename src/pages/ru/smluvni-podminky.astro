@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('legal', 'smluvni-podminky');
+const entry = await getEntry('legal', 'smluvni-podminky-ru');
 if (!entry) {
   // throw new Error('Page legal/smluvni-podminky not found');
 }
