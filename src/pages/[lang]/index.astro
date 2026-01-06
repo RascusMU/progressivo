@@ -70,6 +70,7 @@ const translations = {
   }
 };
 
+// @ts-ignore
 const t = translations[lang];
 ---
 
@@ -84,7 +85,11 @@ const t = translations[lang];
       if (started) return;
 
       stats.forEach(stat => {
-        const target = +stat.getAttribute('data-target');
+        if (!(stat instanceof HTMLElement)) return;
+        const targetStr = stat.getAttribute('data-target');
+        if (!targetStr) return;
+
+        const target = +targetStr;
         const duration = 2000; // 2 seconds
         const increment = target / (duration / 16); // 60fps
 
@@ -92,7 +97,13 @@ const t = translations[lang];
         const updateCount = () => {
           current += increment;
           if (current < target) {
-            stat.innerText = Math.ceil(current) + (stat.nextElementSibling.innerText.includes('/7') && target === 24 ? '' : (target === 15 ? '+' : ''));
+            let suffix = '';
+            if (stat.nextElementSibling instanceof HTMLElement && stat.nextElementSibling.innerText.includes('/7') && target === 24) {
+                 suffix = '';
+            } else if (target === 15) {
+                 suffix = '+';
+            }
+            stat.innerText = Math.ceil(current) + suffix;
             requestAnimationFrame(updateCount);
           } else {
             stat.innerText = target + (target === 15 ? '+' : '');
