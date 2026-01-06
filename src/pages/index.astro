@@ -98,14 +98,14 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
         {services.map((service) => {
           const slug = service.id.replace(/\.md$/, '');
           return (
-          <div class="service-card">
+          <a href={`/cs/sluzby/${slug}`} class="service-card">
             <div class="card-media">
                 <img src="/images/mapa-svetabusines.webp" alt={service.data.title} class="service-image" />
             </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
-            <a href={`/cs/sluzby/${slug}`} class="card-link">Více informací &rarr;</a>
-          </div>
+            <div class="card-link">Více informací &rarr;</div>
+          </a>
         )})}
       </div>
     </div>
@@ -316,7 +316,7 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-card);
-    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -327,6 +327,8 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
     max-width: 350px;
     margin: 0 auto;
     width: 100%;
+    text-decoration: none;
+    color: inherit;
   }
 
   :global(html.dark) .service-card {
@@ -337,6 +339,7 @@ const services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].som
   .service-card:hover {
     box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.2), 0 20px 20px -10px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    border-color: var(--color-accent);
   }
 
   .card-media {
