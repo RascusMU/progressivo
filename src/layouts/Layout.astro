@@ -1,7 +1,7 @@
 ---
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Modal from '../components/Modal.astro';
-import { ClientRouter } from 'astro:transitions';
+// import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -33,13 +33,13 @@ const description = descriptions[lang] || descriptions.cs;
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-		<ClientRouter />
+		<!-- <ClientRouter /> -->
 	</head>
 	<body>
 		<slot />
         <WhatsAppButton />
         <Modal lang={lang} />
-        <script define:vars={{ currentLang: lang }}>
+        <!-- <script define:vars={{ currentLang: lang }}>
             // Automatic language redirection
             // Check if we are on the root path
             if (window.location.pathname === '/' && !window.location.hash) {
@@ -64,7 +64,7 @@ const description = descriptions[lang] || descriptions.cs;
                     }
                 }
             }
-        </script>
+        </script> -->
 	</body>
 </html>
 <style is:global>
