@@ -1,6 +1,7 @@
 ---
 title: "Effektive Integration"
 description: "Verbindung von Online-Tools und Diensten zu einer funktionalen Einheit zur Zeitersparnis."
+lang: de
 ---
 # Effektive Integration
 

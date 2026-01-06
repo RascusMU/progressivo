@@ -2,17 +2,34 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('legal', 'obchodni-podminky-en');
-if (!entry) {
-  // throw new Error('Page legal/obchodni-podminky not found');
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
 }
+
+const { lang } = Astro.params;
+const id = lang === 'cs' ? 'smluvni-podminky' : `smluvni-podminky-${lang}`;
+const entry = await getEntry('legal', id);
+
 const { Content } = entry ? await render(entry) : { Content: null };
+const translations = {
+    cs: 'Smluvní podmínky',
+    en: 'Contractual Conditions',
+    de: 'Vertragsbedingungen',
+    es: 'Condiciones Contractuales',
+    ru: 'Договорные условия'
+};
+const title = translations[lang] || translations.cs;
 ---
 
-<Layout lang="en" title="Obchodní podmínky | Progressivo">
+<Layout lang={lang} title={`${title} | Progressivo`}>
   <div class="page-header">
      <div class="container">
-        <h1>Obchodní podmínky</h1>
+        <h1>{title}</h1>
      </div>
   </div>
   <main class="container page-content animate-on-scroll">

@@ -1,6 +1,7 @@
 ---
 title: "DNA Analysis"
 date: 2025-04-17
+lang: en
 ---
 
 # DNA Analysis

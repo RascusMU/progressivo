@@ -1,6 +1,7 @@
 ---
 title: "Svět je připraven stát se vaším novým domovem"
 date: 2025-04-17
+lang: cs
 ---
 
 # Svět je připraven stát se vaším novým domovem

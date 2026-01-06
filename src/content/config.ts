@@ -6,6 +6,7 @@ const services = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    lang: z.string().default('cs'),
   }),
 });
 
@@ -15,6 +16,7 @@ const blog = defineCollection({
     title: z.string(),
     date: z.date().optional(),
     description: z.string().optional(),
+    lang: z.string().default('cs'),
   }),
 });
 

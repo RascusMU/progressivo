@@ -1,6 +1,7 @@
 ---
 title: "IT-Support"
 description: "Sicherstellung der Technologiefunktionalität, Fehlerbehebung und Systemverwaltung."
+lang: de
 ---
 # IT-Support
 

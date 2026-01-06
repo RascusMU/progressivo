@@ -2,17 +2,34 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('legal', 'gdpr-ru');
-if (!entry) {
-  // throw new Error('Page legal/gdpr not found');
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
 }
+
+const { lang } = Astro.params;
+const id = lang === 'cs' ? 'contact' : `${lang}/contact`;
+const entry = await getEntry('pages', id);
+
 const { Content } = entry ? await render(entry) : { Content: null };
+const translations = {
+    cs: 'Kontakt',
+    en: 'Contact',
+    de: 'Kontakt',
+    es: 'Contacto',
+    ru: 'Контакты'
+};
+const title = translations[lang] || translations.cs;
 ---
 
-<Layout lang="ru" title="GDPR | Progressivo">
+<Layout lang={lang} title={`${title} | Progressivo`}>
   <div class="page-header">
      <div class="container">
-        <h1>GDPR a ochrana dat</h1>
+        <h1>{title}</h1>
      </div>
   </div>
   <main class="container page-content animate-on-scroll">

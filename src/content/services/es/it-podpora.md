@@ -1,6 +1,7 @@
 ---
 title: "Soporte de TI"
 description: "Aseguramiento de la funcionalidad tecnológica, solución de problemas y gestión de sistemas."
+lang: es
 ---
 # Soporte de TI
 

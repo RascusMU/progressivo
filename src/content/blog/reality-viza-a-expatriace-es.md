@@ -2,6 +2,7 @@
 title: "El mundo está listo para convertirse en tu nuevo hogar"
 description: "Guía para vivir e invertir en Panamá, Colombia y Costa Rica. Visas, bienes raíces y expatriación con Progressivo Corp."
 date: 2024-05-21
+lang: es
 ---
 
 # El mundo está listo para convertirse en tu nuevo hogar

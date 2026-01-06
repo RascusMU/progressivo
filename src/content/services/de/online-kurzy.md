@@ -1,6 +1,7 @@
 ---
 title: "Online-Kurse"
 description: "Bildungskurse und Online-Nachhilfe für Kinder und Erwachsene."
+lang: de
 ---
 # Online-Kurse
 
