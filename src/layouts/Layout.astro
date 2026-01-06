@@ -8,9 +8,11 @@ import { ClientRouter } from 'astro:transitions';
 interface Props {
 	title: string;
 	lang?: string;
+    description?: string;
+    image?: string;
 }
 
-const { title, lang = 'cs' } = Astro.props;
+const { title, lang = 'cs', description: propDescription, image = '/images/mapa-svetabusines.webp' } = Astro.props;
 
 const descriptions = {
   cs: "Progressivo - Váš partner pro mezinárodní obchod, expanzi do Panamy a strategické poradenství.",
@@ -20,7 +22,68 @@ const descriptions = {
   ru: "Progressivo - Ваш партнер по международной торговле, расширению бизнеса в Панаме и стратегическому консалтингу."
 };
 
-const description = descriptions[lang] || descriptions.cs;
+const description = propDescription || descriptions[lang] || descriptions.cs;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Hreflang Logic
+const supportedLangs = ['cs', 'en', 'de', 'es', 'ru'];
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+
+// Determine the "base" path without language prefix
+let basePath = currentPath;
+if (segments.length > 0 && supportedLangs.includes(segments[0])) {
+    basePath = '/' + segments.slice(1).join('/');
+}
+// Special case: if basePath is just '/', keep it '/'
+if (basePath === '') basePath = '/';
+
+// Generate hreflangs
+const hreflangs = supportedLangs.map(l => {
+    let href;
+    if (l === 'cs') {
+        // CS is default, but for Services we moved it to /cs/.
+        // For other pages (like root, o-nas, blog), CS is at root.
+        // We need to know if the current page requires explicit CS prefix.
+        // Currently, 'sluzby' requires explicit CS prefix based on our change.
+        if (basePath.startsWith('/sluzby/')) {
+            href = `${Astro.site}cs${basePath}`;
+        } else {
+            // Standard root pages
+            href = `${Astro.site}${basePath === '/' ? '' : basePath.substring(1)}`;
+        }
+    } else {
+        // Other languages always have prefix
+        href = `${Astro.site}${l}${basePath}`;
+    }
+    // Clean up double slashes
+    href = href.replace(/([^:]\/)\/+/g, "$1");
+    // Remove trailing slash if needed, or keep standard. Astro usually adds trailing slash.
+    return { lang: l, href };
+});
+
+const xDefault = hreflangs.find(h => h.lang === 'cs')?.href;
+
+// JSON-LD
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Progressivo",
+  "url": "https://progressivo.eu",
+  "logo": "https://progressivo.eu/images/Transparent-Logo-2-260x174.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+507-6850-9698",
+    "contactType": "customer service"
+  }
+};
+
+const schemaWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Progressivo",
+  "url": "https://progressivo.eu"
+};
 ---
 
 <!doctype html>
@@ -32,7 +95,25 @@ const description = descriptions[lang] || descriptions.cs;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+		<link rel="canonical" href={canonicalURL} />
+
+        {hreflangs.map(h => (
+            <link rel="alternate" hreflang={h.lang} href={h.href} />
+        ))}
+        {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.site)} />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:site_name" content="Progressivo" />
+
+        <!-- JSON-LD -->
+        <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+        <script type="application/ld+json" set:html={JSON.stringify(schemaWebSite)} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
@@ -44,32 +125,6 @@ const description = descriptions[lang] || descriptions.cs;
         <Footer lang={lang} />
         <WhatsAppButton />
         <Modal lang={lang} />
-        <!-- <script define:vars={{ currentLang: lang }}>
-            // Automatic language redirection
-            // Check if we are on the root path
-            if (window.location.pathname === '/' && !window.location.hash) {
-                const savedLang = localStorage.getItem('preferred-lang');
-                const userLang = navigator.language || navigator.userLanguage;
-
-                // If the user has a saved preference, rely on it
-                if (savedLang) {
-                    if (savedLang !== 'cs' && savedLang !== currentLang) {
-                         window.location.href = `/${savedLang}/`;
-                    }
-                } else if (userLang) {
-                    // Otherwise fall back to browser language
-                    if (userLang.startsWith('en') && currentLang !== 'en') {
-                        window.location.href = '/en/';
-                    } else if (userLang.startsWith('de') && currentLang !== 'de') {
-                        window.location.href = '/de/';
-                    } else if (userLang.startsWith('es') && currentLang !== 'es') {
-                        window.location.href = '/es/';
-                    } else if (userLang.startsWith('ru') && currentLang !== 'ru') {
-                        window.location.href = '/ru/';
-                    }
-                }
-            }
-        </script> -->
 	</body>
 </html>
 <style is:global>
@@ -152,7 +207,4 @@ const description = descriptions[lang] || descriptions.cs;
     .prose li {
         margin-bottom: 0.5rem;
     }
-
-    /* Animation classes */
-    /* Removed for immediate visibility fix */
 </style>
