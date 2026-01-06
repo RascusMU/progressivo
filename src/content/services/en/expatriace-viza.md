@@ -2,6 +2,7 @@
 title: "Expatriation and Visas"
 description: "Comprehensive assistance with moving abroad and visa processing."
 lang: en
+image: "/images/expatriace.jpg"
 ---
 # Expatriation and Visas
 

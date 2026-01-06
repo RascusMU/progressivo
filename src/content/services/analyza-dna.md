@@ -2,6 +2,7 @@
 title: "Analýza DNA"
 description: "Moderní vědecká metoda zkoumání genetické informace pro poznání původu a zdraví."
 lang: cs
+image: "/images/dna-face.png"
 ---
 # Analýza DNA
 

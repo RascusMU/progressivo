@@ -2,6 +2,7 @@
 title: "DNA-Analyse"
 description: "Eine moderne wissenschaftliche Methode zur Untersuchung genetischer Informationen zur Erkenntnis von Herkunft und Gesundheit."
 lang: de
+image: "/images/dna-face.png"
 ---
 # DNA-Analyse
 

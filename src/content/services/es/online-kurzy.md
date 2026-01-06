@@ -2,6 +2,7 @@
 title: "Cursos en línea"
 description: "Cursos educativos y tutorías en línea para niños y adultos."
 lang: es
+image: "/images/online-kurz.png"
 ---
 # Cursos en línea
 

@@ -2,6 +2,7 @@
 title: "Online Courses"
 description: "Educational courses and online tutoring for children and adults."
 lang: en
+image: "/images/online-kurz.png"
 ---
 # Online Courses
 

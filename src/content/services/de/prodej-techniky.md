@@ -2,6 +2,7 @@
 title: "Online-Verkauf von Technik"
 description: "Vermittlung von Kauf und Import schwerer Technik online."
 lang: de
+image: "/images/lod-kontajner.jpg"
 ---
 # Online-Verkauf von Technik
 

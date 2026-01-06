@@ -2,6 +2,7 @@
 title: "Expatriación y Visas"
 description: "Asistencia integral con la mudanza al extranjero y tramitación de visas."
 lang: es
+image: "/images/expatriace.jpg"
 ---
 # Expatriación y Visas
 
