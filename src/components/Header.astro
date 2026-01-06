@@ -67,8 +67,8 @@ const currentPath = Astro.url.pathname;
 <header class="header">
   <div class="container header-content">
     <a href={getLink('/')} class="logo">
-      <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" class="logo-light" width="120" height="80" />
-      <img src="/images/Transparent-Logo-tmave.png" alt="Progressivo Logo" class="logo-dark" width="120" height="80" />
+      <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" class="logo-light" width="180" height="120" />
+      <img src="/images/Transparent-Logo-tmave.png" alt="Progressivo Logo" class="logo-dark" width="180" height="120" />
     </a>
 
     <nav class="nav-desktop">
@@ -271,9 +271,28 @@ const currentPath = Astro.url.pathname;
     height: 80px;
   }
 
+  .logo {
+      display: block;
+      width: auto;
+      height: 60px; /* mobil */
+      transition: all 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+      .logo {
+          height: 80px; /* tablet */
+      }
+  }
+
+  @media (min-width: 1024px) {
+      .logo {
+          height: 100px; /* desktop - výraznější */
+      }
+  }
+
   .logo img {
       display: block;
-      height: 60px;
+      height: 100%;
       width: auto;
       border-radius: 0;
       box-shadow: none;

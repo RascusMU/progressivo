@@ -362,12 +362,26 @@ const t = translations[lang];
     width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     max-width: 400px;
     display: block;
     margin: 0 auto;
     aspect-ratio: 3/4;
     object-fit: cover;
+    filter: grayscale(0%);
+    transition: all 0.4s ease;
+  }
+
+  .founder-image:hover {
+    transform: scale(1.05) rotate(1deg); /* jemná rotace */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Responzivita */
+  @media (max-width: 768px) {
+    .founder-image {
+      max-width: 300px; /* na mobilu menší */
+    }
   }
 
   /* Stats Section */
