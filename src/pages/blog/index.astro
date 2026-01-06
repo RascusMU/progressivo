@@ -2,7 +2,20 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const posts = await getCollection('blog');
+// Filter for Czech posts: Assume they DO NOT have a hyphen-lang suffix like -en.md
+// or explicitly include them if your naming convention is different.
+const allPosts = await getCollection('blog');
+const posts = allPosts.filter((post) => {
+    // Check if id ends with -xx.md where xx is a 2-letter code
+    return !/-(en|de|ru|es)\.md$/i.test(post.id);
+});
+
+// Sort by date descending
+posts.sort((a, b) => {
+    const dateA = a.data.date || new Date(0);
+    const dateB = b.data.date || new Date(0);
+    return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout title="Blog | Progressivo">
@@ -14,7 +27,7 @@ const posts = await getCollection('blog');
 
   <div class="container page-content animate-on-scroll">
       <div class="blog-grid">
-        {posts.map((post) => (
+        {posts.length > 0 ? posts.map((post) => (
           <article class="blog-card">
             <div class="card-content">
                 <h2>
@@ -35,7 +48,9 @@ const posts = await getCollection('blog');
                 <a href={`/blog/${post.slug}`} class="read-more">Číst více &rarr;</a>
             </div>
           </article>
-        ))}
+        )) : (
+            <p>Zatím zde nejsou žádné články.</p>
+        )}
       </div>
   </div>
 </Layout>

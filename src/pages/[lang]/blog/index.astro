@@ -2,27 +2,61 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 
-const posts = await getCollection('blog');
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const allPosts = await getCollection('blog');
+
+// Filter posts by language suffix (e.g., -en.md)
+const posts = allPosts.filter((post) => post.id.endsWith(`-${lang}.md`));
+
+// Sort by date descending
+posts.sort((a, b) => {
+    const dateA = a.data.date || new Date(0);
+    const dateB = b.data.date || new Date(0);
+    return dateB.getTime() - dateA.getTime();
+});
+
+const titles = {
+    en: 'Blog',
+    de: 'Blog',
+    es: 'Blog',
+    ru: 'Блог',
+};
+
+const readMore = {
+    en: 'Read more',
+    de: 'Mehr lesen',
+    es: 'Leer más',
+    ru: 'Читать далее',
+};
 ---
 
-<Layout lang="de" title="Blog | Progressivo">
+<Layout lang={lang} title={`${titles[lang] || 'Blog'} | Progressivo`}>
   <div class="page-header">
      <div class="container">
-        <h1>Blog</h1>
+        <h1>{titles[lang] || 'Blog'}</h1>
      </div>
   </div>
 
   <div class="container page-content animate-on-scroll">
       <div class="blog-grid">
-        {posts.map((post) => (
+        {posts.length > 0 ? posts.map((post) => (
           <article class="blog-card">
             <div class="card-content">
                 <h2>
-                    <a href={`/de/blog/${post.slug}`}>{post.data.title}</a>
+                    <a href={`/${lang}/blog/${post.slug}`}>{post.data.title}</a>
                 </h2>
                 {post.data.date && (
                     <time datetime={post.data.date.toISOString()} class="post-date">
-                    {post.data.date.toLocaleDateString('cs-CZ')}
+                    {post.data.date.toLocaleDateString(lang)}
                     </time>
                 )}
                 <p class="post-excerpt">
@@ -32,10 +66,15 @@ const posts = await getCollection('blog');
                         ? post.body.substring(0, 150).replace(/[#*]/g, '') + '...'
                         : ''}
                 </p>
-                <a href={`/de/blog/${post.slug}`} class="read-more">Číst více &rarr;</a>
+                <a href={`/${lang}/blog/${post.slug}`} class="read-more">{readMore[lang] || 'Read more'} &rarr;</a>
             </div>
           </article>
-        ))}
+        )) : (
+            <p>{lang === 'en' ? 'No posts yet.' :
+                lang === 'de' ? 'Noch keine Beiträge.' :
+                lang === 'es' ? 'No hay publicaciones todavía.' :
+                lang === 'ru' ? 'Пока нет постов.' : 'No posts yet.'}</p>
+        )}
       </div>
   </div>
 </Layout>

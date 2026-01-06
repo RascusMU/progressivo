@@ -1,256 +1,314 @@
 ---
 const { lang = 'cs' } = Astro.props;
 
-const isCs = lang === 'cs';
-const homeLink = isCs ? '/' : `/${lang}`;
-const servicesLink = isCs ? '/#services' : `/${lang}/#services`;
-const blogLink = isCs ? '/blog' : `/${lang}/blog`;
-const aboutLink = isCs ? '/o-nas' : `/${lang}/o-nas`;
-const contactLink = isCs ? '/kontakt' : `/${lang}/kontakt`;
+const navLinks = {
+  cs: [
+    { href: '/#services', text: 'Služby' },
+    { href: '/o-nas', text: 'O nás' },
+    { href: '/blog', text: 'Blog' },
+    { href: '/kontakt', text: 'Kontakt' },
+  ],
+  en: [
+    { href: '/en/#services', text: 'Services' },
+    { href: '/en/o-nas', text: 'About Us' },
+    { href: '/en/blog', text: 'Blog' },
+    { href: '/en/kontakt', text: 'Contact' },
+  ],
+  de: [
+    { href: '/de/#services', text: 'Dienstleistungen' },
+    { href: '/de/o-nas', text: 'Über uns' },
+    { href: '/de/blog', text: 'Blog' },
+    { href: '/de/kontakt', text: 'Kontakt' },
+  ],
+  ru: [
+    { href: '/ru/#services', text: 'Услуги' },
+    { href: '/ru/o-nas', text: 'О нас' },
+    { href: '/ru/blog', text: 'Блог' },
+    { href: '/ru/kontakt', text: 'Контакты' },
+  ],
+  es: [
+    { href: '/es/#services', text: 'Servicios' },
+    { href: '/es/o-nas', text: 'Sobre nosotros' },
+    { href: '/es/blog', text: 'Blog' },
+    { href: '/es/kontakt', text: 'Contacto' },
+  ],
+};
 
-// Language Switcher Logic
-const currentPath = Astro.url.pathname;
-const supportedLangs = ['en', 'de', 'ru', 'es'];
+const languages = [
+    { code: 'cs', label: 'CZ', flag: '🇨🇿', path: '/' },
+    { code: 'en', label: 'EN', flag: '🇺🇸', path: '/en/' },
+    { code: 'de', label: 'DE', flag: '🇩🇪', path: '/de/' },
+    { code: 'ru', label: 'RU', flag: '🇷🇺', path: '/ru/' },
+    { code: 'es', label: 'ES', flag: '🇵🇦', path: '/es/' }
+];
 
-function getPurePath(path) {
-  let p = path;
-  if (p.length > 1 && p.endsWith('/')) {
-    p = p.slice(0, -1);
-  }
-  const parts = p.split('/').filter(Boolean);
-  if (parts.length > 0 && supportedLangs.includes(parts[0])) {
-    return '/' + parts.slice(1).join('/');
-  }
-  return p === '' || p === '/' ? '/' : (p.startsWith('/') ? p : '/' + p);
-}
+const currentLangObj = languages.find(l => l.code === lang) || languages[0];
 
-const purePath = getPurePath(currentPath);
-
-function getLangLink(targetLang) {
-    if (targetLang === 'cs') {
-        return purePath === '' ? '/' : purePath;
-    }
-    const suffix = purePath === '/' ? '' : purePath;
-    return `/${targetLang}${suffix}`;
-}
+const links = navLinks[lang] || navLinks.cs;
 ---
-<header>
-  <div class="container header-container">
-    <a href={homeLink} class="logo-link">
-      <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" class="logo" />
+
+<header class="header">
+  <div class="container header-content">
+    <a href={lang === 'cs' ? '/' : `/${lang}/`} class="logo">
+      <img src="/images/Transparent-Logo-2-260x174.png" alt="Progressivo Logo" width="120" height="80" />
     </a>
 
-    <div class="nav-wrapper">
-      <button id="menu-toggle" aria-label="Menu">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-      <nav id="nav-menu">
-        <ul>
-          <li><a href={homeLink}>Domů</a></li>
-          <li><a href={servicesLink}>Služby</a></li>
-          <li><a href={blogLink}>Blog</a></li>
-          <li><a href={aboutLink}>O nás</a></li>
-          <li><a href={contactLink}>Kontakt</a></li>
-          <li class="lang-switch">
-            <a href={getLangLink('cs')} class={`lang-link ${lang === 'cs' ? 'active' : ''}`} title="Čeština">CZ</a>
-            <span class="separator">|</span>
-            <a href={getLangLink('en')} class={`lang-link ${lang === 'en' ? 'active' : ''}`} title="English">EN</a>
-            <span class="separator">|</span>
-            <a href={getLangLink('de')} class={`lang-link ${lang === 'de' ? 'active' : ''}`} title="Deutsch">DE</a>
-            <span class="separator">|</span>
-            <a href={getLangLink('ru')} class={`lang-link ${lang === 'ru' ? 'active' : ''}`} title="Русский">RU</a>
-            <span class="separator">|</span>
-            <a href={getLangLink('es')} class={`lang-link ${lang === 'es' ? 'active' : ''}`} title="Español">ES</a>
-          </li>
-          <li class="theme-switch-wrapper">
-             <button id="theme-toggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
-                <!-- Sun Icon -->
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                </svg>
-                <!-- Moon Icon -->
-                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                </svg>
-             </button>
-          </li>
-        </ul>
-      </nav>
+    <nav class="nav-desktop">
+      <ul class="nav-list">
+        {links.map((link) => (
+          <li><a href={link.href}>{link.text}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+        <!-- Language Switcher Dropdown -->
+        <div class="lang-switcher-dropdown">
+            <button class="lang-btn" aria-label="Select Language" aria-expanded="false">
+                <span class="flag">{currentLangObj.flag}</span>
+                <span class="code">{currentLangObj.label}</span>
+                <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="lang-menu">
+                {languages.map(l => (
+                    <a href={l.path} class={`lang-item ${l.code === lang ? 'active' : ''}`} data-lang={l.code}>
+                        <span class="flag">{l.flag}</span>
+                        <span class="label">{l.label}</span>
+                    </a>
+                ))}
+            </div>
+        </div>
+
+        <button id="theme-toggle" aria-label="Toggle Dark Mode">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <button class="mobile-menu-toggle" aria-label="Open Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
+  </div>
+
+  <div class="mobile-menu">
+      <nav>
+          <ul>
+            {links.map((link) => (
+                <li><a href={link.href}>{link.text}</a></li>
+            ))}
+          </ul>
+      </nav>
   </div>
 </header>
 
 <script>
-  // Mobile Menu
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('nav-menu');
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
 
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
-    });
-  }
+    // Check for saved user preference, if any, on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        root.classList.toggle('dark', savedTheme === 'dark');
+    } else {
+        // Check system preference
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', systemPrefersDark);
+    }
 
-  // Dark Mode Toggle
-  const themeToggle = document.getElementById('theme-toggle');
-
-  if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      if (isDark) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      }
+        root.classList.toggle('dark');
+        localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
     });
-  }
+
+    // Mobile Menu Logic
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Language Switcher Dropdown Logic
+    const langBtn = document.querySelector('.lang-btn');
+    const langMenu = document.querySelector('.lang-menu');
+    const langSwitcher = document.querySelector('.lang-switcher-dropdown');
+
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = langBtn.getAttribute('aria-expanded') === 'true';
+        langBtn.setAttribute('aria-expanded', !expanded);
+        langMenu.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!langSwitcher.contains(e.target)) {
+            langMenu.classList.remove('show');
+            langBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Save language preference on click
+    document.querySelectorAll('.lang-item').forEach(item => {
+        item.addEventListener('click', () => {
+             const selectedLang = item.getAttribute('data-lang');
+             localStorage.setItem('preferred-lang', selectedLang);
+        });
+    });
 </script>
 
 <style>
-  header {
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  .header {
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
-  .header-container {
+  :global(.dark) .header {
+      background: rgba(15, 23, 42, 0.8);
+  }
+
+  .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    height: 80px;
   }
 
-  .logo-link {
+  .logo img {
+      display: block;
+      height: 60px;
+      width: auto;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+  }
+
+  .nav-desktop .nav-list {
     display: flex;
-    align-items: center;
-  }
-
-  .logo {
-    height: 50px;
-    width: auto;
-    transition: height 0.3s ease;
-  }
-
-  .nav-wrapper {
-      display: flex;
-      align-items: center;
-  }
-
-  /* Hamburger Menu Button */
-  #menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    padding: 0;
-    z-index: 1001;
-    margin-left: 1rem;
-  }
-
-  .hamburger-line {
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-text);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-  }
-
-  /* Navigation */
-  nav ul {
+    gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    gap: 2rem;
-    align-items: center;
   }
 
-  nav a {
+  .nav-desktop a {
     text-decoration: none;
     color: var(--color-text);
-    font-weight: 600;
-    font-size: 1rem;
-    position: relative;
-    padding: 0.5rem 0;
+    font-weight: 500;
+    transition: color 0.2s ease;
   }
 
-  nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--color-accent);
-    transition: width 0.3s ease;
-  }
-
-  nav a:hover {
+  .nav-desktop a:hover {
     color: var(--color-accent);
   }
 
-  nav a:hover::after {
-    width: 100%;
+  .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
   }
 
   /* Language Switcher */
-  .lang-switch {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-left: 1rem;
-    font-size: 0.9rem;
-    border-left: 1px solid var(--color-border);
-    padding-left: 1rem;
+  .lang-switcher-dropdown {
+      position: relative;
   }
 
-  .lang-link {
-    color: var(--color-text-light); /* Softer color for inactive languages */
-    padding: 0 !important; /* Override default nav padding */
-    font-weight: 500;
-  }
-
-  .lang-link:hover {
-    color: var(--color-accent);
-  }
-
-  .lang-link.active {
-    color: var(--color-text);
-    font-weight: 700;
-  }
-
-  /* Remove underline animation from language links */
-  .lang-link::after {
-    display: none;
-  }
-
-  .separator {
-    color: var(--color-text-light);
-    opacity: 0.5;
-    font-size: 0.8rem;
-  }
-
-  /* Theme Toggle */
-  .theme-switch-wrapper {
+  .lang-btn {
       display: flex;
       align-items: center;
-      margin-left: 0.5rem;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--color-border);
+      padding: 0.5rem 0.75rem;
+      border-radius: 20px;
+      cursor: pointer;
+      color: var(--color-text);
+      font-weight: 600;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+  }
+
+  :global(.dark) .lang-btn {
+      background: rgba(30, 41, 59, 0.5);
+  }
+
+  .lang-btn:hover {
+      background: var(--color-bg-alt);
+      border-color: var(--color-accent);
+  }
+
+  .lang-btn .flag {
+      font-size: 1.2rem;
+  }
+
+  .lang-btn .chevron {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+  }
+
+  .lang-menu {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-width: 140px;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+  }
+
+  :global(.dark) .lang-menu {
+      background: rgba(15, 23, 42, 0.9);
+  }
+
+  .lang-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+  }
+
+  .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: var(--color-text);
+      border-radius: 8px;
+      transition: background 0.2s;
+      font-weight: 500;
+  }
+
+  .lang-item:hover {
+      background: var(--color-bg-alt);
+      color: var(--color-accent);
+  }
+
+  .lang-item.active {
+      background: var(--color-bg-alt);
+      color: var(--color-accent);
+      font-weight: 700;
   }
 
   #theme-toggle {
@@ -258,117 +316,99 @@ function getLangLink(targetLang) {
       border: none;
       cursor: pointer;
       color: var(--color-text);
-      padding: 0.25rem;
-      border-radius: 50%;
+      padding: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
   }
 
   #theme-toggle:hover {
-      background-color: rgba(0,0,0,0.05);
-      color: var(--color-accent);
+      background-color: var(--color-bg-alt);
   }
 
-  html.dark #theme-toggle:hover {
-      background-color: rgba(255,255,255,0.1);
-  }
-
-  .sun-icon, .moon-icon {
-      width: 20px;
-      height: 20px;
-  }
-
-  /* By default (light mode), show Moon (to switch to dark), hide Sun */
   .sun-icon { display: none; }
   .moon-icon { display: block; }
 
-  /* In dark mode, show Sun (to switch to light), hide Moon */
-  :global(html.dark) .sun-icon { display: block; }
-  :global(html.dark) .moon-icon { display: none; }
+  :global(.dark) .sun-icon { display: block; }
+  :global(.dark) .moon-icon { display: none; }
 
-  :global(html.dark) header {
-    background-color: rgba(15, 23, 42, 0.7); /* Dark blue/black with opacity */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Mobile Menu */
+  .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 101;
   }
 
-  /* Mobile Responsive Styles */
-  @media (max-width: 768px) {
-    .header-container {
-      flex-wrap: wrap; /* Allows nav to break to new line if needed, though we position it absolute */
-    }
+  .mobile-menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: var(--color-text);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+  }
 
-    .logo {
-      height: 40px; /* Smaller logo on mobile */
-    }
-
-    #menu-toggle {
-      display: flex;
-    }
-
-    /* Hamburger Animation when active */
-    #menu-toggle.active .hamburger-line:nth-child(1) {
+  .mobile-menu-toggle.open span:nth-child(1) {
       transform: translateY(9px) rotate(45deg);
-    }
-    #menu-toggle.active .hamburger-line:nth-child(2) {
+  }
+  .mobile-menu-toggle.open span:nth-child(2) {
       opacity: 0;
-    }
-    #menu-toggle.active .hamburger-line:nth-child(3) {
+  }
+  .mobile-menu-toggle.open span:nth-child(3) {
       transform: translateY(-9px) rotate(-45deg);
-    }
+  }
 
-    nav {
-      position: absolute;
-      top: 100%;
+  .mobile-menu {
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100%;
+      height: 100vh;
       background-color: var(--color-bg);
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--color-border);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-
-      /* Hidden state */
-      display: none;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    nav.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    nav ul {
-      flex-direction: column;
+      display: flex;
       align-items: center;
-      gap: 1.5rem;
-    }
+      justify-content: center;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 90;
+  }
 
-    nav a {
-      font-size: 1.125rem;
-      display: block;
-      padding: 0.5rem 2rem;
-    }
+  .mobile-menu.open {
+      transform: translateX(0);
+  }
 
-    .lang-switch {
-      margin-left: 0;
-      margin-top: 1rem;
-      padding-bottom: 0;
-      border-left: none;
-      padding-left: 0;
-    }
+  .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+  }
 
-    .theme-switch-wrapper {
-        margin-left: 0;
-        margin-bottom: 1rem;
-    }
+  .mobile-menu li {
+      margin: 2rem 0;
+  }
 
-    .lang-link {
-        font-size: 1rem;
-        padding: 0 0.5rem !important;
-    }
+  .mobile-menu a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 2rem;
+      font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+      .nav-desktop {
+          display: none;
+      }
+      .mobile-menu-toggle {
+          display: flex;
+      }
   }
 </style>
