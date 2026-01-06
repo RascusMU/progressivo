@@ -2,11 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.params;
 const allServices = await getCollection('services');
-const services = allServices.filter(service => service.id.startsWith('es/'));
+const services = allServices.filter(service => service.id.startsWith(lang + '/'));
 ---
 
-<Layout lang="es" title="Domů | Progressivo">
+<Layout lang={lang} title="Domů | Progressivo">
   <script>
     // Stats Animation
     const statsSection = document.querySelector('.stats-section');
