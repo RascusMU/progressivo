@@ -58,6 +58,7 @@ const navLinks = [
     { href: getLink('/o-nas'), text: t.about },
     { href: getLink('/blog'), text: t.blog },
     { href: getLink('/kontakt'), text: t.contact },
+    { href: 'https://domitoo.progressivo.eu/', text: 'DomiToo', target: '_blank' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -72,7 +73,7 @@ const currentPath = Astro.url.pathname;
     <nav class="nav-desktop">
       <ul class="nav-list">
         {navLinks.map((link) => (
-          <li><a href={link.href}>{link.text}</a></li>
+          <li><a href={link.href} target={link.target || '_self'} rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}>{link.text}</a></li>
         ))}
       </ul>
     </nav>
@@ -149,7 +150,7 @@ const currentPath = Astro.url.pathname;
       <nav>
           <ul>
             {navLinks.map((link) => (
-                <li><a href={link.href}>{link.text}</a></li>
+                <li><a href={link.href} target={link.target || '_self'} rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}>{link.text}</a></li>
             ))}
           </ul>
       </nav>
