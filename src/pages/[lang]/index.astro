@@ -160,6 +160,12 @@ const t = translations[lang];
               const rotateX = ((y - centerY) / centerY) * -5; // Max 5 deg rotation
               const rotateY = ((x - centerX) / centerX) * 5;
 
+              // Spotlight Effect
+              const spotX = (e.clientX - rect.left) / rect.width * 100;
+              const spotY = (e.clientY - rect.top) / rect.height * 100;
+              // @ts-ignore
+              card.style.setProperty('--spotlight', `radial-gradient(circle at ${spotX}% ${spotY}%, rgba(255,255,255,0.1) 0%, transparent 50%)`);
+
               // @ts-ignore
               card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
           });
@@ -454,6 +460,7 @@ const t = translations[lang];
 
   .service-card {
     background: #ffffff;
+    background-image: var(--spotlight);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 2rem;
