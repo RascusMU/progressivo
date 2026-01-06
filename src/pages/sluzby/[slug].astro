@@ -4,8 +4,14 @@ import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
-  return services.map(service => ({
-    params: { slug: service.id },
+  // Filter only for root (CS) files.
+  // Root files have IDs like "analyza-dna.md" or "analyza-dna" (no slashes).
+  // Translated files have IDs like "en/analyza-dna.md".
+
+  const csServices = services.filter(service => !service.id.includes('/'));
+
+  return csServices.map(service => ({
+    params: { slug: service.id.replace(/\.md$/, '') },
     props: { service },
   }));
 }
