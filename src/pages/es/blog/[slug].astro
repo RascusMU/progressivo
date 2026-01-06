@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout lang="es" title={`${post.data.title} | Progressivo`}>
+<Layout title={`${post.data.title} | Progressivo`} description={post.data.description} lang="es">
   <div class="page-header">
      <div class="container">
         <h1>{post.data.title}</h1>

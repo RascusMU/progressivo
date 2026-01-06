@@ -2,9 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('pages', 'contact');
+const entry = await getEntry('pages', 'es/contact');
 if (!entry) {
-  // throw new Error('Page pages/contact not found');
+  // throw new Error('Page pages/es/contact not found');
 }
 const { Content } = entry ? await render(entry) : { Content: null };
 ---

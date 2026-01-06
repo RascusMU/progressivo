@@ -2,10 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('pages', 'about');
+const entry = await getEntry('pages', 'ru/about');
 if (!entry) {
   // Graceful fallback or custom error page if needed, for now just basic text
-  // throw new Error('Page pages/about not found');
+  // throw new Error('Page pages/ru/about not found');
 }
 const { Content } = entry ? await render(entry) : { Content: null };
 ---
