@@ -1,6 +1,7 @@
 ---
 title: "Übersetzungstätigkeit"
 description: "Schnelle und präzise Übersetzungen von Dokumenten und Texten (außer gerichtlich)."
+lang: de
 ---
 # Übersetzungstätigkeit
 

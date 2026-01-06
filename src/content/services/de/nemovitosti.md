@@ -1,6 +1,7 @@
 ---
 title: "Immobilien"
 description: "Vermittlung von Immobilienkäufen in Ländern wie Costa Rica, Panama und Kolumbien."
+lang: de
 ---
 # Immobilien
 

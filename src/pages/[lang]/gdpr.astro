@@ -2,17 +2,26 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 
-const entry = await getEntry('legal', 'smluvni-podminky-es');
-if (!entry) {
-  // throw new Error('Page legal/smluvni-podminky not found');
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+  ];
 }
+
+const { lang } = Astro.params;
+const id = lang === 'cs' ? 'gdpr' : `gdpr-${lang}`;
+const entry = await getEntry('legal', id);
+
 const { Content } = entry ? await render(entry) : { Content: null };
 ---
 
-<Layout lang="es" title="Smluvní podmínky | Progressivo">
+<Layout lang={lang} title="GDPR | Progressivo">
   <div class="page-header">
      <div class="container">
-        <h1>Smluvní podmínky</h1>
+        <h1>GDPR</h1>
      </div>
   </div>
   <main class="container page-content animate-on-scroll">

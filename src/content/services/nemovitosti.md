@@ -1,6 +1,7 @@
 ---
 title: "Nemovitosti"
 description: "Zprostředkování nákupu nemovitostí v zemích jako Kostarika, Panama a Kolumbie."
+lang: cs
 ---
 # Nemovitosti
 

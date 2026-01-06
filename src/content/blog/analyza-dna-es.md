@@ -2,6 +2,7 @@
 title: "Análisis de ADN"
 description: "Cómo el ADN controla la vida, qué revela sobre ti y cómo puede ayudarte a entender tu salud y origen."
 date: 2024-05-21
+lang: es
 ---
 
 # Análisis de ADN

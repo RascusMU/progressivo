@@ -1,6 +1,7 @@
 ---
 title: "Online Sales of Machinery"
 description: "Facilitation of purchase and import of heavy machinery online."
+lang: en
 ---
 # Online Sales of Machinery
 

@@ -1,6 +1,7 @@
 ---
 title: "Překladatelská činnost"
 description: "Rychlé a přesné překlady dokumentů a textů (mimo soudní)."
+lang: cs
 ---
 # Překladatelská činnost
 

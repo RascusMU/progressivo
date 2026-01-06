@@ -1,6 +1,7 @@
 ---
 title: "Expatriace a víza"
 description: "Komplexní pomoc při stěhování do zahraničí a vyřizování víz."
+lang: cs
 ---
 # Expatriace a víza
 

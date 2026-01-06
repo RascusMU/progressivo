@@ -1,6 +1,7 @@
 ---
 title: "Venta de técnica en línea"
 description: "Intermediación de compra e importación de maquinaria pesada en línea."
+lang: es
 ---
 # Venta de técnica en línea
 

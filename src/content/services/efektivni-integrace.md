@@ -1,6 +1,7 @@
 ---
 title: "Efektivní integrace"
 description: "Propojení online nástrojů a služeb do jednoho funkčního celku pro úsporu času."
+lang: cs
 ---
 # Efektivní integrace
 

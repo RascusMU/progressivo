@@ -1,6 +1,7 @@
 ---
 title: "Cursos en línea"
 description: "Cursos educativos y tutorías en línea para niños y adultos."
+lang: es
 ---
 # Cursos en línea
 

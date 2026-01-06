@@ -1,6 +1,7 @@
 ---
 title: "Opportunities for Growth and Success with Us"
 date: 2025-04-17
+lang: en
 ---
 
 # Opportunities for Growth and Success with Us

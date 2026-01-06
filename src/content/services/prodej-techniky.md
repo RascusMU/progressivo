@@ -1,6 +1,7 @@
 ---
 title: "Online prodej techniky"
 description: "Zprostředkování nákupu a dovozu těžké techniky online."
+lang: cs
 ---
 # Online prodej techniky
 

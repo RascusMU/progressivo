@@ -2,6 +2,7 @@
 title: "Oportunidades de crecimiento y éxito con nosotros"
 description: "Descubre oportunidades de crecimiento con nosotros: cursos en línea, soporte de TI, bienes raíces en el trópico y más servicios para tu futuro."
 date: 2024-05-21
+lang: es
 ---
 
 # Oportunidades de crecimiento y éxito con nosotros

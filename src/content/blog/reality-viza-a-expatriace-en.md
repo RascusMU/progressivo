@@ -1,6 +1,7 @@
 ---
 title: "The World is Ready to Become Your New Home"
 date: 2025-04-17
+lang: en
 ---
 
 # The World is Ready to Become Your New Home

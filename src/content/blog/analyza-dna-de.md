@@ -2,6 +2,7 @@
 title: "DNA-Analyse"
 description: "Wie die DNA das Leben steuert, was sie über Sie verrät und wie sie Ihnen helfen kann, Ihre Gesundheit und Herkunft zu verstehen."
 date: 2024-05-21
+lang: de
 ---
 
 # DNA-Analyse

@@ -2,6 +2,7 @@
 title: "Die Welt ist bereit, Ihr neues Zuhause zu werden"
 description: "Leitfaden für Leben und Investitionen in Panama, Kolumbien und Costa Rica. Visa, Immobilien und Expatriierung mit Progressivo Corp."
 date: 2024-05-21
+lang: de
 ---
 
 # Die Welt ist bereit, Ihr neues Zuhause zu werden

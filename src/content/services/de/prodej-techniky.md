@@ -1,6 +1,7 @@
 ---
 title: "Online-Verkauf von Technik"
 description: "Vermittlung von Kauf und Import schwerer Technik online."
+lang: de
 ---
 # Online-Verkauf von Technik
 

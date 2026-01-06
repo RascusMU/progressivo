@@ -1,6 +1,7 @@
 ---
 title: "Effective Integration"
 description: "Connecting online tools and services into one functional unit to save time."
+lang: en
 ---
 # Effective Integration
 

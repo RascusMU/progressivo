@@ -1,6 +1,7 @@
 ---
 title: "Analýza DNA"
 description: "Moderní vědecká metoda zkoumání genetické informace pro poznání původu a zdraví."
+lang: cs
 ---
 # Analýza DNA
 
