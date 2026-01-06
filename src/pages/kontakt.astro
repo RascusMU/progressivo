@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'contact');
@@ -17,6 +18,7 @@ const { Content } = entry ? await render(entry) : { Content: null };
   </div>
   <main class="container page-content animate-on-scroll">
     {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah se připravuje.</p>}
+    <ContactForm lang="cs" />
   </main>
 </Layout>
 

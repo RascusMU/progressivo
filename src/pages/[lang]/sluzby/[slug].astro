@@ -5,22 +5,31 @@ import Layout from '../../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const services = await getCollection('services');
 
-  const languages = ['en', 'de', 'ru', 'es'];
-
+  const languages = ['cs', 'en', 'de', 'ru', 'es'];
   const paths = [];
 
   for (const service of services) {
     const id = service.id;
     const parts = id.split('/');
-    if (parts.length > 1 && languages.includes(parts[0])) {
-      const lang = parts[0];
-      const slug = parts.slice(1).join('/').replace(/\.md$/, '');
 
-      paths.push({
-        params: { lang, slug },
-        props: { service },
-      });
+    let lang, slug;
+
+    // CS files are at the root of the collection (e.g. "analyza-dna.md")
+    // Translated files are in folders (e.g. "en/analyza-dna.md")
+    if (parts.length === 1) {
+        lang = 'cs';
+        slug = id.replace(/\.md$/, '');
+    } else if (parts.length > 1 && languages.includes(parts[0])) {
+        lang = parts[0];
+        slug = parts.slice(1).join('/').replace(/\.md$/, '');
+    } else {
+        continue;
     }
+
+    paths.push({
+      params: { lang, slug },
+      props: { service },
+    });
   }
 
   return paths;
@@ -28,9 +37,10 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 const { Content } = await render(service);
+const { lang } = Astro.params;
 ---
 
-<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={Astro.params.lang}>
+<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={lang}>
   <div class="page-header">
      <div class="container">
         <h1>{service.data.title}</h1>

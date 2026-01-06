@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ContactForm from '../../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -34,6 +35,7 @@ const title = translations[lang] || translations.cs;
   </div>
   <main class="container page-content animate-on-scroll">
     {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah se připravuje.</p>}
+    <ContactForm lang={lang} />
   </main>
 </Layout>
 
