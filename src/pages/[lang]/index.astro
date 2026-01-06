@@ -162,16 +162,18 @@ const t = translations[lang];
     <div class="container">
       <h2 class="section-title">{t.servicesTitle}</h2>
       <div class="services-grid">
-        {services.map((service) => (
+        {services.map((service) => {
+          const slug = service.id.split('/').pop().replace(/\.md$/, '');
+          return (
           <div class="service-card">
             <div class="card-media">
                 <img src="/images/mapa-svetabusines.webp" alt={service.data.title} class="service-image" />
             </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description.length > 150 ? service.data.description.slice(0, 150) + '...' : service.data.description}</p>
-            <a href={`/${lang}/sluzby/${service.id.split('/').pop().replace('.md', '')}`} class="card-link">{t.servicesLink}</a>
+            <a href={`/${lang}/sluzby/${slug}`} class="card-link">{t.servicesLink}</a>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   </section>
