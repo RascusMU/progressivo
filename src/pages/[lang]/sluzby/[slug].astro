@@ -5,6 +5,7 @@ import Layout from '../../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const services = await getCollection('services');
 
+  // Including 'cs' here to support /cs/sluzby/ URLs as requested
   const languages = ['cs', 'en', 'de', 'ru', 'es'];
   const paths = [];
 
