@@ -176,8 +176,8 @@ const getLink = (path) => {
   }
 
   .medallion-image-wrapper {
-      width: 80px;
-      height: 80px;
+      width: 130px;
+      height: 130px;
       flex-shrink: 0;
   }
 
@@ -187,6 +187,7 @@ const getLink = (path) => {
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--color-accent);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   }
 
   .medallion-text {
@@ -316,6 +317,18 @@ const getLink = (path) => {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
+    }
+
+    .medallion-image-wrapper {
+        width: 110px;
+        height: 110px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .medallion-image-wrapper {
+        width: 95px;
+        height: 95px;
     }
   }
 </style>
