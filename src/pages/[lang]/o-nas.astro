@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getEntry, render } from 'astro:content';
+import { aboutContent } from '../../i18n/about';
 
 export async function getStaticPaths() {
   return [
@@ -12,52 +12,354 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
-const id = lang === 'cs' ? 'about' : `${lang}/about`;
-const entry = await getEntry('pages', id);
-
-const { Content } = entry ? await render(entry) : { Content: null };
-const translations = {
-    cs: 'O nás',
-    en: 'About Us',
-    de: 'Über uns',
-    es: 'Sobre nosotros',
-    ru: 'О нас'
-};
-const title = translations[lang] || translations.cs;
+const t = aboutContent[lang as keyof typeof aboutContent] || aboutContent.cs;
 ---
 
-<Layout lang={lang} title={`${title} | Progressivo`}>
-  <div class="page-header">
-     <div class="container">
-        <h1>{title}</h1>
-     </div>
-  </div>
-  <main class="container page-content animate-on-scroll">
-    {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah se připravuje.</p>}
+<Layout lang={lang} title={`${t.hero.title} | Progressivo`}>
+  <main class="page-container animate-on-scroll">
+
+    <!-- 1. NAD FOLDEM -->
+    <section class="section-intro">
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{t.hero.title}</h1>
+      <p class="text-xl md:text-2xl text-muted max-w-3xl leading-relaxed">
+        {t.hero.perex}
+      </p>
+    </section>
+
+    <!-- 2. JAK TO ZAČALO -->
+    <section class="section-content">
+      <h2 class="section-title">{t.started.title}</h2>
+      <div class="prose-content">
+        {t.started.text.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <!-- 3. CO VLASTNĚ DĚLÁME -->
+    <section class="section-content">
+      <h2 class="section-title">{t.whatWeDo.title}</h2>
+      <p class="section-perex mb-10">{t.whatWeDo.perex}</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {t.whatWeDo.items.map((item) => (
+          <article class="card">
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-desc">{item.desc}</p>
+            <p class="card-target">{item.target}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- 4. PROČ TO NENÍ ROZTŘÍŠTĚNÉ -->
+    <section class="section-content">
+      <h2 class="section-title">{t.why.title}</h2>
+      <div class="prose-content">
+        {t.why.text.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <!-- 5. JAK PRACUJEME -->
+    <section class="section-content">
+      <h2 class="section-title">{t.how.title}</h2>
+      <div class="space-y-8">
+        {t.how.items.map((item) => (
+          <div class="how-item">
+            <h3 class="how-title">{item.title}</h3>
+            <p class="how-desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 6. SÍŤ PROJEKTŮ -->
+    <section class="section-content">
+      <h2 class="section-title">{t.network.title}</h2>
+      <p class="section-perex mb-8">{t.network.perex}</p>
+
+      <ul class="network-list">
+        {t.network.items.map((item) => (
+          <li class="network-item">
+            <strong class="text-accent">{item.name}</strong> – {item.desc}
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-8 text-muted">{t.network.conclusion}</p>
+    </section>
+
+    <!-- 7. KDO JSEM -->
+    <section class="section-content founder-section">
+      <h2 class="section-title">{t.founder.name} – <span class="text-accent">{t.founder.role}</span></h2>
+      <div class="prose-content mb-8">
+        {t.founder.text.map((p) => <p>{p}</p>)}
+      </div>
+      <blockquote class="founder-quote">
+        {t.founder.quote}
+      </blockquote>
+    </section>
+
+    <!-- 8. REFERENCE -->
+    <section class="section-content">
+      <h2 class="section-title">{t.testimonials.title}</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {t.testimonials.items.map((item) => (
+          <div class="testimonial-card">
+            <p class="testimonial-text">„{item.text}“</p>
+            <p class="testimonial-author">— {item.author}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 9. KONTAKT / CTA -->
+    <section class="section-content mb-20">
+      <h2 class="section-title">{t.cta.title}</h2>
+      <p class="mb-8 text-lg">{t.cta.text}</p>
+
+      <div class="cta-actions">
+        <a href="mailto:jaroslav@progressivo.eu" class="btn-primary">{t.cta.button}</a>
+        <a href="https://wa.me/50768509698" target="_blank" rel="noopener noreferrer" class="whatsapp-link flex items-center gap-2">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="text-green-500"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span class="underline decoration-transparent hover:decoration-current transition-all">{t.cta.whatsapp}</span>
+        </a>
+      </div>
+    </section>
+
   </main>
 </Layout>
 
 <style>
-  .page-header {
-      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-      padding: 4rem 0 2rem;
-      border-bottom: 1px solid var(--color-border);
-      margin-bottom: 2rem;
+  /* Global Layout & Typography */
+  .page-container {
+    max-width: 1024px; /* Editorial width */
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    font-family: 'Manrope', sans-serif;
+    color: var(--color-text);
   }
 
-  :global(.dark) .page-header {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  .section-intro {
+    margin-bottom: 6rem;
   }
 
-  h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--color-text);
-      margin: 0;
+  .section-content {
+    margin-bottom: 6rem;
   }
 
-  .page-content {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
+  .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-perex {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 65ch;
+    line-height: 1.6;
+  }
+
+  /* Prose Content (Paragraphs) */
+  .prose-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+    font-size: 1.125rem;
+    max-width: 65ch; /* 65-75 chars per line */
+    color: var(--color-text-body, #374151);
+  }
+
+  :global(.dark) .prose-content p {
+    color: var(--color-text-body, #d1d5db);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  /* Cards (Services) */
+  .card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  :global(.dark) .card {
+    background: rgba(30, 41, 59, 0.4); /* Darker glass */
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .card-target {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* How Items */
+  .how-item {
+    border-left: 2px solid var(--color-border);
+    padding-left: 1.5rem;
+  }
+
+  .how-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .how-desc {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  /* Network List */
+  .network-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .network-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.125rem;
+  }
+
+  .network-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Founder Quote */
+  .founder-quote {
+    font-family: 'Plus Jakarta Sans', serif; /* Serif for quote maybe? Prompt said Headings Serif, Text Sans. Let's stick to Headings font for quote visual */
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-accent);
+    border-left: 4px solid var(--color-accent);
+    padding-left: 2rem;
+    margin-top: 2rem;
+    line-height: 1.4;
+  }
+
+  /* Testimonials */
+  .testimonial-card {
+    background: var(--color-bg-alt);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+
+  .testimonial-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  /* CTA */
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  :global(.dark) .btn-primary {
+    background: #f5f5f4;
+    color: #0f172a;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .whatsapp-link {
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .whatsapp-link:hover {
+    color: var(--color-accent);
+  }
+
+  /* Utilities */
+  .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .md\:text-5xl { font-size: 3rem; line-height: 1; }
+  .lg\:text-6xl { font-size: 3.75rem; line-height: 1; }
+  .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .font-bold { font-weight: 700; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mb-20 { margin-bottom: 5rem; }
+  .max-w-3xl { max-width: 48rem; }
+  .leading-relaxed { line-height: 1.625; }
+  .grid { display: grid; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .gap-8 { gap: 2rem; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .flex { display: flex; }
+  .items-center { align-items: center; }
+  .gap-2 { gap: 0.5rem; }
+  .underline { text-decoration: underline; }
+  .decoration-transparent { text-decoration-color: transparent; }
+  .hover\:decoration-current:hover { text-decoration-color: currentColor; }
+  .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+
+  @media (min-width: 768px) {
+    .md\:text-5xl { font-size: 3rem; }
+    .md\:text-2xl { font-size: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .lg\:text-6xl { font-size: 3.75rem; }
+    .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 </style>
