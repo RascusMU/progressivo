@@ -67,14 +67,18 @@ services.sort((a, b) => {
     // Founder Image Unroll Animation
     const founderImageWrapper = document.querySelector('.founder-image-wrapper');
     if (founderImageWrapper) {
+        // Only hide if we are about to observe (prevents invisible image if JS fails later)
+        founderImageWrapper.classList.add('waiting-for-scroll');
+
         const founderObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    entry.target.classList.remove('waiting-for-scroll');
                     entry.target.classList.add('visible');
                     founderObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.2 });
         founderObserver.observe(founderImageWrapper);
     }
 
@@ -355,7 +359,10 @@ services.sort((a, b) => {
     position: relative;
     width: 100%;
     margin-left: -4rem; /* The Magazine "Overlap" */
-    transform: translateY(1rem) scale(0.8); /* Initial state */
+
+    /* Default Visible State (Priority 1) */
+    opacity: 1;
+    transform: translateY(1rem) rotate(-1deg); /* Final desired state */
 
     /* Premium Paper / Scroll Look */
     background-color: #fcfbf9; /* Warm Paper */
@@ -364,22 +371,28 @@ services.sort((a, b) => {
 
     /* Animation Setup */
     transform-origin: top right;
-    clip-path: circle(0% at 100% 0%);
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.1s; /* Short transition for opacity */
+    will-change: transform, clip-path, opacity;
+  }
+
+  /* Only hide if JS applied this class */
+  .founder-image-wrapper.waiting-for-scroll {
+      opacity: 0;
+      clip-path: circle(0% at 100% 0%);
+      transform: translateY(1rem) scale(0.9) rotate(0deg);
   }
 
   .founder-image-wrapper.visible {
-      opacity: 1;
       animation: unroll 0.6s ease-out forwards;
   }
 
   @keyframes unroll {
       0% {
+          opacity: 0;
           clip-path: circle(0% at 100% 0%);
-          transform: translateY(1rem) scale(0.8) rotate(0deg);
+          transform: translateY(1rem) scale(0.9) rotate(0deg);
       }
       100% {
+          opacity: 1;
           clip-path: circle(150% at 100% 0%);
           transform: translateY(1rem) scale(1.0) rotate(-1deg); /* Slight tilt at the end */
       }
