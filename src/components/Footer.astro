@@ -7,80 +7,85 @@ const translations = {
     founderRole: "Zakladatel & CEO",
     quote: "\"Budoucnost patří těm, kteří se nebojí spojit zdánlivě nespojitelné.\"",
     writeToMe: "Napište mi \u2192",
-    companyDesc: "Jsme Progressivo. Propojujeme moderní technologie, vzdělávání a vědu pro lepší budoucnost. Váš partner pro růst a inovace.",
-    quickLinks: "Rychlé odkazy",
+    navTitle: "Navigace",
+    networkTitle: "Síť & Ekosystém",
+    trustTitle: "Důvěra & Legal",
     linkServices: "Služby",
     linkBlog: "Blog",
     linkAbout: "O nás",
     linkContact: "Kontakt",
-    legalInfo: "Právní informace",
     linkGdpr: "GDPR a ochrana dat",
     linkTerms: "Obchodní podmínky",
     linkContract: "Smluvní podmínky",
+    linkWeby: "Weby",
     allRights: "Všechna práva vyhrazena."
   },
   en: {
     founderRole: "Founder & CEO",
     quote: "\"The future belongs to those who are not afraid to connect the seemingly unconnected.\"",
     writeToMe: "Write to me \u2192",
-    companyDesc: "We are Progressivo. Connecting modern technology, education, and science for a better future. Your partner for growth and innovation.",
-    quickLinks: "Quick Links",
+    navTitle: "Navigation",
+    networkTitle: "Network & Ecosystem",
+    trustTitle: "Trust & Legal",
     linkServices: "Services",
     linkBlog: "Blog",
     linkAbout: "About Us",
     linkContact: "Contact",
-    legalInfo: "Legal Info",
     linkGdpr: "GDPR & Data Protection",
     linkTerms: "Terms & Conditions",
     linkContract: "Contractual Terms",
+    linkWeby: "Websites",
     allRights: "All rights reserved."
   },
   de: {
     founderRole: "Gründer & CEO",
     quote: "\"Die Zukunft gehört denen, die sich nicht scheuen, das scheinbar Unverbindbare zu verbinden.\"",
     writeToMe: "Schreiben Sie mir \u2192",
-    companyDesc: "Wir sind Progressivo. Wir verbinden moderne Technologie, Bildung und Wissenschaft für eine bessere Zukunft. Ihr Partner für Wachstum und Innovation.",
-    quickLinks: "Schnelllinks",
+    navTitle: "Navigation",
+    networkTitle: "Netzwerk & Ökosystem",
+    trustTitle: "Vertrauen & Recht",
     linkServices: "Dienstleistungen",
     linkBlog: "Blog",
     linkAbout: "Über uns",
     linkContact: "Kontakt",
-    legalInfo: "Rechtliche Hinweise",
     linkGdpr: "DSGVO & Datenschutz",
     linkTerms: "AGB",
     linkContract: "Vertragsbedingungen",
+    linkWeby: "Websites",
     allRights: "Alle Rechte vorbehalten."
   },
   es: {
     founderRole: "Fundador & CEO",
     quote: "\"El futuro pertenece a aquellos que no temen conectar lo aparentemente inconectable.\"",
     writeToMe: "Escríbeme \u2192",
-    companyDesc: "Somos Progressivo. Conectamos tecnología moderna, educación y ciencia para un futuro mejor. Su socio para el crecimiento y la innovación.",
-    quickLinks: "Enlaces rápidos",
+    navTitle: "Navegación",
+    networkTitle: "Red y Ecosistema",
+    trustTitle: "Confianza y Legal",
     linkServices: "Servicios",
     linkBlog: "Blog",
     linkAbout: "Sobre nosotros",
     linkContact: "Contacto",
-    legalInfo: "Información legal",
     linkGdpr: "GDPR y protección de datos",
     linkTerms: "Términos y condiciones",
     linkContract: "Condiciones contractuales",
+    linkWeby: "Sitios web",
     allRights: "Todos los derechos reservados."
   },
   ru: {
     founderRole: "Основатель и CEO",
     quote: "\"Будущее принадлежит тем, кто не боится соединять, казалось бы, несоединимое.\"",
     writeToMe: "Напишите мне \u2192",
-    companyDesc: "Мы — Progressivo. Соединяем современные технологии, образование и науку ради лучшего будущего. Ваш партнер для роста и инноваций.",
-    quickLinks: "Быстрые ссылки",
+    navTitle: "Навигация",
+    networkTitle: "Сеть и Экосистема",
+    trustTitle: "Доверие и Право",
     linkServices: "Услуги",
     linkBlog: "Блог",
     linkAbout: "О нас",
     linkContact: "Контакты",
-    legalInfo: "Юридическая информация",
     linkGdpr: "GDPR и защита данных",
     linkTerms: "Условия использования",
     linkContract: "Договорные условия",
+    linkWeby: "Веб-сайты",
     allRights: "Все права защищены."
   }
 };
@@ -113,33 +118,69 @@ const getLink = (path) => {
   </div>
 
   <div class="footer-container">
-    <!-- Column 1: Logo & Company Description -->
-    <div class="footer-col company-info">
-      <a href={getLink('/')} class="footer-logo">
-        <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" class="logo-light" width="180" height="120" />
-        <img src="/images/Transparent-Logo-tmave.png" alt="Progressivo Logo" class="logo-dark" width="180" height="120" />
-      </a>
-      <p>{t.companyDesc}</p>
-    </div>
-
-    <!-- Column 2: Quick Links -->
-    <div class="footer-col quick-links">
-      <h3>{t.quickLinks}</h3>
+    <!-- Column A: Navigation -->
+    <div class="footer-col nav-col">
+      <h3>{t.navTitle}</h3>
       <nav>
         <ul>
+          <li><a href={getLink('/o-nas')}>{t.linkAbout}</a></li>
           <li><a href={getLink('/#services')}>{t.linkServices}</a></li>
           <li><a href={getLink('/blog')}>{t.linkBlog}</a></li>
-          <li><a href={getLink('/o-nas')}>{t.linkAbout}</a></li>
           <li><a href={getLink('/kontakt')}>{t.linkContact}</a></li>
         </ul>
       </nav>
     </div>
 
-    <!-- Column 3: Legal Info -->
-    <div class="footer-col legal-info">
-      <h3>{t.legalInfo}</h3>
+    <!-- Column B: Network & Ecosystem -->
+    <div class="footer-col network-col">
+      <h3>{t.networkTitle}</h3>
       <nav>
         <ul>
+          <li>
+            <a href="https://itutoring.cz" target="_blank" rel="noopener noreferrer">
+              iTutoring.cz <span class="icon-external" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://jerry.cingel.cz" target="_blank" rel="noopener noreferrer">
+              jerry.cingel.cz <span class="icon-external" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://bailamos.cz" target="_blank" rel="noopener noreferrer">
+              bailamos.cz <span class="icon-external" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://panama.bailamos.cz" target="_blank" rel="noopener noreferrer">
+              panama.bailamos.cz <span class="icon-external" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <span class="domitoo-item" aria-label="Interní projekt DomiToo AI">
+              <span id="domitoo-d">D</span>omiToo AI
+              <svg class="icon-lock" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </span>
+          </li>
+          <li>
+            <a href="https://progressivo.eu" target="_blank" rel="noopener noreferrer">
+              {t.linkWeby} <span class="icon-external" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Column D: Trust & Legal -->
+    <div class="footer-col trust-col">
+      <h3>{t.trustTitle}</h3>
+      <nav>
+        <ul>
+          <li>
+             <a href="https://www.linkedin.com/in/jaroslavcingel/" target="_blank" rel="noopener noreferrer">
+               LinkedIn <span class="icon-external" aria-hidden="true">↗</span>
+             </a>
+          </li>
           <li><a href={getLink('/gdpr')}>{t.linkGdpr}</a></li>
           <li><a href={getLink('/obchodni-podminky')}>{t.linkTerms}</a></li>
           <li><a href={getLink('/smluvni-podminky')}>{t.linkContract}</a></li>
@@ -149,21 +190,65 @@ const getLink = (path) => {
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; {year} Progressivo. {t.allRights}</p>
+    <p>&copy; {year} Progressivo Corp.</p>
   </div>
 </footer>
+
+<script>
+  // DomiToo Easter Egg Logic
+  document.addEventListener('astro:page-load', () => {
+      const dTrigger = document.getElementById('domitoo-d');
+      if (!dTrigger) return;
+
+      const redirectUrl = 'https://domitoo.progressivo.eu';
+      let touchTimer;
+      const longPressDuration = 600;
+
+      // Desktop Double Click
+      dTrigger.addEventListener('dblclick', () => {
+          window.location.href = redirectUrl;
+      });
+
+      // Mobile Long Press
+      const startPress = (e) => {
+          touchTimer = setTimeout(() => {
+              window.location.href = redirectUrl;
+          }, longPressDuration);
+      };
+
+      const cancelPress = () => {
+          if (touchTimer) clearTimeout(touchTimer);
+      };
+
+      dTrigger.addEventListener('touchstart', startPress, { passive: true });
+      dTrigger.addEventListener('touchend', cancelPress);
+      dTrigger.addEventListener('touchmove', cancelPress);
+      dTrigger.addEventListener('mousedown', startPress);
+      dTrigger.addEventListener('mouseup', cancelPress);
+      dTrigger.addEventListener('mouseleave', cancelPress);
+
+      // Prevent default context menu on long press
+      dTrigger.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+      });
+  });
+</script>
 
 <style>
   footer {
     position: relative;
     z-index: 10;
+    /* Removed background-color to respect hygiene rules, but kept existing layout structure.
+       Actually, user said "žádná změna pozadí", which likely means keep whatever background was there or implied by the "paper feel".
+       The previous footer had var(--color-bg-alt). I will keep it to ensure it doesn't look broken,
+       but user said "žádný tmavý blok". --color-bg-alt is light in light mode (#e7e5e4). */
     background-color: var(--color-bg-alt);
-    padding-top: 0; /* Changed from 4rem because medallion is top */
+    padding-top: 0;
     border-top: 1px solid var(--color-border);
     margin-top: 4rem;
   }
 
-  /* Founder Medallion */
+  /* Founder Medallion - Unchanged */
   .founder-medallion {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     color: white;
@@ -240,45 +325,24 @@ const getLink = (path) => {
       color: var(--color-accent);
   }
 
+  /* Fat Footer Layout */
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 
   .footer-col h3 {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     font-weight: 600;
-    margin-bottom: 1.25rem;
-    color: var(--color-text);
-  }
-
-  .company-info p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-text-light);
-    max-width: 300px;
-  }
-
-  .footer-logo img {
-    height: 80px;
-    width: auto;
     margin-bottom: 1.5rem;
-  }
-
-  .logo-dark {
-      display: none;
-  }
-
-  :global(.dark) .logo-light {
-      display: none;
-  }
-
-  :global(.dark) .logo-dark {
-      display: block;
+    color: var(--color-text);
+    opacity: 0.7;
   }
 
   .footer-col nav ul {
@@ -290,27 +354,56 @@ const getLink = (path) => {
     gap: 0.75rem;
   }
 
-  .footer-col nav a {
+  .footer-col nav a, .domitoo-item {
     text-decoration: none;
     color: var(--color-text-light);
     font-size: 0.95rem;
     transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .footer-col nav a:hover {
     color: var(--color-accent);
-    text-decoration: none;
   }
 
+  /* DomiToo Styles */
+  .domitoo-item {
+      cursor: default; /* Looks like text */
+  }
+
+  #domitoo-d {
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: default;
+  }
+
+  /* Icons */
+  .icon-external {
+      font-size: 0.7em;
+      opacity: 0.6;
+      margin-left: 2px;
+  }
+
+  .icon-lock {
+      margin-left: 4px;
+      opacity: 0.6;
+      width: 12px;
+      height: 12px;
+  }
+
+  /* Footer Bottom */
   .footer-bottom {
     max-width: 1200px;
-    margin: 3rem auto 0;
+    margin: 4rem auto 0;
     padding: 1.5rem 1rem 0;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border); /* Subtle line */
     text-align: center;
     color: var(--color-text-light);
-    font-size: 0.875rem;
-    opacity: 0.8;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    padding-bottom: 2rem;
   }
 
   .footer-bottom p {
@@ -322,19 +415,10 @@ const getLink = (path) => {
     .footer-container {
       grid-template-columns: 1fr; /* Stacked columns */
       gap: 3rem;
-      text-align: center;
+      text-align: left; /* Keep aligned left for list readibility usually, but audit said stack */
     }
 
-    .company-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .footer-col nav ul {
-      align-items: center;
-    }
-
+    /* Medallion responsive styles from original file */
     .medallion-content {
         flex-direction: column;
         text-align: center;
@@ -351,6 +435,10 @@ const getLink = (path) => {
     .medallion-image-wrapper {
         width: 95px;
         height: 95px;
+    }
+
+    .footer-container {
+        padding-left: 1.5rem; /* Little more breathing room on mobile if left aligned */
     }
   }
 </style>
