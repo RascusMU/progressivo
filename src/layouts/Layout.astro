@@ -1,7 +1,8 @@
 ---
-import WhatsAppButton from '../components/WhatsAppButton.astro';
+import FloatingDock from '../components/FloatingDock.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Modal from '../components/Modal.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -121,8 +122,9 @@ const schemaWebSite = {
 	<body>
         <Header lang={lang} />
 		<slot />
+        <FloatingDock lang={lang} />
         <Footer lang={lang} />
-        <WhatsAppButton />
+        <Modal lang={lang} />
 	</body>
 </html>
 <style is:global>
@@ -247,3 +249,26 @@ const schemaWebSite = {
         margin-bottom: 0.5rem;
     }
 </style>
+<script>
+  // Global scroll listener for UI state
+  document.addEventListener('astro:page-load', () => {
+      let lastScrollY = window.scrollY;
+      const threshold = 50;
+
+      const updateScrollState = () => {
+          const scrollY = window.scrollY;
+          const body = document.body;
+
+          if (scrollY > threshold) {
+              body.classList.add('scrolled-down');
+          } else {
+              body.classList.remove('scrolled-down');
+          }
+
+          lastScrollY = scrollY;
+      };
+
+      window.addEventListener('scroll', updateScrollState, { passive: true });
+      updateScrollState(); // Initial check
+  });
+</script>
