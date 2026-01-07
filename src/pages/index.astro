@@ -70,12 +70,12 @@ services.sort((a, b) => {
         if (founderImageWrapper) {
             // Progressive Enhancement: Only hide if IntersectionObserver is supported
             if ('IntersectionObserver' in window) {
-                founderImageWrapper.classList.add('waiting-for-scroll');
+                founderImageWrapper.classList.add('waiting');
 
                 const founderObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            entry.target.classList.remove('waiting-for-scroll');
+                            entry.target.classList.remove('waiting');
                             entry.target.classList.add('visible');
                             founderObserver.unobserve(entry.target);
                         }
@@ -85,8 +85,8 @@ services.sort((a, b) => {
 
                 // FAILSAFE: Ensure image becomes visible even if observer fails or takes too long
                 setTimeout(() => {
-                    if (founderImageWrapper.classList.contains('waiting-for-scroll')) {
-                        founderImageWrapper.classList.remove('waiting-for-scroll');
+                    if (founderImageWrapper.classList.contains('waiting')) {
+                        founderImageWrapper.classList.remove('waiting');
                         founderImageWrapper.classList.add('visible');
                     }
                 }, 3000); // 3 seconds safety timeout
@@ -374,10 +374,6 @@ services.sort((a, b) => {
     width: 100%;
     margin-left: -4rem; /* The Magazine "Overlap" */
 
-    /* Default Visible State (Priority 1) */
-    opacity: 1;
-    transform: translateY(1rem) rotate(-1deg); /* Final desired state */
-
     /* Premium Paper / Scroll Look */
     background-color: #fcfbf9; /* Warm Paper */
     padding: 0; /* Removed border/frame effect */
@@ -385,29 +381,39 @@ services.sort((a, b) => {
 
     /* Animation Setup */
     transform-origin: top right;
-    will-change: transform, clip-path, opacity;
+    transition:
+      mask-position 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+      -webkit-mask-position 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 1.2s ease-out;
   }
 
-  /* Only hide if JS applied this class */
-  .founder-image-wrapper.waiting-for-scroll {
-      opacity: 1;
-      clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
-      transform: translateY(1rem) scale(0.9) rotate(0deg);
+  /* Stav ČEKÁNÍ (přidá JS okamžitě po načtení) */
+  .founder-image-wrapper.waiting {
+    /* Maska: Gradient simuluje měkký ohyb papíru */
+    mask-image: linear-gradient(225deg, black 40%, transparent 60%);
+    mask-size: 300% 300%;
+    mask-position: 100% 0%; /* Start: Skryto (nebo jen roh) */
+
+    /* Safari / Webkit support - KRITICKÉ PRO iOS */
+    -webkit-mask-image: linear-gradient(225deg, black 40%, transparent 60%);
+    -webkit-mask-size: 300% 300%;
+    -webkit-mask-position: 100% 0%;
+
+    /* Fyzika: Zmenšené a natočené */
+    transform: scale(0.92) rotate(-2deg);
+    opacity: 0.8;
   }
 
+  /* Stav ODHALENÍ (přidá JS při scrollu) */
   .founder-image-wrapper.visible {
-      animation: unroll 1.2s ease-out forwards;
-  }
+    /* Reset masky = plně viditelné */
+    mask-position: 0% 100%;
+    -webkit-mask-position: 0% 100%;
 
-  @keyframes unroll {
-      0% {
-          clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
-          transform: translateY(1rem) scale(0.9) rotate(0deg);
-      }
-      100% {
-          clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
-          transform: translateY(1rem) scale(1.0) rotate(-1deg);
-      }
+    /* Reset fyziky = narovnáno */
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
   }
 
   .founder-image {
