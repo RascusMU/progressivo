@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
+import { ui } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   return [
@@ -17,49 +18,230 @@ const id = lang === 'cs' ? 'contact' : `${lang}/contact`;
 const entry = await getEntry('pages', id);
 
 const { Content } = entry ? await render(entry) : { Content: null };
-const translations = {
-    cs: 'Kontakt',
-    en: 'Contact',
-    de: 'Kontakt',
-    es: 'Contacto',
-    ru: 'Контакты'
-};
-const title = translations[lang] || translations.cs;
+const t = ui[lang] || ui.cs;
 ---
 
-<Layout lang={lang} title={`${title} | Progressivo`}>
-  <div class="page-header">
-     <div class="container">
-        <h1>{title}</h1>
-     </div>
-  </div>
+<Layout lang={lang} title={`${t['contact.title']} | Progressivo`}>
   <main class="container page-content animate-on-scroll">
-    {Content ? <div class="prose lg:prose-xl"><Content /></div> : <p>Obsah se připravuje.</p>}
-    <ContactForm lang={lang} />
+    <div class="contact-grid">
+      <!-- Levý sloupec: Info & Kontext -->
+      <div class="info-column">
+        <h1>{t['contact.title']}</h1>
+        <p class="intro-text">{t['contact.intro']}</p>
+
+        <div class="contact-details protected-content">
+          <div class="detail-item">
+            <span class="detail-label">{t['contact.phone']}</span>
+            <span class="detail-value font-mono">+507 6850-9698</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{t['contact.email']}</span>
+            <span class="detail-value font-mono">info@progressivo.eu</span>
+          </div>
+        </div>
+
+        <a href="https://wa.me/50768509698" target="_blank" rel="noopener noreferrer" class="whatsapp-link">
+          {t['contact.whatsapp']}
+        </a>
+
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.542867623631!2d-79.52264622414343!3d8.977465691062635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca8f0d8b4440f%3A0xc0761356580556f0!2sOceania%20Business%20Plaza!5e0!3m2!1sen!2spa!4v1700000000000!5m2!1sen!2spa"
+            width="100%"
+            height="300"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="map-frame"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Pravý sloupec: Akce (Formulář) -->
+      <div class="action-column">
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="faq-section">
+      <div class="prose lg:prose-xl">
+        {Content ? <Content /> : <p>Obsah se připravuje.</p>}
+      </div>
+    </div>
   </main>
 </Layout>
 
 <style>
-  .page-header {
-      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-      padding: 4rem 0 2rem;
-      border-bottom: 1px solid var(--color-border);
-      margin-bottom: 2rem;
+  .page-content {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
   }
 
-  :global(.dark) .page-header {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
   }
 
+  @media (min-width: 1024px) {
+      .contact-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 6rem;
+      }
+  }
+
+  /* Typography */
   h1 {
+      font-family: var(--font-heading);
       font-size: 3rem;
       font-weight: 700;
       color: var(--color-text);
-      margin: 0;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
   }
 
-  .page-content {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
+  .intro-text {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 40ch;
+  }
+
+  .font-mono {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
+  }
+
+  /* Protected Content */
+  .protected-content {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+  }
+
+  .contact-details {
+      margin-bottom: 2.5rem;
+  }
+
+  .detail-item {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .detail-label {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+  }
+
+  .detail-value {
+      font-size: 1.25rem;
+      color: var(--color-text);
+      font-weight: 500;
+  }
+
+  /* WhatsApp Link */
+  .whatsapp-link {
+      display: inline-block;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+  }
+
+  .whatsapp-link:hover {
+      border-bottom-color: var(--color-accent);
+  }
+
+  /* Map */
+  .map-wrapper {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      height: 300px;
+  }
+
+  .map-frame {
+      width: 100%;
+      height: 100%;
+      filter: grayscale(100%) invert(0.9);
+      transition: filter 0.3s ease;
+  }
+
+  :global(.dark) .map-frame {
+      filter: grayscale(100%) invert(0.1);
+  }
+
+  /* FAQ Styling Override */
+  .faq-section {
+      margin-top: 4rem;
+      border-top: 1px solid var(--color-border);
+      padding-top: 4rem;
+  }
+
+  /* Accordion Styling (targeting generated HTML) */
+  :global(.faq-accordion details) {
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem 0;
+  }
+
+  :global(.faq-accordion summary) {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+      padding-right: 2rem;
+  }
+
+  :global(.faq-accordion summary::-webkit-details-marker) {
+      display: none;
+  }
+
+  :global(.faq-accordion summary::after) {
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--color-text-muted);
+      transition: transform 0.2s;
+  }
+
+  :global(.faq-accordion details[open] summary::after) {
+      transform: translateY(-50%) rotate(45deg);
+  }
+
+  :global(.faq-accordion p) {
+      margin-top: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
   }
 </style>
+
+<script>
+    // Prevent context menu and copy on protected content
+    const protectedContent = document.querySelector('.protected-content');
+    if (protectedContent) {
+        protectedContent.addEventListener('contextmenu', (e) => e.preventDefault());
+        protectedContent.addEventListener('copy', (e) => e.preventDefault());
+        protectedContent.addEventListener('touchstart', (e) => {
+             // Basic prevention of long-press selection on some devices
+             // Note: CSS user-select: none handles most of it
+        }, {passive: true});
+    }
+</script>
