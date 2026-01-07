@@ -107,21 +107,35 @@ services.sort((a, b) => {
   <!-- Founder Section -->
   <section id="founder" class="founder-section animate-on-scroll">
     <div class="container founder-content">
-      <div class="founder-text">
-        <h2 class="section-title-left">O zakladateli</h2>
-        <p class="founder-bio">
-          Jaroslav Cingel – Spojuji mezinárodní byznys se svobodou. 15+ let zkušeností v logistice, Panama & EU.
-        </p>
-        <a href="https://cingel.cz" class="founder-link">Poznat můj příběh &rarr;</a>
+      <div class="founder-text-column">
+        <h2 class="editorial-title">Kdo stojí za Progressivo</h2>
+        <div class="founder-prose">
+          <p class="founder-name">Jaroslav Cingel</p>
+          <p>
+            Více než 15 let propojuji Evropu se světem – v byznysu, logistice a online projektech.
+          </p>
+          <p>
+            Progressivo vzniklo proto, že věci, které by měly být jednoduché, jsou často zbytečně složité. Pomáhám je zjednodušit.
+          </p>
+          <p>
+            Žiju mezi Evropou a Panamou. Hledám svobodu volby – kde pracovat a s kým spolupracovat.
+          </p>
+        </div>
 
-        <FounderAudioPlayer
-          src="/audio/founder-intro.mp3"
-          buttonText="▶ Poslechnout úvod (45 s)"
-          disclaimerText="Audio je generováno z hlasu zakladatele pro lepší dostupnost obsahu."
-        />
+        <div class="founder-actions">
+          <a href="https://cingel.cz" target="_blank" class="founder-link">→ Poznat můj příběh</a>
+          <FounderAudioPlayer
+            src="/audio/founder-intro.mp3"
+            buttonText="▶ Poslechnout"
+            disclaimerText="Audio verze úvodu"
+          />
+        </div>
       </div>
-      <div class="founder-image-wrapper">
-        <img src="/images/tatka-pise.webp" alt="Jaroslav Cingel" class="founder-image" />
+
+      <div class="founder-image-column">
+        <div class="founder-image-wrapper">
+          <img src="/images/tatka-pise.webp" alt="Jaroslav Cingel" class="founder-image" />
+        </div>
       </div>
     </div>
   </section>
@@ -226,76 +240,99 @@ services.sort((a, b) => {
     color: white;
   }
 
-  /* Founder Section */
+  /* Founder Section - Magazine Layout */
   .founder-section {
     padding: 8rem 0;
     background-color: var(--color-bg);
+    overflow: hidden; /* For safety with negative margins */
   }
 
   .founder-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.2fr 0.8fr; /* Text wider than image */
     align-items: center;
-  }
-
-  .section-title-left {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
     position: relative;
-    padding-bottom: 1rem;
-    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .section-title-left::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
+  .founder-text-column {
+    z-index: 10;
+    padding-right: 2rem;
   }
 
-  .founder-bio {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: #d97706; /* Amber 600 */
-    margin-bottom: 2rem;
+  .editorial-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2.5rem;
+    color: var(--color-text);
+  }
+
+  .founder-prose {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 3rem;
+  }
+
+  .founder-name {
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .founder-prose p {
+    margin-bottom: 1.5rem;
+  }
+
+  .founder-prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .founder-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 
   .founder-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--color-accent);
-    border: 2px solid var(--color-accent);
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    transition: all 0.2s ease;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
   }
 
   .founder-link:hover {
-    background-color: var(--color-accent);
-    color: white;
+    border-color: var(--color-accent);
+  }
+
+  .founder-image-column {
+    position: relative;
+    z-index: 1;
   }
 
   .founder-image-wrapper {
     position: relative;
+    width: 100%;
+    margin-left: -4rem; /* The Magazine "Overlap" */
+    transform: translateY(1rem); /* Slight offset */
   }
 
   .founder-image {
     width: 100%;
     height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-card);
-    max-width: 400px;
     display: block;
-    margin: 0 auto;
-    aspect-ratio: 3/4;
+    border-radius: 4px; /* Less rounded for editorial look */
+    /* No shadow or specific editorial shadow if desired */
+    /* filter: grayscale(100%);  Optional: Black & White for editorial feel? User didn't ask, but fits style. Keeping color for now. */
     object-fit: cover;
   }
 
@@ -438,18 +475,30 @@ services.sort((a, b) => {
 
   /* Responsive Adjustments */
   @media (max-width: 1024px) {
-     /* The user specifically asked for 3 columns and specific layout.
-        However, usually 1024px is too small for 3 columns if cards are wide.
-        But the user's prompt didn't specify tablet behavior other than <768px.
-        I will leave the 2-column fallback for tablet (1024px) as it was before,
-        but make sure spans are handled gracefully or just allow the grid to flow.
-        Actually, let's stick to the user's specific CSS which only mentioned max-width 768px.
-        Wait, the user's CSS instruction was:
-        "@media (max-width: 768px) { .span-2, .span-3 { grid-column: span 1; } }"
-        It didn't mention 1024px.
-        If I remove the 1024px query, it will stay 3 columns down to 768px.
-        I'll keep it simple and follow the user's explicit CSS for mobile.
-     */
+     .founder-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+     }
+
+     .founder-text-column {
+        padding-right: 0;
+        order: 2; /* Text below image on tablet if desired, or above. Let's keep Text Above as per logic usually, or text below? */
+        /* Standard mobile/tablet flow: Image then Text, or Text then Image.
+           User said "zachovat čitelnost na mobilu".
+        */
+        order: 1;
+        text-align: left;
+     }
+
+     .founder-image-column {
+        order: 2;
+     }
+
+     .founder-image-wrapper {
+        margin-left: 0;
+        transform: none;
+        max-width: 500px;
+     }
   }
 
   @media (max-width: 768px) {
@@ -473,30 +522,28 @@ services.sort((a, b) => {
       font-size: 1.1rem;
     }
 
+    /* Founder Mobile adjustments */
     .founder-content {
-      grid-template-columns: 1fr;
       gap: 2rem;
-      text-align: center;
     }
 
-    .section-title-left {
-      text-align: center;
+    .editorial-title {
+        font-size: 2.25rem;
+        margin-bottom: 1.5rem;
     }
 
-    .section-title-left::after {
-      left: 50%;
-      transform: translateX(-50%);
+    .founder-text-column {
+        padding: 0 1rem;
     }
 
-    .founder-link {
-        margin: 0 auto;
+    .founder-image-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
     }
 
     .section-title {
       font-size: 2rem;
     }
-
-    /* Mobile: 1 column */
-    /* .services-grid override removed to respect auto-fit */
   }
 </style>
