@@ -114,7 +114,8 @@ const getLink = (path) => {
     <!-- Column 1: Logo & Company Description -->
     <div class="footer-col company-info">
       <a href={getLink('/')} class="footer-logo">
-        <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" />
+        <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" class="logo-light" width="180" height="120" />
+        <img src="/images/Transparent-Logo-tmave.png" alt="Progressivo Logo" class="logo-dark" width="180" height="120" />
       </a>
       <p>{t.companyDesc}</p>
     </div>
@@ -254,9 +255,21 @@ const getLink = (path) => {
   }
 
   .footer-logo img {
-    height: 40px;
+    height: 80px;
     width: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-dark {
+      display: none;
+  }
+
+  :global(.dark) .logo-light {
+      display: none;
+  }
+
+  :global(.dark) .logo-dark {
+      display: block;
   }
 
   .footer-col nav ul {
