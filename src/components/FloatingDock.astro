@@ -3,24 +3,24 @@ const { lang = 'cs' } = Astro.props;
 
 const translations = {
   cs: {
-    services: "Služby",
-    collaborate: "Spolupracovat",
+    about: "O nás",
+    blog: "Blog",
   },
   en: {
-    services: "Services",
-    collaborate: "Collaborate",
+    about: "About Us",
+    blog: "Blog",
   },
   de: {
-    services: "Dienstleistungen",
-    collaborate: "Zusammenarbeit",
+    about: "Über uns",
+    blog: "Blog",
   },
   es: {
-    services: "Servicios",
-    collaborate: "Colaborar",
+    about: "Sobre nosotros",
+    blog: "Blog",
   },
   ru: {
-    services: "Услуги",
-    collaborate: "Сотрудничество",
+    about: "О нас",
+    blog: "Блог",
   }
 };
 
@@ -29,30 +29,29 @@ const t = translations[lang] || translations.cs;
 // Helper for links
 const getLink = (path) => {
     if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
-    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`; // Anchor links needs to work on subpages too, so we prepend /
+    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`; // Ensure anchor links are routed via the language page
     return lang === 'cs' ? path : `/${lang}${path}`;
 };
 
-// WhatsApp Link (same as previous button)
+// WhatsApp Link
 const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20spolupr%C3%A1ci";
-
 ---
 
 <nav class="floating-dock" aria-label="Floating Navigation">
   <div class="dock-content">
-    <!-- 1. Logo (Home) -->
+    <!-- 1. Logo (Home / Scroll Top) -->
     <a href={getLink('/')} class="dock-item logo-btn" aria-label="Home">
-        <img src="/images/Original Logo Symbol.png" alt="Home" />
+        <div class="logo-mask"></div>
     </a>
 
-    <!-- 2. Services -->
-    <a href={getLink('#services')} class="dock-item text-link">
-      {t.services}
+    <!-- 2. About Us (Anchor) -->
+    <a href={getLink('#zakladatel')} class="dock-item text-link">
+      {t.about}
     </a>
 
-    <!-- 3. Collaborate (CTA) -->
-    <a href={getLink('#kontakt')} class="dock-item text-link cta">
-      {t.collaborate}
+    <!-- 3. Blog -->
+    <a href={getLink('/blog')} class="dock-item text-link">
+      {t.blog}
     </a>
 
     <!-- 4. WhatsApp -->
@@ -68,6 +67,15 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
 <style>
   .floating-dock {
     position: fixed;
+    /* User requested adding padding-bottom on mobile with safe-area.
+       For a fixed element, 'bottom' property is usually better than padding-bottom for positioning.
+       However, if the user explicitly asked for padding, it might be to increase touch area or visual spacing inside.
+       But for a "Floating Dock" capsule, usually we just want it to sit higher.
+       I'll apply it to 'bottom' as that effectively adds the spacing from the edge.
+       If strictly following "padding-bottom", it would be inside the container, which might look weird if background is set.
+       Here, .floating-dock is a wrapper. .dock-content is the capsule.
+       Let's stick to safe-area on 'bottom' for the wrapper.
+    */
     bottom: calc(1rem + env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%) translateY(0);
@@ -121,23 +129,28 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
     transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  .logo-btn img {
-    height: 32px;
-    width: auto;
-    filter: grayscale(100%) opacity(0.8);
-    transition: filter 0.2s;
+  /* LOGO Mask Implementation for Exact Color Control */
+  .logo-mask {
+    width: 24px;
+    height: 24px;
+    background-color: #1a1a1a; /* Light Mode Logo Color */
+    mask-image: url('/images/Original Logo Symbol.png');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url('/images/Original Logo Symbol.png');
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    transition: background-color 0.2s ease;
   }
 
-  .logo-btn:hover img {
-     filter: grayscale(0%) opacity(1);
+  :global(.dark) .logo-mask {
+    background-color: #ffffff; /* Dark Mode Logo Color */
   }
 
-  :global(.dark) .logo-btn img {
-     filter: invert(1) grayscale(100%) opacity(0.8);
-  }
-
-  :global(.dark) .logo-btn:hover img {
-     filter: invert(1) grayscale(0%) opacity(1);
+  .logo-btn:hover .logo-mask {
+     opacity: 0.8;
   }
 
 
@@ -150,15 +163,6 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
 
   .text-link:hover {
     color: var(--color-accent);
-  }
-
-  .text-link.cta {
-    font-weight: 800;
-    color: var(--color-accent);
-  }
-
-  .text-link.cta:hover {
-     opacity: 0.8;
   }
 
   .wa-btn {
@@ -174,6 +178,19 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
     .floating-dock {
         width: calc(100% - 2rem);
         max-width: 400px; /* Sanity check */
+        /* Explicitly ensuring bottom spacing includes safe area on mobile as requested */
+        padding-bottom: env(safe-area-inset-bottom);
+        /* Reset bottom to just 1rem, as padding handles the safe area now if desired,
+           OR keep bottom calculation.
+           If we add padding-bottom to the wrapper, the content inside (dock-content) might shift up.
+           The wrapper is fixed.
+           The user asked: "Na mobilech přidej k bottom paddingu: padding-bottom: calc(1rem + env(safe-area-inset-bottom));"
+           This phrasing "k bottom paddingu" implies adding it to 'padding-bottom'.
+           If I do this on .floating-dock (wrapper), and it has no background, it effectively lifts the content.
+           Let's apply it exactly as requested to ensure compliance.
+        */
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+        bottom: 0; /* Reset bottom if using padding for positioning */
     }
 
     .dock-content {
@@ -185,12 +202,13 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .floating-dock, .dock-content, .dock-item {
+    .floating-dock, .dock-content, .dock-item, .wa-btn:hover, .logo-btn:hover .logo-mask {
       transition: none !important;
       animation: none !important;
+      transform: none !important;
     }
     .floating-dock.scrolled-down {
-        transform: translateX(-50%); /* No scale */
+        transform: translateX(-50%) !important; /* No scale, just center */
     }
   }
 </style>
