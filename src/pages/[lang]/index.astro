@@ -35,9 +35,9 @@ services.sort((a, b) => {
 
 const translations = {
   en: {
-    heroTitle: "Go Beyond Borders With Us – Connecting Europe With the World",
-    heroSubtitle: "Modern technology, education, and DNA analysis on a single platform.",
-    heroButton: "Discover Our Services",
+    heroTitle: "The world isn't complex. <br> Just poorly explained.",
+    heroSubtitle: "We help people and companies navigate between countries, systems, and decisions – with certainty.",
+    heroButton: "Collaborate",
     founderTitle: "Who's Behind Progressivo",
     founderName: "Jaroslav Cingel",
     founderP1: "For over 15 years, I've been connecting Europe with the world – in business, logistics, and online projects.",
@@ -53,9 +53,9 @@ const translations = {
     servicesLink: "More Info \u2192"
   },
   de: {
-    heroTitle: "Grenzen überschreiten – Wir verbinden Europa mit der Welt",
-    heroSubtitle: "Moderne Technik, Bildung und DNA-Analysen auf einer einzigen Plattform.",
-    heroButton: "Entdecken Sie unsere Dienstleistungen",
+    heroTitle: "Die Welt ist nicht kompliziert. <br> Nur schlecht erklärt.",
+    heroSubtitle: "Wir helfen Menschen und Unternehmen, sich zwischen Ländern, Systemen und Entscheidungen zu bewegen – mit Sicherheit.",
+    heroButton: "Zusammenarbeiten",
     founderTitle: "Wer steht hinter Progressivo",
     founderName: "Jaroslav Cingel",
     founderP1: "Seit über 15 Jahren verbinde ich Europa mit der Welt – in Business, Logistik und Online-Projekten.",
@@ -71,9 +71,9 @@ const translations = {
     servicesLink: "Mehr Info \u2192"
   },
   es: {
-    heroTitle: "Supere las fronteras con nosotros – Conectamos Europa con el mundo",
-    heroSubtitle: "Tecnología moderna, educación y análisis de ADN en una sola plataforma.",
-    heroButton: "Descubra nuestros servicios",
+    heroTitle: "El mundo no es complejo. <br> Solo está mal explicado.",
+    heroSubtitle: "Ayudamos a personas y empresas a moverse entre países, sistemas y decisiones – con certeza.",
+    heroButton: "Colaborar",
     founderTitle: "Quién está detrás de Progressivo",
     founderName: "Jaroslav Cingel",
     founderP1: "Durante más de 15 años, he conectado Europa con el mundo – en negocios, logística y proyectos online.",
@@ -89,9 +89,9 @@ const translations = {
     servicesLink: "Más información \u2192"
   },
   ru: {
-    heroTitle: "Преодолевайте границы с нами – соединяем Европу со всем миром",
-    heroSubtitle: "Современные технологии, образование и ДНК-анализ на единой платформе.",
-    heroButton: "Откройте для себя наши услуги",
+    heroTitle: "Мир не сложен. <br> Просто плохо объяснен.",
+    heroSubtitle: "Мы помогаем людям и компаниям перемещаться между странами, системами и решениями – с уверенностью.",
+    heroButton: "Сотрудничать",
     founderTitle: "Кто стоит за Progressivo",
     founderName: "Ярослав Цингел",
     founderP1: "Более 15 лет я связываю Европу с миром – в бизнесе, логистике и онлайн-проектах.",
@@ -240,12 +240,12 @@ const t = translations[lang];
     });
   </script>
 
-  <!-- Hero Section -->
-  <section class="hero animate-on-scroll">
+  <!-- Editorial Hero Section -->
+  <section class="editorial-hero">
     <div class="container hero-content">
-      <h1>{t.heroTitle}</h1>
-      <p class="subtitle">{t.heroSubtitle}</p>
-      <a href="#services" class="cta-button">{t.heroButton}</a>
+      <h1 class="hero-title" set:html={t.heroTitle}></h1>
+      <p class="hero-subtitle">{t.heroSubtitle}</p>
+      <a href="#services" class="editorial-cta">{t.heroButton} <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -335,54 +335,116 @@ const t = translations[lang];
 </Layout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, var(--color-text) 0%, #1e293b 100%);
-    color: white;
-    padding: 6rem 0;
-    text-align: center;
+  /*
+   * EDITORIAL HERO SECTION
+   * Concept: "Tiché sebevědomí"
+   */
+  .editorial-hero {
+    /* Massive top padding, textured background (inherited from body/layout if present, else clean) */
+    padding-top: max(15vh, 120px);
+    padding-bottom: 8rem;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left; /* Strict left alignment */
+    position: relative;
+    overflow: hidden;
   }
 
   .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding-left: 1.5rem; /* Ensure padding on mobile */
-    padding-right: 1.5rem;
+    align-items: flex-start; /* Left align items */
+    gap: 0; /* Spacing handled by margins */
+    max-width: 1400px; /* Allow it to breathe */
+    padding: 0 1.5rem;
+    animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: white;
-    max-width: 900px;
-    line-height: 1.1;
+  /* Entrance Animation */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .hero .subtitle {
-    font-size: 1.25rem;
-    color: #cbd5e1; /* Slate 300 */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-content {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* MEGA-TYPE H1 */
+  .hero-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(3.5rem, 11vw, 9rem);
+    font-weight: 800; /* ExtraBold */
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #1a1a1a; /* Hard Ink */
+    margin-bottom: 3rem;
+    max-width: 100%;
+  }
+
+  /* Dark Mode H1 */
+  :global(html.dark) .hero-title {
+    color: #f5f5f4; /* Warm White */
+  }
+
+  /* Subline */
+  .hero-subtitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.125rem, 2vw, 1.35rem);
+    line-height: 1.6;
+    color: rgba(26, 26, 26, 0.8);
     max-width: 600px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    margin-top: 0;
   }
 
-  .cta-button {
-    background-color: var(--color-accent);
-    color: white;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px; /* Rounded pill */
-    font-weight: 600;
-    font-size: 1.125rem;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+  :global(html.dark) .hero-subtitle {
+    color: rgba(245, 245, 244, 0.8);
+  }
+
+  /* Editorial CTA (Link style) */
+  .editorial-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  :global(html.dark) .editorial-cta {
+    color: #f5f5f4;
+  }
+
+  .editorial-cta .arrow {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: inline-block;
   }
 
-  .cta-button:hover {
-    background-color: var(--color-accent-hover);
-    transform: translateY(-2px);
-    color: white;
+  .editorial-cta:hover {
+    color: #d97706; /* Amber-600 */
+    border-color: rgba(217, 119, 6, 0.3);
+  }
+
+  .editorial-cta:hover .arrow {
+    transform: translateX(6px);
   }
 
   /* Founder Section - Magazine Layout */
@@ -731,18 +793,6 @@ const t = translations[lang];
 
     .span-2, .span-3 {
         grid-column: span 1;
-    }
-
-    .hero {
-      padding: 4rem 0; /* Adjusted padding */
-    }
-
-    .hero h1 {
-      font-size: 2rem; /* Reduced font size for mobile */
-    }
-
-    .hero .subtitle {
-      font-size: 1.1rem;
     }
 
     /* Founder Mobile adjustments */
