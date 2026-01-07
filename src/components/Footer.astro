@@ -102,10 +102,12 @@ const getLink = (path) => {
          <img src="/images/tatka_knihovna.webp" alt="Jaroslav Cingel" class="medallion-image" />
       </div>
       <div class="medallion-text">
-        <h4>Jaroslav Cingel</h4>
-        <p class="role">{t.founderRole}</p>
         <p class="quote">{t.quote}</p>
-        <a href="mailto:info@cingel.cz" class="contact-link">{t.writeToMe}</a>
+        <div class="signature">
+          <span class="name">&mdash; Jaroslav Cingel</span>
+          <span class="title">CEO, Progressivo Corp.</span>
+        </div>
+        <a href="mailto:jaroslav@cingel.cz" class="contact-link">{t.writeToMe}</a>
       </div>
     </div>
   </div>
@@ -195,26 +197,31 @@ const getLink = (path) => {
       max-width: 600px;
   }
 
-  .medallion-text h4 {
-      font-size: 1.25rem;
-      margin: 0;
-      color: white;
-      font-weight: 700;
-  }
-
-  .role {
-      color: var(--color-accent);
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 0.25rem 0 0.5rem;
-      font-weight: 600;
-  }
-
   .quote {
       font-style: italic;
       color: #cbd5e1;
-      margin: 0.5rem 0;
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+  }
+
+  .signature {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+  }
+
+  .signature .name {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+  }
+
+  .signature .title {
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 500;
   }
 
   .contact-link {
