@@ -26,91 +26,93 @@ services.sort((a, b) => {
 
 <Layout title="Domů | Progressivo">
   <script>
-    // Stats Animation
-    const statsSection = document.querySelector('.stats-section');
-    const stats = document.querySelectorAll('.stat-number');
-    let started = false;
+    document.addEventListener('astro:page-load', () => {
+        // Stats Animation
+        const statsSection = document.querySelector('.stats-section');
+        const stats = document.querySelectorAll('.stat-number');
+        let started = false;
 
-    function startCounting() {
-      if (started) return;
+        function startCounting() {
+          if (started) return;
 
-      stats.forEach(stat => {
-        const target = +stat.getAttribute('data-target');
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60fps
+          stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
 
-        let current = 0;
-        const updateCount = () => {
-          current += increment;
-          if (current < target) {
-            stat.innerText = Math.ceil(current) + (stat.nextElementSibling.innerText.includes('/7') && target === 24 ? '' : (target === 15 ? '+' : ''));
-            requestAnimationFrame(updateCount);
-          } else {
-            stat.innerText = target + (target === 15 ? '+' : '');
-          }
-        };
-        updateCount();
-      });
-      started = true;
-    }
+            let current = 0;
+            const updateCount = () => {
+              current += increment;
+              if (current < target) {
+                stat.innerText = Math.ceil(current) + (stat.nextElementSibling.innerText.includes('/7') && target === 24 ? '' : (target === 15 ? '+' : ''));
+                requestAnimationFrame(updateCount);
+              } else {
+                stat.innerText = target + (target === 15 ? '+' : '');
+              }
+            };
+            updateCount();
+          });
+          started = true;
+        }
 
-    if (statsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                startCounting();
-            }
-        }, { threshold: 0.5 });
-
-        observer.observe(statsSection);
-    }
-
-    // Founder Image Unroll Animation
-    const founderImageWrapper = document.querySelector('.founder-image-wrapper');
-    if (founderImageWrapper) {
-        // Only hide if we are about to observe (prevents invisible image if JS fails later)
-        founderImageWrapper.classList.add('waiting-for-scroll');
-
-        const founderObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('waiting-for-scroll');
-                    entry.target.classList.add('visible');
-                    founderObserver.unobserve(entry.target);
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    startCounting();
                 }
+            }, { threshold: 0.5 });
+
+            observer.observe(statsSection);
+        }
+
+        // Founder Image Unroll Animation
+        const founderImageWrapper = document.querySelector('.founder-image-wrapper');
+        if (founderImageWrapper) {
+            // Only hide if we are about to observe (prevents invisible image if JS fails later)
+            founderImageWrapper.classList.add('waiting-for-scroll');
+
+            const founderObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('waiting-for-scroll');
+                        entry.target.classList.add('visible');
+                        founderObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            founderObserver.observe(founderImageWrapper);
+        }
+
+        // 3D Tilt Effect
+        const cards = document.querySelectorAll('.service-card');
+
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    // @ts-ignore
+                    const rect = card.getBoundingClientRect();
+                    // @ts-ignore
+                    const x = e.clientX - rect.left;
+                    // @ts-ignore
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -5; // Max 5 deg rotation
+                    const rotateY = ((x - centerX) / centerX) * 5;
+
+                    // @ts-ignore
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    // @ts-ignore
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
             });
-        }, { threshold: 0.2 });
-        founderObserver.observe(founderImageWrapper);
-    }
-
-  // 3D Tilt Effect
-  const cards = document.querySelectorAll('.service-card');
-
-  if (window.matchMedia("(min-width: 1024px)").matches) {
-      cards.forEach(card => {
-          card.addEventListener('mousemove', (e) => {
-              // @ts-ignore
-              const rect = card.getBoundingClientRect();
-              // @ts-ignore
-              const x = e.clientX - rect.left;
-              // @ts-ignore
-              const y = e.clientY - rect.top;
-
-              const centerX = rect.width / 2;
-              const centerY = rect.height / 2;
-
-              const rotateX = ((y - centerY) / centerY) * -5; // Max 5 deg rotation
-              const rotateY = ((x - centerX) / centerX) * 5;
-
-              // @ts-ignore
-              card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-          });
-
-          card.addEventListener('mouseleave', () => {
-              // @ts-ignore
-              card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-          });
-      });
-  }
+        }
+    });
   </script>
 
   <!-- Hero Section -->
@@ -290,11 +292,13 @@ services.sort((a, b) => {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
+    gap: 4rem;
   }
 
   .founder-text-column {
     z-index: 10;
-    padding-right: 2rem;
+    padding-right: 0;
+    max-width: 600px; /* Prevent text from touching the image */
   }
 
   .editorial-title {
@@ -366,7 +370,7 @@ services.sort((a, b) => {
 
     /* Premium Paper / Scroll Look */
     background-color: #fcfbf9; /* Warm Paper */
-    padding: 0.75rem; /* White border/frame effect */
+    padding: 0; /* Removed border/frame effect */
     box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
     /* Animation Setup */
@@ -376,25 +380,23 @@ services.sort((a, b) => {
 
   /* Only hide if JS applied this class */
   .founder-image-wrapper.waiting-for-scroll {
-      opacity: 0;
-      clip-path: circle(0% at 100% 0%);
+      opacity: 1;
+      clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
       transform: translateY(1rem) scale(0.9) rotate(0deg);
   }
 
   .founder-image-wrapper.visible {
-      animation: unroll 0.6s ease-out forwards;
+      animation: unroll 1.2s ease-out forwards;
   }
 
   @keyframes unroll {
       0% {
-          opacity: 0;
-          clip-path: circle(0% at 100% 0%);
+          clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
           transform: translateY(1rem) scale(0.9) rotate(0deg);
       }
       100% {
-          opacity: 1;
-          clip-path: circle(150% at 100% 0%);
-          transform: translateY(1rem) scale(1.0) rotate(-1deg); /* Slight tilt at the end */
+          clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+          transform: translateY(1rem) scale(1.0) rotate(-1deg);
       }
   }
 
