@@ -39,9 +39,13 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
 
 <nav class="floating-dock" aria-label="Floating Navigation">
   <div class="dock-content">
-    <!-- 1. Logo (Home / Scroll Top) -->
-    <a href={getLink('/')} class="dock-item logo-btn" aria-label="Home">
-        <div class="logo-mask"></div>
+    <!-- 1. Anchor (Home / Scroll Top) -->
+    <a href={getLink('/')} onclick="if(location.pathname === this.getAttribute('href')) { event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); }" class="dock-item home-btn" aria-label="Domů">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="5" r="3"></circle>
+        <line x1="12" y1="22" x2="12" y2="8"></line>
+        <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+      </svg>
     </a>
 
     <!-- 2. About Us (Anchor) -->
@@ -129,28 +133,17 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
     transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  /* LOGO Mask Implementation for Exact Color Control */
-  .logo-mask {
-    width: 24px;
-    height: 24px;
-    background-color: #1a1a1a; /* Light Mode Logo Color */
-    mask-image: url('/images/Original Logo Symbol.png');
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-image: url('/images/Original Logo Symbol.png');
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    transition: background-color 0.2s ease;
+  /* Home Anchor Button */
+  .home-btn {
+    padding: 10px; /* Ensure larger click area (24+20=44) */
+    color: currentColor;
+    transition: color 0.2s ease;
   }
 
-  :global(.dark) .logo-mask {
-    background-color: #ffffff; /* Dark Mode Logo Color */
-  }
-
-  .logo-btn:hover .logo-mask {
-     opacity: 0.8;
+  .home-btn:hover,
+  .home-btn:focus-visible {
+    color: var(--color-accent, #d97706);
+    outline: none;
   }
 
 
@@ -202,7 +195,7 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .floating-dock, .dock-content, .dock-item, .wa-btn:hover, .logo-btn:hover .logo-mask {
+    .floating-dock, .dock-content, .dock-item, .wa-btn:hover, .home-btn:hover {
       transition: none !important;
       animation: none !important;
       transform: none !important;
