@@ -2,8 +2,6 @@ Kontakt
 
 # Spojte se s námi dnes
 
-<!-- ![](../../wp-content/uploads/2025/04/IMG_2112.webp "Panamá city") -->
-
 Časté dotazy
 
 ## Odpovědi na vaše časté dotazy..
@@ -28,33 +26,11 @@ Jaký je postup pro online nákup nákladní techniky?
 
 Zadáte poptávku, tzn: model, výbava, rok a zemi exportu. Nákladní techniku vyhledáme, nafotíme, spolu po video hovoru odsouhlasíme, vyřídíme veškeré formality s celními úřady a co nejrychleji dodáme na Vámi určené místo.
 
-#### Chcete se dozvědět více
-
-Máte spoustu otázek a chcete znát víc podrobností než nás kontaktujete?
-
-[Více informací](../nove-moznosti/index.html)
-
 Máte dotaz?
 
 ## Kontaktujte nás
 
 Jsme tu pro vás, abychom odpověděli na vaše otázky a poskytli potřebnou pomoc.
-
-Sledujte nás:
-
-Jméno
-
-Příjmení
-
-Email
-
-zpráva
-
-odeslat
-
-The form has been submitted successfully!
-
-There has been some error while submitting the form. Please verify all form fields again.
 
 ### Telefon
 
