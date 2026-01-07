@@ -166,19 +166,29 @@ const t = translations[lang];
         // Founder Image Unroll Animation
         const founderImageWrapper = document.querySelector('.founder-image-wrapper');
         if (founderImageWrapper) {
-            // Only hide if we are about to observe
-            founderImageWrapper.classList.add('waiting-for-scroll');
+            // Progressive Enhancement: Only hide if IntersectionObserver is supported
+            if ('IntersectionObserver' in window) {
+                founderImageWrapper.classList.add('waiting-for-scroll');
 
-            const founderObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.remove('waiting-for-scroll');
-                        entry.target.classList.add('visible');
-                        founderObserver.unobserve(entry.target);
+                const founderObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('waiting-for-scroll');
+                            entry.target.classList.add('visible');
+                            founderObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                founderObserver.observe(founderImageWrapper);
+
+                // FAILSAFE: Ensure image becomes visible even if observer fails or takes too long
+                setTimeout(() => {
+                    if (founderImageWrapper.classList.contains('waiting-for-scroll')) {
+                        founderImageWrapper.classList.remove('waiting-for-scroll');
+                        founderImageWrapper.classList.add('visible');
                     }
-                });
-            }, { threshold: 0.2 });
-            founderObserver.observe(founderImageWrapper);
+                }, 3000); // 3 seconds safety timeout
+            }
         }
 
         // 3D Tilt Effect
