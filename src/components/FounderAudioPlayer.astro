@@ -1,0 +1,221 @@
+---
+interface Props {
+  src: string;
+  buttonText?: string;
+  disclaimerText?: string;
+}
+
+const {
+  src,
+  buttonText = "▶ Poslechnout úvod (45 s)",
+  disclaimerText = "Audio je generováno z hlasu zakladatele pro lepší dostupnost obsahu."
+} = Astro.props;
+---
+
+<div class="founder-audio-player">
+  <div class="player-controls">
+    <button class="play-btn" aria-label="Play audio">
+      <span class="icon-play">▶</span>
+      <span class="icon-pause" style="display: none;">❚❚</span>
+      <span class="btn-text">{buttonText}</span>
+    </button>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+  <p class="audio-disclaimer">{disclaimerText}</p>
+  <audio src={src} preload="metadata"></audio>
+</div>
+
+<style>
+  .founder-audio-player {
+    margin-top: 2rem;
+    font-family: var(--font-body);
+    width: 100%;
+    max-width: 400px; /* Keep it contained */
+  }
+
+  .player-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.6rem 1.25rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    width: fit-content;
+  }
+
+  .play-btn:hover {
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .play-btn:active {
+    transform: scale(0.98);
+  }
+
+  .icon-play, .icon-pause {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Progress Bar */
+  .progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-bg-alt);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .founder-audio-player.active .progress-container {
+    opacity: 1;
+  }
+
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    transition: width 0.1s linear;
+  }
+
+  .audio-disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin: 0.5rem 0 0;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  /* Dark mode nuances */
+  :global(.dark) .play-btn {
+    border-color: rgba(255,255,255,0.2);
+  }
+  :global(.dark) .play-btn:hover {
+    background-color: rgba(255,255,255,0.05);
+  }
+</style>
+
+<script>
+  class AudioPlayer {
+    container: HTMLElement;
+    audio: HTMLAudioElement;
+    playBtn: HTMLButtonElement;
+    iconPlay: HTMLElement;
+    iconPause: HTMLElement;
+    progressBar: HTMLElement;
+    btnText: HTMLElement;
+    originalText: string;
+    isPlaying: boolean = false;
+
+    constructor(el: HTMLElement) {
+      this.container = el;
+      this.audio = el.querySelector('audio')!;
+      this.playBtn = el.querySelector('.play-btn')!;
+      this.iconPlay = el.querySelector('.icon-play')!;
+      this.iconPause = el.querySelector('.icon-pause')!;
+      this.progressBar = el.querySelector('.progress-bar')!;
+      this.btnText = el.querySelector('.btn-text')!;
+      this.originalText = this.btnText.innerText;
+
+      this.init();
+    }
+
+    init() {
+      this.playBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Good practice to avoid bubbling issues if any
+        this.togglePlay();
+      });
+
+      this.audio.addEventListener('timeupdate', () => {
+        if (!this.audio.duration) return;
+        const percent = (this.audio.currentTime / this.audio.duration) * 100;
+        this.progressBar.style.width = `${percent}%`;
+      });
+
+      this.audio.addEventListener('ended', () => {
+        this.reset();
+      });
+    }
+
+    togglePlay() {
+      if (this.audio.paused) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    }
+
+    play() {
+      // Pause all other audio players if multiple exist (optional but good UX)
+      document.querySelectorAll('audio').forEach(a => {
+        if (a !== this.audio && !a.paused) a.pause();
+      });
+
+      this.audio.play();
+      this.isPlaying = true;
+      this.container.classList.add('active');
+      this.iconPlay.style.display = 'none';
+      this.iconPause.style.display = 'flex';
+    }
+
+    pause() {
+      this.audio.pause();
+      this.isPlaying = false;
+      this.iconPlay.style.display = 'flex';
+      this.iconPause.style.display = 'none';
+    }
+
+    reset() {
+      this.isPlaying = false;
+      this.container.classList.remove('active');
+      this.iconPlay.style.display = 'flex';
+      this.iconPause.style.display = 'none';
+      this.progressBar.style.width = '0%';
+      this.audio.currentTime = 0;
+    }
+  }
+
+  function initAudioPlayers() {
+     document.querySelectorAll('.founder-audio-player').forEach(el => {
+       // Check if already initialized to avoid double binding
+       if (!(el as any)._audioPlayerInit) {
+          new AudioPlayer(el as HTMLElement);
+          (el as any)._audioPlayerInit = true;
+       }
+     });
+  }
+
+  // Initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initAudioPlayers);
+
+  // Fallback for initial load if not covered by astro:page-load in some configs
+  document.addEventListener('DOMContentLoaded', () => {
+     // Astro View Transitions normally fires astro:page-load on initial load too,
+     // but sometimes DOMContentLoaded is safer for non-Astro scripts or specific timings.
+     // However, with our check, it's safe to call it twice.
+     initAudioPlayers();
+  });
+</script>
