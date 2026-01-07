@@ -104,7 +104,7 @@ const getLink = (path) => {
       <div class="medallion-text">
         <p class="quote">{t.quote}</p>
         <div class="signature">
-          <span class="name">&mdash; Jaroslav Cingel</span>
+          <span class="name">Jaroslav Cingel</span>
           <span class="title">CEO, Progressivo Corp.</span>
         </div>
         <a href="mailto:jaroslav@cingel.cz" class="contact-link">{t.writeToMe}</a>
@@ -208,7 +208,7 @@ const getLink = (path) => {
   .signature {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0;
       margin-bottom: 1rem;
   }
 
@@ -216,12 +216,14 @@ const getLink = (path) => {
       color: white;
       font-weight: 700;
       font-size: 1rem;
+      line-height: 1.3;
   }
 
   .signature .title {
-      color: var(--color-accent);
+      color: white;
       font-size: 0.875rem;
       font-weight: 500;
+      line-height: 1.3;
   }
 
   .contact-link {
