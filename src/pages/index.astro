@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import FounderAudioPlayer from '../components/FounderAudioPlayer.astro';
 import { getCollection } from 'astro:content';
 
 const allServices = await getCollection('services');
@@ -112,6 +113,12 @@ services.sort((a, b) => {
           Jaroslav Cingel – Spojuji mezinárodní byznys se svobodou. 15+ let zkušeností v logistice, Panama & EU.
         </p>
         <a href="https://cingel.cz" class="founder-link">Poznat můj příběh &rarr;</a>
+
+        <FounderAudioPlayer
+          src="/audio/founder-intro.mp3"
+          buttonText="▶ Poslechnout úvod (45 s)"
+          disclaimerText="Audio je generováno z hlasu zakladatele pro lepší dostupnost obsahu."
+        />
       </div>
       <div class="founder-image-wrapper">
         <img src="/images/tatka-pise.webp" alt="Jaroslav Cingel" class="founder-image" />
