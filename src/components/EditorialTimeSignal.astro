@@ -133,11 +133,19 @@
     gap: 0.75rem; /* Space between rows on mobile */
     /* SIZE (UPSCALING) - Increased ~30% */
     font-size: 1rem;
-    font-weight: 600; /* SemiBold to support big title */
-    /* COLOR (PAPER & INK) */
-    color: var(--color-text);
-    opacity: 0.7;
+    font-weight: 500; /* Medium */
+
+    /* COLOR UPDATE: Darker Amber for Light Mode (Contrast) */
+    color: var(--color-accent-hover);
+    opacity: 1; /* Fully visible */
+
     font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased; /* iOS/Brave rendering fix */
+  }
+
+  /* Dark Mode Override: Brighter Amber */
+  :global(.dark) .time-display {
+    color: var(--color-accent);
   }
 
   .time-group {
