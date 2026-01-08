@@ -1,17 +1,14 @@
 ---
 import { ui, defaultLang } from '../i18n/ui';
+import { getTranslatedPath } from '../i18n/utils';
 
 const { lang = defaultLang } = Astro.props;
 const year = new Date().getFullYear();
 
 const t = ui[lang] || ui[defaultLang];
 
-// Helper for links
-const getLink = (path) => {
-    if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
-    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`;
-    return lang === 'cs' ? path : `/${lang}${path}`;
-};
+// Helper for links (replaced by getTranslatedPath)
+const getLink = (path) => getTranslatedPath(path, lang);
 ---
 <footer>
   <!-- Founder Medallion Section -->

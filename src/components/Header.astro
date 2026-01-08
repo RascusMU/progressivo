@@ -1,5 +1,6 @@
 ---
 import { ui, defaultLang } from '../i18n/ui';
+import { getTranslatedPath, getPathFromUrl } from '../i18n/utils';
 
 const { lang = defaultLang } = Astro.props;
 
@@ -15,19 +16,15 @@ const languages = [
 
 const currentLangObj = languages.find(l => l.code === lang) || languages[0];
 
-// Helper for localized internal links
-const getLink = (path) => {
-    if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
-    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`;
-    return lang === 'cs' ? path : `/${lang}${path}`;
-};
-
+// Use centralized helper
+// Note: Header.astro's getLink logic was identical to what getTranslatedPath provides.
 const currentPath = Astro.url.pathname;
+const basePath = getPathFromUrl(currentPath);
 ---
 
 <header class="header">
   <div class="container header-content">
-    <a href={getLink('/')} class="logo">
+    <a href={getTranslatedPath('/', lang)} class="logo">
       <img src="/images/Transparent Logo.svg" alt="Progressivo Logo" class="logo-light" width="180" height="120" />
       <img src="/images/Transparent-Logo-tmave.png" alt="Progressivo Logo" class="logo-dark" width="180" height="120" />
     </a>
@@ -44,40 +41,8 @@ const currentPath = Astro.url.pathname;
             </button>
             <div class="lang-menu">
                 {languages.map(l => {
-                    // Logic to preserve current path but change language
-                    let targetPath = '/';
-                    const segments = currentPath.split('/').filter(Boolean); // e.g. ['es', 'o-nas'] or ['o-nas']
-
-                    // Identify if the first segment is a language code
-                    const firstSegmentIsLang = languages.some(lang => lang.code === segments[0]);
-
-                    if (l.code === 'cs') {
-                         // Switching TO Czech (root)
-                         if (firstSegmentIsLang) {
-                             // Remove the lang prefix
-                             const newSegments = segments.slice(1);
-                             targetPath = '/' + newSegments.join('/');
-                         } else {
-                             // Already at root or some deep path in CS
-                             targetPath = currentPath;
-                         }
-                    } else {
-                        // Switching TO another language (e.g. 'en')
-                        if (firstSegmentIsLang) {
-                            // Replace the existing lang prefix
-                            const newSegments = [l.code, ...segments.slice(1)];
-                            targetPath = '/' + newSegments.join('/');
-                        } else {
-                            // Add the new lang prefix
-                            const newSegments = [l.code, ...segments];
-                            targetPath = '/' + newSegments.join('/');
-                        }
-                    }
-
-                    // Fix root path edge cases
-                    if (targetPath === '') targetPath = '/';
-                    else if (targetPath === `/${l.code}`) targetPath = `/${l.code}/`;
-                    else if (targetPath === '//') targetPath = '/';
+                    // Centralized Logic to preserve current path but change language
+                    const targetPath = getTranslatedPath(basePath, l.code);
 
                     return (
                         <a href={targetPath} class={`lang-item ${l.code === lang ? 'active' : ''}`} data-lang={l.code}>

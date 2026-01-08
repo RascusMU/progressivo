@@ -1,16 +1,13 @@
 ---
 import { ui, defaultLang } from '../i18n/ui';
+import { getTranslatedPath } from '../i18n/utils';
 
 const { lang = defaultLang } = Astro.props;
 
 const t = ui[lang] || ui[defaultLang];
 
-// Helper for links
-const getLink = (path) => {
-    if (path === '/') return lang === 'cs' ? '/' : `/${lang}/`;
-    if (path.startsWith('#')) return lang === 'cs' ? `/${path}` : `/${lang}/${path}`; // Ensure anchor links are routed via the language page
-    return lang === 'cs' ? path : `/${lang}${path}`;
-};
+// Helper for links (replaced by getTranslatedPath)
+const getLink = (path) => getTranslatedPath(path, lang);
 
 // WhatsApp Link
 const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20spolupr%C3%A1ci";

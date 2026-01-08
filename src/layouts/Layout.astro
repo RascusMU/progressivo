@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
 import { ui, defaultLang } from '../i18n/ui';
+import { getTranslatedPath, getPathFromUrl } from '../i18n/utils';
 
 interface Props {
 	title: string;
@@ -21,37 +22,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Hreflang Logic
 const supportedLangs = Object.keys(ui);
 const currentPath = Astro.url.pathname;
-const segments = currentPath.split('/').filter(Boolean);
 
 // Determine the "base" path without language prefix
-let basePath = currentPath;
-if (segments.length > 0 && supportedLangs.includes(segments[0])) {
-    basePath = '/' + segments.slice(1).join('/');
-}
-// Special case: if basePath is just '/', keep it '/'
-if (basePath === '') basePath = '/';
+const basePath = getPathFromUrl(currentPath);
 
 // Generate hreflangs
 const hreflangs = supportedLangs.map(l => {
-    let href;
-    if (l === 'cs') {
-        // CS is default, but for Services we moved it to /cs/.
-        // For other pages (like root, o-nas, blog), CS is at root.
-        // We need to know if the current page requires explicit CS prefix.
-        // Currently, 'sluzby' requires explicit CS prefix based on our change.
-        if (basePath.startsWith('/sluzby/')) {
-            href = `${Astro.site}cs${basePath}`;
-        } else {
-            // Standard root pages
-            href = `${Astro.site}${basePath === '/' ? '' : basePath.substring(1)}`;
-        }
-    } else {
-        // Other languages always have prefix
-        href = `${Astro.site}${l}${basePath}`;
-    }
-    // Clean up double slashes
+    // getTranslatedPath handles the /cs/sluzby/ logic internally
+    let href = new URL(getTranslatedPath(basePath, l), Astro.site).toString();
+
+    // Clean up double slashes if any (though URL constructor handles it mostly)
     href = href.replace(/([^:]\/)\/+/g, "$1");
-    // Remove trailing slash if needed, or keep standard. Astro usually adds trailing slash.
+
     return { lang: l, href };
 });
 
