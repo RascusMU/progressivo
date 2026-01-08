@@ -101,12 +101,19 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
 
   /* Items */
   .dock-item {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     color: var(--color-text);
     transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .dock-item[aria-current="page"] {
+    color: var(--color-accent);
   }
 
   /* Home Anchor Button */
@@ -220,5 +227,20 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
 
     // Initial check
     update();
+
+    // Active state highlighting
+    const currentPath = window.location.pathname;
+    const items = dock.querySelectorAll('.dock-item');
+    items.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href) {
+            const url = new URL(href, window.location.origin);
+            const path = url.pathname;
+            // Check for exact match or home page match
+            if (path === currentPath || (path !== '/' && currentPath.startsWith(path))) {
+                item.setAttribute('aria-current', 'page');
+            }
+        }
+    });
   });
 </script>
