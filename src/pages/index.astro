@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import FounderAudioPlayer from '../components/FounderAudioPlayer.astro';
+import EditorialTimeSignal from '../components/EditorialTimeSignal.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../i18n/ui';
 
@@ -31,44 +32,6 @@ services.sort((a, b) => {
 <Layout title={`${t.pages.home_title} | Progressivo`}>
   <script>
     document.addEventListener('astro:page-load', () => {
-        // Stats Animation
-        const statsSection = document.querySelector('.stats-section');
-        const stats = document.querySelectorAll('.stat-number');
-        let started = false;
-
-        function startCounting() {
-          if (started) return;
-
-          stats.forEach(stat => {
-            const target = +stat.getAttribute('data-target');
-            const duration = 2000; // 2 seconds
-            const increment = target / (duration / 16); // 60fps
-
-            let current = 0;
-            const updateCount = () => {
-              current += increment;
-              if (current < target) {
-                stat.innerText = Math.ceil(current) + (stat.nextElementSibling.innerText.includes('/7') && target === 24 ? '' : (target === 15 ? '+' : ''));
-                requestAnimationFrame(updateCount);
-              } else {
-                stat.innerText = target + (target === 15 ? '+' : '');
-              }
-            };
-            updateCount();
-          });
-          started = true;
-        }
-
-        if (statsSection) {
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    startCounting();
-                }
-            }, { threshold: 0.5 });
-
-            observer.observe(statsSection);
-        }
-
         // Founder Image Unroll Animation
         const founderImageWrapper = document.querySelector('.founder-image-wrapper');
         if (founderImageWrapper) {
@@ -138,6 +101,9 @@ services.sort((a, b) => {
     </div>
   </section>
 
+  <!-- Editorial Time Signal -->
+  <EditorialTimeSignal />
+
   <!-- Founder Section -->
   <section id="zakladatel" class="founder-section animate-on-scroll">
     <div class="container founder-content">
@@ -164,24 +130,6 @@ services.sort((a, b) => {
         <div class="founder-image-wrapper">
           <img src="/images/tatka-pise.webp" alt="Jaroslav Cingel" class="founder-image" />
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Statistics Section -->
-  <section class="stats-section animate-on-scroll">
-    <div class="container stats-container">
-      <div class="stat-item">
-        <div class="stat-number" data-target="15">0</div>
-        <div class="stat-label">{t.pages.home.stats_years}</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">{t.pages.home.stats_continents}</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="24">0</div>
-        <div class="stat-label">{t.pages.home.stats_support}</div>
       </div>
     </div>
   </section>
@@ -225,7 +173,7 @@ services.sort((a, b) => {
   .editorial-hero {
     /* Massive top padding, textured background (inherited from body/layout if present, else clean) */
     padding-top: max(15vh, 120px);
-    padding-bottom: 8rem;
+    padding-bottom: 2rem; /* Reduced padding bottom since TimeSignal is below */
     padding-left: 0;
     padding-right: 0;
     text-align: left; /* Strict left alignment */
@@ -483,39 +431,6 @@ services.sort((a, b) => {
     /* Removed border-radius to look like cut paper or keep it straight */
     border-radius: 2px;
     object-fit: cover;
-  }
-
-  /* Stats Section */
-  .stats-section {
-    padding: 3rem 0;
-    background-color: var(--color-accent);
-    color: white;
-  }
-
-  .stats-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: 3.5rem;
-    font-weight: 800;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-
-  .stat-label {
-    font-size: 1.125rem;
-    font-weight: 500;
-    opacity: 0.9;
   }
 
   /* Services Section */
