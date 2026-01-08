@@ -2,7 +2,7 @@
 title: "Экспатриация и визы"
 description: "Комплексная помощь при переезде за границу и оформлении виз."
 lang: ru
-image: "/images/expatriace.jpg"
+image: "/images/expatriace.webp"
 ---
 # Экспатриация и визы
 

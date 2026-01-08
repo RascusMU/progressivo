@@ -2,7 +2,7 @@
 title: "Онлайн-курсы"
 description: "Образовательные курсы и репетиторство онлайн для детей и взрослых."
 lang: ru
-image: "/images/online-kurz.png"
+image: "/images/online-kurz.webp"
 ---
 # Онлайн-курсы
 

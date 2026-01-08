@@ -2,7 +2,7 @@
 title: "Análisis de ADN"
 description: "Método científico moderno para examinar la información genética y conocer su origen y salud."
 lang: es
-image: "/images/dna-face.png"
+image: "/images/dna-face.webp"
 ---
 # Análisis de ADN
 

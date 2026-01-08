@@ -2,7 +2,7 @@
 title: "Online Sales of Machinery"
 description: "Facilitation of purchase and import of heavy machinery online."
 lang: en
-image: "/images/lod-kontajner.jpg"
+image: "/images/lod-kontajner.webp"
 ---
 # Online Sales of Machinery
 

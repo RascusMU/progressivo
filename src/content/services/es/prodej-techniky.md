@@ -2,7 +2,7 @@
 title: "Venta de maquinaria online"
 description: "Intermediación en la compra e importación de maquinaria pesada online."
 lang: es
-image: "/images/lod-kontajner.jpg"
+image: "/images/lod-kontajner.webp"
 ---
 # Venta de maquinaria online
 

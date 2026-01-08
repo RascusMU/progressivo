@@ -2,7 +2,7 @@
 title: "Integración Efectiva"
 description: "Conexión de sistemas y procesos para la máxima eficiencia de su negocio."
 lang: es
-image: "/images/integration-visual.png"
+image: "/images/integration-visual.webp"
 ---
 # Integración Efectiva
 

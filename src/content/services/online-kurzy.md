@@ -2,7 +2,7 @@
 title: "Online kurzy"
 description: "Vzdělávací kurzy a doučování online pro děti i dospělé."
 lang: cs
-image: "/images/online-kurz.png"
+image: "/images/online-kurz.webp"
 ---
 # Online kurzy
 

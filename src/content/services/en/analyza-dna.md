@@ -2,7 +2,7 @@
 title: "DNA Analysis"
 description: "A modern scientific method of examining genetic information to understand origin and health."
 lang: en
-image: "/images/dna-face.png"
+image: "/images/dna-face.webp"
 ---
 # DNA Analysis
 

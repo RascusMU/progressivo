@@ -2,7 +2,7 @@
 title: "Cursos Online"
 description: "Educación accesible desde cualquier lugar. Cursos enfocados en habilidades prácticas y crecimiento personal."
 lang: es
-image: "/images/online-courses.png"
+image: "/images/online-courses.webp"
 ---
 # Cursos Online
 

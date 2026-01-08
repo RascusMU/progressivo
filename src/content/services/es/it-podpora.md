@@ -2,7 +2,7 @@
 title: "Soporte de TI"
 description: "Atención profesional para su infraestructura de TI, seguridad y funcionamiento fluido de los sistemas."
 lang: es
-image: "/images/it-support.png"
+image: "/images/it-support.webp"
 ---
 # Soporte de TI
 

@@ -135,12 +135,22 @@
     font-size: 1rem;
     font-weight: 500; /* Medium */
 
+    /* CLS Fixes */
+    height: 2rem;
+    contain: layout;
+    white-space: nowrap;
+
     /* COLOR UPDATE: Darker Amber for Light Mode (Contrast) */
     color: var(--color-accent-hover);
     opacity: 1; /* Fully visible */
 
     font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased; /* iOS/Brave rendering fix */
+
+    /* PERFORMANCE & STABILITY */
+    height: 2rem;
+    contain: layout;
+    white-space: nowrap;
   }
 
   /* Dark Mode Override: Brighter Amber */
