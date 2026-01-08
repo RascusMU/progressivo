@@ -9,8 +9,13 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://progressivo.eu',
   integrations: [sitemap(), react(), keystatic()],
-  output: 'static', // Astro 5 default/hybrid behavior
-  adapter: cloudflare(),
+  output: 'static', // Astro 5 hybrid behavior is default
+  adapter: cloudflare({
+    imageService: 'cloudflare',
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   i18n: {
     defaultLocale: 'cs',
     locales: ['cs', 'en', 'de', 'ru', 'es'],
