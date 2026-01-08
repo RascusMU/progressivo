@@ -2,7 +2,7 @@
 title: "Переводческая деятельность"
 description: "Быстрые и точные переводы документов и текстов (кроме судебных)."
 lang: ru
-image: "/images/preklady.jpg"
+image: "/images/preklady.webp"
 ---
 # Переводческая деятельность
 

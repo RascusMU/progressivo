@@ -2,7 +2,7 @@
 title: "ИТ-поддержка"
 description: "Обеспечение функциональности технологий, устранение неполадок и управление системами."
 lang: ru
-image: "/images/IT-podpora.jpg"
+image: "/images/IT-podpora.webp"
 ---
 # ИТ-поддержка
 

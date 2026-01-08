@@ -2,7 +2,7 @@
 title: "Online-Kurse"
 description: "Bildungskurse und Online-Nachhilfe für Kinder und Erwachsene."
 lang: de
-image: "/images/online-kurz.png"
+image: "/images/online-kurz.webp"
 ---
 # Online-Kurse
 

@@ -96,7 +96,9 @@ const schemaWebSite = {
 	</head>
 	<body>
         <Header lang={lang} />
-		<slot />
+        <main>
+		    <slot />
+        </main>
         <FloatingDock lang={lang} />
         <Footer lang={lang} />
 	</body>

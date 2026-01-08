@@ -2,7 +2,7 @@
 title: "IT-Support"
 description: "Sicherstellung der Technologiefunktionalität, Fehlerbehebung und Systemverwaltung."
 lang: de
-image: "/images/IT-podpora.jpg"
+image: "/images/IT-podpora.webp"
 ---
 # IT-Support
 

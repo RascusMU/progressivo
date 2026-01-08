@@ -2,7 +2,7 @@
 title: "Traducciones"
 description: "Traducciones profesionales y servicios de interpretación para su comunicación internacional."
 lang: es
-image: "/images/translations.png"
+image: "/images/translations.webp"
 ---
 # Traducciones
 

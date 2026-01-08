@@ -2,7 +2,7 @@
 title: "Překladatelská činnost"
 description: "Rychlé a přesné překlady dokumentů a textů (mimo soudní)."
 lang: cs
-image: "/images/preklady.jpg"
+image: "/images/preklady.webp"
 ---
 # Překladatelská činnost
 

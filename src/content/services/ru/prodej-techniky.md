@@ -2,7 +2,7 @@
 title: "Онлайн-продажа техники"
 description: "Посредничество в покупке и импорте тяжелой техники онлайн."
 lang: ru
-image: "/images/lod-kontajner.jpg"
+image: "/images/lod-kontajner.webp"
 ---
 # Онлайн-продажа техники
 

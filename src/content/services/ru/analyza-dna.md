@@ -2,7 +2,7 @@
 title: "ДНК-анализ"
 description: "Современный научный метод исследования генетической информации для познания происхождения и здоровья."
 lang: ru
-image: "/images/dna-face.png"
+image: "/images/dna-face.webp"
 ---
 # ДНК-анализ
 

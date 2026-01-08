@@ -2,7 +2,7 @@
 title: "Übersetzungstätigkeit"
 description: "Schnelle und präzise Übersetzungen von Dokumenten und Texten (außer gerichtlich)."
 lang: de
-image: "/images/preklady.jpg"
+image: "/images/preklady.webp"
 ---
 # Übersetzungstätigkeit
 

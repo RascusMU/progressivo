@@ -2,7 +2,7 @@
 title: "Expatriación y Visas"
 description: "Servicio integral para su traslado, obtención de visas y adaptación en un nuevo país."
 lang: es
-image: "/images/passport-visa.png"
+image: "/images/passport-visa.webp"
 ---
 # Expatriación y Visas
 

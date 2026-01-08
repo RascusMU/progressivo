@@ -2,7 +2,7 @@
 title: "Online prodej techniky"
 description: "Zprostředkování nákupu a dovozu těžké techniky online."
 lang: cs
-image: "/images/lod-kontajner.jpg"
+image: "/images/lod-kontajner.webp"
 ---
 # Online prodej techniky
 
