@@ -12,23 +12,8 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
-const id = 'reklamace-a-vraceni-zbozi'; // Currently only CS exists?
+const id = lang === 'cs' ? 'reklamace-a-vraceni-zbozi' : `reklamace-a-vraceni-zbozi-${lang}`;
 const entry = await getEntry('legal', id);
-
-// If translation doesn't exist, we might want to fallback or show nothing.
-// But since the file exists in content/legal, let's see.
-// The file listing showed only `reklamace-a-vraceni-zbozi.md`, no -en, -de etc.
-// So for now, this page might only be valid for CS?
-// But this is a dynamic route for [lang].
-// If I enable it for [lang], it will show Czech content on /en/reklamace...
-// Maybe I should only create it if I can handle it.
-// But wait, the user wants "Unify routing".
-// If I create this, I ensure no 404s if someone tries to access it, even if content is untranslated.
-// However, typically "reklamace" is specific.
-
-// Let's check if the root page exists. It does NOT in the listing above.
-// But CONTENT_MAP says it should be /reklamace-a-vraceni-zbozi/index.html.
-// I should create the root page AND the dynamic page.
 
 const { Content } = entry ? await render(entry) : { Content: null };
 const translations = {
