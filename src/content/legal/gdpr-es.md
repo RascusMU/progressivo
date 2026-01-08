@@ -1,40 +1,49 @@
----
-title: "Política de Privacidad"
----
+# Política de Privacidad (GDPR)
 
-## Política de Privacidad y RGPD
+La empresa **Progressivo Corp.**, con domicilio social en PH The Regent, C. 74 Este, San Francisco, Ciudad de Panamá, Panamá, inscrita en el Registro Público de Panamá (en adelante, el "Responsable"), valora su privacidad y se compromete a proteger sus datos personales. Esta política describe cómo recopilamos, utilizamos y protegemos sus datos de acuerdo con las leyes aplicables.
 
-**Última actualización: Octubre 2023**
+## 1. Qué datos recopilamos
+Solo procesamos los datos que usted nos proporciona voluntariamente o que obtenemos en base a su actividad en el sitio web:
+- **Datos de identificación:** nombre, apellido.
+- **Datos de contacto:** dirección de correo electrónico, número de teléfono.
+- **Datos de facturación:** dirección, número de identificación fiscal (si solicita servicios).
+- **Datos técnicos:** dirección IP, cookies, datos del navegador.
 
-En Progressivo, nos tomamos muy en serio su privacidad. Este documento describe cómo recopilamos, usamos y protegemos sus datos personales de acuerdo con el Reglamento General de Protección de Datos (RGPD) y otras leyes aplicables.
+## 2. Por qué procesamos los datos
+Utilizamos sus datos para los siguientes propósitos:
+- **Prestación de servicios:** cumplimiento de contratos, entrega de servicios y productos solicitados.
+- **Comunicación:** respuesta a sus consultas, envío de información sobre pedidos.
+- **Marketing:** envío de noticias y comunicaciones comerciales (solo con su consentimiento).
+- **Mejora del sitio web:** análisis de tráfico y comportamiento del usuario para optimizar el sitio.
+- **Cumplimiento de obligaciones legales:** contabilidad, obligaciones fiscales.
 
-### 1. Responsable del Tratamiento
+## 3. Base legal del procesamiento
+Realizamos el procesamiento sobre la base de:
+- **Cumplimiento del contrato:** necesario para proporcionar el servicio.
+- **Interés legítimo:** para garantizar la seguridad y mejorar los servicios.
+- **Consentimiento:** para fines de marketing (se puede revocar en cualquier momento).
+- **Obligación legal:** de acuerdo con las leyes de Panamá y las normas internacionales.
 
-El responsable del tratamiento de datos es **Progressivo s.r.o.** (o la entidad legal correspondiente), con domicilio social en la República Checa. Puede contactarnos en info@progressivo.cz.
+## 4. Quién tiene acceso a los datos
+Sus datos están seguros. Solo tienen acceso a ellos los empleados autorizados y colaboradores del Responsable. En casos necesarios, los transferimos a procesadores (por ejemplo, proveedores de servicios de TI, contadores, pasarelas de pago) que están obligados a mantener la confidencialidad.
 
-### 2. Qué datos recopilamos
+## 5. Cuánto tiempo conservamos los datos
+Conservamos los datos durante el tiempo necesario para cumplir con el propósito del procesamiento, pero como máximo durante el período establecido por la ley (por ejemplo, archivo de documentos contables) o hasta que se revoque el consentimiento.
 
-Podemos recopilar los siguientes tipos de datos personales:
-*   **Información de contacto:** Nombre, dirección de correo electrónico, número de teléfono.
-*   **Datos de uso:** Información sobre cómo utiliza nuestro sitio web.
-*   **Cookies:** Utilizamos cookies para mejorar su experiencia.
+## 6. Sus derechos
+En relación con el procesamiento de datos personales, tiene derecho a:
+- Solicitar acceso a sus datos.
+- Solicitar la corrección de datos inexactos.
+- Solicitar la eliminación de datos (derecho al "olvido").
+- Solicitar la limitación del procesamiento.
+- Oponerse al procesamiento.
+- A la portabilidad de los datos.
+- Revocar el consentimiento para el procesamiento.
 
-### 3. Finalidad del tratamiento
+## 7. Seguridad de los datos
+Implementamos medidas técnicas y organizativas para proteger sus datos contra pérdida, uso indebido o acceso no autorizado. Utilizamos encriptación y servidores seguros.
 
-Utilizamos sus datos para los siguientes fines:
-*   Proporcionar y mantener nuestros servicios.
-*   Comunicarnos con usted con respecto a sus consultas.
-*   Mejorar nuestro sitio web y servicios.
-*   Cumplir con las obligaciones legales.
+## 8. Contacto
+Si tiene preguntas sobre el procesamiento de datos personales o desea ejercer sus derechos, contáctenos en el correo electrónico: **info@progressivo.eu**.
 
-### 4. Sus derechos
-
-Según el RGPD, tiene los siguientes derechos:
-*   **Derecho de acceso.**
-*   **Derecho de rectificación.**
-*   **Derecho de supresión.**
-*   **Derecho a la limitación del tratamiento.**
-*   **Derecho a la portabilidad de los datos.**
-*   **Derecho de oposición.**
-
-Para ejercer estos derechos, póngase en contacto con nosotros.
+Esta política es válida desde el 1 de enero de 2024.

@@ -1,13 +1,23 @@
 ---
-title: "Actividad de traducción"
-description: "Traducciones rápidas y precisas de documentos y textos (excepto judiciales)."
+title: "Traducciones"
+description: "Traducciones profesionales y servicios de interpretación para su comunicación internacional."
 lang: es
-image: "/images/preklady.jpg"
+image: "/images/translations.png"
 ---
-# Actividad de traducción
+# Traducciones
 
-¡La empresa **Progressivo Corp.** es su socio confiable para traducciones de todo tipo! Documentos, correos electrónicos, cartas u otros textos – traducimos todo de manera rápida, de calidad y precisa. Y en cuanto a la comunicación inmediata, también ofrecemos **asistencia de traducción por teléfono**, para que pueda negociar sin preocupaciones con socios comerciales, clientes o autoridades.
+**Traducciones** es un servicio que le ayuda a superar las barreras del idioma. Ofrecemos traducciones profesionales de textos e interpretación para sus necesidades comerciales y personales.
 
-Sin embargo, es necesario mencionar que no nos dedicamos a traducciones judiciales ni oficiales. Estas traducciones específicas suelen requerir más tiempo y procesos especiales que podrían alargar el tiempo de procesamiento. Nuestro objetivo es garantizar una traducción lo más rápida y eficiente posible, que se adapte perfectamente a sus necesidades.
+**Nuestra especialización:**
+Traducciones oficiales (juradas) de documentos para trámites (visas, registros).
+Traducciones técnicas, legales y comerciales.
+Localización de sitios web y aplicaciones para mercados extranjeros.
+Interpretación en reuniones, conferencias y ante autoridades.
 
-**¡Así que no espere más!** Rellene el formulario de contacto de solicitud, acordaremos una fecha y podemos ponernos manos a la obra de inmediato. Con nosotros, la traducción es simple, rápida y sin complicaciones innecesarias – ¡compruébelo usted mismo!
+**Garantizamos:**
+Precisión y corrección terminológica.
+Rapidez y cumplimiento de los plazos acordados.
+Confidencialidad y protección de sus datos.
+Traducciones realizadas por hablantes nativos y profesionales experimentados.
+
+**La calidad de la comunicación** es clave para el éxito en un entorno internacional. Con nuestras traducciones, siempre se entenderá perfectamente.

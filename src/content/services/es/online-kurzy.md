@@ -1,63 +1,23 @@
 ---
-title: "Cursos en línea"
-description: "Cursos educativos y tutorías en línea para niños y adultos."
+title: "Cursos Online"
+description: "Educación accesible desde cualquier lugar. Cursos enfocados en habilidades prácticas y crecimiento personal."
 lang: es
-image: "/images/online-kurz.png"
+image: "/images/online-courses.png"
 ---
-# Cursos en línea
+# Cursos Online
 
-**Para quién son los cursos:**
-Alumnos de 5º, 7º y 9º grado.
+**Cursos Online** es una plataforma moderna para la educación y el desarrollo de habilidades. Ofrecemos una amplia gama de cursos enfocados en el conocimiento práctico que puede aplicar inmediatamente en su vida personal o profesional.
 
-**Cursos de preparación para exámenes de admisión.**
-Niños, jóvenes y adultos.
+**Qué encontrará con nosotros:**
+Cursos de idiomas con profesores experimentados.
+Formación en el campo de TI, marketing digital y negocios.
+Talleres de desarrollo personal y soft skills.
+Seminarios especializados sobre inversiones y vida en el extranjero.
 
-Cursos de programación y TI, lecciones individuales y clubes en línea.
+**Ventajas de nuestros cursos:**
+Flexibilidad: estudie a su propio ritmo, desde cualquier lugar y en cualquier momento.
+Calidad: el contenido es preparado por expertos en la materia.
+Interactividad: posibilidad de consultas y tareas prácticas.
+Certificación: obtenga un certificado al completar el curso.
 
-**Cursos disponibles:**
-
-- Cursos de preparación para exámenes de admisión
-- Lengua checa y matemáticas.
-- Cursos de programación y TI
-- Creación de videojuegos en Unity
-Para principiantes y avanzados.
-- Programación en Scratch
-- Fundamentos de programación y creación de proyectos propios.
-
-**Lecciones individuales
-adaptadas a las necesidades específicas de los estudiantes.**
-- Clubes en línea
-- Enseñanza enfocada en habilidades de TI para niños, jóvenes y adultos.
-
-**Cómo se desarrollan los cursos:**
-- Regularidad
-- Planificación sistemática de lecciones hasta la fecha de los exámenes.
-- Enfoque individual
-- Los tutores adaptan la enseñanza a las necesidades y nivel del estudiante.
-- Enseñanza interactiva
-- Uso de pizarra virtual, chats y materiales preparados de antemano.
-
-**Apoyo de tutores**
-- Consultas y respuestas a preguntas de los estudiantes.
-- Posibilidad de elegir curso
-- Cursos según preferencias – lengua checa, matemáticas o TI.
-
-**Cuándo se realizan los cursos:**
-Horario flexible
-
-**Duración de las lecciones:**
-- 45 minutos
-- 60 minutos
-
-**Cuánto cuestan los cursos:**
-El precio depende de:
-La duración de la lección (45 o 60 minutos).
-El tipo de enseñanza (en línea o presencial).
-El número de lecciones ordenadas (posibilidad de descuento al comprar un mayor número de horas).
-
-**Resumen:**
-iTutoring.cz ofrece una amplia gama de cursos en línea y lecciones individuales.
-Permite la preparación para exámenes de admisión (lengua checa, matemáticas) o el desarrollo de habilidades de TI (programación en Scratch, creación de videojuegos en Unity).
-Los cursos se desarrollan de forma interactiva con un enfoque individual.
-Posibilidad de elegir la duración de las lecciones (45 o 60 minutos).
-Los precios dependen de la duración, el tipo y el número de lecciones, información detallada de precios disponible en la web [iTutoring.cz](https://itutoring.cz/cenik)
+**La educación es la mejor inversión.** Amplíe sus horizontes y obtenga nuevas oportunidades con nuestros cursos en línea.
