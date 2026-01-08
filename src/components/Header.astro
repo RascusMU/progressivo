@@ -208,7 +208,7 @@ const currentPath = Astro.url.pathname;
     background: transparent; /* Transparent utility bar */
     border-bottom: none;
     transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease;
-    padding-top: 1rem;
+    padding-top: max(1rem, env(safe-area-inset-top)); /* Respect iOS safe area */
   }
 
   /* Hide header when scrolled down */
@@ -222,7 +222,9 @@ const currentPath = Astro.url.pathname;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    /* Removed fixed height: 80px; to allow logo to breathe */
+    min-height: 60px;
+    padding-bottom: 0.5rem;
   }
 
   .logo {
@@ -230,18 +232,18 @@ const currentPath = Astro.url.pathname;
       width: auto;
       height: 60px; /* mobil */
       transition: all 0.3s ease;
-      opacity: 0.9;
+      opacity: 1; /* Full ink visibility */
   }
 
   @media (min-width: 768px) {
       .logo {
-          height: 80px; /* tablet */
+          height: 90px; /* tablet - proportional increase */
       }
   }
 
   @media (min-width: 1024px) {
       .logo {
-          height: 100px; /* desktop */
+          height: 120px; /* desktop - Masthead size */
       }
   }
 
