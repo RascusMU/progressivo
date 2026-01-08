@@ -2,39 +2,41 @@
 title: "Datenschutzerklärung"
 ---
 
-## Datenschutzerklärung und DSGVO
+## Datenschutzerklärung
 
-**Letzte Aktualisierung: Oktober 2023**
+**Verantwortlicher:**
+Progressivo Corp
+Sitz: Obrnice 227, 435 21 Obrnice, Tschechische Republik
+E-Mail: info@progressivo.eu
 
-Bei Progressivo nehmen wir den Schutz Ihrer Daten ernst. Dieses Dokument beschreibt, wie wir Ihre personenbezogenen Daten in Übereinstimmung mit der Datenschutz-Grundverordnung (DSGVO) und anderen geltenden Gesetzen erheben, verwenden und schützen.
+Der Schutz Ihrer Privatsphäre hat für uns Priorität. Unsere Website ist so konzipiert, dass sie nur das absolut notwendige Minimum an Daten sammelt, das für ihren Betrieb und die Kommunikation mit Ihnen erforderlich ist.
 
-### 1. Verantwortlicher
+### 1. Cookies und Tracking-Technologien
 
-Der Verantwortliche für die Datenverarbeitung ist **Progressivo s.r.o.** (oder die entsprechende juristische Person) mit Sitz in der Tschechischen Republik. Sie können uns unter info@progressivo.cz kontaktieren.
+**Unsere Website verwendet keine Analyse- oder Marketing-Cookies.**
+Wir verfolgen Ihr Verhalten im Internet nicht, erstellen keine Nutzerprofile und geben keine Daten an Werbenetzwerke weiter. Aus diesem Grund finden Sie auf unserer Website auch keinen störenden Einwilligungs-Banner (Cookie-Banner).
 
-### 2. Welche Daten wir erheben
+**Technischer Speicher (LocalStorage):**
+Um den Benutzerkomfort zu gewährleisten, nutzen wir den technischen Speicher Ihres Browsers (sogenannter LocalStorage). In diesem Speicher werden nur Ihre Einstellungen für die Website gespeichert:
+*   Sprachwahl (damit wir Ihnen die Website in der richtigen Sprache anzeigen können).
+*   Einstellung des Hell-/Dunkelmodus.
 
-Wir können die folgenden Arten von personenbezogenen Daten erheben:
-*   **Kontaktinformationen:** Name, E-Mail-Adresse, Telefonnummer.
-*   **Nutzungsdaten:** Informationen darüber, wie Sie unsere Website nutzen (IP-Adresse, Browsertyp, besuchte Seiten).
-*   **Cookies:** Wir verwenden Cookies, um Ihre Erfahrung zu verbessern.
+Diese Daten verlassen Ihren Browser nicht und dienen ausschließlich der technischen Funktion der Website.
 
-### 3. Zweck der Verarbeitung
+### 2. Google Maps
 
-Wir verwenden Ihre Daten für die folgenden Zwecke:
-*   Bereitstellung und Wartung unserer Dienste.
-*   Kommunikation mit Ihnen bezüglich Ihrer Anfragen.
-*   Verbesserung unserer Website und Dienste.
-*   Einhaltung gesetzlicher Verpflichtungen.
+Zur Anzeige unseres Standorts nutzen wir den Dienst Google Maps.
+*   **Kein automatisches Laden:** Die Karte ist standardmäßig deaktiviert, um eine Datenübertragung an Google ohne Ihr Wissen zu verhindern.
+*   **Aktivierung per Klick:** Die Karte wird erst geladen, wenn Sie aktiv darauf klicken.
+*   Nach der Aktivierung der Karte kann Google Ihre Daten (z. B. IP-Adresse) verarbeiten und Cookies von Drittanbietern gemäß seinen eigenen Datenschutzrichtlinien speichern.
+
+### 3. Kontaktformular
+
+Wenn Sie uns über das Formular auf der Website kontaktieren, verarbeiten wir die von Ihnen eingegebenen Daten (Name, E-Mail, Nachrichtentext).
+
+*   **Zweck der Verarbeitung:** Diese Daten dienen ausschließlich der Bearbeitung Ihrer Anfrage, der Beantwortung Ihres Anliegens oder vorvertraglichen Maßnahmen.
+*   **Kein Marketing:** Wir verwenden Ihre Kontaktdaten nicht für den Versand unverlangter kommerzieller Mitteilungen (Newsletter) und geben sie nicht zu Marketingzwecken an Dritte weiter.
 
 ### 4. Ihre Rechte
 
-Gemäß der DSGVO haben Sie folgende Rechte:
-*   **Auskunftsrecht:** Anforderung einer Kopie der personenbezogenen Daten, die wir über Sie speichern.
-*   **Recht auf Berichtigung:** Anforderung der Korrektur unrichtiger Daten.
-*   **Recht auf Löschung:** Anforderung der Löschung Ihrer Daten ("Recht auf Vergessenwerden").
-*   **Recht auf Einschränkung der Verarbeitung.**
-*   **Recht auf Datenübertragbarkeit.**
-*   **Widerspruchsrecht.**
-
-Um diese Rechte auszuüben, kontaktieren Sie uns bitte.
+Gemäß der DSGVO haben Sie das Recht, Auskunft über Ihre personenbezogenen Daten, deren Berichtigung, Löschung oder Einschränkung der Verarbeitung zu verlangen. Ihre Fragen oder Anträge können Sie an die E-Mail info@progressivo.eu richten.

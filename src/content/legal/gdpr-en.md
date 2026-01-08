@@ -2,51 +2,41 @@
 title: "Privacy Policy"
 ---
 
-## Privacy Policy and GDPR
+## Privacy Policy
 
-**Last updated: October 2023**
+**Data Controller:**
+Progressivo Corp
+Registered office: Obrnice 227, 435 21 Obrnice, Czech Republic
+E-mail: info@progressivo.eu
 
-At Progressivo, we take your privacy seriously. This document outlines how we collect, use, and protect your personal data in accordance with the General Data Protection Regulation (GDPR) and other applicable laws.
+Protecting your privacy is our priority. Our website is designed to collect only the absolute minimum amount of data necessary for its operation and communication with you.
 
-### 1. Data Controller
+### 1. Cookies and Tracking Technologies
 
-The data controller is **Progressivo s.r.o.** (or the relevant legal entity), with its registered office in the Czech Republic. You can contact us at info@progressivo.cz.
+**Our website does not use any analytics or marketing cookies.**
+We do not track your online behavior, create user profiles, or pass data to advertising networks. For this reason, you will not find an annoying consent banner (cookie banner) on our website.
 
-### 2. What Data We Collect
+**Technical Storage (LocalStorage):**
+To ensure user comfort, we use your browser's technical storage (so-called LocalStorage). Only your website preference settings are stored here:
+*   Language selection (so we can display the website in the correct language).
+*   Light/Dark mode setting.
 
-We may collect the following types of personal data:
-*   **Contact Information:** Name, email address, phone number.
-*   **Usage Data:** Information about how you use our website (IP address, browser type, pages visited).
-*   **Cookies:** We use cookies to improve your experience.
+This data does not leave your browser and is used exclusively for the technical functionality of the website.
 
-### 3. Purpose of Processing
+### 2. Google Maps
 
-We use your data for the following purposes:
-*   To provide and maintain our services.
-*   To communicate with you regarding your inquiries.
-*   To improve our website and services.
-*   To comply with legal obligations.
+We use the Google Maps service to display our location.
+*   **No automatic loading:** The map is disabled by default to prevent data transfer to Google without your knowledge.
+*   **Click-to-activate:** The map loads only when you actively click on it.
+*   After activating the map, Google may process your data (e.g., IP address) and store third-party cookies according to its own privacy policy.
 
-### 4. Data Sharing
+### 3. Contact Form
 
-We do not sell your personal data. We may share your data with trusted third-party service providers (e.g., hosting providers, analytics) who assist us in operating our website, conducting our business, or serving our users, so long as those parties agree to keep this information confidential.
+If you contact us via the form on the website, we process the data you enter (name, e-mail, message text).
 
-### 5. Your Rights
+*   **Purpose of processing:** This data is used exclusively to process your inquiry, respond to your request, or for pre-contractual negotiations.
+*   **No marketing:** We do not use your contact details to send unsolicited commercial communications (newsletters) and do not pass them on to third parties for marketing purposes.
 
-Under GDPR, you have the following rights:
-*   **Right to Access:** Request a copy of the personal data we hold about you.
-*   **Right to Rectification:** Request correction of inaccurate data.
-*   **Right to Erasure:** Request deletion of your data ("right to be forgotten").
-*   **Right to Restrict Processing:** Request restriction of processing your data.
-*   **Right to Data Portability:** Request transfer of your data to another controller.
-*   **Right to Object:** Object to the processing of your data.
+### 4. Your Rights
 
-To exercise these rights, please contact us.
-
-### 6. Security
-
-We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.
-
-### 7. Changes to This Policy
-
-We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+In accordance with GDPR, you have the right to request access to your personal data, its correction, deletion, or restriction of processing. You can direct your questions or requests to the e-mail info@progressivo.eu.
