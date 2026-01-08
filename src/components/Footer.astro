@@ -157,8 +157,11 @@ const getLink = (path) => {
             </a>
           </li>
           <li>
-            <span class="domitoo-item" aria-label="Interní projekt DomiToo AI">
-              <span id="domitoo-d">D</span>omiToo AI
+            <span class="domitoo-item" aria-label="Interní projekt DomiToo">
+              <span class="domitoo-logo">
+                DomiToo
+                <span class="domitoo-hit"></span>
+              </span>
               <svg class="icon-lock" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             </span>
           </li>
@@ -197,22 +200,25 @@ const getLink = (path) => {
 <script>
   // DomiToo Easter Egg Logic
   document.addEventListener('astro:page-load', () => {
-      const dTrigger = document.getElementById('domitoo-d');
+      // Logic adjusted for the overlay technique
+      const dTrigger = document.querySelector('.domitoo-hit');
       if (!dTrigger) return;
 
       const redirectUrl = 'https://domitoo.progressivo.eu';
       let touchTimer;
       const longPressDuration = 600;
 
-      // Desktop Double Click
-      dTrigger.addEventListener('dblclick', () => {
+      const activateEasterEgg = () => {
           window.location.href = redirectUrl;
-      });
+      };
+
+      // Desktop Double Click
+      dTrigger.addEventListener('dblclick', activateEasterEgg);
 
       // Mobile Long Press
       const startPress = (e) => {
           touchTimer = setTimeout(() => {
-              window.location.href = redirectUrl;
+              activateEasterEgg();
           }, longPressDuration);
       };
 
@@ -371,12 +377,24 @@ const getLink = (path) => {
   /* DomiToo Styles */
   .domitoo-item {
       cursor: default; /* Looks like text */
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
   }
 
-  #domitoo-d {
-      user-select: none;
-      -webkit-user-select: none;
-      cursor: default;
+  .domitoo-logo {
+      position: relative;
+      display: inline-block;
+  }
+
+  .domitoo-hit {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0.8em;
+      height: 100%;
+      cursor: pointer;
+      z-index: 10;
   }
 
   /* Icons */
