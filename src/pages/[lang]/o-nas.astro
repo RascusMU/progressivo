@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import aboutData from '../../content/pages/about/index.json';
+import { aboutContent } from '../../i18n/about';
 
 export async function getStaticPaths() {
   return [
@@ -13,7 +13,8 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
-const t = aboutData[lang as keyof typeof aboutData] || aboutData.cs;
+const currentLang = lang || 'cs';
+const t = aboutContent[currentLang as keyof typeof aboutContent];
 ---
 
 <Layout lang={lang} title={`${t.hero.title} | Progressivo`}>

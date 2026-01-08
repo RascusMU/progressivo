@@ -1,4 +1,4 @@
-{
+export const aboutContent = {
   "cs": {
     "hero": {
       "title": "O Progressivo",
@@ -69,11 +69,26 @@
       "title": "Síť projektů",
       "perex": "Progressivo není jen jedna firma. Je to síť propojených projektů, které společně tvoří ekosystém pro život a práci mezi kontinenty:",
       "items": [
-        { "name": "iTutoring.cz", "desc": "Online doučování a kurzy" },
-        { "name": "jerry.cingel.cz", "desc": "Osobní projekty a blog" },
-        { "name": "bailamos.cz", "desc": "Taneční a kulturní aktivity" },
-        { "name": "panama.bailamos.cz", "desc": "Život v Panamě" },
-        { "name": "DomiToo", "desc": "AI nástroje pro tvorbu webů" }
+        {
+          "name": "iTutoring.cz",
+          "desc": "Online doučování a kurzy"
+        },
+        {
+          "name": "jerry.cingel.cz",
+          "desc": "Osobní projekty a blog"
+        },
+        {
+          "name": "bailamos.cz",
+          "desc": "Taneční a kulturní aktivity"
+        },
+        {
+          "name": "panama.bailamos.cz",
+          "desc": "Život v Panamě"
+        },
+        {
+          "name": "DomiToo",
+          "desc": "AI nástroje pro tvorbu webů"
+        }
       ],
       "conclusion": "Každý projekt má svůj účel. Společně fungují jako celek."
     },
@@ -108,17 +123,189 @@
     }
   },
   "en": {
-    "hero": { "title": "About Progressivo", "perex": "Progressivo exists because things that should be simple are often unnecessarily complex." },
-    "started": { "title": "How it started", "text": ["I spent over 15 years building projects..."] },
-    "whatWeDo": { "title": "What we actually do", "perex": "Progressivo is an ecosystem...", "items": [] },
-    "why": { "title": "Why so many things?", "text": ["Because when moving to Panama..."] },
-    "how": { "title": "How we work", "items": [] },
-    "network": { "title": "Network of projects", "perex": "Not just one company...", "items": [], "conclusion": "Each has a purpose." },
-    "founder": { "name": "Jaroslav Cingel", "role": "Founder", "text": ["Over 15 years connecting Europe..."], "quote": "The future belongs to those who connect..." },
-    "testimonials": { "title": "What clients say", "items": [] },
-    "cta": { "title": "Got a question?", "text": "Write to me directly.", "button": "Write to Jaroslav", "whatsapp": "WhatsApp" }
+    "hero": {
+      "title": "About Progressivo",
+      "perex": "Progressivo exists because things that should be simple are often unnecessarily complex."
+    },
+    "started": {
+      "title": "How it started",
+      "text": [
+        "I spent over 15 years building projects..."
+      ]
+    },
+    "whatWeDo": {
+      "title": "What we actually do",
+      "perex": "Progressivo is an ecosystem...",
+      "items": []
+    },
+    "why": {
+      "title": "Why so many things?",
+      "text": [
+        "Because when moving to Panama..."
+      ]
+    },
+    "how": {
+      "title": "How we work",
+      "items": []
+    },
+    "network": {
+      "title": "Network of projects",
+      "perex": "Not just one company...",
+      "items": [],
+      "conclusion": "Each has a purpose."
+    },
+    "founder": {
+      "name": "Jaroslav Cingel",
+      "role": "Founder",
+      "text": [
+        "Over 15 years connecting Europe..."
+      ],
+      "quote": "The future belongs to those who connect..."
+    },
+    "testimonials": {
+      "title": "What clients say",
+      "items": []
+    },
+    "cta": {
+      "title": "Got a question?",
+      "text": "Write to me directly.",
+      "button": "Write to Jaroslav",
+      "whatsapp": "WhatsApp"
+    }
   },
-  "de": { "hero": { "title": "Über Progressivo", "perex": "..." }, "started": { "title": "", "text": [] }, "whatWeDo": { "title": "", "perex": "", "items": [] }, "why": { "title": "", "text": [] }, "how": { "title": "", "items": [] }, "network": { "title": "", "perex": "", "items": [], "conclusion": "" }, "founder": { "name": "Jaroslav Cingel", "role": "Gründer", "text": [], "quote": "" }, "testimonials": { "title": "", "items": [] }, "cta": { "title": "", "text": "", "button": "Schreiben Sie Jaroslav", "whatsapp": "" } },
-  "es": { "hero": { "title": "Sobre Progressivo", "perex": "..." }, "started": { "title": "", "text": [] }, "whatWeDo": { "title": "", "perex": "", "items": [] }, "why": { "title": "", "text": [] }, "how": { "title": "", "items": [] }, "network": { "title": "", "perex": "", "items": [], "conclusion": "" }, "founder": { "name": "Jaroslav Cingel", "role": "Fundador", "text": [], "quote": "" }, "testimonials": { "title": "", "items": [] }, "cta": { "title": "", "text": "", "button": "Escribir a Jaroslav", "whatsapp": "" } },
-  "ru": { "hero": { "title": "О Progressivo", "perex": "..." }, "started": { "title": "", "text": [] }, "whatWeDo": { "title": "", "perex": "", "items": [] }, "why": { "title": "", "text": [] }, "how": { "title": "", "items": [] }, "network": { "title": "", "perex": "", "items": [], "conclusion": "" }, "founder": { "name": "Jaroslav Cingel", "role": "Основатель", "text": [], "quote": "" }, "testimonials": { "title": "", "items": [] }, "cta": { "title": "", "text": "", "button": "Написать Ярославу", "whatsapp": "" } }
-}
+  "de": {
+    "hero": {
+      "title": "Über Progressivo",
+      "perex": "..."
+    },
+    "started": {
+      "title": "",
+      "text": []
+    },
+    "whatWeDo": {
+      "title": "",
+      "perex": "",
+      "items": []
+    },
+    "why": {
+      "title": "",
+      "text": []
+    },
+    "how": {
+      "title": "",
+      "items": []
+    },
+    "network": {
+      "title": "",
+      "perex": "",
+      "items": [],
+      "conclusion": ""
+    },
+    "founder": {
+      "name": "Jaroslav Cingel",
+      "role": "Gründer",
+      "text": [],
+      "quote": ""
+    },
+    "testimonials": {
+      "title": "",
+      "items": []
+    },
+    "cta": {
+      "title": "",
+      "text": "",
+      "button": "Schreiben Sie Jaroslav",
+      "whatsapp": ""
+    }
+  },
+  "es": {
+    "hero": {
+      "title": "Sobre Progressivo",
+      "perex": "..."
+    },
+    "started": {
+      "title": "",
+      "text": []
+    },
+    "whatWeDo": {
+      "title": "",
+      "perex": "",
+      "items": []
+    },
+    "why": {
+      "title": "",
+      "text": []
+    },
+    "how": {
+      "title": "",
+      "items": []
+    },
+    "network": {
+      "title": "",
+      "perex": "",
+      "items": [],
+      "conclusion": ""
+    },
+    "founder": {
+      "name": "Jaroslav Cingel",
+      "role": "Fundador",
+      "text": [],
+      "quote": ""
+    },
+    "testimonials": {
+      "title": "",
+      "items": []
+    },
+    "cta": {
+      "title": "",
+      "text": "",
+      "button": "Escribir a Jaroslav",
+      "whatsapp": ""
+    }
+  },
+  "ru": {
+    "hero": {
+      "title": "О Progressivo",
+      "perex": "..."
+    },
+    "started": {
+      "title": "",
+      "text": []
+    },
+    "whatWeDo": {
+      "title": "",
+      "perex": "",
+      "items": []
+    },
+    "why": {
+      "title": "",
+      "text": []
+    },
+    "how": {
+      "title": "",
+      "items": []
+    },
+    "network": {
+      "title": "",
+      "perex": "",
+      "items": [],
+      "conclusion": ""
+    },
+    "founder": {
+      "name": "Jaroslav Cingel",
+      "role": "Основатель",
+      "text": [],
+      "quote": ""
+    },
+    "testimonials": {
+      "title": "",
+      "items": []
+    },
+    "cta": {
+      "title": "",
+      "text": "",
+      "button": "Написать Ярославу",
+      "whatsapp": ""
+    }
+  }
+} as const;
