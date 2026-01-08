@@ -6,58 +6,38 @@ image: "/images/online-kurz.png"
 ---
 # Online kurzy
 
-**Pro koho jsou kurzy určeny:**
-Žáci 5., 7. a 9. tříd
+Nabízíme širokou škálu online kurzů a individuálních lekcí zaměřených na vzdělávání a rozvoj dovedností. Spolupracujeme s platformou **iTutoring.cz**, abychom zajistili kvalitní výuku pro všechny věkové kategorie.
 
-**Přípravné kurzy na přijímací zkoušky.**
-Děti, mládež i dospělí
+## Nabídka kurzů
 
-Kurzy programování a IT, individuální lekce a online kroužky.
+### Příprava na přijímací zkoušky
+Kurzy jsou určeny pro žáky 5., 7. a 9. tříd.
 
-**Dostupné kurzy:**
+*   **Předměty:** Český jazyk a matematika.
+*   **Cíl:** Systematická příprava k úspěšnému zvládnutí přijímacích zkoušek.
 
-- Přípravné kurzy na přijímací zkoušky
-- Český jazyk a matematika.
-- Kurzy programování a IT
-- Tvorba videoher v Unity
-Pro začátečníky i pokročilé.
-- Programování ve Scratch
-- Základy programování a tvorba vlastních projektů.
+### IT a programování
+Kurzy pro děti, mládež i dospělé, od začátečníků po pokročilé.
 
-**Individuální lekce
-přizpůsobené konkrétním potřebám studentů.**
-- Online kroužky
-- Výuka zaměřená na IT dovednosti pro děti, mládež i dospělé.
+*   **Tvorba videoher v Unity:** Pro ty, kteří chtějí proniknout do světa herního vývoje.
+*   **Programování ve Scratch:** Základy algoritmizace a tvorba vlastních projektů.
+*   **Online kroužky:** Výuka zaměřená na rozvoj digitálních dovedností.
 
-**Jak kurzy probíhají:**
-- Pravidelnost
-- Systematické plánování lekcí až do termínu zkoušek.
-- Individuální přístup
-- Lektoři přizpůsobují výuku potřebám a úrovni studenta.
-- Interaktivní výuka
-- Využití virtuální tabule, chatů a předem připravených materiálů.
+## Jak výuka probíhá
 
-**Podpora lektorů**
-- Konzultace a odpovědi na dotazy studentů.
-- Možnost výběru kurzu
-- Kurzy dle preferencí – český jazyk, matematika nebo IT.
+Klademe důraz na efektivitu a pohodlí studentů.
 
-**Kdy kurzy probíhají:**
-Flexibilní rozvrh
+*   **Individuální přístup:** Lektoři přizpůsobují výuku potřebám a úrovni každého studenta.
+*   **Interaktivní formy:** Využití virtuální tabule, chatu a sdílených materiálů.
+*   **Flexibilita:** Systematické plánování lekcí dle vašich časových možností.
+*   **Podpora:** Možnost konzultací a odpovědí na dotazy i mimo lekce.
 
-**Délka lekcí:**
-- 45 minut
-- 60 minut
+## Organizační informace
 
-**Kolik kurzy stojí:**
-Cena závisí na:
-Délce lekce (45 nebo 60 minut).
-Typu výuky (online nebo prezenční).
-Počtu objednaných lekcí (možnost slevy při nákupu většího počtu hodin).
+*   **Délka lekcí:** Možnost výběru mezi 45 nebo 60 minutami.
+*   **Forma:** Online výuka z pohodlí domova.
+*   **Cena:** Závisí na délce lekce, typu výuky a počtu objednaných hodin (možnost zvýhodněných balíčků).
 
-**Shrnutí:**
-iTutoring.cz nabízí širokou škálu online kurzů a individuálních lekcí.
-Umožňuje přípravu na přijímací zkoušky (český jazyk, matematika) nebo rozvoj IT dovedností (programování ve Scratch, tvorba videoher v Unity).
-Kurzy probíhají interaktivně s individuálním přístupem.
-Možnost výběru délky lekcí (45 nebo 60 minut).
-Ceny závisí na délce, typu a počtu lekcí, detailní informace cen jsou dostupné na webu [iTutoring.cz](https://itutoring.cz/cenik)
+## Proč si vybrat naše kurzy
+
+Ať už potřebujete doučování, přípravu na zkoušky nebo se chcete naučit programovat, naše kurzy vám poskytnou potřebné znalosti v přátelském a profesionálním prostředí. Detailní ceník a další informace naleznete na webu [iTutoring.cz](https://itutoring.cz/cenik).

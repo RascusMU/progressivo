@@ -6,8 +6,22 @@ image: "/images/preklady.jpg"
 ---
 # Překladatelská činnost
 
-Společnost **Progressivo Corp.** je váš spolehlivý partner pro překlady všeho druhu! Dokumenty, e-maily, dopisy nebo jiné texty – vše přeložíme rychle, kvalitně a přesně. A pokud jde o okamžitou komunikaci, nabízíme i **asistenci při překladu po telefonu**, abyste mohli bez starostí jednat s obchodními partnery, klienty nebo úřady.
+Nabízíme spolehlivé překladatelské služby pro firmy i jednotlivce. Zaměřujeme se na rychlost, přesnost a srozumitelnost výsledného textu.
 
-Je však třeba zmínit, že se nezabýváme soudními ani úředními překlady. Tyto specifické překlady bývají časově náročnější a vyžadují zvláštní procesy, které by mohly protáhnout dobu zpracování. Naším cílem je však zajistit co nejrychlejší a nejefektivnější překlad, který vám bude perfektně vyhovovat a splní vaše potřeby.
+## Co překládáme
 
-**Tak na nic nečekejte!** Vyplňte poptávkový kontaktní formulář, domluvíme termín a můžeme se hned pustit do práce. S námi je překlad jednoduchý, rychlý a bez zbytečných komplikací – přesvědčte se sami!
+Zajistíme překlad široké škály běžných i odborných textů:
+
+*   **Obchodní korespondence:** E-maily, dopisy, nabídky.
+*   **Dokumentace:** Manuály, produktové listy, interní směrnice.
+*   **Webové stránky a marketingové texty.**
+
+Dále nabízíme **asistenci při překladu po telefonu**, což oceníte při jednání se zahraničními partnery nebo úřady, kdy potřebujete okamžitou jazykovou podporu.
+
+## Důležité upozornění
+
+Specializujeme se na komerční a běžné překlady. **Nezajišťujeme soudní ani úředně ověřené překlady** (tzv. překlady s kulatým razítkem). Tyto dokumenty vyžadují specifické procesy, které nespadají do našeho portfolia zaměřeného na flexibilitu a rychlost.
+
+## Jak objednat překlad
+
+Pokud potřebujete kvalitní překlad bez zbytečných odkladů, kontaktujte nás prostřednictvím formuláře. Domluvíme termín dodání a rozsah práce tak, aby výsledek přesně odpovídal vašim potřebám. S námi je komunikace v cizím jazyce jednodušší.
