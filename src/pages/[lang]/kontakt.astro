@@ -44,17 +44,18 @@ const t = ui[lang] || ui.cs;
           {t['contact.whatsapp']}
         </a>
 
-        <div class="map-wrapper">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.542867623631!2d-79.52264622414343!3d8.977465691062635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca8f0d8b4440f%3A0xc0761356580556f0!2sOceania%20Business%20Plaza!5e0!3m2!1sen!2spa!4v1700000000000!5m2!1sen!2spa"
-            width="100%"
-            height="300"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            class="map-frame"
-          ></iframe>
+        <div class="map-wrapper" id="map-container">
+          <div class="map-placeholder" id="map-placeholder">
+            <div class="placeholder-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="map-icon">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <button id="show-map-btn" class="show-map-btn" aria-label={t['contact.showMap']}>
+                {t['contact.showMap']}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -170,17 +171,71 @@ const t = ui[lang] || ui.cs;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       height: 300px;
+      position: relative;
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
   }
 
-  .map-frame {
+  .map-placeholder {
       width: 100%;
       height: 100%;
-      filter: grayscale(100%) invert(0.9);
-      transition: filter 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-bg-card);
+      transition: opacity 0.3s ease;
   }
 
-  :global(.dark) .map-frame {
+  .placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+  }
+
+  .map-icon {
+      color: var(--color-text-muted);
+  }
+
+  .show-map-btn {
+      background-color: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      box-shadow: var(--shadow-sm);
+  }
+
+  .show-map-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+  }
+
+  /* Map styling once loaded */
+  :global(.map-frame) {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(100%) invert(0.9);
+      transition: filter 0.3s ease;
+      display: block;
+      animation: fadeIn 0.5s ease-out;
+  }
+
+  :global(.dark) :global(.map-frame) {
       filter: grayscale(100%) invert(0.1);
+  }
+
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
   }
 
   /* FAQ Styling Override */
@@ -243,5 +298,28 @@ const t = ui[lang] || ui.cs;
              // Basic prevention of long-press selection on some devices
              // Note: CSS user-select: none handles most of it
         }, {passive: true});
+    }
+
+    // Click to Load Map Logic
+    const showMapBtn = document.getElementById('show-map-btn');
+    const mapContainer = document.getElementById('map-container');
+
+    if (showMapBtn && mapContainer) {
+        showMapBtn.addEventListener('click', () => {
+            const iframe = document.createElement('iframe');
+            // Using legacy q parameter as requested: Oceanía Business Plaza 1000, Panama City
+            // Encoded: Ocean%C3%ADa+Business+Plaza+1000%2C+Panama+City
+            // Adding z=16 for zoom level ~15-17
+            iframe.src = "https://maps.google.com/maps?q=Ocean%C3%ADa+Business+Plaza+1000%2C+Panama+City&t=m&z=16&output=embed&iwloc=near";
+            iframe.classList.add('map-frame');
+            iframe.setAttribute('loading', 'lazy');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+            iframe.setAttribute('title', 'Google Maps - Oceanía Business Plaza');
+
+            // Clear placeholder and append iframe
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+        });
     }
 </script>
