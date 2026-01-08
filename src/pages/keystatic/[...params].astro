@@ -1,0 +1,13 @@
+---
+import { Keystatic } from '../../../node_modules/@keystatic/astro/internal/keystatic-page.js';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { params: undefined } },
+  ];
+}
+---
+
+<Keystatic client:only="react" />
