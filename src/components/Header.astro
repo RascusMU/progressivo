@@ -1,38 +1,9 @@
 ---
-const { lang = 'cs' } = Astro.props;
+import { ui, defaultLang } from '../i18n/ui';
 
-const translations = {
-  cs: {
-    services: 'Služby',
-    about: 'O nás',
-    blog: 'Blog',
-    contact: 'Kontakt',
-  },
-  en: {
-    services: 'Services',
-    about: 'About Us',
-    blog: 'Blog',
-    contact: 'Contact',
-  },
-  de: {
-    services: 'Dienstleistungen',
-    about: 'Über uns',
-    blog: 'Blog',
-    contact: 'Kontakt',
-  },
-  es: {
-    services: 'Servicios',
-    about: 'Sobre nosotros',
-    blog: 'Blog',
-    contact: 'Contacto',
-  },
-  ru: {
-    services: 'Услуги',
-    about: 'О нас',
-    blog: 'Блог',
-    contact: 'Контакты',
-  },
-};
+const { lang = defaultLang } = Astro.props;
+
+const t = ui[lang] || ui[defaultLang];
 
 const languages = [
     { code: 'cs', label: 'CZ', flag: '🇨🇿' },
@@ -43,7 +14,6 @@ const languages = [
 ];
 
 const currentLangObj = languages.find(l => l.code === lang) || languages[0];
-const t = translations[lang] || translations.cs;
 
 // Helper for localized internal links
 const getLink = (path) => {
@@ -67,7 +37,7 @@ const currentPath = Astro.url.pathname;
     <div class="header-actions">
         <!-- Language Switcher Dropdown -->
         <div class="lang-switcher-dropdown">
-            <button class="lang-btn" aria-label="Select Language" aria-expanded="false">
+            <button class="lang-btn" aria-label={t.header.select_language} aria-expanded="false">
                 <span class="flag">{currentLangObj.flag}</span>
                 <span class="code">{currentLangObj.label}</span>
                 <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -119,7 +89,7 @@ const currentPath = Astro.url.pathname;
             </div>
         </div>
 
-        <button id="theme-toggle" aria-label="Toggle Dark Mode">
+        <button id="theme-toggle" aria-label={t.header.toggle_dark}>
             <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
             <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
         </button>

@@ -3,6 +3,7 @@ import FloatingDock from '../components/FloatingDock.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ClientRouter } from 'astro:transitions';
+import { ui, defaultLang } from '../i18n/ui';
 
 interface Props {
 	title: string;
@@ -11,21 +12,14 @@ interface Props {
     image?: string;
 }
 
-const { title, lang = 'cs', description: propDescription, image = '/images/mapa-svetabusines.webp' } = Astro.props;
+const { title, lang = defaultLang, description: propDescription, image = '/images/mapa-svetabusines.webp' } = Astro.props;
 
-const descriptions = {
-  cs: "Progressivo - Váš partner pro mezinárodní obchod, expanzi do Panamy a strategické poradenství.",
-  en: "Progressivo - Your partner for international trade, expansion to Panama, and strategic consulting.",
-  de: "Progressivo - Ihr Partner für internationalen Handel, Expansion nach Panama und strategische Beratung.",
-  es: "Progressivo - Su socio para el comercio internacional, la expansión a Panamá y la consultoría estratégica.",
-  ru: "Progressivo - Ваш партнер по международной торговле, расширению бизнеса в Панаме и стратегическому консалтингу."
-};
-
-const description = propDescription || descriptions[lang] || descriptions.cs;
+const t = ui[lang] || ui[defaultLang];
+const description = propDescription || t.meta.default_description;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Hreflang Logic
-const supportedLangs = ['cs', 'en', 'de', 'es', 'ru'];
+const supportedLangs = Object.keys(ui);
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
 
