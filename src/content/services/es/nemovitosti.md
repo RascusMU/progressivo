@@ -2,7 +2,7 @@
 title: "Bienes Raíces"
 description: "Servicios integrales en el campo de la compra, venta y gestión de bienes raíces en el extranjero."
 lang: es
-image: "/images/real-estate.png"
+image: "/images/nemovitost-playa.webp"
 ---
 # Bienes Raíces
 
