@@ -1,3 +1,23 @@
 User-agent: *
 Allow: /
-Sitemap: https://progressivo.eu/sitemap-index.xml
+
+# Block AI Crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+Sitemap: https://progressivo.eu/sitemap.xml
