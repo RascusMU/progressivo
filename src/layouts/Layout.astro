@@ -2,7 +2,6 @@
 import FloatingDock from '../components/FloatingDock.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Modal from '../components/Modal.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -124,7 +123,6 @@ const schemaWebSite = {
 		<slot />
         <FloatingDock lang={lang} />
         <Footer lang={lang} />
-        <Modal lang={lang} />
 	</body>
 </html>
 <style is:global>
