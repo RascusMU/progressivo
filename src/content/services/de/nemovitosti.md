@@ -2,7 +2,7 @@
 title: "Immobilien"
 description: "Vermittlung von Immobilienkäufen in Ländern wie Costa Rica, Panama und Kolumbien."
 lang: de
-image: "/images/mapa-svetabusines.webp"
+image: "/images/nemovitost-playa.webp"
 ---
 # Immobilien
 

@@ -2,7 +2,7 @@
 title: "Nemovitosti"
 description: "Zprostředkování nákupu nemovitostí v zemích jako Kostarika, Panama a Kolumbie."
 lang: cs
-image: "/images/mapa-svetabusines.webp"
+image: "/images/nemovitost-playa.webp"
 ---
 # Nemovitosti
 
