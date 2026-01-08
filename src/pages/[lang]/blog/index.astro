@@ -40,12 +40,6 @@ const readMore = {
 ---
 
 <Layout lang={lang} title={`${titles[lang] || 'Blog'} | Progressivo`}>
-  <div class="page-header">
-     <div class="container">
-        <h1>{titles[lang] || 'Blog'}</h1>
-     </div>
-  </div>
-
   <div class="container page-content animate-on-scroll">
       <div class="blog-grid">
         {posts.length > 0 ? posts.map((post) => (
@@ -80,26 +74,8 @@ const readMore = {
 </Layout>
 
 <style>
-  .page-header {
-      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-      padding: 4rem 0 2rem;
-      border-bottom: 1px solid var(--color-border);
-      margin-bottom: 2rem;
-  }
-
-  :global(.dark) .page-header {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  }
-
-  h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--color-text);
-      margin: 0;
-  }
-
   .page-content {
-      padding-top: 2rem;
+      padding-top: 8rem;
       padding-bottom: 4rem;
   }
 
