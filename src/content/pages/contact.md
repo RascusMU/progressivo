@@ -1,43 +1,25 @@
 ---
-title: "Kontakt"
-description: "Kontaktujte Progressivo Corp."
+title: Kontakt
+description: Spojte se s námi. Jsme tu pro vás.
 ---
 
-<div class="faq-accordion">
+Tato stránka využívá strukturovaný layout v `src/pages/[lang]/kontakt.astro`.
+Texty jsou částečně v `src/i18n/ui.ts` a částečně v layoutu.
+Tento soubor (contact.md) je zde pro zachování struktury kolekce.
 
-<details>
-<summary>Jaké služby Progressivo Corp. nabízí?</summary>
-<p>
-obchod s nákladní technikou, prodej realit, online jazykové kurzy, doučování v Českém jazyce a IT podporu pro vzdálené řešení problémů, genealogie a další služby.
-</p>
-</details>
+# Často kladené otázky (FAQ)
 
-<details>
-<summary>Jak lze objednat služby online?</summary>
-<p>
-Služby lze snadno objednat přes naše webové stránky, kde najdete všechny potřebné informace a kontaktní formulář.
-</p>
-</details>
+### 1. Jak probíhá první konzultace?
+První konzultace je obvykle online (Google Meet / WhatsApp). Probereme vaše potřeby a zjistíme, zda vám dokážeme pomoci. Tato úvodní konzultace trvá cca 15 minut a je zdarma.
 
-<details>
-<summary>Jak probíhá výuka online kurzů?</summary>
-<p>
-Online kurzy probíhají prostřednictvím videokonferencí nebo prezenčně a zahrnují prezenční nebo interaktivní lekce s učiteli, které trvají 45 až 90 minut.
-</p>
-</details>
+### 2. Jaké služby poskytujete v rámci prodeje techniky?
+Zajišťujeme nákup a dovoz těžké techniky (traktory, bagry, nákladní vozy) ze zahraničí. Nejde o prodej IT techniky, ale o stavební a zemědělské stroje.
 
-<details>
-<summary>Jaký je postup pro technickou podporu?</summary>
-<p>
-Technickou podporu si můžete objednat online, a naši specialisté vám poskytnou rychlé a efektivní řešení vašich problémů.
-</p>
-</details>
+### 3. Pomáháte i s vízy do jiných zemí než Panamy?
+Specializujeme se primárně na Panamu, ale díky naší síti partnerů dokážeme pomoci i v jiných zemích Latinské Ameriky (Kostarika, Paraguay).
 
-<details>
-<summary>Jaký je postup pro online nákup nákladní techniky?</summary>
-<p>
-Zadáte poptávku, tzn: model, výbava, rok a zemi exportu. Nákladní techniku vyhledáme, nafotíme, spolu po video hovoru odsouhlasíme, vyřídíme veškeré formality s celními úřady a co nejrychleji dodáme na Vámi určené místo.
-</p>
-</details>
+### 4. Jsou vaše kurzy certifikované?
+Ano, po úspěšném absolvování našich online kurzů obdržíte certifikát o absolvování.
 
-</div>
+### 5. Jak funguje platba za služby?
+Platby přijímáme bankovním převodem (SEPA / SWIFT) nebo v kryptoměnách. U větších projektů je možná platba po částech na základě milníků.

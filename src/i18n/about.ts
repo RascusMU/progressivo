@@ -293,46 +293,124 @@ export const aboutContent = {
   "es": {
     "hero": {
       "title": "Sobre Progressivo",
-      "perex": "..."
+      "perex": "Progressivo surgió porque las cosas que deberían ser simples a menudo son innecesariamente complejas. Ayudo a personas y empresas a moverse entre países, sistemas y decisiones, con seguridad y sin burocracia innecesaria."
     },
     "started": {
-      "title": "",
-      "text": []
+      "title": "Cómo empezó todo",
+      "text": [
+        "Pasé más de 15 años construyendo proyectos logísticos y en línea entre Europa y el resto del mundo.",
+        "Descubrí que las personas pierden tiempo y dinero no porque carezcan de habilidades, sino porque los sistemas son innecesariamente complicados. Mudarse al extranjero. Comprar una propiedad en un país extranjero. Gestionar un negocio en línea desde otro continente. Tramitar visas. Conectar docenas de herramientas en línea.",
+        "Todo esto debería ser fácil, pero a menudo no lo es.",
+        "Por eso existe Progressivo.",
+        "En 2022 fundé Progressivo Corp. en Panamá. No como una corporación, sino como un ecosistema de servicios basado en las necesidades reales de las personas que viven o hacen negocios entre continentes."
+      ]
     },
     "whatWeDo": {
-      "title": "",
-      "perex": "",
-      "items": []
+      "title": "Qué hacemos realmente",
+      "perex": "Progressivo no es un solo servicio. Es un ecosistema que cubre lo que realmente necesita cuando se mueve entre países y sistemas.",
+      "items": [
+        {
+          "title": "Vida entre continentes",
+          "desc": "Expatriación, visas, bienes raíces, servicios legales.",
+          "target": "Para personas que quieren vivir o invertir en América Latina."
+        },
+        {
+          "title": "Negocios online sin fronteras",
+          "desc": "Soporte de TI, integración de herramientas, automatización.",
+          "target": "Para emprendedores que quieren dirigir su empresa desde cualquier lugar."
+        },
+        {
+          "title": "Proyectos especiales",
+          "desc": "Análisis de ADN, cursos en línea, logística B2B.",
+          "target": "Para aquellos que necesitan algo específico y lo necesitan bien hecho."
+        }
+      ]
     },
     "why": {
-      "title": "",
-      "text": []
+      "title": "¿Por qué tantas cosas bajo un mismo techo?",
+      "text": [
+        "Porque cuando te mudas a Panamá, no solo necesitas visas. También necesitas una propiedad. Y una cuenta bancaria. Y gestión de sitios web si tienes un negocio en línea.",
+        "Cuando compras tecnología en Europa para un proyecto en América del Sur, no solo necesitas logística. También necesitas servicio de aduanas. Y a veces un marco legal.",
+        "Progressivo no es una 'plataforma multiservicio'. Es un ecosistema construido sobre las necesidades reales de las personas que viven o hacen negocios entre continentes.",
+        "Cada servicio existe porque alguien específico lo necesitaba, y nosotros lo resolvimos."
+      ]
     },
     "how": {
-      "title": "",
-      "items": []
+      "title": "Cómo trabajamos",
+      "items": [
+        {
+          "title": "No hacemos cosas que no conocemos desde dentro.",
+          "desc": "Vivo entre Europa y Panamá. He pasado por la expatriación, visas y burocracia. Sé cómo funciona y dónde no funciona."
+        },
+        {
+          "title": "Usted no es un número en el sistema.",
+          "desc": "Conozco a cada cliente por su nombre. Respondo personalmente. Si no sé algo, lo digo directamente."
+        },
+        {
+          "title": "Simplificamos, no complicamos.",
+          "desc": "Si existe una manera más simple, la usamos. Si no, explicamos por qué."
+        },
+        {
+          "title": "Conectamos lo que otros manejan por separado.",
+          "desc": "Visas, bienes raíces, TI, logística: en la vida real, todo funciona como un conjunto."
+        }
+      ]
     },
     "network": {
-      "title": "",
-      "perex": "",
-      "items": [],
-      "conclusion": ""
+      "title": "Red de proyectos",
+      "perex": "Progressivo no es solo una empresa. Es una red de proyectos interconectados que juntos forman un ecosistema para la vida y el trabajo entre continentes:",
+      "items": [
+        {
+          "name": "iTutoring.cz",
+          "desc": "Tutorías y cursos en línea"
+        },
+        {
+          "name": "jerry.cingel.cz",
+          "desc": "Proyectos personales y blog"
+        },
+        {
+          "name": "bailamos.cz",
+          "desc": "Actividades de danza y cultura"
+        },
+        {
+          "name": "panama.bailamos.cz",
+          "desc": "Vida en Panamá"
+        },
+        {
+          "name": "DomiToo",
+          "desc": "Herramientas de IA para la creación de sitios web"
+        }
+      ],
+      "conclusion": "Cada proyecto tiene su propósito. Juntos funcionan como un todo."
     },
     "founder": {
       "name": "Jaroslav Cingel",
       "role": "Fundador",
-      "text": [],
-      "quote": ""
+      "text": [
+        "Durante más de 15 años he estado conectando a Europa con el mundo, en negocios, logística y proyectos en línea.",
+        "Progressivo nació porque las cosas que deberían ser simples a menudo son innecesariamente complejas. Ayudo a simplificarlas, ya sea mudarse a Panamá, comprar una propiedad en Costa Rica, análisis de ADN o automatización de negocios en línea.",
+        "Vivo entre Europa y Panamá. Busco la libertad de elección: dónde trabajar, con quién colaborar y cómo ayudar a otros a encontrar esa misma libertad."
+      ],
+      "quote": "“El futuro pertenece a aquellos que no temen conectar lo aparentemente inconectable.”"
     },
     "testimonials": {
-      "title": "",
-      "items": []
+      "title": "Lo que dicen los clientes",
+      "items": [
+        {
+          "text": "Gracias a Jaroslav, me mudé con mi familia a Panamá en tres meses. Él se encargó de todo, desde la visa hasta la escuela para los niños.",
+          "author": "Martin K., Praga"
+        },
+        {
+          "text": "Gracias a Progressivo Corp., logré expandirme al mercado internacional y abrir nuevas oportunidades comerciales.",
+          "author": "Daulet Aimanov"
+        }
+      ]
     },
     "cta": {
-      "title": "",
-      "text": "",
+      "title": "¿Tiene alguna pregunta?",
+      "text": "Escríbame directamente, respondo personalmente.",
       "button": "Escribir a Jaroslav",
-      "whatsapp": ""
+      "whatsapp": "Escribir por WhatsApp"
     }
   },
   "ru": {

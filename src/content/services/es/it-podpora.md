@@ -1,24 +1,22 @@
 ---
 title: "Soporte de TI"
-description: "Aseguramiento de la funcionalidad tecnológica, solución de problemas y gestión de sistemas."
+description: "Atención profesional para su infraestructura de TI, seguridad y funcionamiento fluido de los sistemas."
 lang: es
-image: "/images/IT-podpora.jpg"
+image: "/images/it-support.png"
 ---
 # Soporte de TI
 
-El **Soporte de TI** es un servicio clave que asegura que su tecnología funcione exactamente como usted lo necesita. Puede incluir una amplia gama de actividades, desde asistencia diaria con problemas técnicos hasta la gestión integral de la infraestructura de TI.
+**Soporte de TI** es un servicio que garantiza que su tecnología funcione de manera confiable, segura y eficiente. Ya sea que sea un individuo o una empresa, nos encargaremos de sus necesidades digitales.
 
-**Bajo soporte de TI, puede imaginar, por ejemplo:**
-Solución de problemas técnicos: Cuando encuentra un problema con su computadora, software o red, el soporte de TI está ahí para ayudarle lo más rápido posible.
+**Qué ofrecemos:**
+Administración de servidores, redes y estaciones de trabajo.
+Resolución rápida de problemas técnicos y fallas (helpdesk).
+Seguridad de datos, copias de seguridad y protección contra ciberataques.
+Instalación y configuración de software y hardware.
 
-**Gestión de Sistemas:**
-El soporte de TI se encarga de que sus servidores, aplicaciones y otras tecnologías funcionen sin problemas y sin interrupciones.
-Instalación y Configuración: ¿Necesita nuevo software o un dispositivo?
-El soporte de TI asegura su correcta instalación y configuración.
+**Por qué elegir nuestro soporte de TI:**
+Enfoque proactivo: resolvemos problemas antes de que amenacen su trabajo.
+Flexibilidad: soporte remoto y visitas in situ según sea necesario.
+Comprensibilidad: le explicaremos todo en un lenguaje humano, sin jerga técnica compleja.
 
-**Seguridad:**
-El soporte de TI cuida la seguridad de sus datos y sistemas, lo protege de ciberataques y recomienda las mejores prácticas de seguridad.
-
-**Consultoría:** Si está pensando en modernizar la tecnología o buscando formas de mejorar la eficiencia, el soporte de TI le brinda consejos y recomendaciones de expertos.
-
-**Gracias al soporte de TI, puede concentrarse en su negocio o tareas diarias sin tener que estresarse por problemas técnicos. En resumen, es el respaldo que asegura el funcionamiento fluido de todos sus procesos digitales.**
+**Un entorno de TI que funciona** es la base del éxito en el mundo moderno. Confíenos sus tecnologías y concéntrese en sus objetivos.
