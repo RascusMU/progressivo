@@ -1,74 +1,28 @@
 ---
-const { lang = 'cs' } = Astro.props;
+import { ui, defaultLang } from '../i18n/ui';
 
-const translations = {
-  cs: {
-    name: "Jméno",
-    email: "Email",
-    message: "Zpráva",
-    submit: "Odeslat",
-    placeholder_name: "Jan Novák",
-    placeholder_email: "jan@example.com",
-    placeholder_message: "Vaše zpráva..."
-  },
-  en: {
-    name: "Name",
-    email: "Email",
-    message: "Message",
-    submit: "Send",
-    placeholder_name: "John Doe",
-    placeholder_email: "john@example.com",
-    placeholder_message: "Your message..."
-  },
-  de: {
-    name: "Name",
-    email: "E-Mail",
-    message: "Nachricht",
-    submit: "Senden",
-    placeholder_name: "Max Mustermann",
-    placeholder_email: "max@example.com",
-    placeholder_message: "Ihre Nachricht..."
-  },
-  es: {
-    name: "Nombre",
-    email: "Correo electrónico",
-    message: "Mensaje",
-    submit: "Enviar",
-    placeholder_name: "Juan Pérez",
-    placeholder_email: "juan@example.com",
-    placeholder_message: "Su mensaje..."
-  },
-  ru: {
-    name: "Имя",
-    email: "Электронная почта",
-    message: "Сообщение",
-    submit: "Отправить",
-    placeholder_name: "Иван Иванов",
-    placeholder_email: "ivan@example.com",
-    placeholder_message: "Ваше сообщение..."
-  }
-};
+const { lang = defaultLang } = Astro.props;
 
-const t = translations[lang] || translations.cs;
+const t = ui[lang] || ui[defaultLang];
 ---
 
 <form action="mailto:info@progressivo.eu" method="post" enctype="text/plain" class="contact-form">
     <div class="form-group">
-        <label for="name">{t.name}</label>
-        <input type="text" id="name" name="name" placeholder={t.placeholder_name} required />
+        <label for="name">{t.form.name_label}</label>
+        <input type="text" id="name" name="name" placeholder={t.form.name_placeholder} required />
     </div>
 
     <div class="form-group">
-        <label for="email">{t.email}</label>
-        <input type="email" id="email" name="email" placeholder={t.placeholder_email} required />
+        <label for="email">{t.form.email_label}</label>
+        <input type="email" id="email" name="email" placeholder={t.form.email_placeholder} required />
     </div>
 
     <div class="form-group">
-        <label for="message">{t.message}</label>
-        <textarea id="message" name="message" rows="5" placeholder={t.placeholder_message} required></textarea>
+        <label for="message">{t.form.message_label}</label>
+        <textarea id="message" name="message" rows="5" placeholder={t.form.message_placeholder} required></textarea>
     </div>
 
-    <button type="submit" class="submit-btn">{t.submit}</button>
+    <button type="submit" class="submit-btn">{t.buttons.submit}</button>
 </form>
 
 <style>

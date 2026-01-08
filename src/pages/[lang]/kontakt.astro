@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
-import { ui } from '../../i18n/ui';
+import { ui, defaultLang } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   return [
@@ -18,30 +18,30 @@ const id = lang === 'cs' ? 'contact' : `${lang}/contact`;
 const entry = await getEntry('pages', id);
 
 const { Content } = entry ? await render(entry) : { Content: null };
-const t = ui[lang] || ui.cs;
+const t = ui[lang] || ui[defaultLang];
 ---
 
-<Layout lang={lang} title={`${t['contact.title']} | Progressivo`}>
+<Layout lang={lang} title={`${t.pages.contact_title} | Progressivo`}>
   <main class="container page-content animate-on-scroll">
     <div class="contact-grid">
       <!-- Levý sloupec: Info & Kontext -->
       <div class="info-column">
-        <h1>{t['contact.title']}</h1>
-        <p class="intro-text">{t['contact.intro']}</p>
+        <h1>{t.pages.contact_title}</h1>
+        <p class="intro-text">{t.pages.contact.intro}</p>
 
         <div class="contact-details protected-content">
           <div class="detail-item">
-            <span class="detail-label">{t['contact.phone']}</span>
+            <span class="detail-label">{t.pages.contact.phone}</span>
             <span class="detail-value font-mono">+507 6850-9698</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">{t['contact.email']}</span>
+            <span class="detail-label">{t.pages.contact.email}</span>
             <span class="detail-value font-mono">info@progressivo.eu</span>
           </div>
         </div>
 
         <a href="https://wa.me/50768509698" target="_blank" rel="noopener noreferrer" class="whatsapp-link">
-          {t['contact.whatsapp']}
+          {t.buttons.whatsapp}
         </a>
 
         <div class="map-wrapper" id="map-container">
@@ -51,8 +51,8 @@ const t = ui[lang] || ui.cs;
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <button id="show-map-btn" class="show-map-btn" aria-label={t['contact.showMap']}>
-                {t['contact.showMap']}
+              <button id="show-map-btn" class="show-map-btn" aria-label={t.buttons.show_map}>
+                {t.buttons.show_map}
               </button>
             </div>
           </div>

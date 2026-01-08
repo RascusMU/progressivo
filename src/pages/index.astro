@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import FounderAudioPlayer from '../components/FounderAudioPlayer.astro';
 import { getCollection } from 'astro:content';
+import { ui } from '../i18n/ui';
+
+const lang = 'cs';
+const t = ui[lang];
 
 const allServices = await getCollection('services');
 let services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].some(prefix => service.id.startsWith(prefix)));
@@ -24,7 +28,7 @@ services.sort((a, b) => {
 });
 ---
 
-<Layout title="Domů | Progressivo">
+<Layout title={`${t.pages.home_title} | Progressivo`}>
   <script>
     document.addEventListener('astro:page-load', () => {
         // Stats Animation
@@ -128,9 +132,9 @@ services.sort((a, b) => {
   <!-- Editorial Hero Section -->
   <section class="editorial-hero">
     <div class="container hero-content">
-      <h1 class="hero-title">Svět není složitý. <br> Jen špatně vysvětlený.</h1>
-      <p class="hero-subtitle">Pomáháme lidem a firmám pohybovat se mezi zeměmi, systémy a rozhodnutími – s jistotou.</p>
-      <a href="#services" class="editorial-cta">Spolupracovat <span class="arrow">→</span></a>
+      <h1 class="hero-title" set:html={t.pages.home.hero_title}></h1>
+      <p class="hero-subtitle">{t.pages.home.hero_subtitle}</p>
+      <a href="#services" class="editorial-cta">{t.buttons.collaborate} <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -138,26 +142,20 @@ services.sort((a, b) => {
   <section id="zakladatel" class="founder-section animate-on-scroll">
     <div class="container founder-content">
       <div class="founder-text-column">
-        <h2 class="editorial-title">Kdo stojí za Progressivo</h2>
+        <h2 class="editorial-title">{t.pages.home.founder_title}</h2>
         <div class="founder-prose">
-          <p class="founder-name">Jaroslav Cingel</p>
-          <p>
-            Více než 15 let propojuji Evropu se světem – v byznysu, logistice a online projektech.
-          </p>
-          <p>
-            Progressivo vzniklo proto, že věci, které by měly být jednoduché, jsou často zbytečně složité. Pomáhám je zjednodušit.
-          </p>
-          <p>
-            Žiju mezi Evropou a Panamou. Hledám svobodu volby – kde pracovat a s kým spolupracovat.
-          </p>
+          <p class="founder-name">{t.pages.home.founder_name}</p>
+          <p>{t.pages.home.founder_p1}</p>
+          <p>{t.pages.home.founder_p2}</p>
+          <p>{t.pages.home.founder_p3}</p>
         </div>
 
         <div class="founder-actions">
-          <a href="https://cingel.cz" target="_blank" class="founder-link">→ Poznat můj příběh</a>
+          <a href="https://cingel.cz" target="_blank" class="founder-link">{t.buttons.founder_story}</a>
           <FounderAudioPlayer
             src="/audio/founder-intro.mp3"
-            buttonText="▶ Poslechnout"
-            disclaimerText="Audio verze úvodu"
+            buttonText={t.buttons.play_audio}
+            disclaimerText={t.pages.home.audio_note}
           />
         </div>
       </div>
@@ -175,15 +173,15 @@ services.sort((a, b) => {
     <div class="container stats-container">
       <div class="stat-item">
         <div class="stat-number" data-target="15">0</div>
-        <div class="stat-label">let v byznysu</div>
+        <div class="stat-label">{t.pages.home.stats_years}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">kontinenty</div>
+        <div class="stat-label">{t.pages.home.stats_continents}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="24">0</div>
-        <div class="stat-label">/7 podpora</div>
+        <div class="stat-label">{t.pages.home.stats_support}</div>
       </div>
     </div>
   </section>
@@ -191,7 +189,7 @@ services.sort((a, b) => {
   <!-- Services Section -->
   <section id="services" class="section-services animate-on-scroll">
     <div class="container">
-      <h2 class="section-title">Naše služby</h2>
+      <h2 class="section-title">{t.pages.home.services_title}</h2>
       <div class="services-grid">
         {services.map((service) => {
           const slug = service.id.replace(/\.md$/, '');

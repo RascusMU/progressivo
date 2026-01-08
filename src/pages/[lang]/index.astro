@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import FounderAudioPlayer from '../../components/FounderAudioPlayer.astro';
 import { getCollection } from 'astro:content';
+import { ui, defaultLang } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   return [
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const allServices = await getCollection('services');
 let services = allServices.filter(service => service.id.startsWith(lang + '/'));
+const t = ui[lang] || ui[defaultLang];
 
 const desiredOrder = [
   'analyza-dna',
@@ -32,87 +34,9 @@ services.sort((a, b) => {
   const slugB = b.id.split('/').pop().replace(/\.md$/, '');
   return desiredOrder.indexOf(slugA) - desiredOrder.indexOf(slugB);
 });
-
-const translations = {
-  en: {
-    heroTitle: "The world isn't complex. <br> Just poorly explained.",
-    heroSubtitle: "We help people and companies navigate between countries, systems, and decisions – with certainty.",
-    heroButton: "Collaborate",
-    founderTitle: "Who's Behind Progressivo",
-    founderName: "Jaroslav Cingel",
-    founderP1: "For over 15 years, I've been connecting Europe with the world – in business, logistics, and online projects.",
-    founderP2: "Progressivo was born from frustration. Things that should be simple are often unnecessarily complicated. I help simplify them.",
-    founderP3: "I live between Europe and Panama. I seek freedom of choice – where to work and who to work with.",
-    founderLink: "→ Learn my story",
-    founderAudioButton: "▶ Listen",
-    founderAudioNote: "Audio intro",
-    statsYears: "Years in Business",
-    statsContinents: "Continents",
-    statsSupport: "/7 Support",
-    servicesTitle: "Our Services",
-    servicesLink: "More Info \u2192"
-  },
-  de: {
-    heroTitle: "Die Welt ist nicht kompliziert. <br> Nur schlecht erklärt.",
-    heroSubtitle: "Wir helfen Menschen und Unternehmen, sich zwischen Ländern, Systemen und Entscheidungen zu bewegen – mit Sicherheit.",
-    heroButton: "Zusammenarbeiten",
-    founderTitle: "Wer steht hinter Progressivo",
-    founderName: "Jaroslav Cingel",
-    founderP1: "Seit über 15 Jahren verbinde ich Europa mit der Welt – in Business, Logistik und Online-Projekten.",
-    founderP2: "Progressivo entstand aus Frustration. Dinge, die einfach sein sollten, sind oft unnötig kompliziert. Ich helfe, sie zu vereinfachen.",
-    founderP3: "Ich lebe zwischen Europa und Panama. Ich suche Wahlfreiheit – wo ich arbeite und mit wem ich zusammenarbeite.",
-    founderLink: "→ Meine Geschichte",
-    founderAudioButton: "▶ Anhören",
-    founderAudioNote: "Audio-Intro",
-    statsYears: "Jahre im Geschäft",
-    statsContinents: "Kontinente",
-    statsSupport: "/7 Support",
-    servicesTitle: "Unsere Dienstleistungen",
-    servicesLink: "Mehr Info \u2192"
-  },
-  es: {
-    heroTitle: "El mundo no es complejo. <br> Solo está mal explicado.",
-    heroSubtitle: "Ayudamos a personas y empresas a moverse entre países, sistemas y decisiones – con seguridad y certeza.",
-    heroButton: "Colaborar",
-    founderTitle: "Quién está detrás de Progressivo",
-    founderName: "Jaroslav Cingel",
-    founderP1: "Durante más de 15 años, he conectado a Europa con el mundo – en negocios, logística y proyectos en línea.",
-    founderP2: "Progressivo nació de la frustración. Las cosas que deberían ser simples a menudo son innecesariamente complicadas. Yo ayudo a simplificarlas.",
-    founderP3: "Vivo entre Europa y Panamá. Busco la libertad de elección – dónde trabajar y con quién colaborar.",
-    founderLink: "→ Conocer mi historia",
-    founderAudioButton: "▶ Escuchar",
-    founderAudioNote: "Versión de audio",
-    statsYears: "Años en el negocio",
-    statsContinents: "Continentes",
-    statsSupport: "/7 Soporte",
-    servicesTitle: "Nuestros Servicios",
-    servicesLink: "Más información \u2192"
-  },
-  ru: {
-    heroTitle: "Мир не сложен. <br> Просто плохо объяснен.",
-    heroSubtitle: "Мы помогаем людям и компаниям перемещаться между странами, системами и решениями – с уверенностью.",
-    heroButton: "Сотрудничать",
-    founderTitle: "Кто стоит за Progressivo",
-    founderName: "Ярослав Цингел",
-    founderP1: "Более 15 лет я связываю Европу с миром – в бизнесе, логистике и онлайн-проектах.",
-    founderP2: "Progressivo родилось из разочарования. Вещи, которые должны быть простыми, часто излишне сложны. Я помогаю их упростить.",
-    founderP3: "Я живу между Европой и Панамой. Я ищу свободу выбора – где работать и с кем сотрудничать.",
-    founderLink: "→ Узнать мою историю",
-    founderAudioButton: "▶ Послушать",
-    founderAudioNote: "Аудио-версия",
-    statsYears: "Лет в бизнесе",
-    statsContinents: "Континента",
-    statsSupport: "/7 Поддержка",
-    servicesTitle: "Наши услуги",
-    servicesLink: "Подробнее \u2192"
-  }
-};
-
-// @ts-ignore
-const t = translations[lang];
 ---
 
-<Layout lang={lang} title="Domů | Progressivo">
+<Layout lang={lang} title={`${t.pages.home_title} | Progressivo`}>
   <script>
     document.addEventListener('astro:page-load', () => {
         // Stats Animation
@@ -243,9 +167,9 @@ const t = translations[lang];
   <!-- Editorial Hero Section -->
   <section class="editorial-hero">
     <div class="container hero-content">
-      <h1 class="hero-title" set:html={t.heroTitle}></h1>
-      <p class="hero-subtitle">{t.heroSubtitle}</p>
-      <a href="#services" class="editorial-cta">{t.heroButton} <span class="arrow">→</span></a>
+      <h1 class="hero-title" set:html={t.pages.home.hero_title}></h1>
+      <p class="hero-subtitle">{t.pages.home.hero_subtitle}</p>
+      <a href="#services" class="editorial-cta">{t.buttons.collaborate} <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -253,26 +177,20 @@ const t = translations[lang];
   <section id="founder" class="founder-section animate-on-scroll">
     <div class="container founder-content">
       <div class="founder-text-column">
-        <h2 class="editorial-title">{t.founderTitle}</h2>
+        <h2 class="editorial-title">{t.pages.home.founder_title}</h2>
         <div class="founder-prose">
-          <p class="founder-name">{t.founderName}</p>
-          <p>
-            {t.founderP1}
-          </p>
-          <p>
-            {t.founderP2}
-          </p>
-          <p>
-            {t.founderP3}
-          </p>
+          <p class="founder-name">{t.pages.home.founder_name}</p>
+          <p>{t.pages.home.founder_p1}</p>
+          <p>{t.pages.home.founder_p2}</p>
+          <p>{t.pages.home.founder_p3}</p>
         </div>
 
         <div class="founder-actions">
-          <a href="https://cingel.cz" target="_blank" class="founder-link">{t.founderLink}</a>
+          <a href="https://cingel.cz" target="_blank" class="founder-link">{t.buttons.founder_story}</a>
           <FounderAudioPlayer
             src="/audio/founder-intro.mp3"
-            buttonText={t.founderAudioButton}
-            disclaimerText={t.founderAudioNote}
+            buttonText={t.buttons.play_audio}
+            disclaimerText={t.pages.home.audio_note}
           />
         </div>
       </div>
@@ -290,15 +208,15 @@ const t = translations[lang];
     <div class="container stats-container">
       <div class="stat-item">
         <div class="stat-number" data-target="15">0</div>
-        <div class="stat-label">{t.statsYears}</div>
+        <div class="stat-label">{t.pages.home.stats_years}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="3">0</div>
-        <div class="stat-label">{t.statsContinents}</div>
+        <div class="stat-label">{t.pages.home.stats_continents}</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="24">0</div>
-        <div class="stat-label">{t.statsSupport}</div>
+        <div class="stat-label">{t.pages.home.stats_support}</div>
       </div>
     </div>
   </section>
@@ -306,7 +224,7 @@ const t = translations[lang];
   <!-- Services Section -->
   <section id="services" class="section-services animate-on-scroll">
     <div class="container">
-      <h2 class="section-title">{t.servicesTitle}</h2>
+      <h2 class="section-title">{t.pages.home.services_title}</h2>
       <div class="services-grid">
         {services.map((service) => {
           const slug = service.id.split('/').pop().replace(/\.md$/, '');

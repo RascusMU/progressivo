@@ -1,96 +1,10 @@
 ---
-const { lang = 'cs' } = Astro.props;
+import { ui, defaultLang } from '../i18n/ui';
+
+const { lang = defaultLang } = Astro.props;
 const year = new Date().getFullYear();
 
-const translations = {
-  cs: {
-    founderRole: "Zakladatel & CEO",
-    quote: "\"Budoucnost patří těm, kteří se nebojí spojit zdánlivě nespojitelné.\"",
-    writeToMe: "Napište mi \u2192",
-    navTitle: "Navigace",
-    networkTitle: "Síť & Ekosystém",
-    trustTitle: "Důvěra & Legal",
-    linkServices: "Služby",
-    linkBlog: "Blog",
-    linkAbout: "O nás",
-    linkContact: "Kontakt",
-    linkGdpr: "GDPR a ochrana dat",
-    linkTerms: "Obchodní podmínky",
-    linkContract: "Smluvní podmínky",
-    linkWeby: "Weby",
-    allRights: "Všechna práva vyhrazena."
-  },
-  en: {
-    founderRole: "Founder & CEO",
-    quote: "\"The future belongs to those who are not afraid to connect the seemingly unconnected.\"",
-    writeToMe: "Write to me \u2192",
-    navTitle: "Navigation",
-    networkTitle: "Network & Ecosystem",
-    trustTitle: "Trust & Legal",
-    linkServices: "Services",
-    linkBlog: "Blog",
-    linkAbout: "About Us",
-    linkContact: "Contact",
-    linkGdpr: "GDPR & Data Protection",
-    linkTerms: "Terms & Conditions",
-    linkContract: "Contractual Terms",
-    linkWeby: "Websites",
-    allRights: "All rights reserved."
-  },
-  de: {
-    founderRole: "Gründer & CEO",
-    quote: "\"Die Zukunft gehört denen, die sich nicht scheuen, das scheinbar Unverbindbare zu verbinden.\"",
-    writeToMe: "Schreiben Sie mir \u2192",
-    navTitle: "Navigation",
-    networkTitle: "Netzwerk & Ökosystem",
-    trustTitle: "Vertrauen & Recht",
-    linkServices: "Dienstleistungen",
-    linkBlog: "Blog",
-    linkAbout: "Über uns",
-    linkContact: "Kontakt",
-    linkGdpr: "DSGVO & Datenschutz",
-    linkTerms: "AGB",
-    linkContract: "Vertragsbedingungen",
-    linkWeby: "Websites",
-    allRights: "Alle Rechte vorbehalten."
-  },
-  es: {
-    founderRole: "Fundador & CEO",
-    quote: "\"El futuro pertenece a aquellos que no temen conectar lo aparentemente inconectable.\"",
-    writeToMe: "Escríbeme \u2192",
-    navTitle: "Navegación",
-    networkTitle: "Red y Ecosistema",
-    trustTitle: "Confianza y Legal",
-    linkServices: "Servicios",
-    linkBlog: "Blog",
-    linkAbout: "Sobre nosotros",
-    linkContact: "Contacto",
-    linkGdpr: "GDPR y protección de datos",
-    linkTerms: "Términos y condiciones",
-    linkContract: "Condiciones contractuales",
-    linkWeby: "Sitios web",
-    allRights: "Todos los derechos reservados."
-  },
-  ru: {
-    founderRole: "Основатель и CEO",
-    quote: "\"Будущее принадлежит тем, кто не боится соединять, казалось бы, несоединимое.\"",
-    writeToMe: "Напишите мне \u2192",
-    navTitle: "Навигация",
-    networkTitle: "Сеть и Экосистема",
-    trustTitle: "Доверие и Право",
-    linkServices: "Услуги",
-    linkBlog: "Блог",
-    linkAbout: "О нас",
-    linkContact: "Контакты",
-    linkGdpr: "GDPR и защита данных",
-    linkTerms: "Условия использования",
-    linkContract: "Договорные условия",
-    linkWeby: "Веб-сайты",
-    allRights: "Все права защищены."
-  }
-};
-
-const t = translations[lang] || translations.cs;
+const t = ui[lang] || ui[defaultLang];
 
 // Helper for links
 const getLink = (path) => {
@@ -107,12 +21,12 @@ const getLink = (path) => {
          <img src="/images/tatka_knihovna.webp" alt="Jaroslav Cingel" class="medallion-image" />
       </div>
       <div class="medallion-text">
-        <p class="quote">{t.quote}</p>
+        <p class="quote">{t.footer.quote}</p>
         <div class="signature">
           <span class="name">Jaroslav Cingel</span>
           <span class="title">CEO, Progressivo Corp.</span>
         </div>
-        <a href="mailto:jaroslav@cingel.cz" class="contact-link">{t.writeToMe}</a>
+        <a href="mailto:jaroslav@cingel.cz" class="contact-link">{t.buttons.write_to_me}</a>
       </div>
     </div>
   </div>
@@ -120,20 +34,20 @@ const getLink = (path) => {
   <div class="footer-container">
     <!-- Column A: Navigation -->
     <div class="footer-col nav-col">
-      <h3>{t.navTitle}</h3>
+      <h3>{t.footer.nav_title}</h3>
       <nav>
         <ul>
-          <li><a href={getLink('/o-nas')}>{t.linkAbout}</a></li>
-          <li><a href={getLink('/#services')}>{t.linkServices}</a></li>
-          <li><a href={getLink('/blog')}>{t.linkBlog}</a></li>
-          <li><a href={getLink('/kontakt')}>{t.linkContact}</a></li>
+          <li><a href={getLink('/o-nas')}>{t.nav.about}</a></li>
+          <li><a href={getLink('/#services')}>{t.nav.services}</a></li>
+          <li><a href={getLink('/blog')}>{t.nav.blog}</a></li>
+          <li><a href={getLink('/kontakt')}>{t.nav.contact}</a></li>
         </ul>
       </nav>
     </div>
 
     <!-- Column B: Network & Ecosystem -->
     <div class="footer-col network-col">
-      <h3>{t.networkTitle}</h3>
+      <h3>{t.footer.network_title}</h3>
       <nav>
         <ul>
           <li>
@@ -167,7 +81,7 @@ const getLink = (path) => {
           </li>
           <li>
             <a href="https://progressivo.eu" target="_blank" rel="noopener noreferrer">
-              {t.linkWeby} <span class="icon-external" aria-hidden="true">↗</span>
+              {t.footer.link_webs} <span class="icon-external" aria-hidden="true">↗</span>
             </a>
           </li>
         </ul>
@@ -176,7 +90,7 @@ const getLink = (path) => {
 
     <!-- Column D: Trust & Legal -->
     <div class="footer-col trust-col">
-      <h3>{t.trustTitle}</h3>
+      <h3>{t.footer.trust_title}</h3>
       <nav>
         <ul>
           <li>
@@ -184,9 +98,9 @@ const getLink = (path) => {
                LinkedIn <span class="icon-external" aria-hidden="true">↗</span>
              </a>
           </li>
-          <li><a href={getLink('/gdpr')}>{t.linkGdpr}</a></li>
-          <li><a href={getLink('/obchodni-podminky')}>{t.linkTerms}</a></li>
-          <li><a href={getLink('/smluvni-podminky')}>{t.linkContract}</a></li>
+          <li><a href={getLink('/gdpr')}>{t.footer.link_gdpr}</a></li>
+          <li><a href={getLink('/obchodni-podminky')}>{t.footer.link_terms}</a></li>
+          <li><a href={getLink('/smluvni-podminky')}>{t.footer.link_contract}</a></li>
         </ul>
       </nav>
     </div>
