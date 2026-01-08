@@ -2,7 +2,7 @@
 ---
 
 <section class="editorial-time-signal" aria-label="Global Operations Time Zones">
-  <div class="container signal-content">
+  <div class="signal-content">
     <!-- 1) Primary Brand Statement -->
     <div class="brand-statement">
       BUILT ON 15+ YEARS OF EXPERIENCE — WORKING ACROSS TIME ZONES
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <!-- 3) Micro Heartbeat Line -->
+    <!-- 3) Heartbeat Line -->
     <div class="heartbeat-line"></div>
   </div>
 </section>
@@ -81,18 +81,6 @@
         // Set interval for 1 minute
         window[INTERVAL_KEY] = setInterval(updateTime, 60000);
     }, msToNextMinute);
-
-    // Also store the timeout ID temporarily if needed, but for simplicity
-    // we assume the timeout is short enough or we just clear the interval on next load.
-    // Ideally we track the timeout too if the user navigates away VERY quickly.
-
-    // Better cleanup logic for Astro View Transitions:
-    // When the page unloads or before new page load, we should clear everything.
-    // However, initTimeSignal is called on 'astro:page-load'.
-    // The previous interval is cleared at the start of initTimeSignal.
-
-    // We can also attach a listener for 'astro:before-preparation' or similar if we want to be pedantic,
-    // but clearing at start of function is robust enough for SPA navigation.
   }
 
   document.addEventListener('astro:page-load', initTimeSignal);
@@ -100,49 +88,64 @@
 
 <style>
   .editorial-time-signal {
-    padding: 2rem 0 4rem 0; /* Adjust padding as needed for "directly under hero" */
+    /* SPACING (VZDUCH) - Distinct separation from Hero CTA */
+    margin-top: 7rem;
+    padding: 0;
     background-color: transparent;
     font-family: 'Manrope', sans-serif;
     text-align: center;
     position: relative;
     z-index: 10;
+
+    /* WIDTH & LAYOUT - 80% width logic */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .signal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    max-width: 1000px;
+    /* SPACING - Gap between lines */
+    gap: 1.5rem;
+    width: 100%;
   }
 
   /* 1) Primary Line */
   .brand-statement {
-    font-size: 0.875rem; /* 14px - "malá / editoriální" */
-    font-weight: 600;
+    /* SIZE (UPSCALING) - Increased ~30% */
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-weight: 600; /* SemiBold */
     text-transform: uppercase;
-    letter-spacing: 0.08em; /* "tracking: jemně zvýšený" */
+    letter-spacing: 0.08em;
+    /* COLOR (PAPER & INK) - Muted, not pure white */
     color: var(--color-text);
+    opacity: 0.7;
     line-height: 1.4;
   }
 
   /* 2) Secondary Line */
   .time-display {
     display: flex;
-    flex-direction: column; /* Mobile first: 2x2 grid approach via rows */
+    flex-direction: column; /* Mobile: 2x2 via rows */
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem; /* Smaller than primary */
-    font-weight: 500;
+    gap: 0.75rem; /* Space between rows on mobile */
+    /* SIZE (UPSCALING) - Increased ~30% */
+    font-size: 1rem;
+    font-weight: 600; /* SemiBold to support big title */
+    /* COLOR (PAPER & INK) */
     color: var(--color-text);
-    opacity: 0.7; /* "60–70% opacity" */
-    font-variant-numeric: tabular-nums; /* Critical */
+    opacity: 0.7;
+    font-variant-numeric: tabular-nums;
   }
 
   .time-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1.5rem; /* Generous space between items */
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .time-entry {
@@ -151,7 +154,7 @@
   }
 
   .separator {
-    margin: 0 0.25rem;
+    margin: 0 0.5rem;
     opacity: 0.5;
   }
 
@@ -162,12 +165,12 @@
   /* 3) Heartbeat Line */
   .heartbeat-line {
     height: 1px;
-    width: 60px; /* Start small, user said "50-60% width" - let's adjust */
-    width: 55%;
+    /* WIDTH - 80% to match container context logic */
+    width: 80%;
     background-color: var(--color-accent);
     margin-top: 1.5rem;
-    opacity: 0.4; /* "30-50%" */
-    animation: heartbeat 1.5s ease-in-out infinite alternate;
+    opacity: 0.4;
+    animation: heartbeat 2s ease-in-out infinite alternate;
   }
 
   @keyframes heartbeat {
@@ -176,7 +179,8 @@
       transform: scaleX(0.98);
     }
     100% {
-      opacity: 0.5;
+      /* HEARTBEAT - Strong signal of life */
+      opacity: 0.8;
       transform: scaleX(1.02);
     }
   }
@@ -184,21 +188,23 @@
   @media (prefers-reduced-motion: reduce) {
     .heartbeat-line {
       animation: none;
-      opacity: 0.4;
+      opacity: 0.6;
     }
   }
 
-  /* Desktop Styles (>= 640px) */
-  @media (min-width: 640px) {
+  /* Desktop Styles */
+  @media (min-width: 768px) {
     .time-display {
       flex-direction: row;
-      gap: 0.5rem;
+      gap: 1.5rem;
     }
 
     .desktop-only {
       display: inline;
     }
-  }
 
-  /* Dark mode tweaks if necessary - inherits variables, so should be fine */
+    .time-group {
+        gap: 0.5rem; /* Reset internal gap for single line flow if needed, or keep spacious */
+    }
+  }
 </style>
