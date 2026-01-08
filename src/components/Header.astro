@@ -70,13 +70,12 @@ const basePath = getPathFromUrl(currentPath);
 
         // Check for saved user preference, if any, on load
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            root.classList.toggle('dark', savedTheme === 'dark');
-        } else {
-            // Check system preference
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            root.classList.toggle('dark', systemPrefersDark);
-        }
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+
+        // Sync state
+        root.setAttribute('data-theme', theme);
+        root.classList.toggle('dark', theme === 'dark');
 
         if (themeToggle) {
              // Remove old listener if exists (good practice for SPA navigations, though strictly replaced elements don't need it)
@@ -85,7 +84,9 @@ const basePath = getPathFromUrl(currentPath);
 
              newThemeToggle.addEventListener('click', () => {
                 root.classList.toggle('dark');
-                localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+                const newTheme = root.classList.contains('dark') ? 'dark' : 'light';
+                root.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
             });
         }
 
