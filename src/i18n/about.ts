@@ -125,52 +125,124 @@ export const aboutContent = {
   "en": {
     "hero": {
       "title": "About Progressivo",
-      "perex": "Progressivo exists because things that should be simple are often unnecessarily complex."
+      "perex": "Progressivo exists because things that should be simple are often unnecessarily complex. I help people and businesses move between countries, systems, and decisions – with certainty and without unnecessary bureaucracy."
     },
     "started": {
-      "title": "How it started",
+      "title": "How It Started",
       "text": [
-        "I spent over 15 years building projects..."
+        "I spent more than 15 years building logistics and online projects between Europe and the rest of the world.",
+        "I found that people lose time and money not because they lack skills, but because systems are unnecessarily complicated. Moving abroad. Buying property in a foreign country. Managing an online business from another continent. Handling visas. Connecting dozens of online tools.",
+        "All of this should be easy – but often it is not.",
+        "That is why Progressivo exists.",
+        "In 2022, I founded Progressivo Corp. in Panama. Not as a corporation, but as an ecosystem of services built on the real needs of people living or doing business between continents."
       ]
     },
     "whatWeDo": {
-      "title": "What we actually do",
-      "perex": "Progressivo is an ecosystem...",
-      "items": []
+      "title": "What We Actually Do",
+      "perex": "Progressivo is not a single service. It is an ecosystem that covers what you really need when moving between countries and systems.",
+      "items": [
+        {
+          "title": "Life Between Continents",
+          "desc": "Expatriation, visas, real estate, legal services.",
+          "target": "For people who want to live or invest in Latin America."
+        },
+        {
+          "title": "Borderless Online Business",
+          "desc": "IT support, tool integration, automation.",
+          "target": "For entrepreneurs who want to run their business from anywhere."
+        },
+        {
+          "title": "Special Projects",
+          "desc": "DNA analysis, online courses, B2B logistics.",
+          "target": "For those who need something specific – and need it done well."
+        }
+      ]
     },
     "why": {
-      "title": "Why so many things?",
+      "title": "Why So Many Things Under One Roof?",
       "text": [
-        "Because when moving to Panama..."
+        "Because when you move to Panama, you don't just need visas. You also need property. And a bank account. And website management if you have an online business.",
+        "When you buy technology in Europe for a project in South America, you don't just need logistics. You also need customs service. And sometimes a legal framework.",
+        "Progressivo is not a \"multi-service platform\". It is an ecosystem built on the real needs of people living or doing business between continents.",
+        "Every service exists because someone specific needed it – and we solved it."
       ]
     },
     "how": {
-      "title": "How we work",
-      "items": []
+      "title": "How We Work",
+      "items": [
+        {
+          "title": "We don't do things we don't know from the inside.",
+          "desc": "I live between Europe and Panama. I've been through expatriation, visas, and bureaucracy. I know how it works – and where it doesn't."
+        },
+        {
+          "title": "You are not a number in the system.",
+          "desc": "I know every client by name. I respond personally. If I don't know something, I say it straight."
+        },
+        {
+          "title": "We simplify, not complicate.",
+          "desc": "If there is a simpler way, we use it. If not, we explain why."
+        },
+        {
+          "title": "We connect what others handle separately.",
+          "desc": "Visas, real estate, IT, logistics – in real life, it works as a whole."
+        }
+      ]
     },
     "network": {
-      "title": "Network of projects",
-      "perex": "Not just one company...",
-      "items": [],
-      "conclusion": "Each has a purpose."
+      "title": "Project Network",
+      "perex": "Progressivo is not just one company. It is a network of interconnected projects that together form an ecosystem for life and work between continents:",
+      "items": [
+        {
+          "name": "iTutoring.cz",
+          "desc": "Online tutoring and courses"
+        },
+        {
+          "name": "jerry.cingel.cz",
+          "desc": "Personal projects and blog"
+        },
+        {
+          "name": "bailamos.cz",
+          "desc": "Dance and cultural activities"
+        },
+        {
+          "name": "panama.bailamos.cz",
+          "desc": "Life in Panama"
+        },
+        {
+          "name": "DomiToo",
+          "desc": "AI tools for web creation"
+        }
+      ],
+      "conclusion": "Each project has its purpose. Together they work as a whole."
     },
     "founder": {
       "name": "Jaroslav Cingel",
       "role": "Founder",
       "text": [
-        "Over 15 years connecting Europe..."
+        "For over 15 years, I have been connecting Europe with the world – in business, logistics, and online projects.",
+        "Progressivo was born because things that should be simple are often unnecessarily complex. I help simplify them – whether it's moving to Panama, buying property in Costa Rica, DNA analysis, or automating an online business.",
+        "I live between Europe and Panama. I seek freedom of choice – where to work, whom to work with, and how to help others find that same freedom."
       ],
-      "quote": "The future belongs to those who connect..."
+      "quote": "“The future belongs to those who are not afraid to connect the seemingly unconnected.”"
     },
     "testimonials": {
-      "title": "What clients say",
-      "items": []
+      "title": "What Clients Say",
+      "items": [
+        {
+          "text": "Thanks to Jaroslav, I moved with my family to Panama in three months. He handled everything from visas to school for the kids.",
+          "author": "Martin K., Prague"
+        },
+        {
+          "text": "Thanks to Progressivo Corp., I managed to expand to the international market and open new business opportunities.",
+          "author": "Daulet Aimanov"
+        }
+      ]
     },
     "cta": {
-      "title": "Got a question?",
-      "text": "Write to me directly.",
+      "title": "Have a Question?",
+      "text": "Write to me directly – I answer personally.",
       "button": "Write to Jaroslav",
-      "whatsapp": "WhatsApp"
+      "whatsapp": "Write on WhatsApp"
     }
   },
   "de": {
