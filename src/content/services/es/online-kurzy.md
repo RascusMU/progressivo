@@ -1,23 +1,43 @@
 ---
-title: "Cursos Online"
-description: "Educación accesible desde cualquier lugar. Cursos enfocados en habilidades prácticas y crecimiento personal."
+title: "Cursos en línea"
+description: "Cursos educativos y tutorías en línea para niños y adultos."
 lang: es
-image: "/images/online-courses.webp"
+image: "/images/online-kurz.webp"
 ---
-# Cursos Online
+# Cursos en línea
 
-**Cursos Online** es una plataforma moderna para la educación y el desarrollo de habilidades. Ofrecemos una amplia gama de cursos enfocados en el conocimiento práctico que puede aplicar inmediatamente en su vida personal o profesional.
+Ofrecemos una amplia gama de cursos en línea y lecciones individuales centradas en la educación y el desarrollo de habilidades. Colaboramos con la plataforma **iTutoring.cz** para asegurar una enseñanza de calidad para todas las edades.
 
-**Qué encontrará con nosotros:**
-Cursos de idiomas con profesores experimentados.
-Formación en el campo de TI, marketing digital y negocios.
-Talleres de desarrollo personal y soft skills.
-Seminarios especializados sobre inversiones y vida en el extranjero.
+## Oferta de cursos
 
-**Ventajas de nuestros cursos:**
-Flexibilidad: estudie a su propio ritmo, desde cualquier lugar y en cualquier momento.
-Calidad: el contenido es preparado por expertos en la materia.
-Interactividad: posibilidad de consultas y tareas prácticas.
-Certificación: obtenga un certificado al completar el curso.
+### Preparación para exámenes de admisión
+Los cursos están destinados a alumnos de 5.º, 7.º y 9.º grado.
 
-**La educación es la mejor inversión.** Amplíe sus horizontes y obtenga nuevas oportunidades con nuestros cursos en línea.
+*   **Asignaturas:** Lengua checa y matemáticas.
+*   **Objetivo:** Preparación sistemática para aprobar con éxito los exámenes de admisión.
+
+### TI y programación
+Cursos para niños, jóvenes y adultos, desde principiantes hasta avanzados.
+
+*   **Creación de videojuegos en Unity:** Para aquellos que quieren adentrarse en el mundo del desarrollo de juegos.
+*   **Programación en Scratch:** Fundamentos de algoritmización y creación de proyectos propios.
+*   **Círculos en línea:** Enseñanza enfocada en el desarrollo de habilidades digitales.
+
+## Cómo se desarrolla la enseñanza
+
+Ponemos énfasis en la eficiencia y la comodidad de los estudiantes.
+
+*   **Enfoque individual:** Los tutores adaptan la enseñanza a las necesidades y el nivel de cada estudiante.
+*   **Formas interactivas:** Uso de pizarra virtual, chat y materiales compartidos.
+*   **Flexibilidad:** Planificación sistemática de lecciones según sus posibilidades de tiempo.
+*   **Soporte:** Posibilidad de consultas y respuestas a preguntas incluso fuera de las lecciones.
+
+## Información organizativa
+
+*   **Duración de las lecciones:** Posibilidad de elegir entre 45 o 60 minutos.
+*   **Forma:** Enseñanza en línea desde la comodidad del hogar.
+*   **Precio:** Depende de la duración de la lección, el tipo de enseñanza y el número de horas solicitadas (posibilidad de paquetes con descuento).
+
+## Por qué elegir nuestros cursos
+
+Ya sea que necesite tutorías, preparación para exámenes o quiera aprender a programar, nuestros cursos le proporcionarán los conocimientos necesarios en un ambiente amigable y profesional. Puede encontrar la lista de precios detallada y más información en el sitio web [iTutoring.cz](https://itutoring.cz/cenik).
