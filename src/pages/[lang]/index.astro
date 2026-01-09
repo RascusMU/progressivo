@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import FounderAudioPlayer from '../../components/FounderAudioPlayer.astro';
 import EditorialTimeSignal from '../../components/EditorialTimeSignal.astro';
+import HomepageCTA from '../../components/HomepageCTA.astro';
 import { getCollection } from 'astro:content';
 import { ui, defaultLang } from '../../i18n/ui';
 
@@ -201,6 +202,9 @@ services.sort((a, b) => {
       </div>
     </div>
   </section>
+
+  <!-- Editorial CTA -->
+  <HomepageCTA lang={lang} />
 </Layout>
 
 <style>

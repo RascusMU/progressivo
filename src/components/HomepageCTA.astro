@@ -1,0 +1,88 @@
+---
+import { getTranslatedPath } from '../i18n/utils';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+
+const contactPath = getTranslatedPath('/kontakt', lang);
+const whatsappLink = "https://wa.me/50768509698";
+---
+
+<section class="editorial-cta-section animate-on-scroll">
+  <div class="container cta-content">
+    <h2 class="cta-text">{t.home_cta.text}</h2>
+    <div class="cta-links">
+      <a href={contactPath} class="cta-link">{t.nav.contact}</a>
+      <span class="separator">/</span>
+      <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="cta-link">{t.home_cta.whatsapp}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .editorial-cta-section {
+    padding: 6rem 0; /* Consistent whitespace */
+    background-color: var(--color-bg);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.05); /* Very subtle separation */
+  }
+
+  :global(html.dark) .editorial-cta-section {
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cta-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--color-text);
+    font-weight: 500; /* Calm weight */
+    line-height: 1.3;
+  }
+
+  .cta-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .cta-link {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-accent); /* Amber */
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .cta-link:hover {
+    border-color: var(--color-accent);
+  }
+
+  .separator {
+    color: var(--color-text-light);
+    font-weight: 300;
+    opacity: 0.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .editorial-cta-section {
+      padding: 4rem 1.5rem;
+    }
+  }
+</style>
