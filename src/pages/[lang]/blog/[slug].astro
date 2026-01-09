@@ -20,7 +20,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout lang={lang} title={`${post.data.title} | Progressivo`} description={post.data.description}>
+<Layout lang={lang} title={`${post.data.title} | Progressivo`} description={post.data.description} type="article" articleDate={post.data.date?.toISOString()}>
   <article class="container page-content animate-on-scroll">
     <div class="prose lg:prose-xl mx-auto">
         <Content />

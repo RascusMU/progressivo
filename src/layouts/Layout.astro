@@ -12,13 +12,37 @@ interface Props {
     description?: string;
     image?: string;
     schema?: object | object[];
+    articleDate?: string;
+    type?: 'website' | 'article';
 }
 
-const { title, lang = defaultLang, description: propDescription, image = '/images/mapa-svetabusines.webp', schema } = Astro.props;
+const {
+    title,
+    lang = defaultLang,
+    description: propDescription,
+    image = '/images/mapa-svetabusines.webp',
+    schema,
+    articleDate,
+    type = 'website'
+} = Astro.props;
 
 const t = ui[lang] || ui[defaultLang];
 const description = propDescription || t.meta.default_description;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Locale Mapping
+const localeMap: Record<string, string> = {
+    'cs': 'cs_CZ',
+    'en': 'en_US',
+    'de': 'de_DE',
+    'es': 'es_PA', // Panama Spanish
+    'ru': 'ru_RU'
+};
+const ogLocale = localeMap[lang] || 'en_US';
+
+// Image URL Resolution (ensure absolute)
+// Use new URL() to handle both relative paths and already absolute URLs if any
+const ogImageURL = new URL(image, Astro.site).toString();
 
 // Hreflang Logic
 const supportedLangs = Object.keys(ui);
@@ -102,12 +126,20 @@ const schemaWebSite = {
         {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 
         <!-- Open Graph -->
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={type} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={new URL(image, Astro.site)} />
+        <meta property="og:image" content={ogImageURL} />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:site_name" content="Progressivo" />
+        <meta property="og:locale" content={ogLocale} />
+        {articleDate && <meta property="article:published_time" content={articleDate} />}
+
+        <!-- Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageURL} />
 
         <!-- JSON-LD -->
         <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
