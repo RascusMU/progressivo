@@ -168,12 +168,13 @@ services.sort((a, b) => {
                     ${(service.data.image || "/images/mapa-svetabusines.webp").replace('.webp', '-800.webp')} 800w,
                     ${(service.data.image || "/images/mapa-svetabusines.webp").replace('.webp', '-1200.webp')} 1200w
                   `}
-                  sizes="(max-width: 600px) 400px, (max-width: 900px) 800px, 1200px"
+                  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
                   alt={service.data.title}
                   class="service-image"
                   width="1200"
                   height="900"
                   loading={index < 2 ? "eager" : "lazy"}
+                  fetchpriority={index === 0 ? "high" : "auto"}
                 />
             </div>
             <h3>{service.data.title}</h3>
@@ -307,25 +308,25 @@ services.sort((a, b) => {
     padding: 8rem 0;
     background-color: var(--color-bg);
     overflow: hidden; /* For safety with negative margins */
-    /* FORCE AMBER INK TEXT */
-    color: var(--color-accent);
+    /* FORCE DARK TEXT for Contrast */
+    color: #222222;
   }
 
-  /* Force Amber Ink on all text elements inside Founder Section */
+  /* Force Dark Text on all text elements inside Founder Section */
   .founder-section h2,
   .founder-section p,
   .founder-section a,
   .founder-section button,
   .founder-section span {
-      color: var(--color-accent) !important;
-      opacity: 0.9; /* Increased contrast from implicit lower opacity */
+      color: #222222 !important;
+      opacity: 0.9;
   }
 
   /* Helper to target the audio player specific parts if needed */
   .founder-section :global(.founder-audio-player .play-btn),
   .founder-section :global(.founder-audio-player .audio-disclaimer) {
-      color: var(--color-accent) !important;
-      border-color: var(--color-accent) !important;
+      color: #222222 !important;
+      border-color: #222222 !important;
   }
 
   .founder-content {
@@ -350,21 +351,21 @@ services.sort((a, b) => {
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 2.5rem;
-    color: var(--color-accent);
+    color: #222222;
   }
 
   .founder-prose {
     font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: 1.15rem;
     line-height: 1.8;
-    color: var(--color-accent);
+    color: #222222;
     margin-bottom: 3rem;
   }
 
   .founder-name {
     font-weight: 800;
     font-size: 1.35rem;
-    color: var(--color-accent);
+    color: #222222;
     margin-bottom: 1rem;
     display: block;
   }
@@ -387,7 +388,7 @@ services.sort((a, b) => {
   .founder-link {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-accent);
+    color: #222222;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
