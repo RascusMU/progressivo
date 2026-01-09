@@ -39,9 +39,23 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 const { Content } = await render(service);
 const { lang } = Astro.params;
+
+// SCHEMA
+const schemaService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.data.title,
+  "description": service.data.description,
+  "provider": {
+    "@type": "Organization",
+    "name": "Progressivo",
+    "url": "https://progressivo.eu"
+  },
+  "url": new URL(Astro.url.pathname, Astro.site).toString()
+};
 ---
 
-<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={lang}>
+<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={lang} schema={schemaService}>
   <article class="container page-content animate-on-scroll">
     <div class="prose lg:prose-xl mx-auto">
         <Content />

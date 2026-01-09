@@ -11,9 +11,10 @@ interface Props {
 	lang?: string;
     description?: string;
     image?: string;
+    schema?: object | object[];
 }
 
-const { title, lang = defaultLang, description: propDescription, image = '/images/mapa-svetabusines.webp' } = Astro.props;
+const { title, lang = defaultLang, description: propDescription, image = '/images/mapa-svetabusines.webp', schema } = Astro.props;
 
 const t = ui[lang] || ui[defaultLang];
 const description = propDescription || t.meta.default_description;
@@ -46,18 +47,31 @@ const schemaOrg = {
   "name": "Progressivo",
   "url": "https://progressivo.eu",
   "logo": "https://progressivo.eu/images/Transparent%20Logo.svg",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+507-6850-9698",
-    "contactType": "customer service"
-  }
+  "email": "info@progressivo.eu",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Oceanía Business Plaza 1000",
+    "addressLocality": "Panama City",
+    "addressCountry": "PA"
+  },
+  "contactPoint": [
+    {
+        "@type": "ContactPoint",
+        "telephone": "+507-6850-9698",
+        "contactType": "customer service",
+        "email": "info@progressivo.eu",
+        "availableLanguage": ["Czech", "English", "German", "Spanish", "Russian"]
+    }
+  ],
+  "sameAs": []
 };
 
 const schemaWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Progressivo",
-  "url": "https://progressivo.eu"
+  "url": "https://progressivo.eu",
+  "inLanguage": lang
 };
 ---
 
@@ -98,6 +112,9 @@ const schemaWebSite = {
         <!-- JSON-LD -->
         <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
         <script type="application/ld+json" set:html={JSON.stringify(schemaWebSite)} />
+        {schema && (Array.isArray(schema) ? schema : [schema]).map(s => (
+            <script type="application/ld+json" set:html={JSON.stringify(s)} />
+        ))}
 
         <!-- Microsoft Clarity -->
         <script type="text/javascript">

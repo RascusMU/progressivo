@@ -19,9 +19,33 @@ const entry = await getEntry('pages', id);
 
 const { Content } = entry ? await render(entry) : { Content: null };
 const t = ui[lang] || ui[defaultLang];
+
+// FAQ Parsing
+let schema = null;
+if (entry && entry.body) {
+    const faqRegex = /<details>[\s\S]*?<summary>(.*?)<\/summary>[\s\S]*?<p>(.*?)<\/p>[\s\S]*?<\/details>/g;
+    const matches = [...entry.body.matchAll(faqRegex)];
+
+    if (matches.length > 0) {
+        const questions = matches.map(match => ({
+            "@type": "Question",
+            "name": match[1].trim(),
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": match[2].trim()
+            }
+        }));
+
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": questions
+        };
+    }
+}
 ---
 
-<Layout lang={lang} title={`${t.pages.contact_title} | Progressivo`}>
+<Layout lang={lang} title={`${t.pages.contact_title} | Progressivo`} schema={schema}>
   <main class="container page-content animate-on-scroll">
     <div class="contact-grid">
       <!-- Levý sloupec: Info & Kontext -->
