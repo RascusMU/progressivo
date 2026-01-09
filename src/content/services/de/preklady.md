@@ -6,8 +6,22 @@ image: "/images/preklady.webp"
 ---
 # Übersetzungstätigkeit
 
-**Progressivo Corp.** ist Ihr zuverlässiger Partner für Übersetzungen aller Art! Dokumente, E-Mails, Briefe oder andere Texte – wir übersetzen alles schnell, qualitativ hochwertig und präzise. Und für die sofortige Kommunikation bieten wir auch **telefonische Übersetzungsassistenz** an, damit Sie sorgenfrei mit Geschäftspartnern, Kunden oder Behörden verhandeln können.
+Wir bieten zuverlässige Übersetzungsdienste für Unternehmen und Einzelpersonen an. Wir konzentrieren uns auf Schnelligkeit, Genauigkeit und Verständlichkeit des resultierenden Textes.
 
-Es ist jedoch zu erwähnen, dass wir keine gerichtlichen oder behördlichen Übersetzungen durchführen. Diese spezifischen Übersetzungen sind oft zeitaufwendiger und erfordern spezielle Prozesse, die die Bearbeitungszeit verlängern könnten. Unser Ziel ist es jedoch, eine möglichst schnelle und effiziente Übersetzung zu gewährleisten, die Ihren Bedürfnissen perfekt entspricht.
+## Was wir übersetzen
 
-**Also warten Sie nicht!** Füllen Sie das Anfrageformular aus, wir vereinbaren einen Termin und können sofort mit der Arbeit beginnen. Mit uns ist die Übersetzung einfach, schnell und ohne unnötige Komplikationen – überzeugen Sie sich selbst!
+Wir sorgen für die Übersetzung einer breiten Palette von allgemeinen und Fachtexten:
+
+*   **Geschäftskorrespondenz:** E-Mails, Briefe, Angebote.
+*   **Dokumentation:** Handbücher, Produktblätter, interne Richtlinien.
+*   **Webseiten und Marketingtexte.**
+
+Des Weiteren bieten wir **Assistenz bei der Übersetzung am Telefon** an, was Sie bei Verhandlungen mit ausländischen Partnern oder Behörden schätzen werden, wenn Sie sofortige sprachliche Unterstützung benötigen.
+
+## Wichtiger Hinweis
+
+Wir spezialisieren uns auf kommerzielle und allgemeine Übersetzungen. **Wir bieten keine gerichtlichen oder amtlich beglaubigten Übersetzungen an** (sogenannte Übersetzungen mit Rundstempel). Diese Dokumente erfordern spezifische Prozesse, die nicht in unser auf Flexibilität und Schnelligkeit ausgerichtetes Portfolio fallen.
+
+## Wie man eine Übersetzung bestellt
+
+Wenn Sie eine qualitativ hochwertige Übersetzung ohne unnötige Verzögerungen benötigen, kontaktieren Sie uns über das Formular. Wir vereinbaren einen Liefertermin und den Umfang der Arbeit, damit das Ergebnis genau Ihren Bedürfnissen entspricht. Mit uns ist die Kommunikation in einer Fremdsprache einfacher.

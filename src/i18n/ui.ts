@@ -200,7 +200,7 @@ export const ui = {
     },
     buttons: {
       read_more: 'Mehr lesen',
-      contact_us: 'Kontaktieren Sie uns',
+      contact_us: 'Schreiben Sie uns',
       submit: 'Senden',
       back: 'Zurück',
       show_map: 'Karte anzeigen',
@@ -209,7 +209,7 @@ export const ui = {
       collaborate: 'Zusammenarbeiten',
       founder_story: '→ Meine Geschichte',
       play_audio: '▶ Anhören',
-      more_info: 'Mehr Info →',
+      more_info: 'Mehr Informationen →',
     },
     form: {
       name_label: 'Name',

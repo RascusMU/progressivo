@@ -6,58 +6,38 @@ image: "/images/online-kurz.webp"
 ---
 # Online-Kurse
 
-**Für wen sind die Kurse bestimmt:**
-Schüler der 5., 7. und 9. Klassen
+Wir bieten eine breite Palette von Online-Kursen und Einzelunterricht an, die auf Bildung und Kompetenzentwicklung ausgerichtet sind. Wir arbeiten mit der Plattform **iTutoring.cz** zusammen, um qualitativen Unterricht für alle Altersgruppen zu gewährleisten.
 
-**Vorbereitungskurse für Aufnahmeprüfungen.**
-Kinder, Jugendliche und Erwachsene
+## Kursangebot
 
-Programmier- und IT-Kurse, Einzelunterricht und Online-AGs.
+### Vorbereitung auf Aufnahmeprüfungen
+Die Kurse sind für Schüler der 5., 7. und 9. Klassen bestimmt.
 
-**Verfügbare Kurse:**
+*   **Fächer:** Tschechische Sprache und Mathematik.
+*   **Ziel:** Systematische Vorbereitung zur erfolgreichen Bewältigung der Aufnahmeprüfungen.
 
-- Vorbereitungskurse für Aufnahmeprüfungen
-- Tschechische Sprache und Mathematik (oder entsprechende lokale Fächer).
-- Programmier- und IT-Kurse
-- Videospielentwicklung in Unity
-Für Anfänger und Fortgeschrittene.
-- Programmieren in Scratch
-- Grundlagen des Programmierens und Erstellung eigener Projekte.
+### IT und Programmieren
+Kurse für Kinder, Jugendliche und Erwachsene, von Anfängern bis Fortgeschrittene.
 
-**Einzelunterricht
-angepasst an die konkreten Bedürfnisse der Schüler.**
-- Online-AGs
-- Unterricht mit Fokus auf IT-Fähigkeiten für Kinder, Jugendliche und Erwachsene.
+*   **Videospielentwicklung in Unity:** Für diejenigen, die in die Welt der Spielentwicklung eintauchen wollen.
+*   **Programmieren in Scratch:** Grundlagen der Algorithmisierung und Erstellung eigener Projekte.
+*   **Online-AGs:** Unterricht mit Fokus auf die Entwicklung digitaler Fähigkeiten.
 
-**Wie die Kurse ablaufen:**
-- Regelmäßigkeit
-- Systematische Unterrichtsplanung bis zum Prüfungstermin.
-- Individueller Ansatz
-- Dozenten passen den Unterricht an die Bedürfnisse und das Niveau des Schülers an.
-- Interaktiver Unterricht
-- Nutzung von virtuellen Tafeln, Chats und vorbereiteten Materialien.
+## Wie der Unterricht abläuft
 
-**Unterstützung durch Dozenten**
-- Konsultationen und Antworten auf Fragen der Schüler.
-- Wahlmöglichkeit des Kurses
-- Kurse nach Vorlieben – Sprache, Mathematik oder IT.
+Wir legen Wert auf Effizienz und Komfort der Studenten.
 
-**Wann die Kurse stattfinden:**
-Flexibler Zeitplan
+*   **Individueller Ansatz:** Dozenten passen den Unterricht an die Bedürfnisse und das Niveau jedes Studenten an.
+*   **Interaktive Formen:** Nutzung von virtuellen Tafeln, Chats und geteilten Materialien.
+*   **Flexibilität:** Systematische Planung der Lektionen nach Ihren zeitlichen Möglichkeiten.
+*   **Unterstützung:** Möglichkeit für Konsultationen und Antworten auf Fragen auch außerhalb der Lektionen.
 
-**Länge der Lektionen:**
-- 45 Minuten
-- 60 Minuten
+## Organisatorische Informationen
 
-**Was die Kurse kosten:**
-Der Preis hängt ab von:
-Länge der Lektion (45 oder 60 Minuten).
-Art des Unterrichts (online oder präsenz).
-Anzahl der bestellten Lektionen (Möglichkeit eines Rabatts beim Kauf einer größeren Stundenanzahl).
+*   **Länge der Lektionen:** Wahlmöglichkeit zwischen 45 oder 60 Minuten.
+*   **Form:** Online-Unterricht bequem von zu Hause aus.
+*   **Preis:** Hängt von der Länge der Lektion, der Art des Unterrichts und der Anzahl der gebuchten Stunden ab (Möglichkeit von vergünstigten Paketen).
 
-**Zusammenfassung:**
-iTutoring.cz bietet eine breite Palette von Online-Kursen und Einzelunterricht an.
-Ermöglicht die Vorbereitung auf Prüfungen oder die Entwicklung von IT-Fähigkeiten (Programmieren in Scratch, Videospielentwicklung in Unity).
-Die Kurse finden interaktiv mit individuellem Ansatz statt.
-Möglichkeit der Wahl der Lektionslänge (45 oder 60 Minuten).
-Preise hängen von Länge, Art und Anzahl der Lektionen ab; detaillierte Preisinformationen sind auf der Website [iTutoring.cz](https://itutoring.cz/cenik) verfügbar.
+## Warum unsere Kurse wählen
+
+Egal, ob Sie Nachhilfe oder Prüfungsvorbereitung benötigen oder Programmieren lernen möchten, unsere Kurse vermitteln Ihnen das nötige Wissen in einer freundlichen und professionellen Umgebung. Eine detaillierte Preisliste und weitere Informationen finden Sie auf der Website [iTutoring.cz](https://itutoring.cz/cenik).
