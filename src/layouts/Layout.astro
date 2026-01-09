@@ -177,12 +177,20 @@ const schemaWebSite = {
              ═══════════════════════════════════════════════════════════ -->
 
         <!-- Floating JC Button -->
+        <!-- AI ADVISOR - GLASSMORPHIC BUTTON -->
         <button onclick="openProgressivoAdvisor()"
-                class="jc-advisor-btn fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center group bg-stone-800 dark:bg-stone-900 border-2 border-amber-600"
-                style="z-index: 50;"
+                class="jc-advisor-btn fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center group transition-all duration-500 hover:scale-110"
+                style="z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
                 aria-label="Business Advisor - Jaroslav Cingel">
-            <span class="text-2xl text-stone-400 group-hover:text-amber-600 transition duration-300"
-                  style="font-family: 'Caveat', cursive; font-weight: 600; letter-spacing: -2px;">
+            <!-- Glass Layer -->
+            <div class="absolute inset-0 rounded-full bg-stone-100/10 dark:bg-stone-900/60 border border-stone-200/30 dark:border-stone-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)]"></div>
+
+            <!-- Amber Glow (Hover) -->
+            <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_20px_rgba(217,119,6,0.4)]"></div>
+
+            <!-- JC Text -->
+            <span class="relative z-10 text-xl text-stone-600 dark:text-stone-300 group-hover:text-amber-500 transition duration-300"
+                  style="font-family: 'Caveat', cursive; font-weight: 700;">
                 JC
             </span>
         </button>
@@ -200,13 +208,15 @@ const schemaWebSite = {
             <!-- Modal Content -->
             <div class="relative bg-stone-50 dark:bg-stone-900 w-full max-w-md rounded-lg shadow-2xl border-2 border-amber-600 overflow-hidden">
                 <!-- Header -->
-                <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white relative">
-                    <h3 class="text-xl font-bold">Business Advisor</h3>
-                    <p class="text-sm opacity-90 mt-1">Popište svou situaci a doporučím vám řešení.</p>
+                <div class="p-6 border-b border-stone-200 dark:border-stone-700 relative">
+                    <h3 class="text-2xl font-serif text-stone-900 dark:text-stone-100">Business Advisor</h3>
+                    <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Popište svou situaci a doporučím vám řešení.</p>
                     <button onclick="closeProgressivoAdvisor()"
-                            class="absolute top-4 right-4 text-white hover:text-stone-900 transition w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center"
+                            class="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-stone-200 dark:hover:bg-stone-700 flex items-center justify-center transition"
                             aria-label="Zavřít">
-                        <i class="fas fa-times"></i>
+                        <svg class="w-4 h-4 text-stone-600 dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
 
@@ -357,25 +367,16 @@ const schemaWebSite = {
 
 /* AI Advisor Styles */
 @keyframes amber-pulse {
-    0%, 100% {
-        box-shadow: 0 0 15px rgba(217, 119, 6, 0.3),
-                    0 0 30px rgba(217, 119, 6, 0.1);
-    }
-    50% {
-        box-shadow: 0 0 25px rgba(217, 119, 6, 0.5),
-                    0 0 50px rgba(217, 119, 6, 0.2);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .jc-advisor-btn {
-    animation: amber-pulse 3s ease-in-out infinite;
+    animation: amber-pulse 4s ease-in-out infinite;
 }
 
 .jc-advisor-btn:hover {
     animation: none;
-    transform: scale(1.1) rotate(5deg) !important;
-    box-shadow: 0 0 30px rgba(217, 119, 6, 0.6),
-                0 0 60px rgba(217, 119, 6, 0.3) !important;
 }
 
 .typing-indicator {
