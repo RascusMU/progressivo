@@ -6,7 +6,7 @@ const description = "Tahle stránka neexistuje.";
 ---
 
 <Layout title={title} description={description}>
-  <div class="container error-container">
+  <div class="error-container">
     <h1 class="error-title">Tahle stránka neexistuje.</h1>
 
     <div class="error-wrap">
@@ -40,30 +40,32 @@ const description = "Tahle stránka neexistuje.";
 </script>
 
 <style>
-  /* LAYOUT – H1 nahoře, odpočet ve středu viewportu */
+  /* CELÁ STRÁNKA – vše na střed, posunuté dolů od loga */
   .error-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 4rem 1.5rem 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem; /* VÍCE NAHOŘE = dál od loga */
   }
 
-  /* H1 – silná, autoritativní, amber */
+  /* H1 – silná, amber, NA STŘEDU */
   .error-title {
     color: #d97706;
     font-weight: 800;
-    white-space: nowrap;
     font-size: clamp(2.2rem, 8vw, 3.5rem);
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     line-height: 1.1;
     font-family: var(--font-heading);
   }
 
-  /* Blok s odpočtem – vertikálně ve středu */
+  /* Blok s odpočtem */
   .error-wrap {
-    margin-top: auto;
-    margin-bottom: auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* Text odpočtu – amber, čitelný */
@@ -72,30 +74,36 @@ const description = "Tahle stránka neexistuje.";
     font-size: clamp(1rem, 4vw, 1.15rem);
     font-family: var(--font-body);
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  /* Progress bar – základ (šedý podklad) */
+  /* Progress bar – základ (světlý podklad) */
   .error-signal {
     width: 100%;
-    max-width: 320px;
+    max-width: 280px;
     height: 2px;
     background: rgba(217, 119, 6, 0.25);
-    margin: 0 auto;
     overflow: hidden;
+    border-radius: 1px;
   }
 
-  /* Progress bar – aktivní část (mizí zleva doprava za 15s) */
+  /* Progress bar – aktivní část */
+  /* SMĚR: začíná PLNÁ, končí PRÁZDNÁ (zleva doprava mizí) */
   .error-progress {
     height: 100%;
     width: 100%;
     background: #d97706;
-    animation: progressBar 15s linear forwards;
+    transform-origin: left center;
+    animation: progressShrink 15s linear forwards;
   }
 
-  @keyframes progressBar {
-    from { width: 100%; }
-    to   { width: 0%; }
+  @keyframes progressShrink {
+    from { 
+      transform: scaleX(1); 
+    }
+    to { 
+      transform: scaleX(0); 
+    }
   }
 
   /* DARK MODE – světlejší amber */
