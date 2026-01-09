@@ -6,58 +6,38 @@ image: "/images/online-kurz.webp"
 ---
 # Online Courses
 
-**Who are the courses for:**
-Students of 5th, 7th, and 9th grades
+We offer a wide range of online courses and individual lessons focused on education and skill development. We cooperate with the **iTutoring.cz** platform to ensure quality teaching for all age categories.
 
-**Preparatory courses for entrance exams.**
-Children, youth, and adults
+## Course Offer
 
-Programming and IT courses, individual lessons, and online clubs.
+### Preparation for Entrance Exams
+Courses are intended for students of 5th, 7th, and 9th grades.
 
-**Available courses:**
+*   **Subjects:** Czech language and mathematics.
+*   **Goal:** Systematic preparation for successfully passing entrance exams.
 
-- Preparatory courses for entrance exams
-- Czech language and mathematics.
-- Programming and IT courses
-- Video game creation in Unity
-For beginners and advanced students.
-- Programming in Scratch
-- Basics of programming and creating your own projects.
+### IT and Programming
+Courses for children, youth, and adults, from beginners to advanced.
 
-**Individual lessons
-tailored to the specific needs of students.**
-- Online clubs
-- Teaching focused on IT skills for children, youth, and adults.
+*   **Video Game Creation in Unity:** For those who want to penetrate the world of game development.
+*   **Programming in Scratch:** Basics of algorithmization and creation of own projects.
+*   **Online Clubs:** Teaching focused on the development of digital skills.
 
-**How courses take place:**
-- Regularity
-- Systematic lesson planning up to the exam date.
-- Individual approach
-- Tutors adapt teaching to the student's needs and level.
-- Interactive teaching
-- Use of a virtual whiteboard, chats, and prepared materials.
+## How Teaching Takes Place
 
-**Tutor support**
-- Consultations and answers to student questions.
-- Course selection options
-- Courses according to preferences – Czech language, mathematics, or IT.
+We place emphasis on efficiency and student comfort.
 
-**When courses take place:**
-Flexible schedule
+*   **Individual Approach:** Tutors adapt teaching to the needs and level of each student.
+*   **Interactive Forms:** Use of a virtual whiteboard, chat, and shared materials.
+*   **Flexibility:** Systematic planning of lessons according to your time possibilities.
+*   **Support:** Possibility of consultations and answers to questions even outside of lessons.
 
-**Lesson length:**
-- 45 minutes
-- 60 minutes
+## Organizational Information
 
-**How much courses cost:**
-The price depends on:
-Lesson length (45 or 60 minutes).
-Type of teaching (online or in-person).
-Number of ordered lessons (possibility of a discount when purchasing a larger number of hours).
+*   **Lesson Length:** Possibility to choose between 45 or 60 minutes.
+*   **Form:** Online teaching from the comfort of your home.
+*   **Price:** Depends on the length of the lesson, type of teaching, and number of ordered hours (possibility of discounted packages).
 
-**Summary:**
-iTutoring.cz offers a wide range of online courses and individual lessons.
-It enables preparation for entrance exams (Czech language, mathematics) or development of IT skills (programming in Scratch, video game creation in Unity).
-Courses take place interactively with an individual approach.
-Possibility to choose lesson length (45 or 60 minutes).
-Prices depend on length, type, and number of lessons; detailed price information is available on the website [iTutoring.cz](https://itutoring.cz/cenik)
+## Why Choose Our Courses
+
+Whether you need tutoring, preparation for exams, or want to learn programming, our courses will provide you with the necessary knowledge in a friendly and professional environment. Detailed price list and other information can be found on the website [iTutoring.cz](https://itutoring.cz/cenik).
