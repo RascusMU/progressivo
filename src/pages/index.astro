@@ -4,13 +4,15 @@ import FounderAudioPlayer from '../components/FounderAudioPlayer.astro';
 import EditorialTimeSignal from '../components/EditorialTimeSignal.astro';
 import HomepageCTA from '../components/HomepageCTA.astro';
 import { getCollection } from 'astro:content';
-import { ui } from '../i18n/ui';
+import { ui, defaultLang } from '../i18n/ui';
 
-const lang = 'cs';
-const t = ui[lang];
+// Root index.astro nemá getStaticPaths, protože je to statický entry point
+const lang = defaultLang; // Vždy 'cs' (nebo co je default)
 
 const allServices = await getCollection('services');
-let services = allServices.filter(service => !['en/', 'de/', 'ru/', 'es/'].some(prefix => service.id.startsWith(prefix)));
+// Filtrujeme služby pro defaultní jazyk
+let services = allServices.filter(service => service.data.lang === lang);
+const t = ui[lang] || ui[defaultLang];
 
 const desiredOrder = [
   'analyza-dna',
@@ -24,19 +26,18 @@ const desiredOrder = [
 ];
 
 services.sort((a, b) => {
-  const slugA = a.id.replace(/\.md$/, '');
-  const slugB = b.id.replace(/\.md$/, '');
+  const slugA = a.id.split('/').pop().replace(/\.md$/, '');
+  const slugB = b.id.split('/').pop().replace(/\.md$/, '');
   return desiredOrder.indexOf(slugA) - desiredOrder.indexOf(slugB);
 });
 ---
 
-<Layout title={`${t.pages.home_title} | Progressivo`}>
+<Layout lang={lang} title={`${t.pages.home_title} | Progressivo`}>
   <script>
     document.addEventListener('astro:page-load', () => {
         // Founder Image Unroll Animation
         const founderImageWrapper = document.querySelector('.founder-image-wrapper');
         if (founderImageWrapper) {
-            // Progressive Enhancement: Only hide if IntersectionObserver is supported
             if ('IntersectionObserver' in window) {
                 founderImageWrapper.classList.add('waiting');
 
@@ -51,13 +52,12 @@ services.sort((a, b) => {
                 }, { threshold: 0.2 });
                 founderObserver.observe(founderImageWrapper);
 
-                // FAILSAFE: Ensure image becomes visible even if observer fails or takes too long
                 setTimeout(() => {
                     if (founderImageWrapper.classList.contains('waiting')) {
                         founderImageWrapper.classList.remove('waiting');
                         founderImageWrapper.classList.add('visible');
                     }
-                }, 3000); // 3 seconds safety timeout
+                }, 3000);
             }
         }
 
@@ -67,6 +67,8 @@ services.sort((a, b) => {
         if (window.matchMedia("(min-width: 1024px)").matches) {
             cards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
+                    if (!document.documentElement.classList.contains('dark')) return;
+
                     // @ts-ignore
                     const rect = card.getBoundingClientRect();
                     // @ts-ignore
@@ -77,14 +79,24 @@ services.sort((a, b) => {
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
 
-                    const rotateX = ((y - centerY) / centerY) * -5; // Max 5 deg rotation
+                    const rotateX = ((y - centerY) / centerY) * -5;
                     const rotateY = ((x - centerX) / centerX) * 5;
+
+                    const spotX = (e.clientX - rect.left) / rect.width * 100;
+                    const spotY = (e.clientY - rect.top) / rect.height * 100;
+                    // @ts-ignore
+                    card.style.setProperty('--spotlight', `radial-gradient(circle at ${spotX}% ${spotY}%, rgba(255,255,255,0.1) 0%, transparent 50%)`);
 
                     // @ts-ignore
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
                 });
 
                 card.addEventListener('mouseleave', () => {
+                    if (!document.documentElement.classList.contains('dark')) {
+                        // @ts-ignore
+                        card.style.transform = '';
+                        return;
+                    }
                     // @ts-ignore
                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
                 });
@@ -93,7 +105,6 @@ services.sort((a, b) => {
     });
   </script>
 
-  <!-- Editorial Hero Section -->
   <section class="editorial-hero">
     <div class="container hero-content">
       <h1 class="hero-title" set:html={t.pages.home.hero_title}></h1>
@@ -102,11 +113,9 @@ services.sort((a, b) => {
     </div>
   </section>
 
-  <!-- Editorial Time Signal -->
   <EditorialTimeSignal />
 
-  <!-- Founder Section -->
-  <section id="zakladatel" class="founder-section animate-on-scroll">
+  <section id="founder" class="founder-section animate-on-scroll">
     <div class="container founder-content">
       <div class="founder-text-column">
         <h2 class="editorial-title">{t.pages.home.founder_title}</h2>
@@ -129,25 +138,18 @@ services.sort((a, b) => {
 
       <div class="founder-image-column">
         <div class="founder-image-wrapper">
-          <img
-            src="/images/tatka-pise.webp"
-            alt="Jaroslav Cingel při práci v kanceláři"
-            class="founder-image"
-            width="682"
-            height="512"
-          />
+          <img src="/images/tatka-pise.webp" alt="Jaroslav Cingel" class="founder-image" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
   <section id="services" class="section-services animate-on-scroll">
     <div class="container">
       <h2 class="section-title">{t.pages.home.services_title}</h2>
       <div class="services-grid">
         {services.map((service, index) => {
-          const slug = service.id.replace(/\.md$/, '');
+          const slug = service.id.split('/').pop().replace(/\.md$/, '');
 
           let spanClass = 'span-1';
           if (slug === 'analyza-dna' || slug === 'expatriace-viza') {
@@ -159,7 +161,7 @@ services.sort((a, b) => {
           const cardClass = `service-card ${spanClass}`;
 
           return (
-          <a href={`/cs/sluzby/${slug}`} class={cardClass}>
+          <a href={`/${lang}/sluzby/${slug}`} class={cardClass}>
             <div class="card-media">
                 <img
                   src={service.data.image || "/images/mapa-svetabusines.webp"}
@@ -185,22 +187,20 @@ services.sort((a, b) => {
     </div>
   </section>
 
-  <!-- Editorial CTA -->
   <HomepageCTA lang={lang} />
 </Layout>
 
 <style>
   /*
-   * EDITORIAL HERO SECTION
-   * Concept: "Tiché sebevědomí"
+   * IDENTICKÉ STYLY JAKO V [lang]/index.astro
+   * Master Copy for Root Homepage
    */
   .editorial-hero {
-    /* Massive top padding, textured background (inherited from body/layout if present, else clean) */
     padding-top: max(15vh, 120px);
-    padding-bottom: 2rem; /* Reduced padding bottom since TimeSignal is below */
+    padding-bottom: 2rem;
     padding-left: 0;
     padding-right: 0;
-    text-align: left; /* Strict left alignment */
+    text-align: left;
     position: relative;
     overflow: hidden;
   }
@@ -208,69 +208,50 @@ services.sort((a, b) => {
   .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Left align items */
-    gap: 0; /* Spacing handled by margins */
-    max-width: 1400px; /* Allow it to breathe */
+    align-items: flex-start;
+    gap: 0;
+    max-width: 1400px;
     padding: 0 1.5rem;
     animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     opacity: 0;
     transform: translateY(20px);
   }
 
-  /* Entrance Animation */
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-content {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
+    .hero-content { animation: none; opacity: 1; transform: none; }
   }
 
-  /* MEGA-TYPE H1 */
   .hero-title {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
     font-size: clamp(3.5rem, 11vw, 9rem);
-    font-weight: 800; /* ExtraBold */
+    font-weight: 800;
     line-height: 0.95;
     letter-spacing: -0.04em;
-    color: #1a1a1a; /* Hard Ink */
+    color: #222222;
     margin-bottom: 3rem;
     max-width: 100%;
-    text-wrap: balance;
   }
 
-  /* Dark Mode H1 */
-  :global(html.dark) .hero-title {
-    color: #f5f5f4; /* Warm White */
-  }
+  :global(html.dark) .hero-title { color: #f5f5f4; }
 
-  /* Subline */
   .hero-subtitle {
     font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: clamp(1.125rem, 2vw, 1.35rem);
     line-height: 1.6;
-    color: rgba(26, 26, 26, 0.8);
+    color: #222222;
+    opacity: 0.8;
     max-width: 600px;
     margin-bottom: 3rem;
     margin-top: 0;
   }
 
-  :global(html.dark) .hero-subtitle {
-    color: rgba(245, 245, 244, 0.8);
-  }
+  :global(html.dark) .hero-subtitle { color: rgba(245, 245, 244, 0.8); }
 
-  /* Editorial CTA (Link style) */
   .editorial-cta {
     display: inline-flex;
     align-items: center;
@@ -278,16 +259,14 @@ services.sort((a, b) => {
     font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #222222;
     text-decoration: none;
     border-bottom: 1px solid currentColor;
     padding-bottom: 2px;
     transition: color 0.3s ease, border-color 0.3s ease;
   }
 
-  :global(html.dark) .editorial-cta {
-    color: #f5f5f4;
-  }
+  :global(html.dark) .editorial-cta { color: #f5f5f4; }
 
   .editorial-cta .arrow {
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -295,43 +274,21 @@ services.sort((a, b) => {
   }
 
   .editorial-cta:hover {
-    color: #d97706; /* Amber-600 */
+    color: #d97706;
     border-color: rgba(217, 119, 6, 0.3);
   }
 
-  .editorial-cta:hover .arrow {
-    transform: translateX(6px);
-  }
+  .editorial-cta:hover .arrow { transform: translateX(6px); }
 
-  /* Founder Section - Magazine Layout */
   .founder-section {
     padding: 8rem 0;
     background-color: var(--color-bg);
-    overflow: hidden; /* For safety with negative margins */
-    /* FORCE DARK TEXT for Contrast */
-    color: #222222;
-  }
-
-  /* Force Dark Text on all text elements inside Founder Section */
-  .founder-section h2,
-  .founder-section p,
-  .founder-section a,
-  .founder-section button,
-  .founder-section span {
-      color: #222222 !important;
-      opacity: 0.9;
-  }
-
-  /* Helper to target the audio player specific parts if needed */
-  .founder-section :global(.founder-audio-player .play-btn),
-  .founder-section :global(.founder-audio-player .audio-disclaimer) {
-      color: #222222 !important;
-      border-color: #222222 !important;
+    overflow: hidden;
   }
 
   .founder-content {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr; /* Text wider than image */
+    grid-template-columns: 1.2fr 0.8fr;
     align-items: center;
     position: relative;
     max-width: 1200px;
@@ -342,7 +299,7 @@ services.sort((a, b) => {
   .founder-text-column {
     z-index: 10;
     padding-right: 0;
-    max-width: 600px; /* Prevent text from touching the image */
+    max-width: 600px;
   }
 
   .editorial-title {
@@ -370,13 +327,8 @@ services.sort((a, b) => {
     display: block;
   }
 
-  .founder-prose p {
-    margin-bottom: 1.5rem;
-  }
-
-  .founder-prose p:last-child {
-    margin-bottom: 0;
-  }
+  .founder-prose p { margin-bottom: 1.5rem; }
+  .founder-prose p:last-child { margin-bottom: 0; }
 
   .founder-actions {
     display: flex;
@@ -394,26 +346,30 @@ services.sort((a, b) => {
     transition: border-color 0.2s ease;
   }
 
-  .founder-link:hover {
-    border-color: var(--color-accent);
+  .founder-link:hover { border-color: #d97706; }
+
+  /* DARK MODE FOUNDER - AMBER FORCE */
+  :global(html.dark) .founder-section h2,
+  :global(html.dark) .founder-section .founder-name,
+  :global(html.dark) .founder-section .founder-prose,
+  :global(html.dark) .founder-section .founder-link,
+  :global(html.dark) .founder-section p,
+  :global(html.dark) .founder-section :global(.founder-audio-player .play-btn),
+  :global(html.dark) .founder-section :global(.founder-audio-player .audio-disclaimer) {
+    color: #fbbf24 !important;
+    opacity: 1 !important;
+    border-color: #fbbf24 !important;
   }
 
-  .founder-image-column {
-    position: relative;
-    z-index: 1;
-  }
+  .founder-image-column { position: relative; z-index: 1; }
 
   .founder-image-wrapper {
     position: relative;
     width: 100%;
-    margin-left: -4rem; /* The Magazine "Overlap" */
-
-    /* Premium Paper / Scroll Look */
-    background-color: #fcfbf9; /* Warm Paper */
-    padding: 0; /* Removed border/frame effect */
+    margin-left: -4rem;
+    background-color: #fcfbf9;
+    padding: 0;
     box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-    /* Animation Setup */
     transform-origin: top right;
     transition:
       mask-position 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -422,30 +378,20 @@ services.sort((a, b) => {
       opacity 1.2s ease-out;
   }
 
-  /* Stav ČEKÁNÍ (přidá JS okamžitě po načtení) */
   .founder-image-wrapper.waiting {
-    /* Maska: Gradient simuluje měkký ohyb papíru */
     mask-image: linear-gradient(225deg, black 40%, transparent 60%);
     mask-size: 300% 300%;
-    mask-position: 100% 0%; /* Start: Skryto (nebo jen roh) */
-
-    /* Safari / Webkit support - KRITICKÉ PRO iOS */
+    mask-position: 100% 0%;
     -webkit-mask-image: linear-gradient(225deg, black 40%, transparent 60%);
     -webkit-mask-size: 300% 300%;
     -webkit-mask-position: 100% 0%;
-
-    /* Fyzika: Zmenšené a natočené */
     transform: scale(0.92) rotate(-2deg);
     opacity: 0.8;
   }
 
-  /* Stav ODHALENÍ (přidá JS při scrollu) */
   .founder-image-wrapper.visible {
-    /* Reset masky = plně viditelné */
     mask-position: 0% 100%;
     -webkit-mask-position: 0% 100%;
-
-    /* Reset fyziky = narovnáno */
     transform: scale(1) rotate(0deg);
     opacity: 1;
   }
@@ -454,12 +400,10 @@ services.sort((a, b) => {
     width: 100%;
     height: auto;
     display: block;
-    /* Removed border-radius to look like cut paper or keep it straight */
-    border-radius: 8px;
+    border-radius: 2px;
     object-fit: cover;
   }
 
-  /* Services Section */
   .section-services {
     padding: 5rem 0;
     background-color: var(--color-bg-alt);
@@ -496,12 +440,13 @@ services.sort((a, b) => {
 
   .service-card {
     background: var(--color-bg-card);
+    background-image: var(--spotlight);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: var(--card-shadow);
-    transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -509,21 +454,33 @@ services.sort((a, b) => {
     border: var(--card-border);
     transform-style: preserve-3d;
     perspective: 1000px;
-    /* Removed max-width: 350px to allow filling the grid cell, especially for spans */
     width: 100%;
     text-decoration: none;
     color: inherit;
   }
 
-  .span-2 {
-      grid-column: span 2;
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+
+  :global(:root:not(.dark)) .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(120, 113, 108, 0.1), 0 10px 10px -5px rgba(120, 113, 108, 0.04);
+    border-color: rgba(217, 119, 6, 0.3);
   }
 
-  .span-3 {
-      grid-column: span 3;
+  :global(:root:not(.dark)) .service-image {
+      filter: sepia(0.05) contrast(0.95) brightness(1.02);
+      transition: filter 0.3s ease, transform 0.5s ease;
   }
 
-  .service-card:hover {
+  :global(:root:not(.dark)) .service-card:hover .service-image { filter: none; }
+
+  :global(html.dark) .service-card {
+    background: rgba(2, 6, 23, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  :global(html.dark) .service-card:hover {
     box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.2), 0 20px 20px -10px rgba(0, 0, 0, 0.1);
     z-index: 10;
     border-color: var(--color-accent);
@@ -544,9 +501,7 @@ services.sort((a, b) => {
     transition: transform 0.5s ease;
   }
 
-  .service-card:hover .service-image {
-    transform: scale(1.05);
-  }
+  .service-card:hover .service-image { transform: scale(1.05); }
 
   .service-card h3 {
     font-size: 1.5rem;
@@ -563,66 +518,35 @@ services.sort((a, b) => {
     font-size: 0.9rem;
   }
 
-  /* Responsive Adjustments */
   @media (max-width: 1024px) {
-     .founder-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-     }
-
-     .founder-text-column {
-        padding-right: 0;
-        order: 2; /* Text below image on tablet if desired, or above. Let's keep Text Above as per logic usually, or text below? */
-        /* Standard mobile/tablet flow: Image then Text, or Text then Image.
-           User said "zachovat čitelnost na mobilu".
-        */
-        order: 1;
-        text-align: left;
-     }
-
-     .founder-image-column {
-        order: 2;
-     }
-
-     .founder-image-wrapper {
-        margin-left: 0;
-        transform: none;
-        max-width: 500px;
-     }
+     .founder-content { grid-template-columns: 1fr; gap: 3rem; }
+     .founder-text-column { padding-right: 0; order: 1; text-align: left; }
+     .founder-image-column { order: 2; }
+     .founder-image-wrapper { margin-left: 0; transform: none; max-width: 500px; }
   }
 
   @media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
+    .services-grid { grid-template-columns: 1fr; }
+    .span-2, .span-3 { grid-column: span 1; }
 
-    .span-2, .span-3 {
-        grid-column: span 1;
-    }
-
-    /* Service Cards Mobile Tuning - Gentle Lift & Touch Feedback */
     .section-services.animate-on-scroll .service-card {
         opacity: 0;
         transform: translateY(30px);
-        /* Ensure no scale transition conflict */
         transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
                     transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Entry Animation: Requires BOTH Observer (.in-view) AND Time Gate (.animations-enabled) */
     :global(body.animations-enabled) .section-services.animate-on-scroll.in-view .service-card {
         opacity: 1;
         transform: translateY(0);
     }
 
-    /* Clear Tap Feedback */
     .service-card:active {
         transform: scale(0.96) !important;
         transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-        border-color: var(--color-accent); /* Optional hint */
+        border-color: var(--color-accent);
     }
 
-    /* Reduced Motion Override */
     @media (prefers-reduced-motion: reduce) {
         .section-services.animate-on-scroll .service-card {
             opacity: 1;
@@ -631,28 +555,10 @@ services.sort((a, b) => {
         }
     }
 
-    /* Founder Mobile adjustments */
-    .founder-content {
-      gap: 2rem;
-    }
-
-    .editorial-title {
-        font-size: 2.25rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .founder-text-column {
-        padding: 0 1rem;
-    }
-
-    .founder-image-wrapper {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-    }
-
-    .section-title {
-      font-size: 2rem;
-    }
+    .founder-content { gap: 2rem; }
+    .editorial-title { font-size: 2.25rem; margin-bottom: 1.5rem; }
+    .founder-text-column { padding: 0 1rem; }
+    .founder-image-wrapper { width: 100%; max-width: 100%; margin-left: 0; }
+    .section-title { font-size: 2rem; }
   }
 </style>
