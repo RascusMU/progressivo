@@ -99,6 +99,21 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
     box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
   }
 
+  /* Animation Keyframes */
+  @keyframes dock-breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  .dock-content.pulse-intro {
+    animation: dock-breathe 500ms ease-in-out;
+  }
+
+  .dock-content.pulse-top {
+    animation: dock-breathe 300ms ease-in-out;
+  }
+
   /* Items */
   .dock-item {
     min-width: 48px;
@@ -194,11 +209,32 @@ const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A
     const dock = document.querySelector('.floating-dock');
     if (!dock) return;
 
+    const dockContent = dock.querySelector('.dock-content');
     let lastScrollY = window.scrollY;
     let ticking = false;
 
+    // 1. INTRO ANIMATION (1.5s delay)
+    setTimeout(() => {
+        if (dockContent && !sessionStorage.getItem('dock-intro-shown')) {
+            dockContent.classList.add('pulse-intro');
+            sessionStorage.setItem('dock-intro-shown', 'true');
+            // Remove class after animation (500ms + buffer)
+            setTimeout(() => dockContent.classList.remove('pulse-intro'), 550);
+        }
+    }, 1500);
+
     function update() {
         const currentScrollY = window.scrollY;
+
+        // 2. SCROLL TO TOP ANIMATION
+        if (currentScrollY < 20) {
+            if (dockContent && !sessionStorage.getItem('dock-top-shown')) {
+                dockContent.classList.add('pulse-top');
+                sessionStorage.setItem('dock-top-shown', 'true');
+                // Remove class after animation (300ms + buffer)
+                setTimeout(() => dockContent.classList.remove('pulse-top'), 350);
+            }
+        }
 
         // Scroll Direction Effect
         // Ignore small movements for stability
