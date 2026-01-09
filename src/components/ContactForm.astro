@@ -36,6 +36,9 @@ const t = ui[lang] || ui[defaultLang];
                 event.preventDefault();
                 const formData = new FormData(form);
 
+                // DEBUG: Verify sent data
+                console.log([...formData]);
+
                 status.textContent = '';
                 status.className = 'form-status';
 
@@ -55,7 +58,13 @@ const t = ui[lang] || ui[defaultLang];
                     } else {
                         const result = await response.json();
                         if (result.errors) {
-                            status.textContent = result.errors.map(error => error.message).join(", ");
+                            const messages = result.errors.map(error => {
+                                if (error.field === 'email') return "Vyplňte prosím platný email.";
+                                if (error.field === 'name') return "Vyplňte prosím své jméno.";
+                                if (error.field === 'message') return "Napište nám prosím zprávu.";
+                                return error.message;
+                            });
+                            status.textContent = messages.join(", ");
                         } else {
                             status.textContent = "Něco se nepovedlo. Zkuste to prosím znovu.";
                         }
