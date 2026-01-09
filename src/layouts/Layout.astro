@@ -172,35 +172,60 @@ const schemaWebSite = {
         <FloatingDock lang={lang} />
         <Footer lang={lang} />
 
-        <!-- AI Advisor Button -->
+        <!-- ═══════════════════════════════════════════════════════════
+             AI BUSINESS ADVISOR - JC SIGNATURE
+             ═══════════════════════════════════════════════════════════ -->
+
+        <!-- Floating JC Button -->
         <button onclick="openProgressivoAdvisor()"
                 class="jc-advisor-btn fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center group bg-stone-800 dark:bg-stone-900 border-2 border-amber-600"
-                aria-label="Business Advisor">
+                style="z-index: 50;"
+                aria-label="Business Advisor - Jaroslav Cingel">
             <span class="text-2xl text-stone-400 group-hover:text-amber-600 transition duration-300"
-                    style="font-family: 'Caveat', cursive; font-weight: 600; letter-spacing: -2px;">JC</span>
+                  style="font-family: 'Caveat', cursive; font-weight: 600; letter-spacing: -2px;">
+                JC
+            </span>
         </button>
 
         <!-- AI Advisor Modal -->
-        <div id="progressivoAdvisorModal" class="modal hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
-            <div class="absolute inset-0 bg-stone-900/90 backdrop-blur-sm" onclick="closeProgressivoAdvisor()"></div>
+        <div id="progressivoAdvisorModal"
+             class="modal hidden fixed inset-0 z-[10000] flex items-center justify-center p-4"
+             style="z-index: 10000;"
+             role="dialog"
+             aria-modal="true">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-stone-900/80 backdrop-blur-md"
+                 onclick="closeProgressivoAdvisor()"></div>
+
+            <!-- Modal Content -->
             <div class="relative bg-stone-50 dark:bg-stone-900 w-full max-w-md rounded-lg shadow-2xl border-2 border-amber-600 overflow-hidden">
+                <!-- Header -->
                 <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 text-white relative">
                     <h3 class="text-xl font-bold">Business Advisor</h3>
                     <p class="text-sm opacity-90 mt-1">Popište svou situaci a doporučím vám řešení.</p>
                     <button onclick="closeProgressivoAdvisor()"
-                            class="absolute top-4 right-4 text-white hover:text-stone-900 transition w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center">
+                            class="absolute top-4 right-4 text-white hover:text-stone-900 transition w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center"
+                            aria-label="Zavřít">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+
+                <!-- Body -->
                 <div class="p-6">
-                    <textarea id="progressivoAdvisorInput" rows="4"
-                                class="w-full border-2 border-stone-300 dark:border-stone-700 bg-transparent text-stone-900 dark:text-stone-100 rounded-lg p-3 text-sm focus:border-amber-600 transition resize-none"
-                                placeholder="Např: Chci založit firmu v Panamě..."></textarea>
+                    <textarea id="progressivoAdvisorInput"
+                              rows="4"
+                              class="w-full border-2 border-stone-300 dark:border-stone-700 bg-transparent text-stone-900 dark:text-stone-100 rounded-lg p-3 text-sm focus:border-amber-600 focus:ring-2 focus:ring-amber-600/20 transition resize-none outline-none"
+                              placeholder="Např: Chci založit firmu v Panamě..."
+                              aria-label="Váš dotaz"></textarea>
+
                     <button onclick="askProgressivoAdvisor()"
-                            class="w-full bg-stone-900 dark:bg-amber-600 text-white py-3 rounded-lg font-bold uppercase text-xs hover:bg-amber-600 transition mt-4 flex items-center justify-center gap-2">
+                            class="w-full bg-stone-900 dark:bg-amber-600 text-white py-3 rounded-lg font-bold uppercase text-xs hover:bg-amber-600 dark:hover:bg-amber-700 transition mt-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
                         <i class="fas fa-magic"></i> Poradit mi
                     </button>
-                    <div id="progressivoAdvisorResult" class="hidden mt-6 bg-amber-50 dark:bg-stone-800 p-4 rounded-lg border border-amber-600 text-sm"></div>
+
+                    <div id="progressivoAdvisorResult"
+                         class="hidden mt-6 bg-amber-50 dark:bg-stone-800 p-4 rounded-lg border border-amber-600 text-sm leading-relaxed">
+                    </div>
                 </div>
             </div>
         </div>
@@ -330,15 +355,51 @@ const schemaWebSite = {
         margin-bottom: 0.5rem;
     }
 
-   @keyframes amber-pulse {
-       0%, 100% { box-shadow: 0 0 15px rgba(217, 119, 6, 0.3), 0 0 30px rgba(217, 119, 6, 0.1); }
-       50% { box-shadow: 0 0 25px rgba(217, 119, 6, 0.5), 0 0 50px rgba(217, 119, 6, 0.2); }
-   }
-   .jc-advisor-btn { animation: amber-pulse 3s ease-in-out infinite; }
-   .jc-advisor-btn:hover { animation: none; transform: scale(1.1) rotate(5deg); }
-   .typing-indicator { display: flex; justify-content: center; gap: 4px; }
-   .typing-indicator span { width: 8px; height: 8px; background: #d97706; border-radius: 50%; animation: typing-bounce 1.4s infinite; }
-   @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+/* AI Advisor Styles */
+@keyframes amber-pulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(217, 119, 6, 0.3),
+                    0 0 30px rgba(217, 119, 6, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(217, 119, 6, 0.5),
+                    0 0 50px rgba(217, 119, 6, 0.2);
+    }
+}
+
+.jc-advisor-btn {
+    animation: amber-pulse 3s ease-in-out infinite;
+}
+
+.jc-advisor-btn:hover {
+    animation: none;
+    transform: scale(1.1) rotate(5deg) !important;
+    box-shadow: 0 0 30px rgba(217, 119, 6, 0.6),
+                0 0 60px rgba(217, 119, 6, 0.3) !important;
+}
+
+.typing-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 1rem 0;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: #d97706;
+    border-radius: 50%;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing-bounce {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
 </style>
 <script>
   // Global scroll listener for UI state & Animation Logic
@@ -398,42 +459,68 @@ const schemaWebSite = {
   });
 </script>
 <script is:inline>
-   let progressivoAdvisorLastFocus;
-   function openProgressivoAdvisor() {
-       progressivoAdvisorLastFocus = document.activeElement;
-       document.getElementById('progressivoAdvisorModal').classList.remove('hidden');
-       document.body.classList.add('overflow-hidden');
-   }
-   function closeProgressivoAdvisor() {
-       document.getElementById('progressivoAdvisorModal').classList.add('hidden');
-       document.body.classList.remove('overflow-hidden');
-       if (progressivoAdvisorLastFocus) progressivoAdvisorLastFocus.focus();
-   }
-   async function askProgressivoAdvisor() {
-       const input = document.getElementById('progressivoAdvisorInput').value.trim();
-       if (!input) return;
-       const result = document.getElementById('progressivoAdvisorResult');
-       result.classList.remove('hidden');
-       result.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
-       const prompt = `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${input}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Čeština.`;
-       const reply = await callGemini(prompt);
-       let fmt = reply.replace(/\n/g, '<br>');
-       fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" class="text-amber-600 underline" onclick="closeProgressivoAdvisor()">#${s}</a>`);
-       fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank" class="text-amber-600 underline">+507 68509698</a>');
-       fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu" class="text-amber-600 underline">info@progressivo.eu</a>');
-       result.innerHTML = `<div class="text-stone-700 dark:text-stone-300">${fmt}</div>`;
-   }
-   async function callGemini(prompt) {
-       const key = atob("QUl6YVN5QU9qNXJ3MXNNWDgwM3AxTG5zaWc3YjBCMDIzTVFnZWhR");
-       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${key}`, {
-           method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-       });
-       const data = await res.json();
-       return data.candidates?.[0]?.content?.parts?.[0]?.text || "Chyba AI.";
-   }
-   document.addEventListener('keydown', (e) => {
-       if (e.key === 'Escape' && !document.getElementById('progressivoAdvisorModal')?.classList.contains('hidden')) closeProgressivoAdvisor();
-   });
+// AI Business Advisor Logic
+let progressivoAdvisorLastFocus;
+
+function openProgressivoAdvisor() {
+    progressivoAdvisorLastFocus = document.activeElement;
+    const modal = document.getElementById('progressivoAdvisorModal');
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    setTimeout(() => {
+        document.getElementById('progressivoAdvisorInput')?.focus();
+    }, 100);
+}
+
+function closeProgressivoAdvisor() {
+    const modal = document.getElementById('progressivoAdvisorModal');
+    modal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    if (progressivoAdvisorLastFocus) progressivoAdvisorLastFocus.focus();
+    document.getElementById('progressivoAdvisorInput').value = '';
+    document.getElementById('progressivoAdvisorResult').classList.add('hidden');
+}
+
+async function askProgressivoAdvisor() {
+    const input = document.getElementById('progressivoAdvisorInput').value.trim();
+    if (!input) { alert('Prosím, napište svůj dotaz.'); return; }
+
+    const result = document.getElementById('progressivoAdvisorResult');
+    result.classList.remove('hidden');
+    result.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+
+    const prompt = `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${input}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Čeština.`;
+
+    try {
+        const reply = await callGemini(prompt);
+        let fmt = reply.replace(/\n/g, '<br>');
+        fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" class="text-amber-600 hover:text-amber-700 underline font-semibold" onclick="closeProgressivoAdvisor()">#${s}</a>`);
+        fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank" class="text-amber-600 underline font-semibold">+507 68509698 📱</a>');
+        fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu" class="text-amber-600 underline font-semibold">info@progressivo.eu ✉️</a>');
+        result.innerHTML = `<div class="text-stone-700 dark:text-stone-300">${fmt}</div>`;
+    } catch (error) {
+        result.innerHTML = '<div class="text-red-600">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+    }
+}
+
+async function callGemini(prompt) {
+    const key = atob("QUl6YVN5QU9qNXJ3MXNNWDgwM3AxTG5zaWc3YjBCMDIzTVFnZWhR");
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${key}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    if (!res.ok) throw new Error(`API Error: ${res.status}`);
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "AI se zamyslela. Zkuste znovu.";
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('progressivoAdvisorModal');
+        if (modal && !modal.classList.contains('hidden')) {
+            closeProgressivoAdvisor();
+        }
+    }
+});
 </script>
