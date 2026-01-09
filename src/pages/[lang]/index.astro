@@ -118,7 +118,6 @@ services.sort((a, b) => {
     });
   </script>
 
-  <!-- Editorial Hero Section -->
   <section class="editorial-hero">
     <div class="container hero-content">
       <h1 class="hero-title" set:html={t.pages.home.hero_title}></h1>
@@ -127,10 +126,8 @@ services.sort((a, b) => {
     </div>
   </section>
 
-  <!-- Editorial Time Signal -->
   <EditorialTimeSignal />
 
-  <!-- Founder Section -->
   <section id="founder" class="founder-section animate-on-scroll">
     <div class="container founder-content">
       <div class="founder-text-column">
@@ -143,9 +140,9 @@ services.sort((a, b) => {
         </div>
 
         <div class="founder-actions">
-          <a href="https://cingel.cz" target="_blank" class="founder-link">{t.buttons.founder_story}</a>
-          <FounderAudioPlayer
-            src="/audio/founder-intro.mp3"
+          <a href="[https://cingel.cz](https://cingel.cz)" target="_blank" class="founder-link">{t.buttons.founder_story}</a>
+          <FounderAudioPlayer 
+            src="/audio/founder-intro.mp3" 
             buttonText={t.buttons.play_audio}
             disclaimerText={t.pages.home.audio_note}
           />
@@ -160,28 +157,27 @@ services.sort((a, b) => {
     </div>
   </section>
 
-  <!-- Services Section -->
   <section id="services" class="section-services animate-on-scroll">
     <div class="container">
       <h2 class="section-title">{t.pages.home.services_title}</h2>
       <div class="services-grid">
         {services.map((service, index) => {
           const slug = service.id.split('/').pop().replace(/\.md$/, '');
-
+          
           let spanClass = 'span-1';
           if (slug === 'analyza-dna' || slug === 'expatriace-viza') {
             spanClass = 'span-2';
           } else if (slug === 'online-kurzy') {
             spanClass = 'span-3';
           }
-
+          
           const cardClass = `service-card ${spanClass}`;
-
+          
           return (
           <a href={`/${lang}/sluzby/${slug}`} class={cardClass}>
             <div class="card-media">
-                <img
-                  src={service.data.image || "/images/mapa-svetabusines.webp"}
+                <img 
+                  src={service.data.image || "/images/mapa-svetabusines.webp"} 
                   srcset={`
                     ${(service.data.image || "/images/mapa-svetabusines.webp").replace('.webp', '-400.webp')} 400w,
                     ${(service.data.image || "/images/mapa-svetabusines.webp").replace('.webp', '-800.webp')} 800w,
@@ -204,13 +200,11 @@ services.sort((a, b) => {
     </div>
   </section>
 
-  <!-- Editorial CTA -->
   <HomepageCTA lang={lang} />
 </Layout>
 
 <style>
-  /*
-   * EDITORIAL HERO SECTION
+  /* * EDITORIAL HERO SECTION
    * Concept: "Tiché sebevědomí"
    */
   .editorial-hero {
@@ -420,15 +414,15 @@ services.sort((a, b) => {
     position: relative;
     width: 100%;
     margin-left: -4rem; /* The Magazine "Overlap" */
-
+    
     /* Premium Paper / Scroll Look */
     background-color: #fcfbf9; /* Warm Paper */
     padding: 0; /* Removed border/frame effect */
     box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
+    
     /* Animation Setup */
     transform-origin: top right;
-    transition:
+    transition: 
       mask-position 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
       -webkit-mask-position 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
       transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -441,7 +435,7 @@ services.sort((a, b) => {
     mask-image: linear-gradient(225deg, black 40%, transparent 60%);
     mask-size: 300% 300%;
     mask-position: 100% 0%; /* Start: Skryto (nebo jen roh) */
-
+    
     /* Safari / Webkit support - KRITICKÉ PRO iOS */
     -webkit-mask-image: linear-gradient(225deg, black 40%, transparent 60%);
     -webkit-mask-size: 300% 300%;
