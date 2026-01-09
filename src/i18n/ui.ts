@@ -66,6 +66,10 @@ export const ui = {
       link_contract: 'Smluvní podmínky',
       link_webs: 'Weby',
     },
+    home_cta: {
+      text: 'Máte otázku nebo konkrétní situaci? Napište nám.',
+      whatsapp: 'WhatsApp',
+    },
     pages: {
       home_title: 'Domů',
       about_title: 'O nás',
@@ -148,6 +152,10 @@ export const ui = {
       link_terms: 'Terms & Conditions',
       link_contract: 'Contractual Terms',
       link_webs: 'Websites',
+    },
+    home_cta: {
+      text: 'Do you have a question or a specific situation? Write to us.',
+      whatsapp: 'WhatsApp',
     },
     pages: {
       home_title: 'Home',
@@ -232,6 +240,10 @@ export const ui = {
       link_contract: 'Vertragsbedingungen',
       link_webs: 'Websites',
     },
+    home_cta: {
+      text: 'Haben Sie eine Frage oder eine konkrete Situation? Schreiben Sie uns.',
+      whatsapp: 'WhatsApp',
+    },
     pages: {
       home_title: 'Startseite',
       about_title: 'Über uns',
@@ -315,6 +327,10 @@ export const ui = {
       link_contract: 'Condiciones Contractuales',
       link_webs: 'Sitios web',
     },
+    home_cta: {
+      text: '¿Tiene alguna pregunta o una situación concreta? Escríbanos.',
+      whatsapp: 'WhatsApp',
+    },
     pages: {
       home_title: 'Inicio',
       about_title: 'Sobre nosotros',
@@ -397,6 +413,10 @@ export const ui = {
       link_terms: 'Условия использования',
       link_contract: 'Договорные условия',
       link_webs: 'Веб-сайты',
+    },
+    home_cta: {
+      text: 'У вас есть вопрос или конкретная ситуация? Напишите нам.',
+      whatsapp: 'WhatsApp',
     },
     pages: {
       home_title: 'Главная',
