@@ -2,27 +2,29 @@
 import Layout from '../layouts/Layout.astro';
 
 const title = "Stránka nenalezena | Progressivo";
-// The 404 page content is specific and minimal, overriding general description.
 const description = "Tahle stránka neexistuje.";
 ---
 
 <Layout title={title} description={description}>
   <div class="container error-container">
-    <div class="error-wrap">
-      <h1 class="error-title">Tahle stránka neexistuje.</h1>
+    <h1 class="error-title">Tahle stránka neexistuje.</h1>
 
+    <div class="error-wrap">
       <p class="error-redirect-note">
-        Za <span id="redirect-count">12</span> sekund vás přesměrujeme na hlavní stránku.
+        Pokud jste se překlikli, rádi vás přesměrujeme na hlavní stránku.<br>
+        Za <span id="redirect-count">15</span> sekund.
       </p>
 
-      <div class="error-signal"></div>
+      <div class="error-signal">
+        <div class="error-progress"></div>
+      </div>
     </div>
   </div>
 </Layout>
 
 <script>
   const countSpan = document.getElementById('redirect-count');
-  let seconds = 12;
+  let seconds = 15;
 
   if (countSpan) {
     const interval = setInterval(() => {
@@ -38,80 +40,75 @@ const description = "Tahle stránka neexistuje.";
 </script>
 
 <style>
-  /*
-   * Centering logic for the error message.
-   * Using a dedicated container to handle vertical/horizontal centering
-   * while allowing the inner .error-wrap to behave as inline-block.
-   */
+  /* LAYOUT – H1 nahoře, odpočet ve středu viewportu */
   .error-container {
-    min-height: 60vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* Aligns the inline-block child to the left visually relative to this flex container,
-       but we want it centered or positioned comfortably.
-       The prompt shows "Tahle stránka neexistuje" on one line.
-    */
-    align-items: flex-start;
-    padding-top: 4rem;
-    padding-bottom: 8rem;
+    padding: 4rem 1.5rem 2rem;
   }
 
-  .error-wrap {
-    display: inline-block; /* šířka podle nejširšího textu */
-  }
-
+  /* H1 – silná, autoritativní, amber */
   .error-title {
-    color: #d97706;          /* amber */
-    font-weight: 500;
+    color: #d97706;
+    font-weight: 800;
     white-space: nowrap;
-    font-size: 2rem;         /* ZVĚTŠIT – musí být dominantní */
-    margin-bottom: 16px;
-    line-height: 1.2;
-    font-family: var(--font-heading); /* Ensure consistency with site fonts */
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    margin-bottom: 0;
+    line-height: 1.1;
+    font-family: var(--font-heading);
   }
 
+  /* Blok s odpočtem – vertikálně ve středu */
+  .error-wrap {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+  }
+
+  /* Text odpočtu – amber, čitelný */
   .error-redirect-note {
     color: #d97706;
-    font-size: 0.95rem;
-    margin-bottom: 14px;
+    font-size: clamp(1rem, 4vw, 1.15rem);
     font-family: var(--font-body);
+    line-height: 1.6;
+    margin-bottom: 1rem;
   }
 
-  /* jemná pulzující linka */
+  /* Progress bar – základ (šedý podklad) */
   .error-signal {
     width: 100%;
+    max-width: 320px;
     height: 2px;
+    background: rgba(217, 119, 6, 0.25);
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  /* Progress bar – aktivní část (mizí zleva doprava za 15s) */
+  .error-progress {
+    height: 100%;
+    width: 100%;
     background: #d97706;
-    margin-left: 12px;       /* jemné editoriální vychýlení */
-    animation: signalPulse 2s ease-in-out infinite;
+    animation: progressBar 15s linear forwards;
   }
 
-  @keyframes signalPulse {
-    0%   { opacity: 0.3; }
-    50%  { opacity: 1; }
-    100% { opacity: 0.3; }
+  @keyframes progressBar {
+    from { width: 100%; }
+    to   { width: 0%; }
   }
 
-  /* Dark mode – zachovat čitelnost */
-  /* Using global selector strategy often used in Astro or data-theme attribute */
-  :global([data-theme="dark"]) .error-title,
-  :global([data-theme="dark"]) .error-redirect-note,
-  :global([data-theme="dark"]) .error-signal {
-    color: #fbbf24; /* světlejší amber */
-    background-color: #fbbf24; /* For the signal line background */
-  }
-
-  /* Reset background-color for text elements to transparent to avoid boxiness,
-     only signal needs background color change.
-  */
+  /* DARK MODE – světlejší amber */
   :global([data-theme="dark"]) .error-title,
   :global([data-theme="dark"]) .error-redirect-note {
-      background-color: transparent;
+    color: #fbbf24;
   }
 
-  /* Ensure the signal line gets the background color update in dark mode */
+  :global([data-theme="dark"]) .error-progress {
+    background: #fbbf24;
+  }
+
   :global([data-theme="dark"]) .error-signal {
-      background: #fbbf24;
+    background: rgba(251, 191, 36, 0.25);
   }
 </style>
