@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Stránka nenalezena | Progressivo";
+const description = "Tahle stránka neexistuje. Možná byla přesunuta, nebo už nedává smysl.";
+const whatsappLink = "https://wa.me/50768509698?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20spolupr%C3%A1ci";
+---
+
+<Layout title={title} description={description}>
+  <div class="container error-content">
+    <h1>Tahle stránka neexistuje.</h1>
+    <p>Možná byla přesunuta, nebo už nedává smysl.</p>
+
+    <nav class="error-nav">
+      <a href="/">Domů</a>
+      <a href="/#services">Služby</a>
+      <a href="/kontakt">Kontakt</a>
+      <a href={whatsappLink} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </nav>
+  </div>
+</Layout>
+
+<style>
+  .error-content {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4rem;
+    padding-bottom: 8rem;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 2rem;
+    max-width: 15ch;
+  }
+
+  p {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-text-light);
+    margin-bottom: 4rem;
+    max-width: 40ch;
+    line-height: 1.5;
+  }
+
+  .error-nav {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .error-nav a {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .error-nav a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .error-nav {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>
