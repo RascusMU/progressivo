@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getTranslatedPath } from '../../i18n/utils';
 
 // Filter for Czech posts: Assume they DO NOT have a hyphen-lang suffix like -en.md
 // or explicitly include them if your naming convention is different.
@@ -25,7 +26,7 @@ posts.sort((a, b) => {
           <article class="blog-card">
             <div class="card-content">
                 <h2>
-                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                    <a href={getTranslatedPath('/blog/' + post.slug, 'cs')}>{post.data.title}</a>
                 </h2>
                 {post.data.date && (
                     <time datetime={post.data.date.toISOString()} class="post-date">
@@ -39,7 +40,7 @@ posts.sort((a, b) => {
                         ? post.body.substring(0, 150).replace(/[#*]/g, '') + '...'
                         : ''}
                 </p>
-                <a href={`/blog/${post.slug}`} class="read-more">Číst více &rarr;</a>
+                <a href={getTranslatedPath('/blog/' + post.slug, 'cs')} class="read-more">Číst více &rarr;</a>
             </div>
           </article>
         )) : (

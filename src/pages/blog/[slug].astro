@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter(post => !post.id.startsWith('en/'))
+    .filter(post => !/-(en|de|ru|es)\.md$/i.test(post.id))
     .map(post => ({
       params: { slug: post.slug },
       props: { post },

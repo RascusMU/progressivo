@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
+import { getTranslatedPath } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   return [
@@ -46,7 +47,7 @@ const readMore = {
           <article class="blog-card">
             <div class="card-content">
                 <h2>
-                    <a href={`/${lang}/blog/${post.slug}`}>{post.data.title}</a>
+                    <a href={getTranslatedPath('/blog/' + post.slug, lang)}>{post.data.title}</a>
                 </h2>
                 {post.data.date && (
                     <time datetime={post.data.date.toISOString()} class="post-date">
@@ -60,7 +61,7 @@ const readMore = {
                         ? post.body.substring(0, 150).replace(/[#*]/g, '') + '...'
                         : ''}
                 </p>
-                <a href={`/${lang}/blog/${post.slug}`} class="read-more">{readMore[lang] || 'Read more'} &rarr;</a>
+                <a href={getTranslatedPath('/blog/' + post.slug, lang)} class="read-more">{readMore[lang] || 'Read more'} &rarr;</a>
             </div>
           </article>
         )) : (
