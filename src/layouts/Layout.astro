@@ -247,8 +247,9 @@ const schemaWebSite = {
     }
 </style>
 <script>
-  // Global scroll listener for UI state
+  // Global scroll listener for UI state & Animation Logic
   document.addEventListener('astro:page-load', () => {
+      // 1. Scroll State
       let lastScrollY = window.scrollY;
       const threshold = 50;
 
@@ -267,5 +268,38 @@ const schemaWebSite = {
 
       window.addEventListener('scroll', updateScrollState, { passive: true });
       updateScrollState(); // Initial check
+
+      // 2. Global Animation Gate (2s Delay)
+      // "Gentle Lift" requires the user to settle before animations trigger
+      setTimeout(() => {
+          document.body.classList.add('animations-enabled');
+      }, 2000);
+
+      // 3. Intersection Observer for .animate-on-scroll
+      if ('IntersectionObserver' in window) {
+          const observerOptions = {
+              root: null,
+              rootMargin: '0px',
+              threshold: 0.1
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      entry.target.classList.add('in-view');
+                      observer.unobserve(entry.target); // Trigger once
+                  }
+              });
+          }, observerOptions);
+
+          document.querySelectorAll('.animate-on-scroll').forEach(el => {
+              observer.observe(el);
+          });
+      } else {
+          // Fallback: Show immediately if IO is not supported
+          document.querySelectorAll('.animate-on-scroll').forEach(el => {
+              el.classList.add('in-view');
+          });
+      }
   });
 </script>

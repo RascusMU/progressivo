@@ -599,6 +599,37 @@ services.sort((a, b) => {
         grid-column: span 1;
     }
 
+    /* Service Cards Mobile Tuning - Gentle Lift & Touch Feedback */
+    .section-services.animate-on-scroll .service-card {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Ensure no scale transition conflict */
+        transition: opacity 800ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                    transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Entry Animation: Requires BOTH Observer (.in-view) AND Time Gate (.animations-enabled) */
+    :global(body.animations-enabled) .section-services.animate-on-scroll.in-view .service-card {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Clear Tap Feedback */
+    .service-card:active {
+        transform: scale(0.96) !important;
+        transition: transform 150ms ease-out !important;
+        border-color: var(--color-accent); /* Optional hint */
+    }
+
+    /* Reduced Motion Override */
+    @media (prefers-reduced-motion: reduce) {
+        .section-services.animate-on-scroll .service-card {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+
     /* Founder Mobile adjustments */
     .founder-content {
       gap: 2rem;
