@@ -327,6 +327,11 @@
 </style>
 
 <script>
+    // Rate limiting
+    let lastRequestTime = 0;
+    const MIN_REQUEST_INTERVAL = 10000; // 10 sekund mezi requesty
+    let isProcessing = false; // Prevence duplicitních requestů
+
     // UI texty podle jazyka
     const uiTexts = {
       cs: {
@@ -335,7 +340,8 @@
         placeholder: 'Např: Chci založit firmu v Panamě...',
         button: 'Poradit mi',
         error: 'Chyba. Kontaktujte nás na info@progressivo.eu',
-        emptyQuery: 'Prosím, napište svůj dotaz.'
+        emptyQuery: 'Prosím, napište svůj dotaz.',
+        rateLimitMessage: 'Prosím počkejte {seconds} sekund mezi dotazy.'
       },
       en: {
         title: 'Business Advisor',
@@ -343,7 +349,8 @@
         placeholder: 'E.g: I want to start a company in Panama...',
         button: 'Advise me',
         error: 'Error. Contact us at info@progressivo.eu',
-        emptyQuery: 'Please write your query.'
+        emptyQuery: 'Please write your query.',
+        rateLimitMessage: 'Please wait {seconds} seconds between queries.'
       },
       de: {
         title: 'Business Advisor',
@@ -351,7 +358,8 @@
         placeholder: 'Z.B: Ich möchte eine Firma in Panama gründen...',
         button: 'Beraten Sie mich',
         error: 'Fehler. Kontaktieren Sie uns unter info@progressivo.eu',
-        emptyQuery: 'Bitte schreiben Sie Ihre Anfrage.'
+        emptyQuery: 'Bitte schreiben Sie Ihre Anfrage.',
+        rateLimitMessage: 'Bitte warten Sie {seconds} Sekunden zwischen Anfragen.'
       },
       ru: {
         title: 'Бизнес-консультант',
@@ -359,7 +367,8 @@
         placeholder: 'Напр: Хочу открыть компанию в Панаме...',
         button: 'Посоветуйте мне',
         error: 'Ошибка. Свяжитесь с нами info@progressivo.eu',
-        emptyQuery: 'Пожалуйста, напишите ваш запрос.'
+        emptyQuery: 'Пожалуйста, напишите ваш запрос.',
+        rateLimitMessage: 'Пожалуйста, подождите {seconds} секунд между запросами.'
       },
       es: {
         title: 'Asesor Empresarial',
@@ -367,7 +376,8 @@
         placeholder: 'Ej: Quiero constituir una empresa en Panamá...',
         button: 'Aconséjame',
         error: 'Error. Contáctenos en info@progressivo.eu',
-        emptyQuery: 'Por favor, escriba su consulta.'
+        emptyQuery: 'Por favor, escriba su consulta.',
+        rateLimitMessage: 'Por favor espere {seconds} segundos entre consultas.'
       }
     };
 
@@ -571,8 +581,29 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
 
         // --- GEMINI LOGIC ---
         const askAdvisor = async () => {
+            // Prevence duplicitních requestů
+            if (isProcessing) {
+              console.log('Request already in progress');
+              return;
+            }
+
+            // Rate limit check
+            const now = Date.now();
+            if (now - lastRequestTime < MIN_REQUEST_INTERVAL) {
+              const timeLeft = Math.ceil((MIN_REQUEST_INTERVAL - (now - lastRequestTime)) / 1000);
+              const lang = getCurrentLanguage();
+              const texts = uiTexts[lang] || uiTexts.cs;
+              alert(texts.rateLimitMessage.replace('{seconds}', timeLeft));
+              return;
+            }
+
+            // Nastavit flagy
+            isProcessing = true;
+            lastRequestTime = now;
+
             const query = input.value.trim();
             if (!query) {
+                isProcessing = false;
                 const lang = getCurrentLanguage();
                 const texts = uiTexts[lang] || uiTexts.cs;
                 alert(texts.emptyQuery);
@@ -686,7 +717,10 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                   });
                 });
 
+                isProcessing = false;
+
             } catch (error) {
+                isProcessing = false;
                 console.error(error);
                 typingDiv.remove();
 
