@@ -89,6 +89,61 @@
     }
 </style>
 
+<style>
+  #jc-advisor-btn {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 10000 !important;
+
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 9999px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+
+    cursor: pointer !important;
+    transition: all 0.5s ease !important;
+  }
+
+  #jc-advisor-btn:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 20px 60px rgba(217, 119, 6, 0.3) !important;
+  }
+
+  #jc-advisor-btn svg {
+    color: #d97706 !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* Modal styles */
+  #progressivoAdvisorModal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10010 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  #progressivoAdvisorModal.hidden {
+    display: none !important;
+  }
+</style>
+
 <script>
     function initAdvisor() {
         const btn = document.getElementById('jc-advisor-btn');
