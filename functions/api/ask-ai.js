@@ -90,7 +90,7 @@ export async function onRequestPost(context) {
 }
 
 // Handle OPTIONS for CORS preflight
-export async function onRequestOptions() {
+export async function onRequestOptions(context) {
   return new Response(null, {
     headers: {
       'Access-Control-Allow-Origin': '*',
