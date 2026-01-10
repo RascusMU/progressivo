@@ -9,9 +9,10 @@
            w-14 h-14
            bottom-32 right-4
            md:bottom-6 md:right-6
-           backdrop-blur-xl bg-white/10 dark:bg-stone-900/40
-           border border-stone-200/20 dark:border-stone-700/30
-           shadow-2xl"
+           bg-stone-100/10 dark:bg-stone-900/60 backdrop-blur-xl
+           border border-stone-200/30 dark:border-stone-700/50
+           shadow-[0_8px_32px_rgba(0,0,0,0.12)]
+           will-change-transform"
     aria-label="Business Advisor - Jaroslav Cingel"
 >
     <!-- JC Text -->
@@ -35,11 +36,11 @@
 
     <!-- Modal Content -->
     <div class="relative w-full max-w-md rounded-xl overflow-hidden shadow-2xl
-                bg-stone-50/95 dark:bg-stone-900/95 backdrop-blur-2xl
+                bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur
                 border-2 border-stone-200/50 dark:border-stone-700/50">
 
         <!-- Header -->
-        <div class="p-6 border-b border-stone-200/50 dark:border-stone-700/50 relative">
+        <div class="p-6 border-b border-stone-200 dark:border-stone-700 relative bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur">
             <h3 class="text-2xl font-serif text-stone-900 dark:text-stone-100">Business Advisor</h3>
             <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Popište svou situaci a doporučím vám řešení.</p>
 
@@ -98,17 +99,6 @@
         0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
         40% { transform: scale(1); opacity: 1; }
     }
-
-    /* Scroll State Classes */
-    :global(#jc-advisor-btn.scrolled-down) {
-        opacity: 0.6;
-        transform: scale(0.9);
-    }
-
-    :global(#jc-advisor-btn.scrolled-up) {
-        opacity: 1;
-        transform: scale(1);
-    }
 </style>
 
 <script>
@@ -123,44 +113,40 @@
 
         if (!btn || !modal) return;
 
-        // --- SCROLL LOGIC ---
+        // --- SCROLL INTERACTION ---
+        // Hide on scroll down, show on scroll up (matching Floating Dock logic)
         let lastScrollY = window.scrollY;
         let ticking = false;
-        let scrollTimeout;
 
-        const updateScrollState = () => {
+        function updateAdvisorButton() {
+            if (!btn) return;
+
             const currentScrollY = window.scrollY;
 
-            if (Math.abs(currentScrollY - lastScrollY) > 5) {
-                if (currentScrollY > lastScrollY) {
-                    btn.classList.add('scrolled-down');
-                    btn.classList.remove('scrolled-up');
-                } else {
-                    btn.classList.add('scrolled-up');
-                    btn.classList.remove('scrolled-down');
-                }
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down - make it subtle
+                btn.style.transform = 'scale(0.9)';
+                btn.style.opacity = '0.6';
+            } else {
+                // Scrolling up or at top - full visibility
+                btn.style.transform = 'scale(1)';
+                btn.style.opacity = '1';
             }
+
             lastScrollY = currentScrollY;
             ticking = false;
-
-            // "Stop" detection
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                btn.classList.add('scrolled-up');
-                btn.classList.remove('scrolled-down');
-            }, 500);
-        };
+        }
 
         const onScroll = () => {
             if (!ticking) {
-                window.requestAnimationFrame(updateScrollState);
+                window.requestAnimationFrame(updateAdvisorButton);
                 ticking = true;
             }
         };
 
         window.addEventListener('scroll', onScroll, { passive: true });
-        // Set initial state
-        btn.classList.add('scrolled-up');
+        // Initial check
+        updateAdvisorButton();
 
         // --- MODAL LOGIC ---
         let lastFocus;
