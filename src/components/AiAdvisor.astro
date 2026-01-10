@@ -96,7 +96,7 @@
   /* Mobile positioning */
   @media (max-width: 768px) {
     #jc-advisor-btn {
-      bottom: 120px !important;
+      bottom: 100px !important;
     }
   }
 
@@ -379,6 +379,14 @@
                 fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank">+507 68509698 📱</a>');
                 fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu">info@progressivo.eu ✉️</a>');
                 result.innerHTML = `<div>${fmt}</div>`;
+
+                // Scroll modal nahoru k odpovědi
+                setTimeout(() => {
+                    const modal = document.querySelector('#progressivoAdvisorModal > div');
+                    if (modal) {
+                        modal.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }, 100);
 
                 // Re-attach listeners to new anchors
                 result.querySelectorAll('a[data-link-type="anchor"]').forEach(a => {
