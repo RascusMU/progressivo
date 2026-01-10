@@ -22,8 +22,8 @@
             </svg>
         </button>
         <div>
-            <h2>Business Advisor</h2>
-            <p>Popište svou situaci a doporučím vám řešení.</p>
+            <h2 id="advisor-title">Business Advisor</h2>
+            <p id="advisor-subtitle">Popište svou situaci a doporučím vám řešení.</p>
 
             <div id="progressivoAdvisorHistory" style="margin-top: 20px; max-height: 400px; overflow-y: auto;"></div>
 
@@ -327,6 +327,90 @@
 </style>
 
 <script>
+    // UI texty podle jazyka
+    const uiTexts = {
+      cs: {
+        title: 'Business Advisor',
+        subtitle: 'Popište svou situaci a doporučím vám řešení.',
+        placeholder: 'Např: Chci založit firmu v Panamě...',
+        button: 'Poradit mi',
+        error: 'Chyba. Kontaktujte nás na info@progressivo.eu',
+        emptyQuery: 'Prosím, napište svůj dotaz.'
+      },
+      en: {
+        title: 'Business Advisor',
+        subtitle: 'Describe your situation and I will recommend a solution.',
+        placeholder: 'E.g: I want to start a company in Panama...',
+        button: 'Advise me',
+        error: 'Error. Contact us at info@progressivo.eu',
+        emptyQuery: 'Please write your query.'
+      },
+      de: {
+        title: 'Business Advisor',
+        subtitle: 'Beschreiben Sie Ihre Situation und ich empfehle eine Lösung.',
+        placeholder: 'Z.B: Ich möchte eine Firma in Panama gründen...',
+        button: 'Beraten Sie mich',
+        error: 'Fehler. Kontaktieren Sie uns unter info@progressivo.eu',
+        emptyQuery: 'Bitte schreiben Sie Ihre Anfrage.'
+      },
+      ru: {
+        title: 'Бизнес-консультант',
+        subtitle: 'Опишите вашу ситуацию, и я порекомендую решение.',
+        placeholder: 'Напр: Хочу открыть компанию в Панаме...',
+        button: 'Посоветуйте мне',
+        error: 'Ошибка. Свяжитесь с нами info@progressivo.eu',
+        emptyQuery: 'Пожалуйста, напишите ваш запрос.'
+      },
+      es: {
+        title: 'Asesor Empresarial',
+        subtitle: 'Describa su situación y le recomendaré una solución.',
+        placeholder: 'Ej: Quiero constituir una empresa en Panamá...',
+        button: 'Aconséjame',
+        error: 'Error. Contáctenos en info@progressivo.eu',
+        emptyQuery: 'Por favor, escriba su consulta.'
+      }
+    };
+
+    // Detekce aktuálního jazyka
+    function getCurrentLanguage() {
+      const html = document.documentElement;
+      const lang = html.getAttribute('lang') || 'cs';
+      return lang.split('-')[0]; // cs, en, de, ru, es
+    }
+
+    // Aplikovat texty při otevření
+    function applyLanguageTexts() {
+      const lang = getCurrentLanguage();
+      const texts = uiTexts[lang] || uiTexts.cs;
+
+      const title = document.getElementById('advisor-title');
+      const subtitle = document.getElementById('advisor-subtitle');
+      const input = document.getElementById('progressivoAdvisorInput');
+      const button = document.getElementById('advisor-ask-btn');
+
+      if (title) title.textContent = texts.title;
+      if (subtitle) subtitle.textContent = texts.subtitle;
+      if (input) input.placeholder = texts.placeholder;
+      if (button) button.innerHTML = `<i class="fas fa-magic"></i> ${texts.button}`;
+    }
+
+    // Multi-language prompty
+    function getPromptForLanguage(userQuery, lang) {
+      const prompts = {
+        cs: `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${userQuery}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Odpověz ČESKY.`,
+
+        en: `You are business consultant Jaroslav Cingel (Progressivo.eu). Services: 1) Company formation in Panama 2) Tax consulting 3) IT support 4) Legal services 5) Expat assistance. Query: "${userQuery}". Task: Analyze (1 sentence), recommend service (2 sentences), suggest website section (#sluzby), offer contact (WhatsApp +507 68509698 or info@progressivo.eu). Max 5 sentences. Answer in ENGLISH.`,
+
+        de: `Du bist Unternehmensberater Jaroslav Cingel (Progressivo.eu). Dienstleistungen: 1) Firmengründung in Panama 2) Steuerberatung 3) IT-Support 4) Rechtsdienstleistungen 5) Expat-Unterstützung. Anfrage: "${userQuery}". Aufgabe: Analysiere (1 Satz), empfehle Service (2 Sätze), schlage Website-Bereich vor (#sluzby), biete Kontakt an (WhatsApp +507 68509698 oder info@progressivo.eu). Max 5 Sätze. Antworte auf DEUTSCH.`,
+
+        ru: `Вы бизнес-консультант Ярослава Цингела (Progressivo.eu). Услуги: 1) Регистрация компаний в Панаме 2) Налоговое консультирование 3) IT-поддержка 4) Юридические услуги 5) Помощь экспатам. Запрос: "${userQuery}". Задача: Проанализируйте (1 предложение), порекомендуйте услугу (2 предложения), предложите раздел сайта (#sluzby), предложите контакт (WhatsApp +507 68509698 или info@progressivo.eu). Макс 5 предложений. Отвечайте на РУССКОМ.`,
+
+        es: `Eres consultor empresarial Jaroslav Cingel (Progressivo.eu). Servicios: 1) Constitución de empresas en Panamá 2) Consultoría fiscal 3) Soporte IT 4) Servicios legales 5) Asistencia para expatriados. Consulta: "${userQuery}". Tarea: Analiza (1 frase), recomienda servicio (2 frases), sugiere sección web (#sluzby), ofrece contacto (WhatsApp +507 68509698 o info@progressivo.eu). Máx 5 frases. Responde en ESPAÑOL.`
+      };
+
+      return prompts[lang] || prompts.cs;
+    }
+
     function initAdvisor() {
         const btn = document.getElementById('jc-advisor-btn');
         const modal = document.getElementById('progressivoAdvisorModal');
@@ -375,6 +459,7 @@
         let lastFocus;
 
         const openModal = () => {
+            applyLanguageTexts();
             lastFocus = document.activeElement;
             modal.classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
@@ -405,7 +490,12 @@
         // --- GEMINI LOGIC ---
         const askAdvisor = async () => {
             const query = input.value.trim();
-            if (!query) { alert('Prosím, napište svůj dotaz.'); return; }
+            if (!query) {
+                const lang = getCurrentLanguage();
+                const texts = uiTexts[lang] || uiTexts.cs;
+                alert(texts.emptyQuery);
+                return;
+            }
 
             // Add typing indicator
             const typingDiv = document.createElement('div');
@@ -414,7 +504,8 @@
             history.appendChild(typingDiv);
             history.scrollTop = history.scrollHeight;
 
-            const prompt = `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${query}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Čeština.`;
+            const currentLang = getCurrentLanguage();
+            const prompt = getPromptForLanguage(query, currentLang);
 
             try {
                 const reply = await callGemini(prompt);
@@ -471,10 +562,12 @@
                 typingDiv.remove();
 
                 // Append Error
+                const lang = getCurrentLanguage();
+                const texts = uiTexts[lang] || uiTexts.cs;
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'chat-message ai-message';
                 errorDiv.style.borderColor = '#ef4444';
-                errorDiv.innerHTML = '<div style="color: #ef4444;">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+                errorDiv.innerHTML = `<div style="color: #ef4444;">${texts.error}</div>`;
                 history.appendChild(errorDiv);
             }
         };
