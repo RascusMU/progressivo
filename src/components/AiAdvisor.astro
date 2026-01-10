@@ -397,15 +397,97 @@
     // Multi-language prompty
     function getPromptForLanguage(userQuery, lang) {
       const prompts = {
-        cs: `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${userQuery}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Odpověz ČESKY.`,
+        cs: `Jsi business konzultant Jaroslava Cingela (Progressivo.eu).
 
-        en: `You are business consultant Jaroslav Cingel (Progressivo.eu). Services: 1) Company formation in Panama 2) Tax consulting 3) IT support 4) Legal services 5) Expat assistance. Query: "${userQuery}". Task: Analyze (1 sentence), recommend service (2 sentences), suggest website section (#sluzby), offer contact (WhatsApp +507 68509698 or info@progressivo.eu). Max 5 sentences. Answer in ENGLISH.`,
+Služby (POUŽIJ PŘESNÉ KOTVY):
+1) #sluzby/analyza-dna - Analýza DNA
+2) #sluzby/efektivni-integrace - Efektivní integrace
+3) #sluzby/it-podpora - IT podpora
+4) #sluzby/online-kurzy - Online kurzy
+5) #sluzby/expatriace - Expatriace a víza
+6) #sluzby/nemovitosti - Nemovitosti
+7) #sluzby/prekladatelska-cinnost - Překladatelská činnost
+8) #sluzby/online-prodej-techniky - Online prodej techniky
 
-        de: `Du bist Unternehmensberater Jaroslav Cingel (Progressivo.eu). Dienstleistungen: 1) Firmengründung in Panama 2) Steuerberatung 3) IT-Support 4) Rechtsdienstleistungen 5) Expat-Unterstützung. Anfrage: "${userQuery}". Aufgabe: Analysiere (1 Satz), empfehle Service (2 Sätze), schlage Website-Bereich vor (#sluzby), biete Kontakt an (WhatsApp +507 68509698 oder info@progressivo.eu). Max 5 Sätze. Antworte auf DEUTSCH.`,
+Dotaz: "${userQuery}"
 
-        ru: `Вы бизнес-консультант Ярослава Цингела (Progressivo.eu). Услуги: 1) Регистрация компаний в Панаме 2) Налоговое консультирование 3) IT-поддержка 4) Юридические услуги 5) Помощь экспатам. Запрос: "${userQuery}". Задача: Проанализируйте (1 предложение), порекомендуйте услугу (2 предложения), предложите раздел сайта (#sluzby), предложите контакт (WhatsApp +507 68509698 или info@progressivo.eu). Макс 5 предложений. Отвечайте на РУССКОМ.`,
+Úkol:
+1. Analyzuj dotaz (1 věta)
+2. Doporuč KONKRÉTNÍ službu (2 věty)
+3. Použij PŘESNOU kotvu (např. #sluzby/expatriace)
+4. Nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu)
 
-        es: `Eres consultor empresarial Jaroslav Cingel (Progressivo.eu). Servicios: 1) Constitución de empresas en Panamá 2) Consultoría fiscal 3) Soporte IT 4) Servicios legales 5) Asistencia para expatriados. Consulta: "${userQuery}". Tarea: Analiza (1 frase), recomienda servicio (2 frases), sugiere sección web (#sluzby), ofrece contacto (WhatsApp +507 68509698 o info@progressivo.eu). Máx 5 frases. Responde en ESPAÑOL.`
+Max 5 vět. Odpověz ČESKY. DŮLEŽITÉ: Používej POUZE kotvy ve formátu #sluzby/nazev-sluzby`,
+
+        en: `You are business consultant Jaroslav Cingel (Progressivo.eu).
+
+Services (USE EXACT ANCHORS):
+1) #sluzby/analyza-dna - DNA Analysis
+2) #sluzby/efektivni-integrace - Efficient Integration
+3) #sluzby/it-podpora - IT Support
+4) #sluzby/online-kurzy - Online Courses
+5) #sluzby/expatriace - Expatriation and Visas
+6) #sluzby/nemovitosti - Real Estate
+7) #sluzby/prekladatelska-cinnost - Translation Services
+8) #sluzby/online-prodej-techniky - Online Tech Sales
+
+Query: "${userQuery}"
+
+Task:
+1. Analyze query (1 sentence)
+2. Recommend SPECIFIC service (2 sentences)
+3. Use EXACT anchor (e.g. #sluzby/expatriace)
+4. Offer contact (WhatsApp +507 68509698 or info@progressivo.eu)
+
+Max 5 sentences. Answer in ENGLISH. IMPORTANT: Use ONLY anchors in format #sluzby/service-name`,
+
+        de: `Du bist Unternehmensberater Jaroslav Cingel (Progressivo.eu).
+
+Dienstleistungen (VERWENDE EXAKTE ANKER):
+1) #sluzby/analyza-dna - DNA-Analyse
+2) #sluzby/efektivni-integrace - Effiziente Integration
+3) #sluzby/it-podpora - IT-Support
+4) #sluzby/online-kurzy - Online-Kurse
+5) #sluzby/expatriace - Expatriation und Visa
+6) #sluzby/nemovitosti - Immobilien
+7) #sluzby/prekladatelska-cinnost - Übersetzungsdienste
+8) #sluzby/online-prodej-techniky - Online-Technikverkauf
+
+Anfrage: "${userQuery}"
+
+Aufgabe: Analysiere (1 Satz), empfehle Service (2 Sätze), verwende EXAKTEN Anker (z.B. #sluzby/expatriace), biete Kontakt an. Max 5 Sätze. Antworte auf DEUTSCH.`,
+
+        ru: `Вы бизнес-консультант Ярослава Цингела (Progressivo.eu).
+
+Услуги (ИСПОЛЬЗУЙТЕ ТОЧНЫЕ ЯКОРЯ):
+1) #sluzby/analyza-dna - Анализ ДНК
+2) #sluzby/efektivni-integrace - Эффективная интеграция
+3) #sluzby/it-podpora - IT-поддержка
+4) #sluzby/online-kurzy - Онлайн-курсы
+5) #sluzby/expatriace - Экспатриация и визы
+6) #sluzby/nemovitosti - Недвижимость
+7) #sluzby/prekladatelska-cinnost - Переводческие услуги
+8) #sluzby/online-prodej-techniky - Онлайн-продажа техники
+
+Запрос: "${userQuery}"
+
+Задача: Проанализируйте (1 предложение), порекомендуйте услугу (2 предложения), используйте ТОЧНЫЙ якорь (напр. #sluzby/expatriace), предложите контакт. Макс 5 предложений. Отвечайте на РУССКОМ.`,
+
+        es: `Eres consultor empresarial Jaroslav Cingel (Progressivo.eu).
+
+Servicios (USA ANCLAS EXACTAS):
+1) #sluzby/analyza-dna - Análisis de ADN
+2) #sluzby/efektivni-integrace - Integración Eficiente
+3) #sluzby/it-podpora - Soporte IT
+4) #sluzby/online-kurzy - Cursos Online
+5) #sluzby/expatriace - Expatriación y Visas
+6) #sluzby/nemovitosti - Bienes Raíces
+7) #sluzby/prekladatelska-cinnost - Servicios de Traducción
+8) #sluzby/online-prodej-techniky - Venta Online de Tecnología
+
+Consulta: "${userQuery}"
+
+Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. #sluzby/expatriace), ofrece contacto. Máx 5 frases. Responde en ESPAÑOL.`
       };
 
       return prompts[lang] || prompts.cs;
@@ -514,9 +596,12 @@
                 typingDiv.remove();
 
                 let fmt = reply.replace(/\n/g, '<br>');
-                fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" data-link-type="anchor">#${s}</a>`);
+                // New processing of links as requested
+                fmt = fmt.replace(/#sluzby\/([a-z-]+)/gi,(match, serviceName)=>`<a href="#sluzby/${serviceName}" data-link-type="service" class="text-amber-600 hover:text-amber-700 underline font-semibold">#sluzby/${serviceName}</a>`);
+
                 fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank">+507 68509698 📱</a>');
-                fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu">info@progressivo.eu ✉️</a>');
+                // Email link to contact page
+                fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="/kontakt" data-link-type="internal" class="text-amber-600 underline font-semibold">info@progressivo.eu ✉️</a>');
 
                 // Append User Question (Secure Text Node)
                 const questionDiv = document.createElement('div');
@@ -540,7 +625,9 @@
                 input.focus();
 
                 // Re-attach listeners to new anchors
-                history.querySelectorAll('a[data-link-type="anchor"]').forEach(link => {
+
+                // Odkazy na služby
+                history.querySelectorAll('a[data-link-type="service"]').forEach(link => {
                   link.addEventListener("click", (e) => {
                     e.preventDefault();
                     const href = link.getAttribute('href');
@@ -548,15 +635,57 @@
                     // Zavřít modal
                     closeModal();
 
-                    // Počkat na zavření a pak scrollnout
+                    // Počkat a najít službu
                     setTimeout(() => {
-                      const target = document.querySelector(href);
-                      if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      const serviceName = href.replace('#sluzby/', '');
+                      const serviceCard = document.querySelector(`[data-service="${serviceName}"]`);
+
+                      if (serviceCard) {
+                        // Scrollnout na sekci služeb
+                        const servicesSection = document.querySelector('#sluzby');
+                        if (servicesSection) {
+                          servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+
+                        // Počkat na scroll, pak zvýraznit + kliknout
+                        setTimeout(() => {
+                          serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                          // Zvýraznit
+                          serviceCard.style.transform = 'scale(1.05)';
+                          serviceCard.style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.5)';
+
+                          // Po 1s kliknout (otevře detail)
+                          setTimeout(() => {
+                            serviceCard.style.transform = '';
+                            serviceCard.style.boxShadow = '';
+
+                            const link = serviceCard.querySelector('a');
+                            if (link) {
+                                link.click();
+                            } else {
+                                // If the card is the link (which it is in index.astro)
+                                serviceCard.click();
+                            }
+                          }, 1000);
+                        }, 800);
                       }
                     }, 300);
                   });
                 });
+
+                // Interní odkazy (kontakt)
+                history.querySelectorAll('a[data-link-type="internal"]').forEach(link => {
+                  link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    closeModal();
+                    setTimeout(() => {
+                      window.location.href = href;
+                    }, 300);
+                  });
+                });
+
             } catch (error) {
                 console.error(error);
                 typingDiv.remove();
