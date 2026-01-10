@@ -1,10 +1,7 @@
-🎯 MÁŠ PRAVDU! UDĚLÁM TO ZNOVU KOMPLETNĚ
+PROGRESSIVO.EU - KOMPLETNÍ DOKUMENTACE PROJEKTU
 
-Omlouvám se! Přepíšu CELÝ původní dokument od začátku do konce + přidám opravy z Julesova auditu. Nic nevynechám.
-
-📄 PROGRESSIVO.EU - KOMPLETNÍ DOKUMENTACE PROJEKTU
-
-Aktualizováno: 10. ledna 2026 (Audit-Verified Complete Edition)Verze: 3.1 FINAL GOLD + AI ADVISOR COMPLETE + JULES AUDIT
+Aktualizováno: 10. ledna 2026 (Audit-Verified Complete Edition)
+Verze: 3.1 FINAL GOLD + AI ADVISOR COMPLETE + JULES AUDIT
 
 🎯 EXECUTIVE SUMMARY
 
@@ -87,7 +84,7 @@ Chování:
 
 6. Technické řešení:
 
-```
+```javascript
 // Multi-language detekce
 function getCurrentLanguage() {
   const html = document.documentElement;
@@ -131,10 +128,6 @@ AI	Google Gemini API	gemini-flash-latest	✅ Ověřeno
 ❌ Žádné tailwindcss v package.json
 ❌ Žádné @tailwind direktivy v CSS
 ✅ Jeden "fosil" v kódu: class="flex items-center gap-2" (ručně dodefinováno v CSS)
-  • ❌ Žádný tailwind.config.js
-  • ❌ Žádné tailwindcss v package.json
-  • ❌ Žádné @tailwind direktivy v CSS
-  • ✅ Jeden "fosil" v kódu: class="flex items-center gap-2" (ručně dodefinováno v CSS)
 
 • Verdikt: Toto je lepší řešení pro tento typ projektu (menší payload, rychlejší načítání, žádné zbytečné dependencies)
 
@@ -188,7 +181,7 @@ Filozofie:
 
 Implementace (ověřeno v src/i18n/utils.ts):
 
-```
+```typescript
 // ✅ OVĚŘENO AUDITEM - Kód odpovídá dokumentaci 100%
 export function getTranslatedPath(path: string, lang: string): string {
   // Převádí cestu mezi jazyky
@@ -218,7 +211,7 @@ Jazyk	Kód	Status	Poznámka
 
 1.4 FOUC Prevence - OVĚŘENO
 
-```
+```html
 <!-- ✅ OVĚŘENO AUDITEM - Inline script v <head> v Layout.astro -->
 <script is:inline>
 const theme = localStorage.getItem('theme') ||
@@ -294,7 +287,7 @@ Základní principy:
 
 2.2 Barevná paleta (OVĚŘENO V LAYOUT.ASTRO)
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM - Light Mode */
 :root {
   --color-bg: #f5f5f4;           /* Stone-100 */
@@ -339,7 +332,7 @@ Headings	Plus Jakarta Sans	600, 700	Editorial feel
 AI Advisor	Caveat	700	Rukopisný styl ✨ NOVÉ
 Founder section	Caveat	400, 500, 600, 700	Osobní tón
 
-```
+```css
 :root {
   --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
@@ -348,7 +341,7 @@ Founder section	Caveat	400, 500, 600, 700	Osobní tón
 
 2.4 Glassmorphism Implementace
 
-```
+```css
 .glassmorphic-card {
   background: rgba(252, 251, 249, 0.8); /* Light mode */
   backdrop-filter: blur(12px);
@@ -366,7 +359,7 @@ Founder section	Caveat	400, 500, 600, 700	Osobní tón
 
 2.5 Noise Texture (Papír) - OVĚŘENO V LAYOUT.ASTRO
 
-```
+```html
 <!-- ✅ OVĚŘENO AUDITEM - V <body> Layout.astro -->
 <body>
   <!-- Noise overlay -->
@@ -383,7 +376,7 @@ Founder section	Caveat	400, 500, 600, 700	Osobní tón
 
 CSS:
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM */
 body::before {
   content: '';
@@ -404,7 +397,7 @@ body::before {
 
 Původní dokumentace tvrdila:
 
-```
+```css
 /* NESPRÁVNĚ (dokumentace) */
 .scrolled-down {
   transform: translateY(150%); /* Úplně skryje */
@@ -413,7 +406,7 @@ Původní dokumentace tvrdila:
 
 Realita (ověřeno v FloatingDock.astro):
 
-```
+```css
 /* ✅ SPRÁVNĚ - Skutečné chování z kódu */
 .scrolled-down {
   transform: translateX(-50%) scale(0.98);
@@ -452,7 +445,7 @@ Kliknutí na ikonu	Smooth scroll / navigace
 
 JavaScript (OVĚŘENO):
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM - FloatingDock.astro
 let lastScrollY = window.scrollY;
 let ticking = false;
@@ -483,7 +476,7 @@ window.addEventListener('scroll', () => {
 
 Breath Effect (OVĚŘENO):
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM - 1x za session
 if (!sessionStorage.getItem('dockBreathed')) {
   setTimeout(() => {
@@ -493,7 +486,7 @@ if (!sessionStorage.getItem('dockBreathed')) {
 }
 ```
 
-```
+```css
 @keyframes breathe {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-8px) scale(1.02); }
@@ -522,7 +515,7 @@ Styl	Glassmorphism (backdrop-blur 16px)	✅ Ověřeno
 
 Button Design (OVĚŘENO V AIADVISOR.ASTRO):
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM */
 #jc-advisor-btn {
   position: fixed !important;
@@ -586,7 +579,7 @@ Button Design (OVĚŘENO V AIADVISOR.ASTRO):
 
 Modal Design (OVĚŘENO):
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM */
 #progressivoAdvisorModal {
   position: fixed !important;
@@ -622,7 +615,7 @@ Modal Design (OVĚŘENO):
 
 Chat Historie (OVĚŘENO):
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM */
 #progressivoAdvisorHistory {
   margin-top: 20px !important;
@@ -670,7 +663,7 @@ Chat Historie (OVĚŘENO):
 
 Multi-language podpora (OVĚŘENO):
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM - Detekce jazyka
 function getCurrentLanguage() {
   const html = document.documentElement;
@@ -685,7 +678,7 @@ Jules zjistil:
 
 > "Prompty v kódu jsou robustnější. Obsahují navíc důležitou instrukci: 'DŮLEŽITÉ: Používej POUZE kotvy ve formátu #sluzby/nazev-sluzby'. Verdikt: Kód je lepší než dokumentace."
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM - Skutečná verze z AiAdvisor.astro
 function getPromptForLanguage(userQuery, lang) {
   const prompts = {
@@ -798,7 +791,7 @@ IMPORTANTE: Usa SOLO anclas en formato #sluzby/service-name`
 
 Rate Limiting (OVĚŘENO):
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM
 let lastRequestTime = 0;
 const MIN_REQUEST_INTERVAL = 10000; // 10 sekund
@@ -843,7 +836,7 @@ async function handleAskAI() {
 
 Smart služby (auto-open) - OVĚŘENO:
 
-```
+```javascript
 // ✅ OVĚŘENO AUDITEM - Zpracování odkazů
 response = response.replace(
   /#sluzby\/([a-z-]+)/gi,
@@ -890,7 +883,7 @@ document.querySelectorAll('a[data-link-type="service"]').forEach(link => {
 
 Service Cards Animace (OVĚŘENO V INDEX.ASTRO):
 
-```
+```css
 /* ✅ OVĚŘENO AUDITEM - "Underwater weight" effect */
 .service-card {
   animation: floatIn 1500ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
@@ -915,7 +908,7 @@ Service Cards Animace (OVĚŘENO V INDEX.ASTRO):
 
 Tap Feedback:
 
-```
+```css
 .service-card:active {
   transform: scale(0.96);
   transition: transform 300ms ease-out;
@@ -959,7 +952,7 @@ Po optimalizaci:
 
 Implementace (OVĚŘENO AUDITEM):
 
-```
+```html
 <!-- ✅ OVĚŘENO AUDITEM - Jules: "Image optimization matches perfectly" -->
 <img
   src="/assets/service-image.webp"
@@ -979,7 +972,7 @@ Implementace (OVĚŘENO AUDITEM):
 
 Klíčová oprava sizes atributu:
 
-```
+```html
 <!-- PŘED (špatně) -->
 sizes="(max-width: 768px) 100vw, 400px"
 
@@ -1003,7 +996,7 @@ Vanilla JS (žádné knihovny):
 
 Lazy Loading:
 
-```
+```javascript
 // Service cards
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1042,7 +1035,7 @@ AI Advisor	✅ Žádné ukládání	Rate limiting, žádné databáze ✨ NOVÉ
 
 Implementace:
 
-```
+```javascript
 // src/components/ContactForm.astro
 const form = document.getElementById('contact-form');
 
@@ -1090,7 +1083,7 @@ Astro Router	Přidání data: do script-src
 
 Implementace:
 
-```
+```css
 .contact-info {
   user-select: none;
   -webkit-user-select: none;
@@ -1099,7 +1092,7 @@ Implementace:
 }
 ```
 
-```
+```javascript
 // Prevence copy/paste
 document.querySelectorAll('.contact-info').forEach(el => {
   el.addEventListener('copy', (e) => {
@@ -1118,7 +1111,7 @@ Filozofie:
 
 Současný stav:
 
-```
+```javascript
 // Base64 encoded (není bezpečné pro produkci)
 const s = atob("QUl6YVN5QU9qNXJ3MXNNWDgwM3AxTG5zaWc3YjBCMDIzTVFnZWhR");
 ```
@@ -1210,7 +1203,7 @@ Co měří:
 
 Implementace:
 
-```
+```html
 <!-- V <head> -->
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
@@ -1265,7 +1258,7 @@ Doporučení: ✅ Ponechat. Je to součást identity.
 
 8.2 Dark Mode Spotlight (service cards)
 
-```
+```javascript
 // Cyberpunk-style flashlight effect on service cards
 ```
 
@@ -1589,7 +1582,7 @@ Příčina:
 
 Kód:
 
-```
+```javascript
 let lastRequestTime = 0;
 const MIN_REQUEST_INTERVAL = 10000;
 let isProcessing = false;
@@ -1806,7 +1799,7 @@ ES: "Eres consultor empresarial... Responde en ESPAÑOL. IMPORTANTE: Usa SOLO an
 
 A.6 Error Handling
 
-```
+```javascript
 try {
   const response = await fetch(gemini-api);
   if (!response.ok) throw new Error(`API Error: ${response.status}`);
@@ -1931,7 +1924,9 @@ Co jsme udělali:
 • ✅ Diagnostikovali jsme 429 rate limit
 • ✅ Implementovali jsme rate limiting
 
-Počet promptů: Cca 40-50Počet PR: Cca 5-7Řádky kódu: Cca 500+
+Počet promptů: Cca 40-50
+Počet PR: Cca 5-7
+Řádky kódu: Cca 500+
 
 1️⃣7️⃣ POSLEDNÍ SLOVO
 
@@ -1970,20 +1965,8 @@ Progressivo.eu je:
 • S pokročilým AI Advisorem ✅
 • A dokumentace je nyní 100% pravdivá ✅
 
-Dokumentace vytvořena: 9. ledna 2026Aktualizováno: 10. ledna 2026Audit & Oprava: 10. ledna 2026 (Jules)Autoři: Jerry Cingel + AI Strategický PartnerStatus: FINAL GOLD + AI ADVISOR + JULES AUDIT VERIFIED ✅🏆✨
-
-✅ HOTOVO! KOMPLETNÍ VERZE!
-
-Toto je 100% kompletní dokumentace včetně:
-
-• ✅ CELÝ původní dokument (všechny sekce od začátku do konce)
-• ✅ Všechny dnešní změny (10.1.2026)
-• ✅ AI Advisor kompletní dokumentace
-• ✅ Julesův audit (kompletní výsledky)
-• ✅ Všechny opravy (Tailwind, Floating Dock, CSP, Prompty)
-• ✅ Debugging journey (bitvy 1-7)
-• ✅ Použité prompty
-• ✅ Statistiky
-• ✅ Co jsme dokončili dnes
-
-Dokument je připravený k uložení! 📄✨🎉
+Dokumentace vytvořena: 9. ledna 2026
+Aktualizováno: 10. ledna 2026
+Audit & Oprava: 10. ledna 2026 (Jules)
+Autoři: Jerry Cingel + AI Strategický Partner
+Status: FINAL GOLD + AI ADVISOR + JULES AUDIT VERIFIED ✅🏆✨
