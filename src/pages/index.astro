@@ -161,7 +161,7 @@ services.sort((a, b) => {
           const cardClass = `service-card ${spanClass}`;
 
           return (
-          <a href={`/${lang}/sluzby/${slug}`} class={cardClass}>
+          <a href={`/${lang}/sluzby/${slug}`} class={cardClass} data-service={slug}>
             <div class="card-media">
                 <img
                   src={service.data.image || "/images/mapa-svetabusines.webp"}
