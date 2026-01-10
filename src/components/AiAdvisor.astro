@@ -5,24 +5,15 @@
 <!-- AI ADVISOR BUTTON -->
 <button
     id="jc-advisor-btn"
-    class="fixed z-[10000] rounded-full flex items-center justify-center group transition-all duration-500
-           w-14 h-14
-           bottom-32 right-4
-           md:bottom-6 md:right-6
-           bg-stone-100/10 dark:bg-stone-900/60 backdrop-blur-xl
-           border border-stone-200/30 dark:border-stone-700/50
-           shadow-[0_8px_32px_rgba(0,0,0,0.12)]
-           will-change-transform"
-    aria-label="Business Advisor - Jaroslav Cingel"
+    class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center group transition-all duration-500 hover:scale-110"
+    style="z-index: 10000; position: fixed !important; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+    aria-label="Business Advisor"
 >
-    <!-- JC Text -->
-    <span class="relative z-10 text-xl text-stone-600 dark:text-stone-300 group-hover:text-amber-500 transition duration-300"
-          style="font-family: 'Caveat', cursive; font-weight: 700;">
-        JC
-    </span>
+    <div class="absolute inset-0 rounded-full bg-white/10 dark:bg-black/40 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"></div>
 
-    <!-- Pulse/Glow Effect -->
-    <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_20px_rgba(217,119,6,0.3)]"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="relative z-10 text-amber-500">
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+    </svg>
 </button>
 
 <!-- AI ADVISOR MODAL -->
