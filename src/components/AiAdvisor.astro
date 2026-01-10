@@ -1,0 +1,258 @@
+---
+// src/components/AiAdvisor.astro
+---
+
+<!-- AI ADVISOR BUTTON -->
+<button
+    id="jc-advisor-btn"
+    class="fixed z-[9998] rounded-full flex items-center justify-center group transition-all duration-500
+           w-14 h-14
+           bottom-24 right-4
+           md:bottom-6 md:right-6
+           backdrop-blur-xl bg-white/10 dark:bg-stone-900/40
+           border border-stone-200/20 dark:border-stone-700/30
+           shadow-2xl"
+    aria-label="Business Advisor - Jaroslav Cingel"
+>
+    <!-- JC Text -->
+    <span class="relative z-10 text-xl text-stone-600 dark:text-stone-300 group-hover:text-amber-500 transition duration-300"
+          style="font-family: 'Caveat', cursive; font-weight: 700;">
+        JC
+    </span>
+
+    <!-- Pulse/Glow Effect -->
+    <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_20px_rgba(217,119,6,0.3)]"></div>
+</button>
+
+<!-- AI ADVISOR MODAL -->
+<div id="progressivoAdvisorModal"
+     class="modal hidden fixed inset-0 z-[10000] flex items-center justify-center p-4"
+     role="dialog"
+     aria-modal="true">
+
+    <!-- Backdrop -->
+    <div id="advisor-backdrop" class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm transition-opacity cursor-pointer"></div>
+
+    <!-- Modal Content -->
+    <div class="relative w-full max-w-md rounded-xl overflow-hidden shadow-2xl
+                bg-stone-50/95 dark:bg-stone-900/95 backdrop-blur-2xl
+                border-2 border-stone-200/50 dark:border-stone-700/50">
+
+        <!-- Header -->
+        <div class="p-6 border-b border-stone-200/50 dark:border-stone-700/50 relative">
+            <h3 class="text-2xl font-serif text-stone-900 dark:text-stone-100">Business Advisor</h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Popište svou situaci a doporučím vám řešení.</p>
+
+            <!-- Close Button -->
+            <button id="advisor-close-btn"
+                    class="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-stone-200/50 dark:hover:bg-stone-700/50 flex items-center justify-center transition"
+                    aria-label="Zavřít">
+                <svg class="w-4 h-4 text-stone-600 dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6">
+            <textarea id="progressivoAdvisorInput"
+                      rows="4"
+                      class="w-full border-2 border-stone-300 dark:border-stone-700 bg-transparent text-stone-900 dark:text-stone-100 rounded-lg p-3 text-sm focus:border-amber-600 focus:ring-0 transition resize-none outline-none placeholder-stone-400"
+                      placeholder="Např: Chci založit firmu v Panamě..."
+                      aria-label="Váš dotaz"></textarea>
+
+            <button id="advisor-ask-btn"
+                    class="w-full bg-stone-900 dark:bg-amber-600 text-white py-3 rounded-lg font-bold uppercase text-xs hover:bg-stone-800 dark:hover:bg-amber-700 transition mt-4 flex items-center justify-center gap-2 shadow-lg">
+                <i class="fas fa-magic"></i> Poradit mi
+            </button>
+
+            <!-- Result Area -->
+            <div id="progressivoAdvisorResult"
+                 class="hidden mt-6 bg-amber-50/50 dark:bg-stone-800/50 p-4 rounded-lg border border-amber-600/30 text-sm leading-relaxed">
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Typing Indicator Styles */
+    .typing-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+        padding: 1rem 0;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: #d97706;
+        border-radius: 50%;
+        animation: typing-bounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typing-bounce {
+        0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+        40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Scroll State Classes */
+    :global(#jc-advisor-btn.scrolled-down) {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+
+    :global(#jc-advisor-btn.scrolled-up) {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
+
+<script>
+    function initAdvisor() {
+        const btn = document.getElementById('jc-advisor-btn');
+        const modal = document.getElementById('progressivoAdvisorModal');
+        const closeBtn = document.getElementById('advisor-close-btn');
+        const backdrop = document.getElementById('advisor-backdrop');
+        const askBtn = document.getElementById('advisor-ask-btn');
+        const input = document.getElementById('progressivoAdvisorInput') as HTMLTextAreaElement;
+        const result = document.getElementById('progressivoAdvisorResult');
+
+        if (!btn || !modal) return;
+
+        // --- SCROLL LOGIC ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        let scrollTimeout;
+
+        const updateScrollState = () => {
+            const currentScrollY = window.scrollY;
+
+            if (Math.abs(currentScrollY - lastScrollY) > 5) {
+                if (currentScrollY > lastScrollY) {
+                    btn.classList.add('scrolled-down');
+                    btn.classList.remove('scrolled-up');
+                } else {
+                    btn.classList.add('scrolled-up');
+                    btn.classList.remove('scrolled-down');
+                }
+            }
+            lastScrollY = currentScrollY;
+            ticking = false;
+
+            // "Stop" detection
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                btn.classList.add('scrolled-up');
+                btn.classList.remove('scrolled-down');
+            }, 500);
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollState);
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        // Set initial state
+        btn.classList.add('scrolled-up');
+
+        // --- MODAL LOGIC ---
+        let lastFocus;
+
+        const openModal = () => {
+            lastFocus = document.activeElement as HTMLElement;
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            setTimeout(() => input?.focus(), 100);
+        };
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (lastFocus) lastFocus.focus();
+            if (input) input.value = '';
+            if (result) result.classList.add('hidden');
+        };
+
+        // Event Listeners
+        btn.addEventListener('click', openModal);
+        closeBtn?.addEventListener('click', closeModal);
+        backdrop?.addEventListener('click', closeModal);
+
+        // --- GEMINI LOGIC ---
+        const askAdvisor = async () => {
+            const query = input.value.trim();
+            if (!query) { alert('Prosím, napište svůj dotaz.'); return; }
+
+            result.classList.remove('hidden');
+            result.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+
+            const prompt = `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${query}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Čeština.`;
+
+            try {
+                const reply = await callGemini(prompt);
+                let fmt = reply.replace(/\n/g, '<br>');
+                // Dynamic links handling - we need to delegate click for generated content
+                fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" data-link-type="anchor" class="text-amber-600 hover:text-amber-700 underline font-semibold">#${s}</a>`);
+                fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank" class="text-amber-600 underline font-semibold">+507 68509698 📱</a>');
+                fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu" class="text-amber-600 underline font-semibold">info@progressivo.eu ✉️</a>');
+                result.innerHTML = `<div class="text-stone-700 dark:text-stone-300">${fmt}</div>`;
+
+                // Re-attach listeners to new anchors
+                result.querySelectorAll('a[data-link-type="anchor"]').forEach(a => {
+                    a.addEventListener('click', closeModal);
+                });
+            } catch (error) {
+                console.error(error);
+                result.innerHTML = '<div class="text-red-600">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+            }
+        };
+
+        askBtn?.addEventListener('click', askAdvisor);
+
+        // Keydown (Escape)
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        };
+        document.addEventListener('keydown', onKeyDown);
+
+        // --- CLEANUP ---
+        // Clean up listeners when navigating away (View Transitions)
+        const cleanup = () => {
+            window.removeEventListener('scroll', onScroll);
+            document.removeEventListener('keydown', onKeyDown);
+            btn.removeEventListener('click', openModal);
+            closeBtn?.removeEventListener('click', closeModal);
+            backdrop?.removeEventListener('click', closeModal);
+            askBtn?.removeEventListener('click', askAdvisor);
+        };
+
+        // We use 'astro:before-swap' to clean up before the new body replaces the old one.
+        // However, the script runs again on 'astro:page-load'.
+        // If we use { once: true }, it handles the next navigation.
+        document.addEventListener('astro:before-swap', cleanup, { once: true });
+    }
+
+    async function callGemini(prompt) {
+        const key = atob("QUl6YVN5QU9qNXJ3MXNNWDgwM3AxTG5zaWc3YjBCMDIzTVFnZWhR");
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${key}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!res.ok) throw new Error(`API Error: ${res.status}`);
+        const data = await res.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || "AI se zamyslela. Zkuste znovu.";
+    }
+
+    // Initialize on load and every nav
+    document.addEventListener('astro:page-load', initAdvisor);
+</script>
