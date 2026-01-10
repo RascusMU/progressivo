@@ -25,13 +25,13 @@
             <h2>Business Advisor</h2>
             <p>Popište svou situaci a doporučím vám řešení.</p>
 
+            <div id="progressivoAdvisorResult" class="hidden"></div>
+
             <textarea id="progressivoAdvisorInput" placeholder="Např: Chci založit firmu v Panamě..."></textarea>
 
             <button id="advisor-ask-btn">
                 <i class="fas fa-magic"></i> Poradit mi
             </button>
-
-            <div id="progressivoAdvisorResult" class="hidden"></div>
         </div>
     </div>
 </div>
@@ -389,8 +389,22 @@
                 }, 100);
 
                 // Re-attach listeners to new anchors
-                result.querySelectorAll('a[data-link-type="anchor"]').forEach(a => {
-                    a.addEventListener('click', closeModal);
+                result.querySelectorAll('a[data-link-type="anchor"]').forEach(link => {
+                  link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+
+                    // Zavřít modal
+                    closeModal();
+
+                    // Počkat na zavření a pak scrollnout
+                    setTimeout(() => {
+                      const target = document.querySelector(href);
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }, 300);
+                  });
                 });
             } catch (error) {
                 console.error(error);
