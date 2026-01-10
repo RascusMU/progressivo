@@ -1,70 +1,46 @@
 ---
-// src/components/AiAdvisor.astro
 ---
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
 <!-- AI ADVISOR BUTTON -->
-<button
-    id="jc-advisor-btn"
-    class="fixed bottom-6 right-6 z-[10000] w-14 h-14 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/20 shadow-xl hover:shadow-2xl hover:shadow-amber-900/20 group transition-all duration-500 hover:scale-110"
-    aria-label="Business Advisor"
->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="relative z-10 text-amber-500">
-        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-    </svg>
+<button id="jc-advisor-btn">
+  <span class="jc-initials">
+    <span class="j-letter">J</span><span class="c-letter">C</span>
+  </span>
 </button>
 
 <!-- AI ADVISOR MODAL -->
-<div id="progressivoAdvisorModal"
-     class="modal hidden fixed inset-0 z-[10010] flex items-center justify-center p-4"
-     role="dialog"
-     aria-modal="true">
+<div id="progressivoAdvisorModal" class="hidden">
+    <div>
+        <button id="advisor-close-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div>
+            <h2>Business Advisor</h2>
+            <p>Popište svou situaci a doporučím vám řešení.</p>
 
-    <!-- Backdrop -->
-    <div id="advisor-backdrop" class="absolute inset-0 transition-opacity cursor-pointer"></div>
+            <textarea id="progressivoAdvisorInput" placeholder="Např: Chci založit firmu v Panamě..."></textarea>
 
-    <!-- Modal Content -->
-    <div id="advisor-modal-window" class="relative w-full max-w-md rounded-xl overflow-hidden shadow-2xl
-                bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur
-                border-2 border-stone-200/50 dark:border-stone-700/50">
-
-        <!-- Header -->
-        <div class="p-6 border-b border-stone-200 dark:border-stone-700 relative bg-stone-50/90 dark:bg-stone-900/90 backdrop-blur">
-            <h2 class="text-2xl font-serif text-stone-900 dark:text-stone-100">Business Advisor</h2>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Popište svou situaci a doporučím vám řešení.</p>
-
-            <!-- Close Button -->
-            <button id="advisor-close-btn"
-                    class="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-stone-200/50 dark:hover:bg-stone-700/50 flex items-center justify-center transition"
-                    aria-label="Zavřít">
-                <svg class="w-4 h-4 text-stone-600 dark:text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Body -->
-        <div class="p-6">
-            <textarea id="progressivoAdvisorInput"
-                      rows="4"
-                      class="w-full border-2 border-stone-300 dark:border-stone-700 bg-transparent text-stone-900 dark:text-stone-100 rounded-lg p-3 text-sm focus:border-amber-600 focus:ring-0 transition resize-none outline-none placeholder-stone-400"
-                      placeholder="Např: Chci založit firmu v Panamě..."
-                      aria-label="Váš dotaz"></textarea>
-
-            <button id="advisor-ask-btn"
-                    class="w-full bg-stone-900 dark:bg-amber-600 text-white py-3 rounded-lg font-bold uppercase text-xs hover:bg-stone-800 dark:hover:bg-amber-700 transition mt-4 flex items-center justify-center gap-2 shadow-lg">
+            <button id="advisor-ask-btn">
                 <i class="fas fa-magic"></i> Poradit mi
             </button>
 
-            <!-- Result Area -->
-            <div id="progressivoAdvisorResult"
-                 class="hidden mt-6 bg-amber-50/50 dark:bg-stone-800/50 p-4 rounded-lg border border-amber-600/30 text-sm leading-relaxed">
-            </div>
+            <div id="progressivoAdvisorResult" class="hidden"></div>
         </div>
     </div>
 </div>
 
 <style>
-  /* Button styles (už tam jsou) */
+  /* ═══════════════════════════════════════
+     BUTTON STYLES
+     ═══════════════════════════════════════ */
+
   #jc-advisor-btn {
     position: fixed !important;
     bottom: 24px !important;
@@ -95,15 +71,39 @@
     box-shadow: 0 20px 60px rgba(217, 119, 6, 0.3) !important;
   }
 
-  #jc-advisor-btn svg {
+  /* JC Initials */
+  .jc-initials {
+    font-family: 'Caveat', cursive !important;
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
     color: #d97706 !important;
-    width: 24px !important;
-    height: 24px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: baseline !important;
+    transform: rotate(-10deg) !important;
+    letter-spacing: -2px !important;
   }
 
-  /* PŘIDEJ TYTO MODAL STYLY: */
+  .j-letter {
+    transform: translateY(-3px) !important;
+    display: inline-block !important;
+  }
 
-  /* Modal backdrop */
+  .c-letter {
+    display: inline-block !important;
+  }
+
+  /* Mobile positioning */
+  @media (max-width: 768px) {
+    #jc-advisor-btn {
+      bottom: 120px !important;
+    }
+  }
+
+  /* ═══════════════════════════════════════
+     MODAL STYLES
+     ═══════════════════════════════════════ */
+
   #progressivoAdvisorModal {
     position: fixed !important;
     inset: 0 !important;
@@ -121,8 +121,7 @@
     display: none !important;
   }
 
-  /* Modal window */
-  #advisor-modal-window {
+  #progressivoAdvisorModal > div {
     position: relative !important;
     width: 100% !important;
     max-width: 500px !important;
@@ -135,7 +134,6 @@
     overflow: hidden !important;
   }
 
-  /* Modal header */
   #progressivoAdvisorModal h2 {
     font-family: var(--font-heading) !important;
     font-size: 1.5rem !important;
@@ -150,7 +148,6 @@
     margin: 0 !important;
   }
 
-  /* Close button */
   #advisor-close-btn {
     position: absolute !important;
     top: 20px !important;
@@ -173,7 +170,6 @@
     color: #f8fafc !important;
   }
 
-  /* Textarea */
   #progressivoAdvisorInput {
     width: 100% !important;
     min-height: 120px !important;
@@ -198,7 +194,6 @@
     box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1) !important;
   }
 
-  /* Submit button */
   #advisor-ask-btn {
     width: 100% !important;
     padding: 12px 24px !important;
@@ -224,7 +219,10 @@
     box-shadow: 0 10px 30px rgba(217, 119, 6, 0.3) !important;
   }
 
-  /* Result area */
+  /* ═══════════════════════════════════════
+     RESULT AREA + ODKAZY (AMBER)
+     ═══════════════════════════════════════ */
+
   #progressivoAdvisorResult {
     margin-top: 24px !important;
     padding: 20px !important;
@@ -240,6 +238,7 @@
     display: none !important;
   }
 
+  /* ODKAZY - AMBER BARVA */
   #progressivoAdvisorResult a {
     color: #d97706 !important;
     text-decoration: underline !important;
@@ -283,8 +282,7 @@
     }
   }
 
-  /* Padding for sections */
-  #advisor-modal-window > div {
+  #progressivoAdvisorModal > div > div {
     padding: 24px !important;
   }
 </style>
@@ -294,9 +292,8 @@
         const btn = document.getElementById('jc-advisor-btn');
         const modal = document.getElementById('progressivoAdvisorModal');
         const closeBtn = document.getElementById('advisor-close-btn');
-        const backdrop = document.getElementById('advisor-backdrop');
         const askBtn = document.getElementById('advisor-ask-btn');
-        const input = document.getElementById('progressivoAdvisorInput') as HTMLTextAreaElement;
+        const input = document.getElementById('progressivoAdvisorInput');
         const result = document.getElementById('progressivoAdvisorResult');
 
         if (!btn || !modal) return;
@@ -333,14 +330,13 @@
         };
 
         window.addEventListener('scroll', onScroll, { passive: true });
-        // Initial check
         updateAdvisorButton();
 
         // --- MODAL LOGIC ---
         let lastFocus;
 
         const openModal = () => {
-            lastFocus = document.activeElement as HTMLElement;
+            lastFocus = document.activeElement;
             modal.classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
             setTimeout(() => input?.focus(), 100);
@@ -354,10 +350,17 @@
             if (result) result.classList.add('hidden');
         };
 
-        // Event Listeners
         btn.addEventListener('click', openModal);
         closeBtn?.addEventListener('click', closeModal);
-        backdrop?.addEventListener('click', closeModal);
+
+        // CLICK OUTSIDE FIX
+        const onModalClick = (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+        modal.addEventListener("click", onModalClick);
+
 
         // --- GEMINI LOGIC ---
         const askAdvisor = async () => {
@@ -372,11 +375,10 @@
             try {
                 const reply = await callGemini(prompt);
                 let fmt = reply.replace(/\n/g, '<br>');
-                // Dynamic links handling - we need to delegate click for generated content
-                fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" data-link-type="anchor" class="text-amber-600 hover:text-amber-700 underline font-semibold">#${s}</a>`);
-                fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank" class="text-amber-600 underline font-semibold">+507 68509698 📱</a>');
-                fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu" class="text-amber-600 underline font-semibold">info@progressivo.eu ✉️</a>');
-                result.innerHTML = `<div class="text-stone-700 dark:text-stone-300">${fmt}</div>`;
+                fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" data-link-type="anchor">#${s}</a>`);
+                fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank">+507 68509698 📱</a>');
+                fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu">info@progressivo.eu ✉️</a>');
+                result.innerHTML = `<div>${fmt}</div>`;
 
                 // Re-attach listeners to new anchors
                 result.querySelectorAll('a[data-link-type="anchor"]').forEach(a => {
@@ -384,7 +386,7 @@
                 });
             } catch (error) {
                 console.error(error);
-                result.innerHTML = '<div class="text-red-600">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+                result.innerHTML = '<div style="color: #ef4444;">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
             }
         };
 
@@ -399,19 +401,15 @@
         document.addEventListener('keydown', onKeyDown);
 
         // --- CLEANUP ---
-        // Clean up listeners when navigating away (View Transitions)
         const cleanup = () => {
             window.removeEventListener('scroll', onScroll);
             document.removeEventListener('keydown', onKeyDown);
             btn.removeEventListener('click', openModal);
             closeBtn?.removeEventListener('click', closeModal);
-            backdrop?.removeEventListener('click', closeModal);
+            modal.removeEventListener('click', onModalClick);
             askBtn?.removeEventListener('click', askAdvisor);
         };
 
-        // We use 'astro:before-swap' to clean up before the new body replaces the old one.
-        // However, the script runs again on 'astro:page-load'.
-        // If we use { once: true }, it handles the next navigation.
         document.addEventListener('astro:before-swap', cleanup, { once: true });
     }
 
@@ -427,6 +425,5 @@
         return data.candidates?.[0]?.content?.parts?.[0]?.text || "AI se zamyslela. Zkuste znovu.";
     }
 
-    // Initialize on load and every nav
     document.addEventListener('astro:page-load', initAdvisor);
 </script>
