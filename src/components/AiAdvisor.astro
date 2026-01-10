@@ -25,7 +25,7 @@
             <h2>Business Advisor</h2>
             <p>Popište svou situaci a doporučím vám řešení.</p>
 
-            <div id="progressivoAdvisorResult" class="hidden"></div>
+            <div id="progressivoAdvisorHistory" style="margin-top: 20px; max-height: 400px; overflow-y: auto;"></div>
 
             <textarea id="progressivoAdvisorInput" placeholder="Např: Chci založit firmu v Panamě..."></textarea>
 
@@ -219,35 +219,78 @@
     box-shadow: 0 10px 30px rgba(217, 119, 6, 0.3) !important;
   }
 
+  #progressivoAdvisorModal > div > div {
+    padding: 24px !important;
+  }
+</style>
+
+<!-- GLOBAL STYLES FOR DYNAMIC CHAT ELEMENTS -->
+<style is:global>
   /* ═══════════════════════════════════════
-     RESULT AREA + ODKAZY (AMBER)
+     CHAT HISTORY & AMBER LINKS
      ═══════════════════════════════════════ */
 
-  #progressivoAdvisorResult {
-    margin-top: 24px !important;
-    padding: 20px !important;
+  /* Chat historie */
+  #progressivoAdvisorHistory {
+    margin-top: 20px !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    padding: 16px !important;
+    background: rgba(30, 41, 59, 0.3) !important;
+    border-radius: 12px !important;
+  }
+
+  .chat-message {
+    margin-bottom: 16px !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    line-height: 1.6 !important;
+    font-size: 0.875rem !important;
+  }
+
+  .user-message {
+    background: rgba(100, 116, 139, 0.2) !important;
+    color: #cbd5e1 !important;
+    text-align: right !important;
+  }
+
+  .ai-message {
     background: rgba(217, 119, 6, 0.1) !important;
     border: 1px solid rgba(217, 119, 6, 0.2) !important;
-    border-radius: 12px !important;
     color: #f8fafc !important;
-    font-size: 0.875rem !important;
-    line-height: 1.6 !important;
   }
 
-  #progressivoAdvisorResult.hidden {
-    display: none !important;
-  }
-
-  /* ODKAZY - AMBER BARVA */
-  #progressivoAdvisorResult a {
+  /* ODKAZY - AMBER (DŮLEŽITÉ!) */
+  .ai-message a,
+  #progressivoAdvisorHistory a {
     color: #d97706 !important;
     text-decoration: underline !important;
     font-weight: 600 !important;
     transition: color 0.3s !important;
   }
 
-  #progressivoAdvisorResult a:hover {
+  .ai-message a:hover,
+  #progressivoAdvisorHistory a:hover {
     color: #f59e0b !important;
+  }
+
+  /* Scrollbar pro historii */
+  #progressivoAdvisorHistory::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  #progressivoAdvisorHistory::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.3) !important;
+    border-radius: 3px !important;
+  }
+
+  #progressivoAdvisorHistory::-webkit-scrollbar-thumb {
+    background: rgba(217, 119, 6, 0.5) !important;
+    border-radius: 3px !important;
+  }
+
+  #progressivoAdvisorHistory::-webkit-scrollbar-thumb:hover {
+    background: rgba(217, 119, 6, 0.7) !important;
   }
 
   /* Typing indicator */
@@ -281,10 +324,6 @@
       transform: scale(1) !important;
     }
   }
-
-  #progressivoAdvisorModal > div > div {
-    padding: 24px !important;
-  }
 </style>
 
 <script>
@@ -294,7 +333,7 @@
         const closeBtn = document.getElementById('advisor-close-btn');
         const askBtn = document.getElementById('advisor-ask-btn');
         const input = document.getElementById('progressivoAdvisorInput');
-        const result = document.getElementById('progressivoAdvisorResult');
+        const history = document.getElementById('progressivoAdvisorHistory');
 
         if (!btn || !modal) return;
 
@@ -347,7 +386,8 @@
             document.body.classList.remove('overflow-hidden');
             if (lastFocus) lastFocus.focus();
             if (input) input.value = '';
-            if (result) result.classList.add('hidden');
+            // Clear history on close
+            if (history) history.innerHTML = '';
         };
 
         btn.addEventListener('click', openModal);
@@ -367,29 +407,49 @@
             const query = input.value.trim();
             if (!query) { alert('Prosím, napište svůj dotaz.'); return; }
 
-            result.classList.remove('hidden');
-            result.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            // Add typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-message ai-message typing-indicator-container';
+            typingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            history.appendChild(typingDiv);
+            history.scrollTop = history.scrollHeight;
 
             const prompt = `Jsi business konzultant Jaroslava Cingela (Progressivo.eu). Služby: 1) Zakládání firem v Panamě 2) Daňové poradenství 3) IT podpora 4) Právní služby 5) Expat asistence. Dotaz: "${query}". Úkol: Analyzuj (1 věta), doporuč službu (2 věty), navrhni sekci webu (#sluzby), nabídni kontakt (WhatsApp +507 68509698 nebo info@progressivo.eu). Max 5 vět. Čeština.`;
 
             try {
                 const reply = await callGemini(prompt);
+
+                // Remove typing indicator
+                typingDiv.remove();
+
                 let fmt = reply.replace(/\n/g, '<br>');
                 fmt = fmt.replace(/#([a-z-]+)/gi, (m,s) => `<a href="#${s}" data-link-type="anchor">#${s}</a>`);
                 fmt = fmt.replace(/\+507 68509698/g, '<a href="https://wa.me/50768509698" target="_blank">+507 68509698 📱</a>');
                 fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="mailto:info@progressivo.eu">info@progressivo.eu ✉️</a>');
-                result.innerHTML = `<div>${fmt}</div>`;
 
-                // Scroll modal nahoru k odpovědi
-                setTimeout(() => {
-                    const modal = document.querySelector('#progressivoAdvisorModal > div');
-                    if (modal) {
-                        modal.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }, 100);
+                // Append User Question (Secure Text Node)
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'chat-message user-message';
+                questionDiv.innerHTML = '<strong>Vy:</strong> ';
+                questionDiv.appendChild(document.createTextNode(query));
+
+                // Append AI Answer
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'chat-message ai-message';
+                answerDiv.innerHTML = `<strong>AI:</strong> ${fmt}`;
+
+                history.appendChild(questionDiv);
+                history.appendChild(answerDiv);
+
+                // Scroll historie dolů
+                history.scrollTop = history.scrollHeight;
+
+                // Vyčistit textarea
+                input.value = '';
+                input.focus();
 
                 // Re-attach listeners to new anchors
-                result.querySelectorAll('a[data-link-type="anchor"]').forEach(link => {
+                history.querySelectorAll('a[data-link-type="anchor"]').forEach(link => {
                   link.addEventListener("click", (e) => {
                     e.preventDefault();
                     const href = link.getAttribute('href');
@@ -408,7 +468,14 @@
                 });
             } catch (error) {
                 console.error(error);
-                result.innerHTML = '<div style="color: #ef4444;">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+                typingDiv.remove();
+
+                // Append Error
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'chat-message ai-message';
+                errorDiv.style.borderColor = '#ef4444';
+                errorDiv.innerHTML = '<div style="color: #ef4444;">Chyba. Kontaktujte nás na info@progressivo.eu</div>';
+                history.appendChild(errorDiv);
             }
         };
 
