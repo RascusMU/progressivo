@@ -525,7 +525,13 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                                 if (serviceCard.tagName === 'A') {
                                     serviceCard.click();
                                 } else {
-                                    serviceCard.querySelector('a')?.click();
+                                    const link = serviceCard.querySelector('a');
+                                    if (link) {
+                                        const href = link.getAttribute('href');
+                                        if (href) {
+                                            window.location.href = href;
+                                        }
+                                    }
                                 }
                                 history.replaceState(null, '', window.location.pathname);
                             }, 2000); // 2 sekundy zvýraznění
@@ -736,7 +742,13 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                                 if (serviceCard.tagName === 'A') {
                                     serviceCard.click();
                                 } else {
-                                    serviceCard.querySelector('a')?.click();
+                                    const link = serviceCard.querySelector('a');
+                                    if (link) {
+                                        const href = link.getAttribute('href');
+                                        if (href) {
+                                            window.location.href = href;
+                                        }
+                                    }
                                 }
                               }, 2000); // ← 2 sekundy zvýraznění
                             }
