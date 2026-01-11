@@ -3,5 +3,8 @@
   "include": [
     "/api/*"
   ],
-  "exclude": []
+  "exclude": [
+    "/404",
+    "/_astro/*"
+  ]
 }
