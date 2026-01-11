@@ -70,6 +70,10 @@ export const ui = {
       text: 'Máte otázku nebo konkrétní situaci? Napište nám.',
       whatsapp: 'WhatsApp',
     },
+    itutoring: {
+      title: 'Kompletní informace o iTutoring.cz',
+      description: 'Detailní přehled našeho partnera pro online vzdělávání. Rozbalte sekce níže pro více informací.'
+    },
     pages: {
       home_title: 'Domů',
       about_title: 'O nás',
@@ -157,6 +161,10 @@ export const ui = {
       text: 'Do you have a question or a specific situation? Write to us.',
       whatsapp: 'WhatsApp',
     },
+    itutoring: {
+      title: 'Complete information about iTutoring.cz',
+      description: 'Detailed overview of our partner for online education. Expand the sections below for more information.'
+    },
     pages: {
       home_title: 'Home',
       about_title: 'About Us',
@@ -166,6 +174,7 @@ export const ui = {
         hero_subtitle: 'We help people and companies navigate between countries, systems, and decisions – with certainty.',
         founder_title: "Who's Behind Progressivo",
         founder_name: 'Jaroslav Cingel',
+        founder_p1: "For over 15 years, I've been connecting Europe with the world – in business, logistics, and online projects.",
         founder_p1: "For over 15 years, I've been connecting Europe with the world – in business, logistics, and online projects.",
         founder_p2: 'Progressivo was born from frustration. Things that should be simple are often unnecessarily complicated. I help simplify them.',
         founder_p3: 'I live between Europe and Panama. I seek freedom of choice – where to work and who to work with.',
@@ -243,6 +252,10 @@ export const ui = {
     home_cta: {
       text: 'Haben Sie eine Frage oder eine konkrete Situation? Schreiben Sie uns.',
       whatsapp: 'WhatsApp',
+    },
+    itutoring: {
+      title: 'Vollständige Informationen über iTutoring.cz',
+      description: 'Detaillierte Übersicht unseres Partners für Online-Bildung. Erweitern Sie die Abschnitte unten für weitere Informationen.'
     },
     pages: {
       home_title: 'Startseite',
@@ -331,6 +344,10 @@ export const ui = {
       text: '¿Tiene alguna pregunta o una situación concreta? Escríbanos.',
       whatsapp: 'WhatsApp',
     },
+    itutoring: {
+      title: 'Información completa sobre iTutoring.cz',
+      description: 'Descripción detallada de nuestro socio para la educación en línea. Despliegue las secciones a continuación para más información.'
+    },
     pages: {
       home_title: 'Inicio',
       about_title: 'Sobre nosotros',
@@ -417,6 +434,10 @@ export const ui = {
     home_cta: {
       text: 'У вас есть вопрос или конкретная ситуация? Напишите нам.',
       whatsapp: 'WhatsApp',
+    },
+    itutoring: {
+      title: 'Полная информация о iTutoring.cz',
+      description: 'Подробный обзор нашего партнера по онлайн-образованию. Разверните разделы ниже для получения дополнительной информации.'
     },
     pages: {
       home_title: 'Главная',

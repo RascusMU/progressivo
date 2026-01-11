@@ -1,0 +1,114 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ITutoringAccordion from '../../../components/ITutoringAccordion.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+
+  // Including 'cs' here to support /cs/sluzby/ URLs as requested
+  const languages = ['cs', 'en', 'de', 'ru', 'es'];
+  const paths = [];
+
+  for (const service of services) {
+    const id = service.id;
+    const parts = id.split('/');
+
+    let lang, slug;
+
+    // Check if this is an online-kurzy entry
+    // CS: online-kurzy.md
+    // EN: en/online-kurzy.md, etc.
+    // The slug logic in [slug].astro handles this. We need to filter by slug 'online-kurzy'
+
+    if (parts.length === 1) {
+        lang = 'cs';
+        slug = id.replace(/\.md$/, '');
+    } else if (parts.length > 1 && languages.includes(parts[0])) {
+        lang = parts[0];
+        slug = parts.slice(1).join('/').replace(/\.md$/, '');
+    } else {
+        continue;
+    }
+
+    if (slug === 'online-kurzy') {
+        paths.push({
+            params: { lang }, // slug is implicitly 'online-kurzy' for this file path... wait
+            // This file is src/pages/[lang]/sluzby/online-kurzy.astro
+            // So the URL is /:lang/sluzby/online-kurzy
+            // We only need to return { params: { lang }, props: { service } }
+            // Because the directory structure defines the URL structure.
+            props: { service },
+        });
+    }
+  }
+
+  return paths;
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+const { lang } = Astro.params;
+
+const t = useTranslations(lang as any); // Cast because lang from params is string
+const itutoring = t('itutoring') as any;
+
+// SCHEMA
+const schemaService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.data.title,
+  "description": service.data.description,
+  "provider": {
+    "@type": "Organization",
+    "name": "Progressivo",
+    "url": "https://progressivo.eu"
+  },
+  "url": new URL(Astro.url.pathname, Astro.site).toString()
+};
+---
+
+<Layout title={`${service.data.title} | Progressivo`} description={service.data.description} lang={lang} schema={schemaService} image={service.data.image}>
+  <article class="container page-content animate-on-scroll">
+    <div class="prose lg:prose-xl mx-auto">
+        <Content />
+    </div>
+
+    <section class="itutoring-detail">
+        <h2>{itutoring.title}</h2>
+        <p>
+          {itutoring.description}
+        </p>
+
+        <ITutoringAccordion />
+      </section>
+  </article>
+</Layout>
+
+<style>
+  .page-content {
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+  }
+
+  .itutoring-detail {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .itutoring-detail h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+  }
+
+  .itutoring-detail p {
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    font-family: 'Manrope', sans-serif;
+  }
+</style>
