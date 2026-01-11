@@ -291,7 +291,7 @@ services.sort((a, b) => {
 
   .founder-section {
     padding: 8rem 0;
-    background-color: var(--color-bg);
+    background-color: var(--color-bg-alt); /* Editorial Cut-out - Distinct Background */
     overflow: hidden;
   }
 
@@ -472,9 +472,9 @@ services.sort((a, b) => {
   .span-3 { grid-column: span 3; }
 
   :global(:root:not(.dark)) .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(120, 113, 108, 0.1), 0 10px 10px -5px rgba(120, 113, 108, 0.04);
-    border-color: rgba(217, 119, 6, 0.3);
+    border-color: var(--color-accent); /* Full Amber Border Highlight on Hover */
   }
 
   :global(:root:not(.dark)) .service-image {
