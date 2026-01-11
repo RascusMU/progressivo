@@ -2,7 +2,7 @@
 
 > **Strategická platforma Progressivo Corp.**
 > Postaveno na filozofii "Paper & Ink" – klid, typografie, důvěra.
-> *Verze: 2.2 FINAL GOLD COMPLETE EDITION*
+> *Verze: 3.1 FINAL GOLD + AI ADVISOR COMPLETE + JULES AUDIT*
 
 Toto úložiště obsahuje zdrojový kód webu [progressivo.eu](https://progressivo.eu), postaveného na frameworku **Astro 5** s důrazem na absolutní výkon, bezpečnost a typografický design.
 
@@ -17,64 +17,60 @@ Web není jen digitální vizitka, ale **digitální artefakt**. Designový syst
 *   **Calm Tech:** Žádné blikající bannery. Animace jsou plynulé ("underwater weight"), prvky dýchají.
 *   **Floating Dock:** Odvážná navigace umístěná dole (thumb-friendly), která nahrazuje tradiční header.
 *   **Temný režim (Cyberpunk/Monochrome):** Interaktivní "baterka" na kartách služeb a monochromatická Amber sekce zakladatele.
+*   **Editorial Time Signal:** Živý čas ve světových metropolích jako vizuální masthead.
 
 ## 🛠️ Technický Stack
 
 Projekt je navržen jako "Future-Proof" s minimem závislostí.
 
-*   **Core:** [Astro 5.0](https://astro.build) (Static Site Generation - SSG).
-*   **Jazyk:** TypeScript (Strict Mode), Vanilla JavaScript (žádný React/Vue na klientovi).
-*   **Styling:** Vanilla CSS + CSS Variables (žádný Tailwind, žádný Bootstrap).
-*   **Hosting:** Cloudflare Pages (Adapter `mode: 'directory'`).
-*   **AI:** Google Gemini API (pro AI Business Advisora).
-*   **Formuláře:** Formspree (AJAX submission).
-*   **Analytics:** Cloudflare Web Analytics + Microsoft Clarity (Privacy-first, bez cookies).
+*   **Core:** [Astro 5](https://astro.build) (Static Site Generation).
+*   **Deployment:** Cloudflare Pages (Static Output + Cloudflare Functions pro API).
+*   **Jazyk:** JavaScript / TypeScript (Strict Mode).
+*   **Styling:** Vanilla CSS + CSS Variables (Scoped & Global). **Žádný Tailwind.**
+*   **AI:** Google Gemini API (model `gemini-flash-latest`) via Server-side Proxy.
+*   **I18n:** Custom routing systém (5 jazyků: CS, EN, DE, RU, ES).
+*   **Assets:** Self-hosted fonty (`@fontsource`), optimalizované obrázky (`astro:assets`).
 
 ## 🚀 Klíčové Funkce
 
 ### 1. AI Business Advisor
-Komponenta `AiAdvisor.astro` využívá Google Gemini API pro poskytování kontextuálních rad.
-*   Funguje zcela client-side.
-*   Využívá rate-limiting a zamykání požadavků.
-*   Odpovědi jsou streamované a stylované do designu webu.
+Inteligentní chatovací asistent (`AiAdvisor.astro`) v pravém dolním rohu.
+*   **Architektura:** Hybridní. UI je client-side, ale komunikace s Gemini API probíhá přes zabezpečenou server-side proxy (`functions/api/ask-ai.js`).
+*   **Funkce:** Rate-limiting (10s), detekce jazyka, kontextuální doporučování služeb pomocí kotev (např. `#sluzby/analyza-dna`).
+*   **Bezpečnost:** API klíč je skrytý na serveru, klient k němu nemá přístup.
 
 ### 2. Pokročilá Internacionalizace (i18n)
-Web podporuje 5 jazyků: **CS (Master), EN, DE, RU, ES**.
-*   **Logika:** Custom implementace v `src/i18n/utils.ts`.
-*   **Routing:** Výchozí jazyk (`cs`) je na rootu (např. `/sluzby/`), ostatní mají prefix (`/en/services/`).
-*   **Data:** Veškeré UI texty jsou centralizované v `src/i18n/ui.ts`.
-*   **Obsah:** Synchronizovaný 1:1 s českým masterem.
+Web plně podporuje **CS (Master), EN, DE, RU, ES**.
+*   **Logika:** Centralizovaná v `src/i18n/utils.ts` (funkce `getTranslatedPath`).
+*   **Routing:** Výchozí jazyk (`cs`) je na rootu, ostatní mají prefix (např. `/en/services/`).
+*   **UI Texty:** Všechny texty rozhraní jsou v `src/i18n/ui.ts`.
 
-### 3. Floating Dock & Navigace
-*   Umístěn dole (`bottom: env(safe-area-inset-bottom)`).
-*   Obsahuje: Home, O nás, Blog, WhatsApp.
-*   Inteligentní skrývání při scrollu a "dýchání" pro upoutání pozornosti.
-
-### 4. Editorial Time Signal
-*   Zobrazuje živý čas ve 4 světových metropolích.
-*   Používá `tabular-nums` pro zabránění poskakování textu.
-*   Vizuálně odděluje Hero sekci od obsahu.
+### 3. Floating Dock
+Hlavní navigační prvek nahrazující klasické menu.
+*   Umístěn dole (`bottom: env(safe-area-inset-bottom)`) pro snadné ovládání na mobilu.
+*   Obsahuje: Home/Top (kotva), O nás, Blog, WhatsApp.
+*   Vizuálně reaguje na scroll (zmenšení/průhlednost).
 
 ## 📂 Struktura Projektu
 
 ```text
 /
-├── public/              # Statické soubory (obrázky, fonts, _headers)
+├── functions/           # Cloudflare Pages Functions (Server-side API)
+│   └── api/
+│       └── ask-ai.js    # Proxy pro Google Gemini API
+├── public/              # Statické soubory (_headers, _routes.json, images)
 ├── src/
-│   ├── components/      # Astro komponenty (FloatingDock, AiAdvisor, Footer...)
-│   ├── content/         # Content Collections (Markdown/MDX)
-│   │   ├── blog/        # Články (plochá struktura s příponami -en.md, atd.)
+│   ├── components/      # Astro komponenty (AiAdvisor, FloatingDock...)
+│   ├── content/         # Content Collections (Markdown)
+│   │   ├── blog/        # Články (plochá struktura s příponami -en.md)
 │   │   ├── services/    # Služby (vnořené složky dle jazyka)
-│   │   ├── pages/       # Textové stránky (O nás, Kontakt)
-│   │   └── legal/       # Právní dokumenty (GDPR, Terms)
-│   ├── i18n/            # Logika překladů a texty
-│   │   ├── ui.ts        # Slovník UI textů
-│   │   └── utils.ts     # Pomocné funkce pro routing
-│   ├── layouts/         # Layout.astro (hlavní obálka)
-│   └── pages/           # Routování
+│   │   ├── pages/       # Statické stránky (O nás, Kontakt)
+│   │   └── legal/       # Právní dokumenty
+│   ├── i18n/            # Logika překladů
+│   └── pages/           # Souborový routing
 │       ├── [lang]/      # Dynamické routy pro cizí jazyky
 │       └── index.astro  # Homepage (CS)
-└── astro.config.mjs     # Konfigurace projektu
+└── astro.config.mjs     # Konfigurace Astro (Static output)
 ```
 
 ## 💻 Instalace a Vývoj
@@ -90,52 +86,43 @@ Web podporuje 5 jazyků: **CS (Master), EN, DE, RU, ES**.
 npm install
 
 # Spuštění lokálního vývojového serveru
+# Pozn: AI Advisor nebude fungovat bez nastaveného proxy/env v dev módu
 npm run dev
 
 # Build pro produkci (do složky dist/)
 npm run build
 
-# Náhled buildu (simulace produkce)
+# Náhled buildu
 npm run preview
 ```
 
-### Proměnné Prostředí (.env)
-Pro plnou funkčnost (hlavně AI Advisora) vytvořte soubor `.env`:
+### Proměnné Prostředí (Environment Variables)
+Pro funkčnost AI Advisora je nutné nastavit proměnnou prostředí v administraci Cloudflare Pages (Settings -> Environment variables).
 
-```ini
-PUBLIC_GEMINI_API_KEY=vase_api_klic_z_google_ai_studia
-```
+*   `GEMINI_API_KEY`: Váš API klíč z Google AI Studia.
+
+> **Pozor:** Klíč se NEZADÁVÁ do klientského `.env` souboru, protože je používán pouze na serveru (v `functions/`).
 
 ## ✍️ Správa Obsahu
 
 ### Přidání Služby
-1.  Vytvořte nový `.md` soubor v `src/content/services/`.
+1.  Vytvořte `.md` soubor v `src/content/services/`.
 2.  Pro cizí jazyky použijte odpovídající podsložku (např. `src/content/services/en/`).
-3.  Dodržujte schéma frontmatter (definováno v `src/content/config.ts`).
+3.  Frontmatter musí obsahovat `title`, `description` a `lang`.
 
 ### Přidání Blog Postu
 1.  Vytvořte soubor v `src/content/blog/`.
-2.  **Čeština:** `nazev-clanku.md`
-3.  **Jazyky:** `nazev-clanku-en.md`, `nazev-clanku-de.md`, atd.
-4.  Ujistěte se, že `lang` ve frontmatteru odpovídá příponě.
+2.  Pojmenování: `nazev-clanku.md` (CS), `nazev-clanku-en.md` (EN).
+3.  Systém automaticky filtruje články podle jazyka stránky.
 
 ## 🔒 Security & Privacy
 
-Tento web dodržuje přísné bezpečnostní a privacy standardy:
-*   **CSP (Content Security Policy):** Striktně nastaveno v `public/_headers`.
-*   **Žádné Cookies:** Web nepoužívá marketingové cookies ani trackery.
-*   **GDPR:** Plně compliant bez nutnosti cookie lišty (pouze technické LocalStorage).
-*   **Ochrana Kontaktů:** E-maily a telefony jsou chráněny CSS (`user-select: none`) proti scrapování.
-
-## 🌍 Deployment
-
-Web je nasazen na **Cloudflare Pages**.
-*   Build command: `npm run build`
-*   Output directory: `dist`
-*   Node.js version: Nastaveno na kompatibilní verzi (v Environment Variables v Cloudflare).
+*   **CSP:** Nastaveno v `public/_headers`. Povoluje pouze `self`, `data:` a nezbytné analytiky.
+*   **Žádné Cookies:** Web nepoužívá marketingové cookies. LocalStorage slouží pouze pro preference (téma).
+*   **Ochrana:** API endpointy jsou chráněny CORS politikou a rate-limity.
 
 ---
 
-> **Poznámka pro vývojáře:** Před každým commitem zkontrolujte, zda jste neporušili integritu designu ("Paper & Ink"). Nepřidávejte zbytečné knihovny. Udržujte kód čistý.
+> **Poznámka:** Tento projekt nepoužívá React, Vue ani Svelte. Veškerá interaktivita je řešena pomocí Vanilla JS a Astro View Transitions.
 
-*Dokumentace aktualizována: Leden 2026*
+*Dokumentace aktualizována: Únor 2026 (Jules)*
