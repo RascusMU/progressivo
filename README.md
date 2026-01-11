@@ -3,8 +3,12 @@
 > **Strategická platforma Progressivo Corp.**
 > Postaveno na filozofii "Paper & Ink" – klid, typografie, důvěra.
 > *Verze: 3.1 FINAL GOLD + AI ADVISOR COMPLETE + JULES AUDIT*
+>
+> 🟢 **Status:** VERIFIED & GREEN (Jules Audit, Únor 2026)
 
 Toto úložiště obsahuje zdrojový kód webu [progressivo.eu](https://progressivo.eu), postaveného na frameworku **Astro 5** s důrazem na absolutní výkon, bezpečnost a typografický design.
+
+📜 **Detailní technická dokumentace:** [docs/STATE-OF-THE-PROJECT.md](docs/STATE-OF-THE-PROJECT.md)
 
 ---
 
@@ -23,21 +27,23 @@ Web není jen digitální vizitka, ale **digitální artefakt**. Designový syst
 
 Projekt je navržen jako "Future-Proof" s minimem závislostí.
 
-*   **Core:** [Astro 5](https://astro.build) (Static Site Generation).
+*   **Core:** [Astro 5.16](https://astro.build) (Static Site Generation).
 *   **Deployment:** Cloudflare Pages (Static Output + Cloudflare Functions pro API).
 *   **Jazyk:** JavaScript / TypeScript (Strict Mode).
-*   **Styling:** Vanilla CSS + CSS Variables (Scoped & Global). **Žádný Tailwind.**
+*   **Styling:** Vanilla CSS + CSS Variables (Scoped & Global). **🚫 Žádný Tailwind.**
 *   **AI:** Google Gemini API (model `gemini-flash-latest`) via Server-side Proxy.
 *   **I18n:** Custom routing systém (5 jazyků: CS, EN, DE, RU, ES).
 *   **Assets:** Self-hosted fonty (`@fontsource`), optimalizované obrázky (`astro:assets`).
 
 ## 🚀 Klíčové Funkce
 
-### 1. AI Business Advisor
+### 1. AI Business Advisor (✨ New)
 Inteligentní chatovací asistent (`AiAdvisor.astro`) v pravém dolním rohu.
 *   **Architektura:** Hybridní. UI je client-side, ale komunikace s Gemini API probíhá přes zabezpečenou server-side proxy (`functions/api/ask-ai.js`).
-*   **Funkce:** Rate-limiting (10s), detekce jazyka, kontextuální doporučování služeb pomocí kotev (např. `#sluzby/analyza-dna`).
-*   **Bezpečnost:** API klíč je skrytý na serveru, klient k němu nemá přístup.
+*   **Multi-language:** Plná podpora 5 jazyků (CS/EN/DE/RU/ES) s kontextuálními prompty.
+*   **Smart Services:** AI rozpozná potřebu uživatele, naviguje na sekci služeb, vizuálně zvýrazní kartu a automaticky ji otevře.
+*   **Funkce:** Rate-limiting (10s), isProcessing lock, historie chatu.
+*   **Bezpečnost:** API klíč je skrytý na serveru.
 
 ### 2. Pokročilá Internacionalizace (i18n)
 Web plně podporuje **CS (Master), EN, DE, RU, ES**.
