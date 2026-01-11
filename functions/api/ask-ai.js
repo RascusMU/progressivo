@@ -12,6 +12,8 @@ export async function onRequestPost(context) {
     const body = await request.json();
     const { prompt } = body;
 
+    console.log('[AI] Received prompt length:', prompt ? prompt.length : 0);
+
     if (!prompt) {
       return new Response(
         JSON.stringify({ error: 'Missing prompt' }),
@@ -36,7 +38,7 @@ export async function onRequestPost(context) {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 500,
+            maxOutputTokens: 2048,
           }
         })
       }
@@ -52,7 +54,37 @@ export async function onRequestPost(context) {
     }
 
     const geminiData = await geminiResponse.json();
-    const responseText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
+
+    console.log('[AI] Gemini status:', geminiResponse.status);
+
+    let responseText = 'No response';
+
+    if (geminiData.candidates && geminiData.candidates.length > 0) {
+      const candidate = geminiData.candidates[0];
+
+      // Check for finish_reason (může být SAFETY, MAX_TOKENS, atd.)
+      if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+        console.warn('Gemini finish reason:', candidate.finishReason);
+      }
+
+      if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+        responseText = candidate.content.parts[0].text;
+      }
+    }
+
+    if (!responseText || responseText === 'No response') {
+      console.error('Empty response from Gemini:', JSON.stringify(geminiData));
+      return new Response(
+        JSON.stringify({
+          error: 'AI returned empty response',
+          finishReason: geminiData.candidates?.[0]?.finishReason
+        }),
+        { status: 500, headers: corsHeaders }
+      );
+    }
+
+    console.log('[AI] Response length:', responseText.length);
+    console.log('[AI] Finish reason:', geminiData.candidates?.[0]?.finishReason);
 
     return new Response(
       JSON.stringify({ response: responseText }),
