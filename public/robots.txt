@@ -20,4 +20,7 @@ Disallow: /
 User-agent: PerplexityBot
 Disallow: /
 
+User-agent: Claude-Web
+Disallow: /
+
 Sitemap: https://progressivo.eu/sitemap.xml
