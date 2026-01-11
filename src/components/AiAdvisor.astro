@@ -503,6 +503,38 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
     }
 
     function initAdvisor() {
+        // 1️⃣ DETEKCE HASH (ODKAZY Z JINÝCH STRÁNEK)
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#sluzby/')) {
+            setTimeout(() => {
+                const servicesSection = document.querySelector('#services');
+                if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    setTimeout(() => {
+                        const serviceName = hash.replace('#sluzby/', '');
+                        const serviceCard = document.querySelector(`[data-service="${serviceName}"]`);
+                        if (serviceCard) {
+                            serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            serviceCard.style.transform = 'scale(1.05)';
+                            serviceCard.style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.5)';
+
+                            setTimeout(() => {
+                                serviceCard.style.transform = '';
+                                serviceCard.style.boxShadow = '';
+                                if (serviceCard.tagName === 'A') {
+                                    serviceCard.click();
+                                } else {
+                                    serviceCard.querySelector('a')?.click();
+                                }
+                                history.replaceState(null, '', window.location.pathname);
+                            }, 2000); // 2 sekundy zvýraznění
+                        }
+                    }, 500);
+                }
+            }, 300);
+        }
+
         const btn = document.getElementById('jc-advisor-btn');
         const modal = document.getElementById('progressivoAdvisorModal');
         const closeBtn = document.getElementById('advisor-close-btn');
@@ -577,6 +609,18 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
         };
         modal.addEventListener("click", onModalClick);
 
+        // 3️⃣ ENTER PRO ODESLÁNÍ DOTAZU
+        if (input && askBtn) {
+            input.addEventListener('keydown', (e) => {
+                // Enter (bez Shift) → odeslat
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    askBtn.click();
+                }
+                // Shift + Enter → nový řádek (default)
+            });
+        }
+
 
         // --- GEMINI LOGIC ---
         const askAdvisor = async () => {
@@ -609,6 +653,16 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                 return;
             }
 
+            // Append User Question (Secure Text Node) - IMMEDIATELY
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'chat-message user-message';
+            questionDiv.innerHTML = '<strong>Vy:</strong> ';
+            questionDiv.appendChild(document.createTextNode(query));
+            history.appendChild(questionDiv);
+
+            // Vyčistit textarea immediately
+            input.value = '';
+
             // Add typing indicator
             const typingDiv = document.createElement('div');
             typingDiv.className = 'chat-message ai-message typing-indicator-container';
@@ -633,30 +687,21 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                 // Email link to contact page
                 fmt = fmt.replace(/info@progressivo\.eu/g, '<a href="/kontakt" data-link-type="internal" class="text-amber-600 underline font-semibold">info@progressivo.eu ✉️</a>');
 
-                // Append User Question (Secure Text Node)
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'chat-message user-message';
-                questionDiv.innerHTML = '<strong>Vy:</strong> ';
-                questionDiv.appendChild(document.createTextNode(query));
-
                 // Append AI Answer
                 const answerDiv = document.createElement('div');
                 answerDiv.className = 'chat-message ai-message';
                 answerDiv.innerHTML = `<strong>AI:</strong> ${fmt}`;
 
-                history.appendChild(questionDiv);
                 history.appendChild(answerDiv);
 
                 // Scroll historie dolů
                 history.scrollTop = history.scrollHeight;
 
-                // Vyčistit textarea
-                input.value = '';
                 input.focus();
 
                 // Re-attach listeners to new anchors
 
-                // Odkazy na služby
+                // 2️⃣ UPRAVENÝ EVENT LISTENER PRO SERVICE LINKS
                 history.querySelectorAll('a[data-link-type="service"]').forEach(link => {
                   link.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -671,6 +716,7 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                                          window.location.pathname === `/${currentLang}`;
 
                     if (isOnHomepage) {
+                      // Jsme na homepage → scroll přímo
                       setTimeout(() => {
                         const servicesSection = document.querySelector('#services');
                         if (servicesSection) {
@@ -687,18 +733,18 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                               setTimeout(() => {
                                 serviceCard.style.transform = '';
                                 serviceCard.style.boxShadow = '';
-                                const link = serviceCard.querySelector('a');
-                                if (link) {
-                                    link.click();
-                                } else {
+                                if (serviceCard.tagName === 'A') {
                                     serviceCard.click();
+                                } else {
+                                    serviceCard.querySelector('a')?.click();
                                 }
-                              }, 2000);
+                              }, 2000); // ← 2 sekundy zvýraznění
                             }
                           }, 500);
                         }
                       }, 300);
                     } else {
+                      // Nejsme na homepage → přejdi na homepage s hash
                       window.location.href = homepageUrl + href;
                     }
                   });
