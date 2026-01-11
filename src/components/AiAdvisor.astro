@@ -662,45 +662,45 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
                     e.preventDefault();
                     const href = link.getAttribute('href');
 
-                    // Zavřít modal
                     closeModal();
 
-                    // Počkat a najít službu
-                    setTimeout(() => {
-                      const serviceName = href.replace('#sluzby/', '');
-                      const serviceCard = document.querySelector(`[data-service="${serviceName}"]`);
+                    const currentLang = document.documentElement.getAttribute('lang')?.split('-')[0] || 'cs';
+                    const homepageUrl = currentLang === 'cs' ? '/' : `/${currentLang}/`;
+                    const isOnHomepage = window.location.pathname === '/' ||
+                                         window.location.pathname === `/${currentLang}/` ||
+                                         window.location.pathname === `/${currentLang}`;
 
-                      if (serviceCard) {
-                        // Scrollnout na sekci služeb
-                        const servicesSection = document.querySelector('#sluzby');
+                    if (isOnHomepage) {
+                      setTimeout(() => {
+                        const servicesSection = document.querySelector('#services');
                         if (servicesSection) {
                           servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
 
-                        // Počkat na scroll, pak zvýraznit + kliknout
-                        setTimeout(() => {
-                          serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                          // Zvýraznit
-                          serviceCard.style.transform = 'scale(1.05)';
-                          serviceCard.style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.5)';
-
-                          // Po 1s kliknout (otevře detail)
                           setTimeout(() => {
-                            serviceCard.style.transform = '';
-                            serviceCard.style.boxShadow = '';
+                            const serviceName = href.replace('#sluzby/', '');
+                            const serviceCard = document.querySelector(`[data-service="${serviceName}"]`);
+                            if (serviceCard) {
+                              serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              serviceCard.style.transform = 'scale(1.05)';
+                              serviceCard.style.boxShadow = '0 0 30px rgba(217, 119, 6, 0.5)';
 
-                            const link = serviceCard.querySelector('a');
-                            if (link) {
-                                link.click();
-                            } else {
-                                // If the card is the link (which it is in index.astro)
-                                serviceCard.click();
+                              setTimeout(() => {
+                                serviceCard.style.transform = '';
+                                serviceCard.style.boxShadow = '';
+                                const link = serviceCard.querySelector('a');
+                                if (link) {
+                                    link.click();
+                                } else {
+                                    serviceCard.click();
+                                }
+                              }, 2000);
                             }
-                          }, 1000);
-                        }, 800);
-                      }
-                    }, 300);
+                          }, 500);
+                        }
+                      }, 300);
+                    } else {
+                      window.location.href = homepageUrl + href;
+                    }
                   });
                 });
 
