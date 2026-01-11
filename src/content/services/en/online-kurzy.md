@@ -4,40 +4,25 @@ description: "Educational courses and online tutoring for children and adults."
 lang: en
 image: "/images/online-kurz.webp"
 ---
-# Online Courses
+# Investment in Education
 
-We offer a wide range of online courses and individual lessons focused on education and skill development. We cooperate with the **iTutoring.cz** platform to ensure quality teaching for all age categories.
+In the digital era, knowledge is true capital. We offer strategic educational programs delivered online, respecting your time and maximizing results. Our expert teaching partner is **iTutoring.cz**.
 
-## Course Offer
+## For the New Generation
 
-### Preparation for Entrance Exams
-Courses are intended for students of 5th, 7th, and 9th grades.
+Systematic preparation is the key to success.
 
-*   **Subjects:** Czech language and mathematics.
-*   **Goal:** Systematic preparation for successfully passing entrance exams.
+*   **Academic Progress:** Targeted preparation for entrance exams (grades 5, 7, and 9) in Czech language and mathematics.
+*   **Digital Literacy:** Programming courses (Scratch) and development (Unity) for future innovators.
 
-### IT and Programming
-Courses for children, youth, and adults, from beginners to advanced.
+## For Professionals
 
-*   **Video Game Creation in Unity:** For those who want to penetrate the world of game development.
-*   **Programming in Scratch:** Basics of algorithmization and creation of own projects.
-*   **Online Clubs:** Teaching focused on the development of digital skills.
+Effective competence expansion without the need to commute.
 
-## How Teaching Takes Place
+*   **Individual Approach:** 1:1 teaching adapted to your pace.
+*   **Flexibility:** 45 or 60-minute lessons, planned according to your calendar.
+*   **Comfort:** Fully online form utilizing modern interactive tools.
 
-We place emphasis on efficiency and student comfort.
+## Partnership with iTutoring.cz
 
-*   **Individual Approach:** Tutors adapt teaching to the needs and level of each student.
-*   **Interactive Forms:** Use of a virtual whiteboard, chat, and shared materials.
-*   **Flexibility:** Systematic planning of lessons according to your time possibilities.
-*   **Support:** Possibility of consultations and answers to questions even outside of lessons.
-
-## Organizational Information
-
-*   **Lesson Length:** Possibility to choose between 45 or 60 minutes.
-*   **Form:** Online teaching from the comfort of your home.
-*   **Price:** Depends on the length of the lesson, type of teaching, and number of ordered hours (possibility of discounted packages).
-
-## Why Choose Our Courses
-
-Whether you need tutoring, preparation for exams, or want to learn programming, our courses will provide you with the necessary knowledge in a friendly and professional environment. Detailed price list and other information can be found on the website [iTutoring.cz](https://itutoring.cz/cenik).
+We collaborate with proven experts. Complete information about tutors, pricing, and discounted package options can be found directly on the [iTutoring.cz](https://itutoring.cz/cenik) portal.

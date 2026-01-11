@@ -4,40 +4,25 @@ description: "Bildungskurse und Online-Nachhilfe für Kinder und Erwachsene."
 lang: de
 image: "/images/online-kurz.webp"
 ---
-# Online-Kurse
+# Investition in Bildung
 
-Wir bieten eine breite Palette von Online-Kursen und Einzelunterricht an, die auf Bildung und Kompetenzentwicklung ausgerichtet sind. Wir arbeiten mit der Plattform **iTutoring.cz** zusammen, um qualitativen Unterricht für alle Altersgruppen zu gewährleisten.
+Im digitalen Zeitalter ist Wissen das wahre Kapital. Wir bieten strategische Bildungsprogramme an, die online durchgeführt werden, Ihre Zeit respektieren und Ergebnisse maximieren. Der Garant für fachgerechten Unterricht ist unser Partner **iTutoring.cz**.
 
-## Kursangebot
+## Für die neue Generation
 
-### Vorbereitung auf Aufnahmeprüfungen
-Die Kurse sind für Schüler der 5., 7. und 9. Klassen bestimmt.
+Systematische Vorbereitung ist der Schlüssel zum Erfolg.
 
-*   **Fächer:** Tschechische Sprache und Mathematik.
-*   **Ziel:** Systematische Vorbereitung zur erfolgreichen Bewältigung der Aufnahmeprüfungen.
+*   **Akademischer Fortschritt:** Gezielte Vorbereitung auf Aufnahmeprüfungen (5., 7. und 9. Klasse) in Tschechischer Sprache und Mathematik.
+*   **Digitale Kompetenz:** Programmierkurse (Scratch) und Entwicklung (Unity) für zukünftige Innovatoren.
 
-### IT und Programmieren
-Kurse für Kinder, Jugendliche und Erwachsene, von Anfängern bis Fortgeschrittene.
+## Für Profis
 
-*   **Videospielentwicklung in Unity:** Für diejenigen, die in die Welt der Spielentwicklung eintauchen wollen.
-*   **Programmieren in Scratch:** Grundlagen der Algorithmisierung und Erstellung eigener Projekte.
-*   **Online-AGs:** Unterricht mit Fokus auf die Entwicklung digitaler Fähigkeiten.
+Effektive Erweiterung der Kompetenzen ohne Pendeln.
 
-## Wie der Unterricht abläuft
+*   **Individueller Ansatz:** 1:1-Unterricht, angepasst an Ihr Tempo.
+*   **Flexibilität:** 45- oder 60-Minuten-Lektionen, geplant nach Ihrem Kalender.
+*   **Komfort:** Vollständige Online-Form unter Nutzung moderner interaktiver Tools.
 
-Wir legen Wert auf Effizienz und Komfort der Studenten.
+## Partnerschaft mit iTutoring.cz
 
-*   **Individueller Ansatz:** Dozenten passen den Unterricht an die Bedürfnisse und das Niveau jedes Studenten an.
-*   **Interaktive Formen:** Nutzung von virtuellen Tafeln, Chats und geteilten Materialien.
-*   **Flexibilität:** Systematische Planung der Lektionen nach Ihren zeitlichen Möglichkeiten.
-*   **Unterstützung:** Möglichkeit für Konsultationen und Antworten auf Fragen auch außerhalb der Lektionen.
-
-## Organisatorische Informationen
-
-*   **Länge der Lektionen:** Wahlmöglichkeit zwischen 45 oder 60 Minuten.
-*   **Form:** Online-Unterricht bequem von zu Hause aus.
-*   **Preis:** Hängt von der Länge der Lektion, der Art des Unterrichts und der Anzahl der gebuchten Stunden ab (Möglichkeit von vergünstigten Paketen).
-
-## Warum unsere Kurse wählen
-
-Egal, ob Sie Nachhilfe oder Prüfungsvorbereitung benötigen oder Programmieren lernen möchten, unsere Kurse vermitteln Ihnen das nötige Wissen in einer freundlichen und professionellen Umgebung. Eine detaillierte Preisliste und weitere Informationen finden Sie auf der Website [iTutoring.cz](https://itutoring.cz/cenik).
+Wir arbeiten mit bewährten Experten zusammen. Vollständige Informationen zu Dozenten, Preisen und Möglichkeiten für vergünstigte Pakete finden Sie direkt auf dem Portal [iTutoring.cz](https://itutoring.cz/cenik).
