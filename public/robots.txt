@@ -1,16 +1,8 @@
-User-agent: *
-Allow: /
+# Note: Cloudflare "AI Scrapers and Crawlers" feature automatically handles:
+# User-agent: * (Allow: /)
+# GPTBot, CCBot, Google-Extended, Amazonbot, Applebot-Extended, Bytespider, ClaudeBot
 
-# Block AI Crawlers
-User-agent: GPTBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
+# Additional manual blocks for bots not covered by Cloudflare yet:
 User-agent: anthropic-ai
 Disallow: /
 
