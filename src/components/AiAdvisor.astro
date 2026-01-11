@@ -758,6 +758,7 @@ Tarea: Analiza (1 frase), recomienda servicio (2 frases), usa ancla EXACTA (ej. 
     }
 
     // Call Cloudflare Function
+    // Security check: Direct API calls removed. using /api/ask-ai proxy only.
     async function callAI(prompt) {
       try {
         const response = await fetch('/api/ask-ai', {
