@@ -4,40 +4,25 @@ description: "Vzdělávací kurzy a doučování online pro děti i dospělé."
 lang: cs
 image: "/images/online-kurz.webp"
 ---
-# Online kurzy
+# Investice do vzdělání
 
-Nabízíme širokou škálu online kurzů a individuálních lekcí zaměřených na vzdělávání a rozvoj dovedností. Spolupracujeme s platformou **iTutoring.cz**, abychom zajistili kvalitní výuku pro všechny věkové kategorie.
+V digitální éře je znalost správným kapitálem. Nabízíme strategické vzdělávací programy realizované online, které respektují váš čas a maximalizují výsledky. Garantem odborné výuky je náš partner **iTutoring.cz**.
 
-## Nabídka kurzů
+## Pro novou generaci
 
-### Příprava na přijímací zkoušky
-Kurzy jsou určeny pro žáky 5., 7. a 9. tříd.
+Systematická příprava je klíčem k úspěchu.
 
-*   **Předměty:** Český jazyk a matematika.
-*   **Cíl:** Systematická příprava k úspěšnému zvládnutí přijímacích zkoušek.
+*   **Akademický postup:** Cílená příprava na přijímací zkoušky (5., 7. a 9. třída) z českého jazyka a matematiky.
+*   **Digitální gramotnost:** Kurzy programování (Scratch) a vývoje (Unity) pro budoucí inovátory.
 
-### IT a programování
-Kurzy pro děti, mládež i dospělé, od začátečníků po pokročilé.
+## Pro profesionály
 
-*   **Tvorba videoher v Unity:** Pro ty, kteří chtějí proniknout do světa herního vývoje.
-*   **Programování ve Scratch:** Základy algoritmizace a tvorba vlastních projektů.
-*   **Online kroužky:** Výuka zaměřená na rozvoj digitálních dovedností.
+Efektivní rozšiřování kompetencí bez nutnosti dojíždění.
 
-## Jak výuka probíhá
+*   **Individuální přístup:** Výuka 1:1 přizpůsobená vašemu tempu.
+*   **Flexibilita:** Lekce 45 nebo 60 minut, plánované dle vašeho kalendáře.
+*   **Komfort:** Plně online forma s využitím moderních interaktivních nástrojů.
 
-Klademe důraz na efektivitu a pohodlí studentů.
+## Partnerství s iTutoring.cz
 
-*   **Individuální přístup:** Lektoři přizpůsobují výuku potřebám a úrovni každého studenta.
-*   **Interaktivní formy:** Využití virtuální tabule, chatu a sdílených materiálů.
-*   **Flexibilita:** Systematické plánování lekcí dle vašich časových možností.
-*   **Podpora:** Možnost konzultací a odpovědí na dotazy i mimo lekce.
-
-## Organizační informace
-
-*   **Délka lekcí:** Možnost výběru mezi 45 nebo 60 minutami.
-*   **Forma:** Online výuka z pohodlí domova.
-*   **Cena:** Závisí na délce lekce, typu výuky a počtu objednaných hodin (možnost zvýhodněných balíčků).
-
-## Proč si vybrat naše kurzy
-
-Ať už potřebujete doučování, přípravu na zkoušky nebo se chcete naučit programovat, naše kurzy vám poskytnou potřebné znalosti v přátelském a profesionálním prostředí. Detailní ceník a další informace naleznete na webu [iTutoring.cz](https://itutoring.cz/cenik).
+Spolupracujeme s prověřenými experty. Kompletní informace o lektorech, ceníku a možnostech zvýhodněných balíčků naleznete přímo na portálu [iTutoring.cz](https://itutoring.cz/cenik).
