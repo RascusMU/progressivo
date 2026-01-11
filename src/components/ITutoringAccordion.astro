@@ -1,99 +1,109 @@
 ---
-// Hardcoded content for iTutoring accordion
+import { useTranslations } from '../i18n/utils';
+import { defaultLang } from '../i18n/ui';
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+
+// Get the translation object for the accordion
+// In Astro frontmatter, we can cast or treat as any if type safety is an issue,
+// but since we are in JS/loose TS mode here, it should work.
+const translations = t('itutoring_accordion') as any;
+
+// Helper type for sections if we were in TS mode, but in Astro frontmatter JS is loose
 const sections = [
   {
     id: 'co-nabizime',
-    title: 'Co nabízíme',
-    description: 'Profesionální doučování a příprava na zkoušky s prověřenými lektory',
+    title: translations.offer_title,
+    description: translations.offer_desc,
     points: [
-      'Individuální lekce 1 na 1 (online nebo prezenčně)',
-      'Příprava na přijímačky na SŠ/Gymnázia/VŠ',
-      'Příprava k maturitě',
-      'Jazykové kurzy a kroužky',
-      'Firemní školení',
-      'Více než 100 zkušených lektorů'
+      translations.offer_p1,
+      translations.offer_p2,
+      translations.offer_p3,
+      translations.offer_p4,
+      translations.offer_p5,
+      translations.offer_p6
     ],
-    cta: { text: 'Začít s doučováním', url: 'https://marketplace.itutoring.cz/doucovani' }
+    cta: { text: translations.offer_cta, url: 'https://marketplace.itutoring.cz/doucovani' }
   },
   {
     id: 'jak-to-funguje',
-    title: 'Jak to funguje',
-    description: 'Jednoduchý proces ve třech krocích k úspěchu',
+    title: translations.how_title,
+    description: translations.how_desc,
     points: [
-      '1. Vyplníte formulář',
-      '2. Najdeme Vám vhodného lektora',
-      '3. Naplánujete termín',
-      '4. Dosáhnete svých cílů'
+      translations.how_p1,
+      translations.how_p2,
+      translations.how_p3,
+      translations.how_p4
     ],
     cta: null
   },
   {
     id: 'pro-koho-je-to',
-    title: 'Pro koho je to',
-    description: 'Pomáháme studentům všech věkových kategorií',
+    title: translations.target_title,
+    description: translations.target_desc,
     points: [
-      'Studenti základních škol',
-      'Studenti středních škol',
-      'Studenti vysokých škol',
-      'Dospělí',
-      'Firmy'
+      translations.target_p1,
+      translations.target_p2,
+      translations.target_p3,
+      translations.target_p4,
+      translations.target_p5
     ],
     cta: null
   },
   {
     id: 'proc-itutoring',
-    title: 'Proč iTutoring',
-    description: 'Důvěřují nám stovky spokojených klientů',
+    title: translations.why_title,
+    description: translations.why_desc,
     points: [
-      '10 000+ odučených hodin',
-      '100+ zkušených lektorů',
-      '98% úspěšnost u přijímaček',
-      '5/5 průměrné hodnocení',
-      'Transparentní ceny',
-      'Online nebo prezenčně',
-      'Mobilní aplikace'
+      translations.why_p1,
+      translations.why_p2,
+      translations.why_p3,
+      translations.why_p4,
+      translations.why_p5,
+      translations.why_p6,
+      translations.why_p7
     ],
-    cta: { text: 'Zobrazit reference', url: 'https://itutoring.cz/reference' }
+    cta: { text: translations.why_cta, url: 'https://itutoring.cz/reference' }
   },
   {
     id: 'ceny-a-platba',
-    title: 'Ceny a platba',
-    description: 'Dostupné ceny pro každého',
+    title: translations.pricing_title,
+    description: translations.pricing_desc,
     points: [
-      'Od 400 Kč',
-      'Balíčky 60 nebo 45 minut',
-      'První lekce bez závazku',
-      'Platíte až po první lekci',
-      'Transparentní ceník'
+      translations.pricing_p1,
+      translations.pricing_p2,
+      translations.pricing_p3,
+      translations.pricing_p4,
+      translations.pricing_p5
     ],
-    cta: { text: 'Zobrazit ceník', url: 'https://itutoring.cz/cenik' }
+    cta: { text: translations.pricing_cta, url: 'https://itutoring.cz/cenik' }
   },
   {
     id: 'mobilni-aplikace',
-    title: 'Mobilní aplikace',
-    description: 'Mějte vždy přehled o svém doučování',
+    title: translations.app_title,
+    description: translations.app_desc,
     points: [
-      'Termíny lekcí',
-      'Zápis z lekcí',
-      'Kontakty na lektory',
-      'Zbývající lekce',
-      'Notifikace',
-      'iOS i Android'
+      translations.app_p1,
+      translations.app_p2,
+      translations.app_p3,
+      translations.app_p4,
+      translations.app_p5,
+      translations.app_p6
     ],
-    cta: { text: 'Stáhnout aplikaci', url: 'https://portal.itutoring.cz' }
+    cta: { text: translations.app_cta, url: 'https://portal.itutoring.cz' }
   },
   {
     id: 'kontakt',
-    title: 'Kontakt',
-    description: 'Máte dotazy? Rádi Vám pomůžeme',
+    title: translations.contact_title,
+    description: translations.contact_desc,
     points: [
-      'Web: itutoring.cz',
-      'Marketplace: marketplace.itutoring.cz',
-      'Aplikace: portal.itutoring.cz',
-      'Společnost: iTutoring s.r.o., IČO 17352614',
-      'Online chat'
+      translations.contact_p1,
+      translations.contact_p2,
+      translations.contact_p3,
+      translations.contact_p4
     ],
-    cta: { text: 'Napsat zprávu', url: 'https://itutoring.cz/#kontakt' }
+    cta: { text: translations.contact_cta, url: 'https://itutoring.cz/#kontakt' }
   }
 ];
 ---
@@ -103,7 +113,7 @@ const sections = [
     <div class="header-icon">🎓</div>
     <div class="header-text">
       <h3>iTutoring.cz</h3>
-      <span class="badge">Partnerská společnost</span>
+      <span class="badge">{translations.badge}</span>
     </div>
   </header>
 
