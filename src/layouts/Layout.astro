@@ -7,6 +7,16 @@ import { ClientRouter } from 'astro:transitions';
 import { ui, defaultLang } from '../i18n/ui';
 import { getTranslatedPath, getPathFromUrl } from '../i18n/utils';
 
+// Fonts
+import '@fontsource/manrope/400.css';
+import '@fontsource/manrope/500.css';
+import '@fontsource/manrope/600.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
+import '@fontsource/plus-jakarta-sans/700.css';
+import '@fontsource/caveat/600.css';
+import '@fontsource/caveat/700.css';
+
 interface Props {
 	title: string;
 	lang?: string;
@@ -158,11 +168,6 @@ const schemaWebSite = {
           })(window, document, "clarity", "script", "uypg8a6dsa");
         </script>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 		<ClientRouter />
 	</head>
 	<body>

@@ -9,13 +9,16 @@ const t = ui[lang] || ui[defaultLang];
 
 // Helper for links (replaced by getTranslatedPath)
 const getLink = (path) => getTranslatedPath(path, lang);
+
+import { Image } from 'astro:assets';
+import founderMedallionImage from '../assets/images/tatka_knihovna.webp';
 ---
 <footer>
   <!-- Founder Medallion Section -->
   <div class="founder-medallion">
     <div class="container medallion-content">
       <div class="medallion-image-wrapper">
-         <img src="/images/tatka_knihovna.webp" alt="Jaroslav Cingel" class="medallion-image" />
+         <Image src={founderMedallionImage} alt="Jaroslav Cingel" class="medallion-image" width={260} />
       </div>
       <div class="medallion-text">
         <p class="quote">{t.footer.quote}</p>
